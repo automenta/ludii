@@ -7,7 +7,7 @@ package utils.experiments;
 import game.Game;
 import gnu.trove.map.TObjectIntMap;
 import gnu.trove.map.hash.TObjectIntHashMap;
-import main.math.Stats;
+import math.Stats;
 
 import java.io.File;
 import java.io.IOException;
@@ -86,8 +86,8 @@ public class ResultsSummary
         final StringBuilder sb = new StringBuilder();
         sb.append("=====================================================\n");
         int totGamesPlayed = 0;
-        for (int i = 0; i < this.agentPointsPerPlayer.length; ++i) {
-            totGamesPlayed += this.agentPointsPerPlayer[i][1].numSamples();
+        for (Stats[] stats : this.agentPointsPerPlayer) {
+            totGamesPlayed += stats[1].numSamples();
         }
         sb.append("Completed " + totGamesPlayed + " games.\n");
         sb.append("\n");
@@ -109,7 +109,8 @@ public class ResultsSummary
     public void writeAlphaRankData(final File outFile) {
         try (final PrintWriter writer = new PrintWriter(outFile, StandardCharsets.UTF_8)) {
             writer.write("agents,scores\n");
-            for (final List<String> matchup : this.matchupPayoffsMap.keySet()) {
+            for (final Map.Entry<List<String>, double[]> entry : this.matchupPayoffsMap.entrySet()) {
+                final List<String> matchup = entry.getKey();
                 final StringBuilder agentTuple = new StringBuilder();
                 agentTuple.append("\"(");
                 for (int i = 0; i < matchup.size(); ++i) {
@@ -121,7 +122,7 @@ public class ResultsSummary
                     agentTuple.append("'");
                 }
                 agentTuple.append(")\"");
-                final double[] scoreSums = this.matchupPayoffsMap.get(matchup);
+                final double[] scoreSums = entry.getValue();
                 final int count = this.matchupCountsMap.get(matchup);
                 final double[] avgScores = Arrays.copyOf(scoreSums, scoreSums.length);
                 for (int j = 0; j < avgScores.length; ++j) {

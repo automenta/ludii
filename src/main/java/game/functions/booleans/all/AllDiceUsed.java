@@ -17,9 +17,9 @@ public final class AllDiceUsed extends BaseBooleanFunction
     @Override
     public boolean eval(final Context context) {
         final int[][] diceValues = context.state().currentDice();
-        for (int indexHand = 0; indexHand < diceValues.length; ++indexHand) {
-            for (int indexDie = 0; indexDie < diceValues[indexHand].length; ++indexDie) {
-                if (diceValues[indexHand][indexDie] != 0) {
+        for (int[] diceValue : diceValues) {
+            for (int indexDie = 0; indexDie < diceValue.length; ++indexDie) {
+                if (diceValue[indexDie] != 0) {
                     return false;
                 }
             }

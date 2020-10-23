@@ -5,9 +5,9 @@
 package language.compiler;
 
 import language.grammar.Grammar;
-import main.grammar.Instance;
-import main.grammar.Report;
-import main.grammar.Token;
+import grammar.Instance;
+import grammar.Report;
+import grammar.Token;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,8 +23,8 @@ public abstract class Arg
         this.symbolName = null;
         this.parameterName = null;
         this.instances = new ArrayList<>();
-        this.symbolName = ((symbolName == null) ? null : symbolName);
-        this.parameterName = ((parameterName == null) ? null : parameterName);
+        this.symbolName = (symbolName);
+        this.parameterName = (parameterName);
     }
     
     public String symbolName() {
@@ -42,24 +42,24 @@ public abstract class Arg
     public static Arg createFromToken(final Grammar grammar, final Token token) {
         Arg arg = null;
         switch (token.type()) {
-            case Terminal: {
+            case Terminal -> {
                 return new ArgTerminal(token.name(), token.parameterLabel());
             }
-            case Class: {
+            case Class -> {
                 arg = new ArgClass(token.name(), token.parameterLabel());
                 for (final Token sub : token.arguments()) {
-                    ((ArgClass)arg).add(createFromToken(grammar, sub));
+                    ((ArgClass) arg).add(createFromToken(grammar, sub));
                 }
                 break;
             }
-            case Array: {
+            case Array -> {
                 arg = new ArgArray(token.name(), token.parameterLabel());
                 for (final Token sub : token.arguments()) {
-                    ((ArgArray)arg).add(createFromToken(grammar, sub));
+                    ((ArgArray) arg).add(createFromToken(grammar, sub));
                 }
                 break;
             }
-            default: {
+            default -> {
                 return null;
             }
         }

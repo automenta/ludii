@@ -45,7 +45,7 @@ public class UnicodeGraphics
         final int[] rgbaReplacement = { 0, 0, 0, 0 };
         ArrayList<Point> pointsToCheck = new ArrayList<>();
         pointsToCheck.add(new Point(0, 0));
-        while (pointsToCheck.size() > 0) {
+        while (!pointsToCheck.isEmpty()) {
             pointsToCheck = ImageProcessing.floodFillBreadth(imgPiece, pointsToCheck, pointsToCheck.get(0).x, pointsToCheck.get(0).y, width, height, rgbaTarget, rgbaReplacement);
         }
         ImageProcessing.makeMask(imgPiece, width, height, rgbaMask[2]);
@@ -89,7 +89,7 @@ public class UnicodeGraphics
         final int[] rgbaReplacement = { 0, 0, 0, 0 };
         ArrayList<Point> pointsToCheck = new ArrayList<>();
         pointsToCheck.add(new Point(0, 0));
-        while (pointsToCheck.size() > 0) {
+        while (!pointsToCheck.isEmpty()) {
             pointsToCheck = ImageProcessing.floodFillBreadth(imgPiece, pointsToCheck, pointsToCheck.get(0).x, pointsToCheck.get(0).y, width, height, rgbaTarget, rgbaReplacement);
         }
         ImageProcessing.makeMask(imgPiece, width, height, rgbaMask[who]);

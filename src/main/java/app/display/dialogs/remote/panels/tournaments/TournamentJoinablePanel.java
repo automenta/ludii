@@ -45,7 +45,6 @@ public class TournamentJoinablePanel extends BaseFindTournamentPanel
                                 RemoteDialog.bringDialogToFront();
                                 Manager.app.addTextToStatusPanel(inputLine + "\n");
                             }
-                            in.close();
                         }
                     }
                     catch (Exception ex) {}
@@ -59,7 +58,6 @@ public class TournamentJoinablePanel extends BaseFindTournamentPanel
                             RemoteDialog.bringDialogToFront();
                             Manager.app.addTextToStatusPanel(inputLine2 + "\n");
                         }
-                        in2.close();
                     }
                 }
             }

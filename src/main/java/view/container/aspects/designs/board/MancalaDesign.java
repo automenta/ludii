@@ -26,11 +26,11 @@ public class MancalaDesign extends BoardDesign
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final int swThin = Math.max(1, (int)(0.001 * this.boardStyle.placement().width + 0.5));
         final int swThick = 2 * swThin;
-        this.setStrokesAndColours(context, null, new Color(125, 75, 0), new Color(255, 220, 100), null, null, null, new Color(127, 100, 50), (float)swThin, (float)swThick);
+        this.setStrokesAndColours(context, null, new Color(125, 75, 0), new Color(255, 220, 100), null, null, null, new Color(127, 100, 50), swThin, swThick);
         final Rectangle2D bounds = context.board().graph().bounds();
         final int numColumns = (context.board() instanceof MancalaBoard) ? ((MancalaBoard)context.board()).numColumns() : ((int)(bounds.getWidth() - 0.5));
         final int numRows = (context.board() instanceof MancalaBoard) ? ((MancalaBoard)context.board()).numRows() : ((int)(bounds.getHeight() + 0.5) + 1);
-        final boolean withStore = !(context.board() instanceof MancalaBoard) || !((MancalaBoard)context.board()).storeType().equals(StoreType.None);
+        final boolean withStore = !(context.board() instanceof MancalaBoard) || ((MancalaBoard) context.board()).storeType() != StoreType.None;
         this.drawMancalaBoard(g2d, numRows, numColumns, withStore);
         return g2d.getSVGDocument();
     }

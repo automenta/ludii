@@ -10,8 +10,8 @@ import language.compiler.Compiler;
 import main.CommandLineArgParse;
 import main.FileHandling;
 import main.StringRoutines;
-import main.collections.ListUtils;
-import main.grammar.Report;
+import collections.ListUtils;
+import grammar.Report;
 import metadata.ai.features.Features;
 import metadata.ai.heuristics.Heuristics;
 import metadata.ai.misc.BestAgent;
@@ -215,54 +215,45 @@ public class EvalGate
                     boolean writeBestAgent = false;
                     boolean writeFeatures = false;
                     boolean writeHeuristics = false;
-                    if (EvalGate.this.gateAgentType.equals("BestAgent")) {
-                        writeBestAgent = true;
-                        if (EvalGate.this.evalAgent.equals("Alpha-Beta")) {
-                            writeHeuristics = true;
-                        }
-                        else if (EvalGate.this.evalAgent.contains("BiasedMCTS")) {
-                            writeFeatures = true;
-                        }
-                        else {
-                            System.err.println("Eval agent is neiter Alpha-Beta nor a variant of BiasedMCTS");
-                        }
-                    }
-                    else if (EvalGate.this.gateAgentType.equals("Alpha-Beta")) {
-                        if (EvalGate.this.evalAgent.equals("Alpha-Beta")) {
-                            writeHeuristics = true;
-                        }
-                        else {
-                            System.err.println("evalAgent = " + EvalGate.this.evalAgent + " against gateAgentType = " + EvalGate.this.gateAgentType);
-                        }
-                    }
-                    else if (EvalGate.this.gateAgentType.equals("BiasedMCTS")) {
-                        if (EvalGate.this.evalAgent.contains("BiasedMCTS")) {
-                            writeFeatures = true;
-                        }
-                        else {
-                            System.err.println("evalAgent = " + EvalGate.this.evalAgent + " against gateAgentType = " + EvalGate.this.gateAgentType);
-                        }
-                    }
-                    else {
-                        System.err.println("Unrecognised gate agent type: " + EvalGate.this.gateAgentType);
+                    switch (EvalGate.this.gateAgentType) {
+                        case "BestAgent":
+                            writeBestAgent = true;
+                            if (EvalGate.this.evalAgent.equals("Alpha-Beta")) {
+                                writeHeuristics = true;
+                            } else if (EvalGate.this.evalAgent.contains("BiasedMCTS")) {
+                                writeFeatures = true;
+                            } else {
+                                System.err.println("Eval agent is neiter Alpha-Beta nor a variant of BiasedMCTS");
+                            }
+                            break;
+                        case "Alpha-Beta":
+                            if (EvalGate.this.evalAgent.equals("Alpha-Beta")) {
+                                writeHeuristics = true;
+                            } else {
+                                System.err.println("evalAgent = " + EvalGate.this.evalAgent + " against gateAgentType = " + EvalGate.this.gateAgentType);
+                            }
+                            break;
+                        case "BiasedMCTS":
+                            if (EvalGate.this.evalAgent.contains("BiasedMCTS")) {
+                                writeFeatures = true;
+                            } else {
+                                System.err.println("evalAgent = " + EvalGate.this.evalAgent + " against gateAgentType = " + EvalGate.this.gateAgentType);
+                            }
+                            break;
+                        default:
+                            System.err.println("Unrecognised gate agent type: " + EvalGate.this.gateAgentType);
+                            break;
                     }
                     final String bestAgentsDataDirPath = EvalGate.this.bestAgentsDataDir.getAbsolutePath().replaceAll(Pattern.quote("\\"), "/");
                     if (writeBestAgent) {
                         final File bestAgentFile = new File(bestAgentsDataDirPath + "/BestAgent.txt");
                         try (final PrintWriter writer = new PrintWriter(bestAgentFile)) {
-                            BestAgent bestAgent;
-                            if (EvalGate.this.evalAgent.equals("Alpha-Beta")) {
-                                bestAgent = new BestAgent("AlphaBeta");
-                            }
-                            else if (EvalGate.this.evalAgent.equals("BiasedMCTS")) {
-                                bestAgent = new BestAgent("Biased MCTS");
-                            }
-                            else if (EvalGate.this.evalAgent.equals("BiasedMCTSUniformPlayouts")) {
-                                bestAgent = new BestAgent("Biased MCTS (Uniform Playouts)");
-                            }
-                            else {
-                                bestAgent = null;
-                            }
+                            BestAgent bestAgent = switch (EvalGate.this.evalAgent) {
+                                case "Alpha-Beta" -> new BestAgent("AlphaBeta");
+                                case "BiasedMCTS" -> new BestAgent("Biased MCTS");
+                                case "BiasedMCTSUniformPlayouts" -> new BestAgent("Biased MCTS (Uniform Playouts)");
+                                default -> null;
+                            };
                             System.out.println("Writing new best agent: " + EvalGate.this.evalAgent);
                             writer.println(bestAgent.toString());
                         }

@@ -14,7 +14,7 @@ import app.utils.SettingsDesktop;
 import app.utils.UserPreferences;
 import game.Game;
 import main.StringRoutines;
-import main.options.GameOptions;
+import options.GameOptions;
 import manager.Manager;
 import manager.ai.AIDetails;
 import manager.ai.AIMenuName;
@@ -43,7 +43,13 @@ import java.util.List;
 
 public final class DesktopApp extends BaseApp implements ActionListener, ItemListener
 {
-    public static final String AppName = "Ludii Player";
+    public static final String GAME_DEFAULT =
+            //WORKING:
+            //"/lud/board/space/line/Tic-Tac-Mo.lud"
+            //"/lud/board/space/line/Tic-Tac-Toe.lud"
+            "/lud/experimental/Flowers.lud"
+            ;
+
     public static boolean devJar;
     private static JFrameList frame;
     private static MainWindow view;
@@ -79,12 +85,7 @@ public final class DesktopApp extends BaseApp implements ActionListener, ItemLis
                 final JSONObject json = new JSONObject().put("AI", new JSONObject().put("algorithm", "Human"));
                 Manager.aiSelected[i] = new AIDetails(json, i, AIMenuName.Human);
             }
-            try {
-                DesktopApp.createFrame();
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DesktopApp.createFrame();
         });
     }
     
@@ -94,7 +95,7 @@ public final class DesktopApp extends BaseApp implements ActionListener, ItemLis
         GameOptions gameOptions = game.description().gameOptions();
         if (gameOptions.numCategories() > 0) {
             final List<String> optionHeadings = gameOptions.allOptionStrings(SettingsManager.userSelections.selectedOptionStrings());
-            if (optionHeadings.size() > 0) {
+            if (!optionHeadings.isEmpty()) {
                 final String appendOptions = " (" + StringRoutines.join(", ", optionHeadings) + ")";
                 frameTitle += appendOptions;
             }
@@ -108,7 +109,7 @@ public final class DesktopApp extends BaseApp implements ActionListener, ItemLis
                 int found = 0;
                 for (int cat = 0; cat < gameOptions.numCategories(); ++cat) {
                     try {
-                        if (gameOptions.categories().get(cat).options().size() > 0) {
+                        if (!gameOptions.categories().get(cat).options().isEmpty()) {
                             final List<String> optionHeadings2 = gameOptions.categories().get(cat).options().get(0).menuHeadings();
                             String optionSelected = optionHeadings2.get(0);
                             optionSelected = optionSelected.substring(optionSelected.indexOf(47) + 1);
@@ -164,7 +165,7 @@ public final class DesktopApp extends BaseApp implements ActionListener, ItemLis
         UserPreferences.savePreferences();
     }
     
-    static void createFrame() throws SQLException {
+    static void createFrame() {
         try {
             UserPreferences.loadPreferences();
             (DesktopApp.frame = new JFrameList("Ludii Player")).setDefaultCloseOperation(3);
@@ -197,14 +198,11 @@ public final class DesktopApp extends BaseApp implements ActionListener, ItemLis
             DesktopApp.frame.setMinimumSize(new Dimension(400, 400));
             FileLoading.createFileChoosers();
             setCurrentGraphicsDevice(DesktopApp.frame.getGraphicsConfiguration().getDevice());
-            Runtime.getRuntime().addShutdownHook(new Thread() {
-                @Override
-                public void run() {
-                    if (DesktopApp.loadSuccessful()) {
-                        DesktopApp.appClosedTasks();
-                    }
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                if (DesktopApp.loadSuccessful()) {
+                    DesktopApp.appClosedTasks();
                 }
-            });
+            }));
             loadInitialGame(true);
         }
         catch (Exception e2) {
@@ -224,7 +222,9 @@ public final class DesktopApp extends BaseApp implements ActionListener, ItemLis
                 }
             }
             else if (firstTry) {
-                GameLoading.loadGameFromMemory("/lud/board/war/other/Surakarta.lud", false);
+                GameLoading.loadGameFromMemory(
+                        GAME_DEFAULT
+                , false);
             }
             else {
                 GameLoading.loadFailSafeGame();

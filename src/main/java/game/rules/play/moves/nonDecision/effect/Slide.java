@@ -166,7 +166,7 @@ public final class Slide extends Effect
     
     private Moves slideByTrack(final Context context) {
         final Moves moves = new BaseMoves(super.then());
-        if (this.preComputedTracks.size() == 0) {
+        if (this.preComputedTracks.isEmpty()) {
             return moves;
         }
         final int from = this.startLocationFn.eval(context);

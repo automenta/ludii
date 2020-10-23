@@ -13,7 +13,7 @@ import game.functions.graph.generators.basis.Basis;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
 import game.util.graph.Poly;
-import main.math.Polygon;
+import math.Polygon;
 import util.Context;
 
 import java.awt.geom.Point2D;

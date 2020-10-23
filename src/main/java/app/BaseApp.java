@@ -14,7 +14,7 @@ import app.loading.GameLoading;
 import app.utils.Sound;
 import bridge.PlatformGraphics;
 import game.Game;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import manager.Manager;
 import manager.PlayerInterface;
 import manager.game.GameSetup;

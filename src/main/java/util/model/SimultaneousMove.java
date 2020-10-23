@@ -7,8 +7,8 @@ package util.model;
 import game.Game;
 import game.rules.play.moves.Moves;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import util.*;
 import util.action.Action;
 import util.action.others.ActionPass;
@@ -98,9 +98,7 @@ public final class SimultaneousMove extends Model
                     }
                 }
             }
-            final Iterator<AI> iterator = interruptedAIs.iterator();
-            while (iterator.hasNext()) {
-                final AI ai = iterator.next();
+            for (AI ai : interruptedAIs) {
                 ai.setWantsInterrupt(false);
             }
             this.lastStepAIs = new AI[this.lastStepAIs.length];
@@ -148,7 +146,7 @@ public final class SimultaneousMove extends Model
                             playerMoves.add(move);
                         }
                     }
-                    if (playerMoves.size() == 0) {
+                    if (playerMoves.isEmpty()) {
                         final ActionPass actionPass = new ActionPass();
                         actionPass.setDecision(true);
                         final Move passMove = new Move(actionPass);
@@ -416,7 +414,7 @@ public final class SimultaneousMove extends Model
                     }
                     else {
                         final FastArrayList<Move> playerMoves = legalPerPlayer.get(p);
-                        if (playerMoves.size() == 0) {
+                        if (playerMoves.isEmpty()) {
                             final ActionPass actionPass = new ActionPass();
                             actionPass.setDecision(true);
                             final Move passMove = new Move(actionPass);

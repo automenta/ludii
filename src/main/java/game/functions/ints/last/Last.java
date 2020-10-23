@@ -18,13 +18,13 @@ public final class Last extends BaseIntFunction
     
     public static IntFunction construct(final LastType lastType, @Opt @Name final BooleanFunction afterConsequence) {
         switch (lastType) {
-            case From: {
+            case From -> {
                 return new LastFrom(afterConsequence);
             }
-            case To: {
+            case To -> {
                 return new LastTo(afterConsequence);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Last(): A LastType is not implemented.");
             }
         }

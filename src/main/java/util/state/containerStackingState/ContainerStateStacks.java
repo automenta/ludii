@@ -7,7 +7,7 @@ package util.state.containerStackingState;
 import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import topology.Cell;
 import util.state.State;
 import util.zhash.*;

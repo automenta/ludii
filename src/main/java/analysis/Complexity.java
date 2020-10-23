@@ -9,9 +9,9 @@ import game.types.play.RepetitionType;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TObjectDoubleHashMap;
 import language.compiler.Compiler;
-import main.grammar.Description;
-import main.grammar.Report;
-import main.options.UserSelections;
+import grammar.Description;
+import grammar.Report;
+import options.UserSelections;
 import util.Context;
 import util.Trial;
 

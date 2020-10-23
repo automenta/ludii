@@ -45,11 +45,9 @@ public final class DefToTex
             }
         }
         Collections.sort(dirs);
-        final Iterator<File> iterator = dirs.iterator();
-        while (iterator.hasNext()) {
-            final File dir = iterator.next();
+        for (File dir : dirs) {
             final String path = dir.getCanonicalPath();
-            if (path.indexOf("/def/") != -1) {
+            if (path.contains("/def/")) {
                 final String name = path.substring(path.indexOf("def/"));
                 sb.append(texSection(name));
             }
@@ -95,7 +93,7 @@ public final class DefToTex
         sb.append(texDefine(define));
     }
     
-    static final String commentsFromLines(final List<String> lines) {
+    static String commentsFromLines(final List<String> lines) {
         final StringBuilder sb = new StringBuilder();
         int commentLinesAdded = 0;
         for (final String line : lines) {
@@ -116,7 +114,7 @@ public final class DefToTex
         return comments;
     }
     
-    static final List<String> examplesFromLines(final List<String> lines) {
+    static List<String> examplesFromLines(final List<String> lines) {
         final List<String> examples = new ArrayList<>();
         for (final String line : lines) {
             final int c = line.indexOf("@example");
@@ -128,7 +126,7 @@ public final class DefToTex
         return examples;
     }
     
-    static final String defineFromLines(final List<String> lines) {
+    static String defineFromLines(final List<String> lines) {
         final StringBuilder sb = new StringBuilder();
         boolean defineFound = false;
         for (final String line : lines) {

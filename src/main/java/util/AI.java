@@ -5,8 +5,8 @@
 package util;
 
 import game.Game;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 
 import java.lang.ref.WeakReference;
 

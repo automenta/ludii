@@ -30,7 +30,7 @@ public final class Constants
     public static final int END = -2;
     public static final int Infinity = 1000000000;
     public static final int NegativeInfinity = -1000000000;
-    public static int UNUSED;
+    public static int UNUSED = -1;
     public static final int MAX_DISTANCE = 1000;
     public static final int NOBODY = 0;
     public static final int NO_PIECE = 0;
@@ -51,8 +51,10 @@ public final class Constants
     public static final int MAX_ARGS = 20;
     public static final int MIN_IMAGE_SIZE = 2;
     public static List<BitSet>[][] combos;
-    public static String FAIL_SAFE_GAME_DESCRIPTION;
-    public static String BASIC_GAME_DESCRIPTION;
+    public static String FAIL_SAFE_GAME_DESCRIPTION =
+        "(game \"Tic-Tac-Toe\"  \n    (players 2)  \n    (equipment { \n        (board (square 3)) \n        (piece \"Disc\" P1) \n        (piece \"Cross\" P2) \n    })  \n    (rules \n        (play (move Add (to (sites Empty))))\n        (end (if (is Line 3) (result Mover Win)))\n    )\n)";
+    public static String BASIC_GAME_DESCRIPTION =
+        "(game \"Name\"  \n    (players 2)  \n    (equipment { \n        (board (square 3)) \n        (piece \"Ball\" Each) \n    })  \n    (rules \n        (play (move Add (to (sites Empty))))\n        (end (if (no Moves Next) (result Mover Win)))\n    )\n)";
     
     public static void createCombos() {
         Constants.combos = (List<BitSet>[][])new ArrayList[21][21];
@@ -88,10 +90,5 @@ public final class Constants
         }
     }
     
-    static {
-        Constants.UNUSED = -1;
-        Constants.combos = null;
-        Constants.FAIL_SAFE_GAME_DESCRIPTION = "(game \"Tic-Tac-Toe\"  \n    (players 2)  \n    (equipment { \n        (board (square 3)) \n        (piece \"Disc\" P1) \n        (piece \"Cross\" P2) \n    })  \n    (rules \n        (play (move Add (to (sites Empty))))\n        (end (if (is Line 3) (result Mover Win)))\n    )\n)";
-        Constants.BASIC_GAME_DESCRIPTION = "(game \"Name\"  \n    (players 2)  \n    (equipment { \n        (board (square 3)) \n        (piece \"Ball\" Each) \n    })  \n    (rules \n        (play (move Add (to (sites Empty))))\n        (end (if (no Moves Next) (result Mover Win)))\n    )\n)";
-    }
+
 }

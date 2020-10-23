@@ -53,14 +53,12 @@ public final class SitesTrack extends BaseRegionFunction
                         track = t;
                         break;
                     }
-                    continue;
                 }
                 else {
                     if (t.owner() == playerId || t.owner() == 0) {
                         track = t;
                         break;
                     }
-                    continue;
                 }
             }
         }

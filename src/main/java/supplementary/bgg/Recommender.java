@@ -96,11 +96,11 @@ public class Recommender
             else {
                 matches2.setScore(matches2.score() / Math.sqrt(matches2.game().ratings().size()));
             }
-            if (Database.validGameIds().size() == 0 || Database.validGameIds().contains(matches2.game().bggId())) {
+            if (Database.validGameIds().isEmpty() || Database.validGameIds().contains(matches2.game().bggId())) {
                 result.add(matches2);
             }
         }
-        Collections.sort(result, (a, b) -> {
+        result.sort((a, b) -> {
             if (a.score() == b.score()) {
                 return 0;
             }
@@ -144,11 +144,11 @@ public class Recommender
         }
         final List<Matches> result = new ArrayList<>();
         for (final Matches matches2 : ratingMap.values()) {
-            if (Database.validGameIds().size() == 0 || Database.validGameIds().contains(matches2.game().bggId())) {
+            if (Database.validGameIds().isEmpty() || Database.validGameIds().contains(matches2.game().bggId())) {
                 result.add(matches2);
             }
         }
-        Collections.sort(result, (a, b) -> {
+        result.sort((a, b) -> {
             if (a.score() == b.score()) {
                 return 0;
             }
@@ -200,9 +200,7 @@ public class Recommender
                 othersMap.put(otherRating.user().name(), otherRating.user());
             }
         }
-        for (final User other : othersMap.values()) {
-            others.add(other);
-        }
+        others.addAll(othersMap.values());
         messageString = messageString + others.size() + " users have scored at least one game that " + userName + " has scored.\n";
         for (final User other : others) {
             double tally = 0.0;
@@ -219,7 +217,7 @@ public class Recommender
             tally /= user.ratings().size();
             other.setMatch(tally);
         }
-        Collections.sort(others, (a, b) -> {
+        others.sort((a, b) -> {
             if (a.match() == b.match()) {
                 return 0;
             }
@@ -272,18 +270,19 @@ public class Recommender
             }
         }
         final List<Matches> result = new ArrayList<>();
-        for (final Integer gameId : numberOfRecommendsMap.keySet()) {
-            if (numberOfRecommendsMap.get(gameId) > threshold) {
+        for (final Map.Entry<Integer, Integer> entry : numberOfRecommendsMap.entrySet()) {
+            final Integer gameId = entry.getKey();
+            if (entry.getValue() > threshold) {
                 final Matches match = new Matches(data.games().get(gameId));
-                match.setNumberMatches(numberOfRecommendsMap.get(gameId));
-                match.setScore(numberOfRecommendsMap.get(gameId) / (double)numberOfMatchesMap.get(gameId));
-                if (Database.validGameIds().size() != 0 && !Database.validGameIds().contains(match.game().bggId())) {
+                match.setNumberMatches(entry.getValue());
+                match.setScore(entry.getValue() / (double)numberOfMatchesMap.get(gameId));
+                if (!Database.validGameIds().isEmpty() && !Database.validGameIds().contains(match.game().bggId())) {
                     continue;
                 }
                 result.add(match);
             }
         }
-        Collections.sort(result, (a, b) -> {
+        result.sort((a, b) -> {
             if (a.score() == b.score()) {
                 return 0;
             }
@@ -336,18 +335,19 @@ public class Recommender
             }
         }
         final List<Matches> result = new ArrayList<>();
-        for (final Integer gameId : numberOfMatchesMap.keySet()) {
-            if (numberOfMatchesMap.get(gameId) > threshold) {
+        for (final Map.Entry<Integer, Integer> entry : numberOfMatchesMap.entrySet()) {
+            final Integer gameId = entry.getKey();
+            if (entry.getValue() > threshold) {
                 final Matches match = new Matches(data.games().get(gameId));
-                match.setNumberMatches(numberOfMatchesMap.get(gameId));
-                match.setScore(scoreSimilarityMap.get(gameId) / (double)numberOfMatchesMap.get(gameId));
-                if (Database.validGameIds().size() != 0 && !Database.validGameIds().contains(match.game().bggId())) {
+                match.setNumberMatches(entry.getValue());
+                match.setScore(scoreSimilarityMap.get(gameId) / (double) entry.getValue());
+                if (!Database.validGameIds().isEmpty() && !Database.validGameIds().contains(match.game().bggId())) {
                     continue;
                 }
                 result.add(match);
             }
         }
-        Collections.sort(result, (a, b) -> {
+        result.sort((a, b) -> {
             if (a.score() == b.score()) {
                 return 0;
             }

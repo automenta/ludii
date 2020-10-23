@@ -43,25 +43,22 @@ public final class TrackSiteEndTrack extends BaseIntFunction
                     track = t;
                     break;
                 }
-                continue;
             }
             else if (this.name != null) {
                 if (this.name != null && t.name().contains(this.name) && t.owner() == playerId) {
                     track = t;
                     break;
                 }
-                continue;
             }
             else {
                 if (t.owner() == playerId || t.owner() == 0) {
                     track = t;
                     break;
                 }
-                continue;
             }
         }
         if (track == null) {
-            if (context.game().board().tracks().size() == 0) {
+            if (context.game().board().tracks().isEmpty()) {
                 return -1;
             }
             track = context.game().board().tracks().get(0);

@@ -37,12 +37,12 @@ public class SettingsColour
         return null;
     }
     
-    public static final Color[] originalPlayerColours() {
+    public static Color[] originalPlayerColours() {
         final Color[] originalPlayerColours = { new Color(250, 250, 250), new Color(250, 250, 250), new Color(50, 50, 50), new Color(190, 0, 0), new Color(0, 190, 0), new Color(0, 0, 190), new Color(190, 0, 190), new Color(0, 190, 190), new Color(255, 153, 0), new Color(255, 255, 153), new Color(153, 204, 255), new Color(255, 153, 204), new Color(204, 153, 255), new Color(255, 204, 153), new Color(153, 204, 0), new Color(255, 204, 0), new Color(255, 102, 0), new Color(250, 250, 250) };
         return originalPlayerColours;
     }
     
-    public static final Color playerColour(final int playerId, final Context context) {
+    public static Color playerColour(final int playerId, final Context context) {
         if (playerId > context.game().players().count()) {
             return SettingsColour.customPlayerColours[17];
         }

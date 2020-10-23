@@ -13,8 +13,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -44,9 +42,9 @@ public class MessagePlayersDialog extends JDialog
         final String[] allPlayersPre = DatabaseFunctions.GetAllPlayers().split("_next_");
         final String[] allPlayers = new String[allPlayersPre.length - 1];
         int allPlayersIndex = 0;
-        for (int i = 0; i < allPlayersPre.length; ++i) {
-            if (Integer.parseInt(allPlayersPre[i].split("NEXT_COL")[0]) != SettingsNetwork.getLoginId()) {
-                allPlayers[allPlayersIndex] = allPlayersPre[i];
+        for (String s : allPlayersPre) {
+            if (Integer.parseInt(s.split("NEXT_COL")[0]) != SettingsNetwork.getLoginId()) {
+                allPlayers[allPlayersIndex] = s;
                 ++allPlayersIndex;
             }
         }
@@ -62,13 +60,13 @@ public class MessagePlayersDialog extends JDialog
         model.addColumn("ID");
         model.addColumn("Username");
         model.addColumn("Online");
-        for (int j = 0; j < allPlayers.length; ++j) {
+        for (String allPlayer : allPlayers) {
             try {
-                final String gameDetails = allPlayers[j];
+                final String gameDetails = allPlayer;
                 final String[] splitDetails = gameDetails.split("NEXT_COL");
-                model.addRow(new Object[] { splitDetails[0], splitDetails[1], splitDetails[2] });
+                model.addRow(new Object[]{splitDetails[0], splitDetails[1], splitDetails[2]});
+            } catch (Exception ex) {
             }
-            catch (Exception ex) {}
         }
         this.getContentPane().add(this.contentPanel, "Center");
         this.contentPanel.setLayout(null);

@@ -12,25 +12,25 @@ public class No implements GraphicsItem
 {
     public static GraphicsItem construct(final NoBooleanType boardType, @Opt final Boolean value) {
         switch (boardType) {
-            case Board: {
+            case Board -> {
                 return new NoBoard(value);
             }
-            case Animation: {
+            case Animation -> {
                 return new NoAnimation(value);
             }
-            case HandScale: {
+            case HandScale -> {
                 return new NoHandScale(value);
             }
-            case DicePips: {
+            case DicePips -> {
                 return new NoDicePips(value);
             }
-            case Curves: {
+            case Curves -> {
                 return new NoCurves(value);
             }
-            case MaskedColour: {
+            case MaskedColour -> {
                 return new NoMaskedColour(value);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("No(): A NoBooleanType is not implemented.");
             }
         }

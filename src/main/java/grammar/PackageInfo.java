@@ -45,7 +45,7 @@ public class PackageInfo {
     }
 
     public void listAlphabetically() {
-        Collections.sort(this.rules, (a, b) -> a.lhs().grammarLabel().compareTo(b.lhs().grammarLabel()));
+        this.rules.sort(Comparator.comparing(a -> a.lhs().grammarLabel()));
     }
 
     public String toString() {

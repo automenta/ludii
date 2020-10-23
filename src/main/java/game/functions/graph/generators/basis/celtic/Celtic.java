@@ -14,9 +14,9 @@ import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import game.util.graph.*;
 import gnu.trove.list.array.TIntArrayList;
-import main.math.MathRoutines;
-import main.math.Polygon;
-import main.math.Vector;
+import math.MathRoutines;
+import math.Polygon;
+import math.Vector;
 import util.Context;
 
 import java.awt.geom.Point2D;
@@ -62,8 +62,8 @@ public class Celtic extends Basis
             this.polygon.setFrom(poly.polygon());
         }
         else {
-            for (int n = 0; n < sides.length; ++n) {
-                this.sides.add(sides[n].eval());
+            for (DimFunction side : sides) {
+                this.sides.add(side.eval());
             }
         }
     }
@@ -99,9 +99,9 @@ public class Celtic extends Basis
             for (int col = fromCol; col < toCol + 1; ++col) {
                 final Point2D ptRef = new Point2D.Double(col * uu2, row * uu2);
                 if (this.polygon.isEmpty() || this.polygon.contains(ptRef)) {
-                    for (int n = 0; n < ref.length; ++n) {
-                        final double x = ptRef.getX() + ref[n][0];
-                        final double y = ptRef.getY() + ref[n][1];
+                    for (double[] doubles : ref) {
+                        final double x = ptRef.getX() + doubles[0];
+                        final double y = ptRef.getY() + doubles[1];
                         graph.findOrAddVertex(x, y, 0.001);
                     }
                 }

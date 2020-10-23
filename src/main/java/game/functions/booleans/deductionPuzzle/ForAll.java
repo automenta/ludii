@@ -35,10 +35,9 @@ public class ForAll extends BaseBooleanFunction
         final int saveFrom = context.to();
         final int saveHint = context.hint();
         final int saveEdge = context.edge();
-        if (!this.type.equals(PuzzleElementType.Hint)) {
+        if (this.type != PuzzleElementType.Hint) {
             final List<? extends TopologyElement> elements = context.topology().getGraphElements(PuzzleElementType.convert(this.type));
-            for (int i = 0; i < elements.size(); ++i) {
-                final TopologyElement element = elements.get(i);
+            for (final TopologyElement element : elements) {
                 context.setFrom(element.index());
                 if (!this.constraint.eval(context)) {
                     context.setHint(saveHint);

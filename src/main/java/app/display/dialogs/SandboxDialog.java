@@ -73,7 +73,7 @@ public class SandboxDialog extends JDialog
         final game.equipment.component.Component componentAtSite = context.components()[context.containerState(containerId).what(locnUpSite, locnType)];
         if (componentAtSite != null && componentAtSite.isDie()) {
             MainWindow.setVolatileMessage("Setting dice not supported yet.");
-            EventQueue.invokeLater(() -> this.dispose());
+            EventQueue.invokeLater(this::dispose);
         }
         if (sandboxValueType == SandboxValueType.LocalState) {
             numButtonsNeeded = context.game().maximalLocalStates();

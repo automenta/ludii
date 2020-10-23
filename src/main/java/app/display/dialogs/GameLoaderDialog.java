@@ -39,7 +39,7 @@ public class GameLoaderDialog
         final GameLoaderNode root = new GameLoaderNode("Games", "/lud/");
         for (final String choice : choices) {
             String str = choice.replaceAll(Pattern.quote("\\"), "/");
-            if (str.startsWith("/")) {
+            if (!str.isEmpty() && str.charAt(0) == '/') {
                 str = str.substring(1);
             }
             final String[] parts = str.split("/");
@@ -119,8 +119,8 @@ public class GameLoaderDialog
                 }
                 EventQueue.invokeLater(() -> {
                     final String currentSearchString = filterField.getText();
-                    if (GameLoaderDialog.oldSearchString.equals(currentSearchString) || (GameLoaderDialog.oldSearchString.equals("Search Game") && currentSearchString.equals(""))) {
-                        if (!GameLoaderDialog.lastKeyPressed.equals("")) {}
+                    if (GameLoaderDialog.oldSearchString.equals(currentSearchString) || (GameLoaderDialog.oldSearchString.equals("Search Game") && currentSearchString.isEmpty())) {
+                        if (!GameLoaderDialog.lastKeyPressed.isEmpty()) {}
                         filterField.setText(filterField.getText() + GameLoaderDialog.lastKeyPressed);
                         GameLoaderDialog.lastKeyPressed = "";
                     }
@@ -130,7 +130,7 @@ public class GameLoaderDialog
             
             @Override
             public void focusLost(final FocusEvent e) {
-                if (filterField.getText().equals("Search Game") || filterField.getText().length() == 0) {
+                if (filterField.getText().equals("Search Game") || filterField.getText().isEmpty()) {
                     filterField.setText("Search Game");
                 }
                 this.setTextColour();
@@ -326,9 +326,9 @@ public class GameLoaderDialog
                 return super.getChildAt(index);
             }
             int visibleIdx = -1;
-            final Enumeration<TreeNode> e = this.children.elements();
-            while (e.hasMoreElements()) {
-                final GameLoaderNode node = (GameLoaderNode) e.nextElement();
+            Iterator<TreeNode> iterator = this.children.iterator();
+            while (iterator.hasNext()) {
+                final GameLoaderNode node = (GameLoaderNode) iterator.next();
                 if (node.isVisible) {
                     ++visibleIdx;
                 }
@@ -345,9 +345,9 @@ public class GameLoaderDialog
             }
             int count = 0;
             try {
-                final Enumeration<TreeNode> e = this.children.elements();
-                while (e.hasMoreElements()) {
-                    final GameLoaderNode node = (GameLoaderNode) e.nextElement();
+                Iterator<TreeNode> iterator = this.children.iterator();
+                while (iterator.hasNext()) {
+                    final GameLoaderNode node = (GameLoaderNode) iterator.next();
                     if (node.isVisible) {
                         ++count;
                     }
@@ -372,9 +372,9 @@ public class GameLoaderDialog
             }
             else {
                 this.isVisible = false;
-                final Enumeration<TreeNode> e = this.children.elements();
-                while (e.hasMoreElements()) {
-                    final GameLoaderNode child = (GameLoaderNode) e.nextElement();
+                Iterator<TreeNode> iterator = this.children.iterator();
+                while (iterator.hasNext()) {
+                    final GameLoaderNode child = (GameLoaderNode) iterator.next();
                     child.updateVisibility(filterText);
                     if (child.isVisible) {
                         this.isVisible = true;
@@ -453,12 +453,12 @@ public class GameLoaderDialog
             if (filterText.equals("searchgame")) {
                 filterText = "";
             }
-            if (filterText.length() > 0) {
+            if (!filterText.isEmpty()) {
                 root.updateVisibility(filterText);
                 model.setFilterActive(true);
             }
             model.reload();
-            if (filterText.length() == 0) {
+            if (filterText.isEmpty()) {
                 final Enumeration<TreeNode> bfsEnumeration = root.breadthFirstEnumeration();
                 while (bfsEnumeration.hasMoreElements()) {
                     final GameLoaderNode node = (GameLoaderNode) bfsEnumeration.nextElement();
@@ -489,7 +489,6 @@ public class GameLoaderDialog
                             this.setSelectionPath(new TreePath(node2.getPath()));
                             break;
                         }
-                        continue;
                     }
                 }
             }

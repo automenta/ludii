@@ -19,7 +19,7 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntIntHashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
-import main.collections.FastTIntArrayList;
+import collections.FastTIntArrayList;
 import util.state.containerState.ContainerState;
 import util.state.containerState.ContainerStateFactory;
 import util.state.onTrack.OnTrackIndices;
@@ -340,13 +340,12 @@ public class State implements Serializable
         if (other.votes != null) {
             this.votes = new ArrayList<>(other.votes);
             this.propositions = new ArrayList<>(other.propositions);
-            this.isDecided = other.isDecided;
         }
         else {
             this.votes = null;
             this.propositions = null;
-            this.isDecided = other.isDecided;
         }
+        this.isDecided = other.isDecided;
         this.valuesPlayer = new TIntIntHashMap(other.valuesPlayer);
         if (other.notes != null) {
             this.notes = new TIntObjectHashMap<>(other.notes);
@@ -498,9 +497,7 @@ public class State implements Serializable
         this.setTemp(other.tempValue);
         this.pendingValues = new TIntHashSet(other.pendingValues());
         if (this.amount != null) {
-            for (int index = 0; index < other.amount.length; ++index) {
-                this.amount[index] = other.amount[index];
-            }
+            System.arraycopy(other.amount, 0, this.amount, 0, other.amount.length);
         }
         this.moverHash = other.moverHash;
         this.nextHash = other.nextHash;
@@ -601,9 +598,7 @@ public class State implements Serializable
             }
         }
         if (this.amount != null) {
-            for (int index = 0; index < this.amount.length; ++index) {
-                this.amount[index] = 0;
-            }
+            Arrays.fill(this.amount, 0);
         }
         this.valuesPlayer = new TIntIntHashMap();
         if (game.usesNote()) {
@@ -819,9 +814,7 @@ public class State implements Serializable
     }
     
     public void reinitSumDice() {
-        for (int i = 0; i < this.sumDice.length; ++i) {
-            this.sumDice[i] = 0;
-        }
+        Arrays.fill(this.sumDice, 0);
     }
     
     public int[] currentDice(final int index) {
@@ -846,9 +839,7 @@ public class State implements Serializable
     
     public void reinitCurrentDice() {
         for (int i = 0; i < this.currentDice.length; ++i) {
-            for (int j = 0; j < this.currentDice[i].length; ++j) {
-                this.currentDice[i][j] = 0;
-            }
+            Arrays.fill(this.currentDice[i], 0);
         }
     }
     

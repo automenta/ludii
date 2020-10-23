@@ -4,7 +4,7 @@
 
 package game.util.graph;
 
-import main.math.RCL;
+import math.RCL;
 
 public class Situation
 {

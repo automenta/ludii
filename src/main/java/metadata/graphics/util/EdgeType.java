@@ -14,6 +14,6 @@ public enum EdgeType implements GraphicsItem
     Interlayer;
     
     public boolean supersetOf(final EdgeType eA) {
-        return this.equals(eA) || this.equals(EdgeType.All);
+        return this == eA || this == EdgeType.All;
     }
 }

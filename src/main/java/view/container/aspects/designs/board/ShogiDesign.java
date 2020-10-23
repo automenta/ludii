@@ -26,7 +26,7 @@ public class ShogiDesign extends BoardDesign
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.004f;
         final float swThick;
-        final float swThin = swThick = (float)Math.max(1, (int)(0.4f / this.topology().vertices().size() * this.boardStyle.placement().width + 0.5));
+        final float swThin = swThick = Math.max(1, (int)(0.4f / this.topology().vertices().size() * this.boardStyle.placement().width + 0.5));
         this.setStrokesAndColours(context, new Color(100, 75, 50), new Color(100, 75, 50), new Color(255, 230, 130), null, null, null, new Color(0, 0, 0), swThin, swThick);
         this.fillCells(g2d);
         this.drawInnerCellEdges(g2d, context);

@@ -75,7 +75,7 @@ public final class Claim extends Effect
                         actionAdd.setDecision(true);
                     }
                     final Move action = new Move(actionAdd);
-                    if (this.type.equals(SiteType.Edge)) {
+                    if (this.type == SiteType.Edge) {
                         action.setFromNonDecision(siteEval);
                         action.setToNonDecision(siteEval);
                         action.setEdgeMove(siteEval);
@@ -118,7 +118,7 @@ public final class Claim extends Effect
                             actionAdd2.setDecision(true);
                         }
                         action2 = new Move(actionAdd2);
-                        if (this.type.equals(SiteType.Edge)) {
+                        if (this.type == SiteType.Edge) {
                             action2.setFromNonDecision(toSite);
                             action2.setToNonDecision(toSite);
                             action2.setEdgeMove(toSite);
@@ -208,19 +208,19 @@ public final class Claim extends Effect
         else {
             maxNumStates = 0;
         }
-        if (this.type.equals(SiteType.Cell)) {
+        if (this.type == SiteType.Cell) {
             this.actionCache = new Move[game.players().count() + 1][][][];
             for (int p = 1; p < this.actionCache.length; ++p) {
                 this.actionCache[p] = new Move[game.numComponents() + 1][maxNumStates + 2][game.equipment().totalDefaultSites()];
             }
         }
-        else if (this.type.equals(SiteType.Edge)) {
+        else if (this.type == SiteType.Edge) {
             this.actionCache = new Move[game.players().count() + 1][][][];
             for (int p = 1; p < this.actionCache.length; ++p) {
                 this.actionCache[p] = new Move[game.players().count() + 1][maxNumStates + 2][game.board().topology().edges().size()];
             }
         }
-        else if (this.type.equals(SiteType.Vertex)) {
+        else if (this.type == SiteType.Vertex) {
             this.actionCache = new Move[game.players().count() + 1][][][];
             for (int p = 1; p < this.actionCache.length; ++p) {
                 this.actionCache[p] = new Move[game.numComponents() + 1][maxNumStates + 2][game.board().topology().vertices().size()];

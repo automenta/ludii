@@ -80,7 +80,7 @@ public final class Custodial extends Effect
         return moves;
     }
     
-    private final void shortSandwich(final Context context, final Moves actions, final TopologyElement fromV, final List<Radial> radials) {
+    private void shortSandwich(final Context context, final Moves actions, final TopologyElement fromV, final List<Radial> radials) {
         for (final Radial radial : radials) {
             if (radial.steps().length >= 3 && this.isTarget(context, radial.steps()[1].id())) {
                 if (!this.isFriend(context, radial.steps()[2].id())) {
@@ -92,17 +92,17 @@ public final class Custodial extends Effect
         }
     }
     
-    private final boolean isFriend(final Context context, final int location) {
+    private boolean isFriend(final Context context, final int location) {
         context.setTo(location);
         return this.friendRule.eval(context);
     }
     
-    private final boolean isTarget(final Context context, final int location) {
+    private boolean isTarget(final Context context, final int location) {
         context.setBetween(location);
         return this.targetRule.eval(context);
     }
     
-    private final void longSandwich(final Context context, final Moves actions, final TopologyElement fromV, final List<Radial> radials, final int maxPathLength) {
+    private void longSandwich(final Context context, final Moves actions, final TopologyElement fromV, final List<Radial> radials, final int maxPathLength) {
         for (final Radial radial : radials) {
             boolean foundEnemy = false;
             int posIdx;

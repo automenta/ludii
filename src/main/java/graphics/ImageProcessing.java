@@ -49,8 +49,8 @@ public class ImageProcessing
                         if (rgba[0] != rgbaTarget[0] || rgba[1] != rgbaTarget[1] || rgba[2] != rgbaTarget[2] || rgba[3] != rgbaTarget[3]) {
                             boolean inPointsToCheck = false;
                             final Point pointToAdd = new Point(x + off[a][0], y + off[a][1]);
-                            for (int i = 0; i < pointsToCheck.size(); ++i) {
-                                if (pointToAdd.x == pointsToCheck.get(i).x && pointToAdd.y == pointsToCheck.get(i).y) {
+                            for (Point point : pointsToCheck) {
+                                if (pointToAdd.x == point.x && pointToAdd.y == point.y) {
                                     inPointsToCheck = true;
                                 }
                             }
@@ -122,12 +122,12 @@ public class ImageProcessing
     public static void ballImage(final Graphics2D g2d, final int x0, final int y0, final int r, final Color baseColour) {
         final float[] dist = { 0.0f, 0.25f, 0.4f, 1.0f };
         final Color[] colors = { Color.WHITE, baseColour, baseColour, Color.BLACK };
-        RadialGradientPaint rgp = new RadialGradientPaint(new Point(x0 + r * 2 / 3, y0 + r * 2 / 3), (float)(r * 2), dist, colors);
+        RadialGradientPaint rgp = new RadialGradientPaint(new Point(x0 + r * 2 / 3, y0 + r * 2 / 3), (r * 2), dist, colors);
         g2d.setPaint(rgp);
         g2d.fill(new Ellipse2D.Double(x0, y0, r * 2, r * 2));
         final float[] dist2 = { 0.0f, 0.35f, 1.0f };
         final Color[] colors2 = { new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), Color.BLACK };
-        rgp = new RadialGradientPaint(new Point(x0 + r, y0 + r), (float)(r * 2), dist2, colors2);
+        rgp = new RadialGradientPaint(new Point(x0 + r, y0 + r), (r * 2), dist2, colors2);
         g2d.setPaint(rgp);
         g2d.fill(new Ellipse2D.Double(x0, y0, r * 2, r * 2));
     }
@@ -166,22 +166,22 @@ public class ImageProcessing
         g2d.setColor(baseColour);
         g2d.fillRect(0, 0, imageSize, imageSize);
         GeneralPath path = new GeneralPath();
-        path.moveTo((float)pts[0][0].x, (float)pts[0][0].y);
-        path.lineTo((float)pts[1][0].x, (float)pts[1][0].y);
-        path.lineTo((float)pts[2][0].x, (float)pts[2][0].y);
-        path.lineTo((float)pts[2][1].x, (float)pts[2][1].y);
-        path.lineTo((float)pts[1][1].x, (float)pts[1][1].y);
-        path.lineTo((float)pts[0][1].x, (float)pts[0][1].y);
+        path.moveTo(pts[0][0].x, pts[0][0].y);
+        path.lineTo(pts[1][0].x, pts[1][0].y);
+        path.lineTo(pts[2][0].x, pts[2][0].y);
+        path.lineTo(pts[2][1].x, pts[2][1].y);
+        path.lineTo(pts[1][1].x, pts[1][1].y);
+        path.lineTo(pts[0][1].x, pts[0][1].y);
         path.closePath();
         g2d.setColor(new Color(255, 230, 200, 100));
         g2d.fill(path);
         path = new GeneralPath();
-        path.moveTo((float)pts[0][0].x, (float)pts[0][0].y);
-        path.lineTo((float)pts[3][0].x, (float)pts[3][0].y);
-        path.lineTo((float)pts[2][0].x, (float)pts[2][0].y);
-        path.lineTo((float)pts[2][1].x, (float)pts[2][1].y);
-        path.lineTo((float)pts[3][1].x, (float)pts[3][1].y);
-        path.lineTo((float)pts[0][1].x, (float)pts[0][1].y);
+        path.moveTo(pts[0][0].x, pts[0][0].y);
+        path.lineTo(pts[3][0].x, pts[3][0].y);
+        path.lineTo(pts[2][0].x, pts[2][0].y);
+        path.lineTo(pts[2][1].x, pts[2][1].y);
+        path.lineTo(pts[3][1].x, pts[3][1].y);
+        path.lineTo(pts[0][1].x, pts[0][1].y);
         path.closePath();
         g2d.setColor(new Color(50, 40, 20, 100));
         g2d.fill(path);

@@ -4,8 +4,8 @@
 
 package utils.data_structures.experience_buffers;
 
-import main.collections.FVector;
-import main.math.BitTwiddling;
+import collections.FVector;
+import math.BitTwiddling;
 
 import java.io.Serializable;
 import java.util.ArrayList;

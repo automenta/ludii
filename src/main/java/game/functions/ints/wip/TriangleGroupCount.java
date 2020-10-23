@@ -125,7 +125,7 @@ public final class TriangleGroupCount extends BaseIntFunction
             }
         }
         final TIntArrayList common = commonItems(resultA, resultB);
-        return common.size() > 0;
+        return !common.isEmpty();
     }
     
     public static TIntArrayList commonItems(final TIntArrayList list1, final TIntArrayList list2) {

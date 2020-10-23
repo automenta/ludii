@@ -112,7 +112,7 @@ public class AIFactory
         else {
             System.err.println("Expecting AI file to start with \"algorithm=\", but it starts with " + firstLine);
         }
-        System.err.println(String.format("Warning: cannot convert string \"%s\" to AI; defaulting to random.", string));
+        System.err.printf("Warning: cannot convert string \"%s\" to AI; defaulting to random.%n", string);
         return null;
     }
     
@@ -232,7 +232,7 @@ public class AIFactory
                         catch (NoClassDefFoundError exception) {}
                     }
                 }
-                classes.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+                classes.sort(Comparator.comparing(Class::getName));
                 AIFactory.thirdPartyAIClasses.put(jarFile.getAbsolutePath(), classes);
             }
         }

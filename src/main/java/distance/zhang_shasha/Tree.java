@@ -91,7 +91,7 @@ public class Tree
         for (int i = 0; i < node.children.size(); ++i) {
             leftmost(node.children.get(i));
         }
-        if (node.children.size() == 0) {
+        if (node.children.isEmpty()) {
             node.leftmost = node;
         }
         else {
@@ -105,6 +105,7 @@ public class Tree
             for (int j = i + 1; j < this.l.size(); ++j) {
                 if (this.l.get(j) == this.l.get(i)) {
                     flag = 1;
+                    break;
                 }
             }
             if (flag == 0) {

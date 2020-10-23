@@ -21,13 +21,13 @@ public final class Max extends Effect
     
     public static Moves construct(final MaxMovesType maxType, final Moves moves, @Opt final Then then) {
         switch (maxType) {
-            case Captures: {
+            case Captures -> {
                 return new MaxCaptures(moves, then);
             }
-            case Moves: {
+            case Moves -> {
                 return new MaxMoves(moves, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Max(): A MaxMovesType is not implemented.");
             }
         }
@@ -35,10 +35,10 @@ public final class Max extends Effect
     
     public static Moves construct(final MaxDistanceType maxType, @Opt final String trackName, @Opt final RoleType owner, final Moves moves, @Opt final Then then) {
         switch (maxType) {
-            case Distance: {
+            case Distance -> {
                 return new MaxDistance(trackName, owner, moves, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Max(): A MaxDistanceType is not implemented.");
             }
         }

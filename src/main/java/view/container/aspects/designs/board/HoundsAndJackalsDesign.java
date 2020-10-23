@@ -43,7 +43,7 @@ public class HoundsAndJackalsDesign extends BoardDesign
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.005f;
-        final float swThin = (float)Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
+        final float swThin = Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
         final float swThick = 2.0f * swThin;
         this.setStrokesAndColours(context, new Color(200, 200, 200), null, null, null, null, null, new Color(140, 140, 140), swThin, swThick);
         this.drawHoundsAndJackalsBoard(g2d);
@@ -79,11 +79,11 @@ public class HoundsAndJackalsDesign extends BoardDesign
         final int gy = hy - 3 * unit;
         final int ix = hx;
         final int iy = ptI.y + border;
-        path.moveTo((float)ax, (float)ay);
-        path.lineTo((float)bx, (float)by);
-        path.curveTo((float)cx, (float)cy, (float)dx, (float)dy, (float)ex, (float)ey);
-        path.curveTo((float)fx, (float)fy, (float)gx, (float)gy, (float)hx, (float)hy);
-        path.lineTo((float)ix, (float)iy);
+        path.moveTo(ax, ay);
+        path.lineTo(bx, by);
+        path.curveTo(cx, cy, dx, dy, ex, ey);
+        path.curveTo(fx, fy, gx, gy, hx, hy);
+        path.lineTo(ix, iy);
         path.closePath();
         g2d.setColor(new Color(255, 240, 220));
         g2d.fill(path);
@@ -129,8 +129,8 @@ public class HoundsAndJackalsDesign extends BoardDesign
         dx = pt5.x - d1;
         dy = pt5.y;
         path = new GeneralPath();
-        path.moveTo((float)ax, (float)ay);
-        path.curveTo((float)bx, (float)by, (float)cx, (float)cy, (float)dx, (float)dy);
+        path.moveTo(ax, ay);
+        path.curveTo(bx, by, cx, cy, dx, dy);
         g2d.draw(path);
         ax = pt10.x + d1;
         ay = pt10.y;
@@ -141,8 +141,8 @@ public class HoundsAndJackalsDesign extends BoardDesign
         dx = pt9.x + d1;
         dy = pt9.y;
         path = new GeneralPath();
-        path.moveTo((float)ax, (float)ay);
-        path.curveTo((float)bx, (float)by, (float)cx, (float)cy, (float)dx, (float)dy);
+        path.moveTo(ax, ay);
+        path.curveTo(bx, by, cx, cy, dx, dy);
         g2d.draw(path);
         ax = pt4.x - d1;
         ay = pt4.y;
@@ -153,8 +153,8 @@ public class HoundsAndJackalsDesign extends BoardDesign
         dx = pt7.x + d1;
         dy = pt7.y;
         path = new GeneralPath();
-        path.moveTo((float)ax, (float)ay);
-        path.curveTo((float)bx, (float)by, (float)cx, (float)cy, (float)dx, (float)dy);
+        path.moveTo(ax, ay);
+        path.curveTo(bx, by, cx, cy, dx, dy);
         g2d.draw(path);
         ax = pt8.x + d1;
         ay = pt8.y;
@@ -165,8 +165,8 @@ public class HoundsAndJackalsDesign extends BoardDesign
         dx = pt11.x - d1;
         dy = pt11.y;
         path = new GeneralPath();
-        path.moveTo((float)ax, (float)ay);
-        path.curveTo((float)bx, (float)by, (float)cx, (float)cy, (float)dx, (float)dy);
+        path.moveTo(ax, ay);
+        path.curveTo(bx, by, cx, cy, dx, dy);
         g2d.draw(path);
     }
 }

@@ -7,7 +7,7 @@ package util.state.containerState;
 import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import topology.Cell;
 import util.state.State;
 import util.zhash.HashedBitSet;
@@ -199,7 +199,7 @@ public class ContainerFlatState extends BaseContainerState
         }
         if (countVal != -1) {
             if (this.count != null) {
-                this.count.setChunk(trialState, site - this.offset, (countVal < 0) ? 0 : countVal);
+                this.count.setChunk(trialState, site - this.offset, Math.max(countVal, 0));
             }
             else if (this.count == null && countVal > 1) {
                 throw new UnsupportedOperationException("This game does not support counts, but a count > 1 has been set. countVal=" + countVal);
@@ -394,14 +394,14 @@ public class ContainerFlatState extends BaseContainerState
         return sb.toString();
     }
     
-    private static final boolean chunkSetsEqual(final HashedChunkSet thisSet, final HashedChunkSet otherSet) {
+    private static boolean chunkSetsEqual(final HashedChunkSet thisSet, final HashedChunkSet otherSet) {
         if (thisSet == null) {
             return otherSet == null;
         }
         return thisSet.equals(otherSet);
     }
     
-    private static final boolean bitSetsEqual(final HashedBitSet thisSet, final HashedBitSet otherSet) {
+    private static boolean bitSetsEqual(final HashedBitSet thisSet, final HashedBitSet otherSet) {
         if (thisSet == null) {
             return otherSet == null;
         }
@@ -552,7 +552,7 @@ public class ContainerFlatState extends BaseContainerState
     public void setCount(final State trialState, final int site, final int countVal) {
         if (countVal != -1) {
             if (this.count != null) {
-                this.count.setChunk(trialState, site - this.offset, (countVal < 0) ? 0 : countVal);
+                this.count.setChunk(trialState, site - this.offset, Math.max(countVal, 0));
             }
             else if (this.count == null && countVal > 1) {
                 throw new UnsupportedOperationException("This game does not support counts, but a count > 1 has been set. countVal=" + countVal);

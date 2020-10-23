@@ -79,7 +79,7 @@ public final class Intervene extends Effect
         return moves;
     }
     
-    private final void shortSandwich(final Context context, final Moves actions, final TopologyElement fromV, final List<Radial> radials) {
+    private void shortSandwich(final Context context, final Moves actions, final TopologyElement fromV, final List<Radial> radials) {
         for (final Radial radial : radials) {
             if (radial.steps().length >= 2) {
                 if (!this.isTarget(context, radial.steps()[1].id())) {
@@ -108,12 +108,12 @@ public final class Intervene extends Effect
         }
     }
     
-    private final boolean isTarget(final Context context, final int location) {
+    private boolean isTarget(final Context context, final int location) {
         context.setTo(location);
         return this.targetRule.eval(context);
     }
     
-    private final void longSandwich(final Context context, final Moves actions, final TopologyElement fromV, final List<Radial> radials, final int maxPathLength, final int minPathLength) {
+    private void longSandwich(final Context context, final Moves actions, final TopologyElement fromV, final List<Radial> radials, final int maxPathLength, final int minPathLength) {
         for (final Radial radial : radials) {
             final TIntArrayList sitesToIntervene = new TIntArrayList();
             for (int posIdx = 1; posIdx < radial.steps().length && posIdx <= maxPathLength && this.isTarget(context, radial.steps()[posIdx].id()); ++posIdx) {

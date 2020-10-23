@@ -78,7 +78,7 @@ public class AllDifferent extends BaseBooleanFunction
                 }
             }
         }
-        else if (this.typeRegion.equals(RegionTypeStatic.Regions)) {
+        else if (this.typeRegion == RegionTypeStatic.Regions) {
             final Regions[] regions2;
             final Regions[] regions = regions2 = context.game().equipment().regions();
             for (final Regions rgn : regions2) {
@@ -90,7 +90,7 @@ public class AllDifferent extends BaseBooleanFunction
                         final Integer[][] regionsList = convertStaticRegionOnLocs = rgn.convertStaticRegionOnLocs(area, context);
                         for (final Integer[] locs : convertStaticRegionOnLocs) {
                             final TIntArrayList history2 = new TIntArrayList();
-                            if (!area.equals(RegionTypeStatic.AllDirections) || cs.what(locs[0], realType) != 0) {
+                            if (area != RegionTypeStatic.AllDirections || cs.what(locs[0], realType) != 0) {
                                 for (final Integer loc : locs) {
                                     if (loc != null) {
                                         if (cs.isResolved(loc, realType)) {

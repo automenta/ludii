@@ -13,7 +13,7 @@ import game.util.graph.Edge;
 import game.util.graph.Face;
 import game.util.graph.Graph;
 import game.util.graph.Vertex;
-import main.math.Vector;
+import math.Vector;
 import util.Context;
 
 public final class Layers extends BaseGraphFunction

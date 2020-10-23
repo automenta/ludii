@@ -55,7 +55,7 @@ public class TurnsPage extends TabPage
                     stringMove = stringMove + action.toTurnFormat(context.currentInstanceContext()) + ", ";
                 }
             }
-            if (stringMove.length() > 0) {
+            if (!stringMove.isEmpty()) {
                 stringMove = stringMove.substring(0, stringMove.length() - 2);
             }
         }
@@ -63,7 +63,7 @@ public class TurnsPage extends TabPage
             for (final Action action : lastMove.actions()) {
                 stringMove = stringMove + action.toTurnFormat(context.currentInstanceContext()) + ", ";
             }
-            if (stringMove.length() > 0) {
+            if (!stringMove.isEmpty()) {
                 stringMove = stringMove.substring(0, stringMove.length() - 2);
             }
         }

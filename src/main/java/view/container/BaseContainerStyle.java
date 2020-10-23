@@ -65,54 +65,54 @@ public abstract class BaseContainerStyle implements ContainerStyle
     public void draw(final Graphics2D g2d, final PlaneType plane, final Context context) {
         try {
             switch (plane) {
-                case BOARD: {
+                case BOARD -> {
                     Bridge.graphicsRenderer().drawBoard(g2d, this.containerPlacement.unscaledPlacement());
                     break;
                 }
-                case TRACK: {
+                case TRACK -> {
                     this.containerTrack.drawBoardTrack(g2d, context, this);
                     break;
                 }
-                case AXES: {
+                case AXES -> {
                     this.containerAxis.drawAxes(g2d);
                     break;
                 }
-                case GRAPH: {
+                case GRAPH -> {
                     Bridge.graphicsRenderer().drawGraph(g2d, this.containerPlacement.unscaledPlacement());
                     break;
                 }
-                case CONNECTIONS: {
+                case CONNECTIONS -> {
                     Bridge.graphicsRenderer().drawConnections(g2d, this.containerPlacement.unscaledPlacement());
                     break;
                 }
-                case HINTS: {
+                case HINTS -> {
                     if (context.game().metadata().graphics().hintType() == PuzzleHintType.None) {
                         break;
                     }
                     this.containerDesign.drawPuzzleHints(g2d, context);
                     break;
                 }
-                case CANDIDATES: {
+                case CANDIDATES -> {
                     this.containerDesign.drawPuzzleCandidates(g2d, context);
                     break;
                 }
-                case COMPONENTS: {
+                case COMPONENTS -> {
                     this.containerComponents.drawComponents(g2d, context);
                     break;
                 }
-                case PREGENERATION: {
+                case PREGENERATION -> {
                     DeveloperGUI.drawPregeneration(g2d, context, this);
                     break;
                 }
-                case INDICES: {
+                case INDICES -> {
                     this.drawIndices(g2d, context);
                     break;
                 }
-                case POSSIBLEMOVES: {
+                case POSSIBLEMOVES -> {
                     this.drawPossibleMoves(g2d, context);
                     break;
                 }
-                case COSTS: {
+                case COSTS -> {
                     this.drawElementCost(g2d, context);
                     break;
                 }
@@ -201,10 +201,10 @@ public abstract class BaseContainerStyle implements ContainerStyle
     
     private void drawIndexIfRequired(final boolean showIndices, final boolean showCoordinates, final Graphics2D g2d, final TopologyElement graphElement) {
         if (showIndices) {
-            StringUtil.drawStringAtSite(g2d, "" + graphElement.index(), graphElement, this.screenPosn(graphElement.centroid()), SettingsVC.coordWithOutline);
+            StringUtil.drawStringAtSite(g2d, String.valueOf(graphElement.index()), graphElement, this.screenPosn(graphElement.centroid()), SettingsVC.coordWithOutline);
         }
         if (showCoordinates) {
-            StringUtil.drawStringAtSite(g2d, "" + graphElement.label(), graphElement, this.screenPosn(graphElement.centroid()), SettingsVC.coordWithOutline);
+            StringUtil.drawStringAtSite(g2d, graphElement.label(), graphElement, this.screenPosn(graphElement.centroid()), SettingsVC.coordWithOutline);
         }
     }
     
@@ -372,15 +372,9 @@ public abstract class BaseContainerStyle implements ContainerStyle
     @Override
     public List<TopologyElement> drawnGraphElements() {
         final List<TopologyElement> allGraphElements = new ArrayList<>();
-        for (final TopologyElement g : this.drawnCells()) {
-            allGraphElements.add(g);
-        }
-        for (final TopologyElement g : this.drawnEdges()) {
-            allGraphElements.add(g);
-        }
-        for (final TopologyElement g : this.drawnVertices()) {
-            allGraphElements.add(g);
-        }
+        allGraphElements.addAll(this.drawnCells());
+        allGraphElements.addAll(this.drawnEdges());
+        allGraphElements.addAll(this.drawnVertices());
         return allGraphElements;
     }
     

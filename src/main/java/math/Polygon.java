@@ -36,14 +36,14 @@ public final class Polygon {
                 this.points.clear();
                 break;
             }
-            this.points.add(new Point2D.Double(pair[0].floatValue(), pair[1].floatValue()));
+            this.points.add(new Point2D.Double(pair[0], pair[1]));
         }
     }
 
     public Polygon(int numSides) {
-        double r = (double)numSides / (Math.PI * 2);
+        double r = numSides / (Math.PI * 2);
         for (int n = 0; n < numSides; ++n) {
-            double theta = 1.5707963267948966 + (double)n / (double)numSides * 2.0 * Math.PI;
+            double theta = 1.5707963267948966 + (double)n / numSides * 2.0 * Math.PI;
             double x = r * Math.cos(theta);
             double y = r * Math.sin(theta);
             this.points.add(new Point2D.Double(x, y));
@@ -91,9 +91,9 @@ public final class Polygon {
         }
         double avgX = 0.0;
         double avgY = 0.0;
-        for (int n = 0; n < this.points.size(); ++n) {
-            avgX += this.points.get(n).getX();
-            avgY += this.points.get(n).getY();
+        for (Point2D point : this.points) {
+            avgX += point.getX();
+            avgY += point.getY();
         }
         return new Point2D.Double(avgX /= this.points.size(), avgY /= this.points.size());
     }
@@ -171,7 +171,7 @@ public final class Polygon {
         for (int n = 0; n < sides.size(); ++n) {
             int nextStep = sides.get(n);
             step = (step + (nextStep < 0 ? -1 : 1) + steps.length) % steps.length;
-            this.points.add(new Point2D.Double(x += (double)nextStep * steps[step][0], y += (double)nextStep * steps[step][1]));
+            this.points.add(new Point2D.Double(x += nextStep * steps[step][0], y += nextStep * steps[step][1]));
         }
     }
 

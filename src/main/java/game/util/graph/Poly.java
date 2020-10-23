@@ -5,7 +5,7 @@
 package game.util.graph;
 
 import game.functions.dim.DimFunction;
-import main.math.Polygon;
+import math.Polygon;
 import util.BaseLudeme;
 
 public class Poly extends BaseLudeme
@@ -22,7 +22,7 @@ public class Poly extends BaseLudeme
             final DimFunction[] yPoint = pts[i];
             floatPts[i] = new Float[yPoint.length];
             for (int j = 0; j < pts[i].length; ++j) {
-                floatPts[i][j] = Float.valueOf(pts[i][j].eval());
+                floatPts[i][j] = (float) pts[i][j].eval();
             }
         }
         this.polygon = new Polygon(floatPts);

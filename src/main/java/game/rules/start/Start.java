@@ -53,13 +53,12 @@ public class Start extends BaseLudeme implements Serializable
             final BaseAction actionAtomic = new ActionAdd(type, locn, what, 1, -1, -1, isInvisible, isMasked, Boolean.TRUE);
             actionAtomic.apply(context, true);
             context.trial().moves().add(new Move(actionAtomic));
-            context.trial().addInitPlacement();
         }
         else {
             final BaseAction actionAtomic = new ActionAdd(type, locn, what, count, state, rotation, isInvisible, isMasked, null);
             actionAtomic.apply(context, true);
             context.trial().moves().add(new Move(actionAtomic));
-            context.trial().addInitPlacement();
         }
+        context.trial().addInitPlacement();
     }
 }

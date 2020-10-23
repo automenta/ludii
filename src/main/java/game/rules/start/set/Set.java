@@ -48,16 +48,16 @@ public final class Set extends StartRule
             throw new IllegalArgumentException("Set(): With SetStartSitesType Exactly one region or site parameter must be non-null.");
         }
         switch (startType) {
-            case Count: {
+            case Count -> {
                 return new SetCount(value, type, at, to);
             }
-            case Cost: {
+            case Cost -> {
                 return new SetCost(value, type, at, to);
             }
-            case Phase: {
+            case Phase -> {
                 return new SetPhase(value, type, at, to);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetStartSitesType is not implemented.");
             }
         }
@@ -65,13 +65,13 @@ public final class Set extends StartRule
     
     public static Rule construct(final SetStartPlayerType startType, @Opt final RoleType role, final IntFunction value) {
         switch (startType) {
-            case Amount: {
+            case Amount -> {
                 return new SetAmount(role, value);
             }
-            case Score: {
+            case Score -> {
                 return new SetScore(role, value);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetStartPlayerType is not implemented.");
             }
         }
@@ -79,10 +79,10 @@ public final class Set extends StartRule
     
     public static Rule construct(final SetStartPlayersType startType, final IntFunction value, final RoleType[] roles) {
         switch (startType) {
-            case Team: {
+            case Team -> {
                 return new SetTeam(value, roles);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetStartPlayersType is not implemented.");
             }
         }
@@ -90,10 +90,10 @@ public final class Set extends StartRule
     
     public static Rule construct(final SetStartGraphType startType, @Opt final SiteType type) {
         switch (startType) {
-            case AllInvisible: {
+            case AllInvisible -> {
                 return new SetAllInvisible(type);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetStartGraphType is not implemented.");
             }
         }

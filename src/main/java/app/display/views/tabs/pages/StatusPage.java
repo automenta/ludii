@@ -152,9 +152,7 @@ public class StatusPage extends TabPage
                     SettingsNetwork.activePlayers[l] = false;
                     if (SettingsNetwork.getActiveGameId() != 0) {
                         final double[] tempRanking = new double[longestTrial.ranking().length];
-                        for (int m = 0; m < longestTrial.ranking().length; ++m) {
-                            tempRanking[m] = longestTrial.ranking()[m];
-                        }
+                        System.arraycopy(longestTrial.ranking(), 0, tempRanking, 0, longestTrial.ranking().length);
                         for (int player = 1; player < longestTrial.ranking().length; ++player) {
                             if (longestTrial.ranking()[player] == 0.0) {
                                 tempRanking[player] = 1000.0;

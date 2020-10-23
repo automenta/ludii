@@ -160,9 +160,9 @@ public final class MathRoutines {
     }
 
     public static Color shade(Color colour, double adjust) {
-        int r = Math.max(0, Math.min(255, (int)((double)colour.getRed() * adjust + 0.5)));
-        int g = Math.max(0, Math.min(255, (int)((double)colour.getGreen() * adjust + 0.5)));
-        int b = Math.max(0, Math.min(255, (int)((double)colour.getBlue() * adjust + 0.5)));
+        int r = Math.max(0, Math.min(255, (int)(colour.getRed() * adjust + 0.5)));
+        int g = Math.max(0, Math.min(255, (int)(colour.getGreen() * adjust + 0.5)));
+        int b = Math.max(0, Math.min(255, (int)(colour.getBlue() * adjust + 0.5)));
         return new Color(r, g, b);
     }
 
@@ -170,10 +170,7 @@ public final class MathRoutines {
         if (val <= min) {
             return min;
         }
-        if (val >= max) {
-            return max;
-        }
-        return val;
+        return Math.min(val, max);
     }
 
     public static Point2D.Double average(Point2D a, Point2D b) {
@@ -389,7 +386,7 @@ public final class MathRoutines {
         return true;
     }
 
-    public static boolean pointInPolygon(Point2D pt, Point2D[] poly) {
+    public static boolean pointInPolygon(Point2D.Double pt, Point2D.Double[] poly) {
         int sz = poly.length;
         int j = sz - 1;
         boolean odd = false;
@@ -403,7 +400,7 @@ public final class MathRoutines {
         return odd;
     }
 
-    public static boolean pointInPolygon(Point2D pt, List<Point2D> poly) {
+    public static boolean pointInPolygon(Point2D.Double pt, List<Point2D.Double> poly) {
         int sz = poly.size();
         int j = sz - 1;
         boolean odd = false;

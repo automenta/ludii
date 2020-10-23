@@ -104,7 +104,7 @@ public class Stats {
         this.conf = 0.0;
         this.min = 0.0;
         this.max = 0.0;
-        if (this.samples.size() == 0) {
+        if (this.samples.isEmpty()) {
             return;
         }
         this.min = Double.POSITIVE_INFINITY;
@@ -119,7 +119,7 @@ public class Stats {
             if (!(val > this.max)) continue;
             this.max = val;
         }
-        this.mean = this.sum / (double)this.samples.size();
+        this.mean = this.sum / this.samples.size();
         if (this.samples.size() > 1) {
             for (i = 0; i < this.samples.size(); ++i) {
                 val = this.samples.getQuick(i);
@@ -133,7 +133,7 @@ public class Stats {
     }
 
     public void show() {
-        System.out.printf(this.toString());
+        System.out.print(this.toString());
     }
 
     public void showFull() {

@@ -109,19 +109,7 @@ public final class SVGHints
             final Field f = hintsClass.getDeclaredField(fieldName);
             return (RenderingHints.Key)f.get(null);
         }
-        catch (ClassNotFoundException e) {
-            return null;
-        }
-        catch (NoSuchFieldException ex) {
-            return null;
-        }
-        catch (SecurityException ex2) {
-            return null;
-        }
-        catch (IllegalArgumentException ex3) {
-            return null;
-        }
-        catch (IllegalAccessException ex4) {
+        catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | SecurityException | NoSuchFieldException e) {
             return null;
         }
     }
@@ -182,31 +170,31 @@ public final class SVGHints
         @Override
         public boolean isCompatibleValue(final Object val) {
             switch (this.intKey()) {
-                case 0: {
+                case 0 -> {
                     return SVGHints.VALUE_IMAGE_HANDLING_EMBED.equals(val) || SVGHints.VALUE_IMAGE_HANDLING_REFERENCE.equals(val);
                 }
-                case 1: {
+                case 1 -> {
                     return "auto".equals(val) || "inherit".equals(val) || "optimizeLegibility".equals(val) || "geometricPrecision".equals(val) || "optimizeSpeed".equals(val);
                 }
-                case 2: {
+                case 2 -> {
                     return val == null || val instanceof String;
                 }
-                case 3: {
+                case 3 -> {
                     return val == null || val instanceof String;
                 }
-                case 4: {
+                case 4 -> {
                     return val == null || val instanceof String;
                 }
-                case 5: {
+                case 5 -> {
                     return true;
                 }
-                case 6: {
+                case 6 -> {
                     return val instanceof String;
                 }
-                case 7: {
+                case 7 -> {
                     return val == null || SVGHints.VALUE_DRAW_STRING_TYPE_STANDARD.equals(val) || SVGHints.VALUE_DRAW_STRING_TYPE_VECTOR.equals(val);
                 }
-                default: {
+                default -> {
                     throw new RuntimeException("Not possible!");
                 }
             }

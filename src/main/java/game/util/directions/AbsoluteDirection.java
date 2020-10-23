@@ -317,154 +317,154 @@ public enum AbsoluteDirection implements Direction
     
     public static DirectionFacing convert(final AbsoluteDirection absoluteDirection) {
         switch (absoluteDirection) {
-            case Adjacent: {
+            case Adjacent -> {
                 return null;
             }
-            case All: {
+            case All -> {
                 return null;
             }
-            case Axial: {
+            case Axial -> {
                 return null;
             }
-            case Angled: {
+            case Angled -> {
                 return null;
             }
-            case Diagonal: {
+            case Diagonal -> {
                 return null;
             }
-            case OffDiagonal: {
+            case OffDiagonal -> {
                 return null;
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 return null;
             }
-            case Downward: {
+            case Downward -> {
                 return null;
             }
-            case SameLayer: {
+            case SameLayer -> {
                 return null;
             }
-            case Upward: {
+            case Upward -> {
                 return null;
             }
-            case Rotational: {
+            case Rotational -> {
                 return null;
             }
-            case E: {
+            case E -> {
                 return CompassDirection.E;
             }
-            case ENE: {
+            case ENE -> {
                 return CompassDirection.ENE;
             }
-            case ESE: {
+            case ESE -> {
                 return CompassDirection.ESE;
             }
-            case N: {
+            case N -> {
                 return CompassDirection.N;
             }
-            case NE: {
+            case NE -> {
                 return CompassDirection.NE;
             }
-            case NNE: {
+            case NNE -> {
                 return CompassDirection.NNE;
             }
-            case NNW: {
+            case NNW -> {
                 return CompassDirection.NNW;
             }
-            case NW: {
+            case NW -> {
                 return CompassDirection.NW;
             }
-            case S: {
+            case S -> {
                 return CompassDirection.S;
             }
-            case SE: {
+            case SE -> {
                 return CompassDirection.SE;
             }
-            case SSE: {
+            case SSE -> {
                 return CompassDirection.SSE;
             }
-            case SSW: {
+            case SSW -> {
                 return CompassDirection.SSW;
             }
-            case SW: {
+            case SW -> {
                 return CompassDirection.SW;
             }
-            case W: {
+            case W -> {
                 return CompassDirection.W;
             }
-            case WNW: {
+            case WNW -> {
                 return CompassDirection.WNW;
             }
-            case WSW: {
+            case WSW -> {
                 return CompassDirection.WSW;
             }
-            case CCW: {
+            case CCW -> {
                 return RotationalDirection.CCW;
             }
-            case CW: {
+            case CW -> {
                 return RotationalDirection.CW;
             }
-            case In: {
+            case In -> {
                 return RotationalDirection.In;
             }
-            case Out: {
+            case Out -> {
                 return RotationalDirection.Out;
             }
-            case U: {
+            case U -> {
                 return SpatialDirection.U;
             }
-            case UN: {
+            case UN -> {
                 return SpatialDirection.UN;
             }
-            case UNE: {
+            case UNE -> {
                 return SpatialDirection.UNE;
             }
-            case UE: {
+            case UE -> {
                 return SpatialDirection.UE;
             }
-            case USE: {
+            case USE -> {
                 return SpatialDirection.USE;
             }
-            case US: {
+            case US -> {
                 return SpatialDirection.US;
             }
-            case USW: {
+            case USW -> {
                 return SpatialDirection.USW;
             }
-            case UW: {
+            case UW -> {
                 return SpatialDirection.UW;
             }
-            case UNW: {
+            case UNW -> {
                 return SpatialDirection.UNW;
             }
-            case D: {
+            case D -> {
                 return SpatialDirection.D;
             }
-            case DN: {
+            case DN -> {
                 return SpatialDirection.DN;
             }
-            case DNE: {
+            case DNE -> {
                 return SpatialDirection.DNE;
             }
-            case DE: {
+            case DE -> {
                 return SpatialDirection.DE;
             }
-            case DSE: {
+            case DSE -> {
                 return SpatialDirection.DSE;
             }
-            case DS: {
+            case DS -> {
                 return SpatialDirection.DS;
             }
-            case DSW: {
+            case DSW -> {
                 return SpatialDirection.DSW;
             }
-            case DW: {
+            case DW -> {
                 return SpatialDirection.DW;
             }
-            case DNW: {
+            case DNW -> {
                 return SpatialDirection.DNW;
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -477,22 +477,22 @@ public enum AbsoluteDirection implements Direction
     
     public static RelationType converToRelationType(final AbsoluteDirection absoluteDirection) {
         switch (absoluteDirection) {
-            case Adjacent: {
+            case Adjacent -> {
                 return RelationType.Adjacent;
             }
-            case Diagonal: {
+            case Diagonal -> {
                 return RelationType.Diagonal;
             }
-            case All: {
+            case All -> {
                 return RelationType.All;
             }
-            case OffDiagonal: {
+            case OffDiagonal -> {
                 return RelationType.OffDiagonal;
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 return RelationType.Orthogonal;
             }
-            default: {
+            default -> {
                 return null;
             }
         }

@@ -5,7 +5,7 @@
 package utils;
 
 import game.Game;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import util.AI;
 import util.Context;
 import util.Move;

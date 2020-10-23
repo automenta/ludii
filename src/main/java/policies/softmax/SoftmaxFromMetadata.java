@@ -32,8 +32,8 @@ public class SoftmaxFromMetadata extends SoftmaxPolicy
                 SoftmaxPolicy.addFeatureSetWeights(featureSet.role().owner(), featureSet.featureStrings(), featureSet.featureWeights(), featureSetsList, linFuncs);
             }
         }
-        this.featureSets = featureSetsList.toArray(new FeatureSet[featureSetsList.size()]);
-        this.linearFunctions = linFuncs.toArray(new LinearFunction[linFuncs.size()]);
+        this.featureSets = featureSetsList.toArray(new FeatureSet[0]);
+        this.linearFunctions = linFuncs.toArray(new LinearFunction[0]);
         this.playoutActionLimit = 200;
         super.initAI(game, playerID);
     }

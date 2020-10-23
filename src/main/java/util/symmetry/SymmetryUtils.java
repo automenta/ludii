@@ -9,7 +9,7 @@ import java.util.BitSet;
 
 public class SymmetryUtils
 {
-    public static final int[][] playerPermutations(final int numPlayers) {
+    public static int[][] playerPermutations(final int numPlayers) {
         if (numPlayers > 4) {
             final int[][] permutations = new int[1][numPlayers + 1];
             for (int who = 1; who <= numPlayers; ++who) {
@@ -53,7 +53,7 @@ public class SymmetryUtils
         return next;
     }
     
-    private static final void swap(final int[] array, final int idx1, final int idx2) {
+    private static void swap(final int[] array, final int idx1, final int idx2) {
         final int temp = array[idx1];
         array[idx1] = array[idx2];
         array[idx2] = temp;

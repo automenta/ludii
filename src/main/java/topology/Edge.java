@@ -6,8 +6,8 @@ package topology;
 
 import game.types.board.RelationType;
 import game.types.board.SiteType;
-import main.math.Point3D;
-import main.math.Vector;
+import math.Point3D;
+import math.Vector;
 
 import java.awt.geom.Point2D;
 import java.io.Serializable;

@@ -13,7 +13,7 @@ import game.util.graph.Edge;
 import game.util.graph.Graph;
 import game.util.graph.Poly;
 import game.util.graph.Vertex;
-import main.math.Polygon;
+import math.Polygon;
 import util.Context;
 
 import java.util.ArrayList;

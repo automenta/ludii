@@ -7,7 +7,7 @@ package metadata.ai.heuristics.terms;
 import annotations.Name;
 import annotations.Opt;
 import game.Game;
-import main.collections.FVector;
+import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import util.Context;
 
@@ -20,7 +20,7 @@ public class MobilitySimple extends HeuristicTerm
     @Override
     public float computeValue(final Context context, final int player, final float absWeightThreshold) {
         if (context.state().mover() == player) {
-            return (float)context.game().moves(context).count();
+            return context.game().moves(context).count();
         }
         return 0.0f;
     }

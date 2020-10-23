@@ -90,9 +90,7 @@ public class Deck extends Container
         }
         if (typeOfCards == null) {
             typeOfCards = new CardType[(int)this.cardsBySuit];
-            for (int j = 1; j <= this.cardsBySuit; ++j) {
-                typeOfCards[j - 1] = CardType.values()[j];
-            }
+            System.arraycopy(CardType.values(), 1, typeOfCards, 0, this.cardsBySuit);
         }
         this.types = typeOfCards;
         this.values = val;
@@ -110,54 +108,42 @@ public class Deck extends Container
         this.indexComponent = other.indexComponent;
         if (other.biased != null) {
             this.biased = new Integer[other.biased.length];
-            for (int i = 0; i < other.biased.length; ++i) {
-                this.biased[i] = other.biased[i];
-            }
+            System.arraycopy(other.biased, 0, this.biased, 0, other.biased.length);
         }
         else {
             this.biased = null;
         }
         if (other.ranks != null) {
             this.ranks = new Integer[other.ranks.length];
-            for (int i = 0; i < other.ranks.length; ++i) {
-                this.ranks[i] = other.ranks[i];
-            }
+            System.arraycopy(other.ranks, 0, this.ranks, 0, other.ranks.length);
         }
         else {
             this.ranks = null;
         }
         if (other.values != null) {
             this.values = new Integer[other.values.length];
-            for (int i = 0; i < other.values.length; ++i) {
-                this.values[i] = other.values[i];
-            }
+            System.arraycopy(other.values, 0, this.values, 0, other.values.length);
         }
         else {
             this.values = null;
         }
         if (other.trumpRanks != null) {
             this.trumpRanks = new Integer[other.trumpRanks.length];
-            for (int i = 0; i < other.trumpRanks.length; ++i) {
-                this.trumpRanks[i] = other.trumpRanks[i];
-            }
+            System.arraycopy(other.trumpRanks, 0, this.trumpRanks, 0, other.trumpRanks.length);
         }
         else {
             this.trumpRanks = null;
         }
         if (other.trumpValues != null) {
             this.trumpValues = new Integer[other.trumpValues.length];
-            for (int i = 0; i < other.trumpValues.length; ++i) {
-                this.trumpValues[i] = other.trumpValues[i];
-            }
+            System.arraycopy(other.trumpValues, 0, this.trumpValues, 0, other.trumpValues.length);
         }
         else {
             this.trumpValues = null;
         }
         if (other.types != null) {
             this.types = new CardType[other.types.length];
-            for (int i = 0; i < other.types.length; ++i) {
-                this.types[i] = other.types[i];
-            }
+            System.arraycopy(other.types, 0, this.types, 0, other.types.length);
         }
         else {
             this.types = null;

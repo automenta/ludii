@@ -83,7 +83,6 @@ public class EvalUtil
                     Manager.app.addTextToAnalysisPanel("Statistics collected over " + numTrials + " random trials.\n");
                     Manager.app.setTemporaryMessage("");
                 });
-                return;
             });
             Manager.app.selectAnalysisTab();
             Manager.app.setTemporaryMessage("Estimate Game Length is starting. This will take a bit over 30 seconds.\n");
@@ -114,7 +113,6 @@ public class EvalUtil
                     Manager.app.addTextToAnalysisPanel("Statistics collected over " + numTrials + " random trials.\n");
                     Manager.app.setTemporaryMessage("");
                 });
-                return;
             });
             Manager.app.selectAnalysisTab();
             Manager.app.setTemporaryMessage("Estimate Branching Factor is starting. This will take a bit over 30 seconds.\n");

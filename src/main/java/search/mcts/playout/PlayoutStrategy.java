@@ -30,7 +30,7 @@ public interface PlayoutStrategy
         return playout;
     }
     
-    public static PlayoutStrategy constructPlayoutStrategy(final String[] inputs) {
+    static PlayoutStrategy constructPlayoutStrategy(final String[] inputs) {
         PlayoutStrategy playout = null;
         if (inputs[0].endsWith("random") || inputs[0].endsWith("randomplayout")) {
             playout = new RandomPlayout();

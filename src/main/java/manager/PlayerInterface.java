@@ -6,7 +6,7 @@ package manager;
 
 import bridge.PlatformGraphics;
 import game.Game;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import org.json.JSONObject;
 import util.Context;
 import util.Move;

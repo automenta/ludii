@@ -12,8 +12,8 @@ import language.compiler.exceptions.CompilerException;
 import language.grammar.Grammar;
 import main.Constants;
 import main.StringRoutines;
-import main.grammar.*;
-import main.options.UserSelections;
+import grammar.*;
+import options.UserSelections;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +43,7 @@ public class Parser
                     return false;
                 }
             }
-            return parseExpanded(description, userSelections, report, isVerbose);
+            return parseExpanded(description, report, isVerbose);
         }
         catch (CompilerException e) {
             if (isVerbose) {
@@ -57,7 +57,7 @@ public class Parser
         }
     }
     
-    private static boolean parseExpanded(final Description description, final UserSelections userSelections, final Report report, final boolean isVerbose) {
+    private static boolean parseExpanded(final Description description, final Report report, final boolean isVerbose) {
         report.clear();
         if (Constants.combos == null) {
             Constants.createCombos();
@@ -118,12 +118,14 @@ public class Parser
         if (report.isError()) {
             return false;
         }
-        description.parseTree().parse(null, report, null);
-        final int failureDepth = description.parseTree().deepestFailure();
-        if (failureDepth >= 0) {
-            description.parseTree().reportFailures(report, failureDepth);
+        if (!description.parseTree().parse(null, report, null)) {
+            final int failureDepth = description.parseTree().deepestFailure();
+            if (failureDepth >= 0) {
+                description.parseTree().reportFailures(report, failureDepth);
+            }
+            return !report.isError();
         }
-        return !report.isError();
+        return true;
     }
     
     private static void checkQuotes(final String str, final Report report) {
@@ -178,7 +180,7 @@ public class Parser
     private static void checkOptionsExpanded(final String expanded, final Report report) {
         int c = -1;
         while (true) {
-            c = expanded.indexOf("<", c + 1);
+            c = expanded.indexOf('<', c + 1);
             if (c == -1) {
                 return;
             }
@@ -194,7 +196,7 @@ public class Parser
     }
     
     private static void matchTokensWithSymbols(final ParseItem item, final Grammar grammar, final Report report) {
-        if (item.token() == null) {
+        if (item.token == null) {
             report.addError("Null token for item: " + item.dump(" "));
             return;
         }
@@ -203,18 +205,16 @@ public class Parser
         }
         catch (Exception ex) {}
         if (item.instances().isEmpty()) {
-            switch (item.token().type()) {
-                case Terminal: {
-                    String error = "Couldn't find token '" + item.token().name() + "'.";
-                    if (Character.isLowerCase(item.token().name().charAt(0))) {
-                        error = error + " Maybe missing bracket '(" + item.token().name() + " ...)'?";
+            switch (item.token.type()) {
+                case Terminal -> {
+                    String error = "Couldn't find token '" + item.token.name() + "'.";
+                    if (Character.isLowerCase(item.token.name().charAt(0))) {
+                        error = error + " Maybe missing bracket '(" + item.token.name() + " ...)'?";
                     }
                     report.addError(error);
-                    break;
                 }
-                case Class: {
-                    report.addError("Couldn't find ludeme class for token '" + item.token().name() + "'.");
-                    break;
+                case Class -> {
+                    report.addError("Couldn't find ludeme class for token '" + item.token.name() + "'.");
                 }
             }
         }
@@ -225,28 +225,26 @@ public class Parser
     
     public static void matchSymbols(final ParseItem item, final Grammar grammar, final Report report) {
         item.clearInstances();
-        switch (item.token().type()) {
-            case Terminal: {
-                final Arg arg = new ArgTerminal(item.token().name(), item.token().parameterLabel());
+        switch (item.token.type()) {
+            case Terminal -> {
+                final Arg arg = new ArgTerminal(item.token.name(), item.token.parameterLabel());
                 arg.matchSymbols(grammar, report);
                 for (final Instance instance : arg.instances()) {
                     item.add(instance);
                 }
-                break;
             }
-            case Class: {
-                final Arg arg = new ArgClass(item.token().name(), item.token().parameterLabel());
+            case Class -> {
+                final Arg arg = new ArgClass(item.token.name(), item.token.parameterLabel());
                 arg.matchSymbols(grammar, report);
                 for (final Instance instance : arg.instances()) {
                     item.add(instance);
                 }
                 for (final Instance instance : item.instances()) {
-                    final GrammarRule rule = instance.symbol().rule();
+                    final GrammarRule rule = instance.symbol.rule();
                     if (rule != null) {
                         instance.setClauses(rule.rhs());
                     }
                 }
-                break;
             }
         }
     }

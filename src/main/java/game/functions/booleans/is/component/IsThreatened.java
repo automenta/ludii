@@ -26,7 +26,6 @@ import util.action.move.ActionRemove;
 import util.state.containerState.ContainerState;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @Hide
 public final class IsThreatened extends BaseBooleanFunction
@@ -61,7 +60,7 @@ public final class IsThreatened extends BaseBooleanFunction
                 if (site != -1) {
                     final Context newContext = new TempContext(context);
                     newContext.state().setPrev(ownerWhat);
-                    newContext.containerState(newContext.containerId()[site]).setSite(newContext.state(), site, ownerWhat, this.what.eval(newContext), -1, -1, -1, -1, ((this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex)) ? SiteType.Vertex : SiteType.Cell);
+                    newContext.containerState(newContext.containerId()[site]).setSite(newContext.state(), site, ownerWhat, this.what.eval(newContext), -1, -1, -1, -1, ((this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex)) ? SiteType.Vertex : SiteType.Cell);
                     IsThreatened.autoFail.set(Boolean.TRUE);
                     final TIntArrayList enemies = context.game().players().players().get(ownerWhat).enemies();
                     for (int i = 0; i < enemies.size(); ++i) {
@@ -78,7 +77,6 @@ public final class IsThreatened extends BaseBooleanFunction
                     IsThreatened.autoFail.set(Boolean.FALSE);
                 }
             }
-            return false;
         }
         else {
             final int[] sites2 = this.region.eval(context).sites();
@@ -97,7 +95,7 @@ public final class IsThreatened extends BaseBooleanFunction
                         }
                         final Context newContext2 = new TempContext(context);
                         newContext2.state().setPrev(ownerWhat2);
-                        newContext2.containerState(newContext2.containerId()[site]).setSite(newContext2.state(), site, ownerWhat2, idPiece, -1, -1, -1, -1, ((this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex)) ? SiteType.Vertex : SiteType.Cell);
+                        newContext2.containerState(newContext2.containerId()[site]).setSite(newContext2.state(), site, ownerWhat2, idPiece, -1, -1, -1, -1, ((this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex)) ? SiteType.Vertex : SiteType.Cell);
                         final TIntArrayList enemies2 = newContext2.game().players().players().get(ownerWhat2).enemies();
                         for (int j = 0; j < enemies2.size(); ++j) {
                             newContext2.state().setMover(enemies2.getQuick(j));
@@ -116,8 +114,8 @@ public final class IsThreatened extends BaseBooleanFunction
                     }
                 }
             }
-            return false;
         }
+        return false;
     }
     
     @Override
@@ -134,16 +132,16 @@ public final class IsThreatened extends BaseBooleanFunction
     public long gameFlags(final Game game) {
         long gameFlags = 0L;
         if (this.type != null) {
-            if (this.type.equals(SiteType.Edge) || this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Edge || this.type == SiteType.Vertex) {
                 gameFlags |= 0x800000L;
             }
-            if (this.type.equals(SiteType.Edge)) {
+            if (this.type == SiteType.Edge) {
                 gameFlags |= 0x4000000L;
             }
-            if (this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Vertex) {
                 gameFlags |= 0x1000000L;
             }
-            if (this.type.equals(SiteType.Cell)) {
+            if (this.type == SiteType.Cell) {
                 gameFlags |= 0x2000000L;
             }
         }

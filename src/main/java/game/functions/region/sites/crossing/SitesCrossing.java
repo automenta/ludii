@@ -17,7 +17,7 @@ import game.types.play.RoleType;
 import game.util.equipment.Region;
 import game.util.moves.Player;
 import gnu.trove.list.array.TIntArrayList;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import topology.Edge;
 import topology.Topology;
 import topology.Vertex;

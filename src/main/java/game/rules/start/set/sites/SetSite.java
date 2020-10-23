@@ -154,8 +154,7 @@ public final class SetSite extends StartRule
             this.invisible = new boolean[numPlayer];
             for (int pid = 1; pid <= numPlayer; ++pid) {
                 boolean isInvisible = false;
-                for (int i = 0; i < this.invisibleTo.length; ++i) {
-                    final RoleType roleInvisible = this.invisibleTo[i];
+                for (final RoleType roleInvisible : this.invisibleTo) {
                     if (roleInvisible.owner() == pid) {
                         isInvisible = true;
                         this.invisible[pid - 1] = isInvisible;
@@ -176,8 +175,7 @@ public final class SetSite extends StartRule
             this.masked = new boolean[numPlayer];
             for (int pid = 1; pid <= numPlayer; ++pid) {
                 boolean isMasked = false;
-                for (int i = 0; i < this.maskedTo.length; ++i) {
-                    final RoleType roleMasked = this.maskedTo[i];
+                for (final RoleType roleMasked : this.maskedTo) {
                     if (roleMasked.owner() == pid) {
                         isMasked = true;
                         this.masked[pid - 1] = isMasked;

@@ -42,7 +42,7 @@ public class EBNF {
             if (!split[n].contains("::=")) continue;
             String strRule = split[n];
             while (strRule.contains("  ")) {
-                strRule = strRule.replaceAll("  ", " ");
+                strRule = strRule.replaceAll(" {2}", " ");
             }
             EBNFRule rule = new EBNFRule(strRule);
             this.rules.put(rule.lhs(), rule);

@@ -27,8 +27,7 @@ public class ClassEnumeratorFindAll
         final ArrayList<Class<?>> classes = new ArrayList<>();
         try {
             final String[] files = directory.list();
-            for (int i = 0; i < files.length; ++i) {
-                final String fileName = files[i];
+            for (final String fileName : files) {
                 String className = null;
                 if (fileName.endsWith(".class")) {
                     className = fileName.substring(0, fileName.length() - 6);
@@ -76,7 +75,6 @@ public class ClassEnumeratorFindAll
                     classes.addAll(processDirectory(subdir));
                 }
             }
-            jarFile.close();
         }
         catch (IOException e) {
             throw new RuntimeException("Unexpected IOException reading JAR File '" + jarPath + "'", e);

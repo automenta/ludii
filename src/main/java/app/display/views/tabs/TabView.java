@@ -37,7 +37,6 @@ public class TabView extends View
         this.bgColour = new Color(255, 255, 230);
         this.titlesSet = false;
         TabView.tabTitleHeight = 16;
-        this.pages.clear();
         DesktopApp.view();
         final int toolHeight = MainWindow.toolPanel().placement().height;
         DesktopApp.view();
@@ -175,8 +174,8 @@ public class TabView extends View
     }
     
     public void updateTabs(final Context context) {
-        for (int i = 0; i < this.pages.size(); ++i) {
-            this.pages.get(i).updatePage(context);
+        for (TabPage page : this.pages) {
+            page.updatePage(context);
         }
     }
     

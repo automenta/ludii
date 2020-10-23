@@ -11,7 +11,7 @@ import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.NonDecision;
 import game.rules.play.moves.nonDecision.effect.Then;
 import game.rules.play.moves.nonDecision.operator.Operator;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import util.Context;
 import util.Move;
 
@@ -32,7 +32,7 @@ public final class Append extends Operator
         for (final Move m : evaluated) {
             m.setDecision(true);
         }
-        if (evaluated.size() == 0) {
+        if (evaluated.isEmpty()) {
             return result;
         }
         final Move newMove = new Move(evaluated);

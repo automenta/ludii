@@ -69,8 +69,8 @@ public final class Or extends Operator
     @Override
     public Moves eval(final Context context) {
         final Moves moves = new BaseMoves(super.then());
-        for (int i = 0; i < this.list.length; ++i) {
-            moves.moves().addAll(this.list[i].eval(context).moves());
+        for (Moves value : this.list) {
+            moves.moves().addAll(value.eval(context).moves());
         }
         if (this.then() != null) {
             for (int j = 0; j < moves.moves().size(); ++j) {

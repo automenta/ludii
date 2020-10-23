@@ -4,8 +4,8 @@
 
 package view.container.aspects.designs.board;
 
-import main.math.MathRoutines;
-import main.math.Vector;
+import math.MathRoutines;
+import math.Vector;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 import topology.Vertex;
 import util.Context;
@@ -34,7 +34,7 @@ public class SpiralDesign extends BoardDesign
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.005f;
-        final float swThin = (float)Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
+        final float swThin = Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
         final float swThick = 1.0f * swThin;
         this.setStrokesAndColours(context, new Color(0, 0, 0), new Color(150, 75, 0), new Color(200, 150, 75), new Color(250, 221, 144), new Color(223, 178, 110), null, null, swThin, swThick);
         this.numTurns = context.board().graph().dim()[0];
@@ -114,7 +114,7 @@ public class SpiralDesign extends BoardDesign
         final double y0 = this.topology().vertices().get(0).centroid().getY();
         final List<Point> pts = new ArrayList<>();
         for (double theta = -0.05; theta < end + 1.0; theta += 0.2) {
-            final double clipTheta = ((theta > end) ? end : theta) - 0.005;
+            final double clipTheta = (Math.min(theta, end)) - 0.005;
             final double r = 0.05 + b * clipTheta;
             final double x2 = x0 - r * Math.cos(clipTheta);
             final double y2 = y0 + r * Math.sin(clipTheta);
@@ -141,7 +141,7 @@ public class SpiralDesign extends BoardDesign
         for (int n = 0; n < pts.size() - 3; ++n) {
             final Point pt5 = pts.get(n);
             if (n == 0) {
-                path.moveTo((float)pt5.x, (float)pt5.y);
+                path.moveTo(pt5.x, pt5.y);
             }
             else {
                 final Point ptA = pts.get(n - 1);
@@ -164,7 +164,7 @@ public class SpiralDesign extends BoardDesign
             }
         }
         final Point ptN = pts.get(pts.size() - 1);
-        path.lineTo((float)ptN.x, (float)ptN.y);
+        path.lineTo(ptN.x, ptN.y);
         g2d.setColor(new Color(255, 240, 220));
         g2d.fill(path);
         g2d.setStroke(new BasicStroke(3.0f, 0, 1));
@@ -176,8 +176,8 @@ public class SpiralDesign extends BoardDesign
         path = new GeneralPath();
         final Point ptA2 = pts.get(0);
         final Point ptB2 = pts.get(22);
-        path.moveTo((float)ptA2.x, (float)ptA2.y);
-        path.curveTo((float)(ptA2.x + (int)(0.25 * u)), (float)(ptA2.y + (int)(0.5 * u)), (float)(ptB2.x + (int)(0.0 * u)), (float)(ptB2.y - (int)(0.5 * u)), (float)ptB2.x, (float)ptB2.y);
+        path.moveTo(ptA2.x, ptA2.y);
+        path.curveTo((ptA2.x + (int)(0.25 * u)), (ptA2.y + (int)(0.5 * u)), (ptB2.x + (int)(0.0 * u)), (ptB2.y - (int)(0.5 * u)), ptB2.x, ptB2.y);
         g2d.draw(path);
         for (int vid = 1; vid < this.thetas.length / 2; ++vid) {
             final double theta2 = (this.thetas[vid] + this.thetas[vid + 1]) / 2.0;

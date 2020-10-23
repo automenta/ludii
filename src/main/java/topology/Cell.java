@@ -5,7 +5,7 @@
 package topology;
 
 import game.types.board.SiteType;
-import main.math.Point3D;
+import math.Point3D;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public final class Cell extends TopologyElement implements Serializable
         this.adjacent = new ArrayList<>();
         this.neighbours = new ArrayList<>();
         this.index = index;
-        this.label = index + "";
+        this.label = String.valueOf(index);
         this.centroid = new Point3D(x, y, z);
     }
     

@@ -39,10 +39,10 @@ public final class Size extends BaseIntFunction
             throw new IllegalArgumentException("Size(): With SizeSiteType zero or one 'in' or 'at' parameters must be non-null.");
         }
         switch (sizeType) {
-            case Stack: {
+            case Stack -> {
                 return new SizeStack(type, in, at);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Size(): A SizeSiteType is not implemented.");
             }
         }
@@ -60,10 +60,10 @@ public final class Size extends BaseIntFunction
             throw new IllegalArgumentException("Size(): With SizeLargePiece one 'in' or 'at' parameters must be non-null.");
         }
         switch (sizeType) {
-            case LargePiece: {
+            case LargePiece -> {
                 return new SizeLargePiece(type, in, at);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Size(): A SizeLargePiece is not implemented.");
             }
         }
@@ -71,10 +71,10 @@ public final class Size extends BaseIntFunction
     
     public static IntFunction construct(@Opt final SizeGroupType sizeType, @Opt final SiteType type, @Name final IntFunction at, @Opt final Direction directions, @Opt @Name final BooleanFunction If) {
         switch (sizeType) {
-            case Group: {
+            case Group -> {
                 return new SizeGroup(type, at, directions, If);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Size(): A SizeGroupType is not implemented.");
             }
         }
@@ -92,10 +92,10 @@ public final class Size extends BaseIntFunction
             throw new IllegalArgumentException("Size(): With SizeTerritoryType only one role or player parameter must be non-null.");
         }
         switch (sizeType) {
-            case Territory: {
+            case Territory -> {
                 return new SizeTerritory(type, role, player, direction);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Size(): A SizeTerritoryType is not implemented.");
             }
         }

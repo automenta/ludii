@@ -29,32 +29,32 @@ public class Hex extends Basis
     public static GraphFunction construct(@Opt final HexShapeType shape, final DimFunction dimA, @Opt final DimFunction dimB) {
         final HexShapeType st = (shape == null) ? HexShapeType.Hexagon : shape;
         switch (st) {
-            case Hexagon: {
+            case Hexagon -> {
                 return new HexagonOnHex(dimA);
             }
-            case Triangle: {
+            case Triangle -> {
                 return new TriangleOnHex(dimA);
             }
-            case Diamond: {
+            case Diamond -> {
                 return new DiamondOnHex(dimA, null);
             }
-            case Prism: {
+            case Prism -> {
                 return new DiamondOnHex(dimA, (dimB != null) ? dimB : dimA);
             }
-            case Star: {
+            case Star -> {
                 return new StarOnHex(dimA);
             }
-            case Limping: {
+            case Limping -> {
                 final DimFunction dimAplus1 = new Add(dimA, new DimConstant(1));
-                return new CustomOnHex(new DimFunction[] { dimA, dimAplus1 });
+                return new CustomOnHex(new DimFunction[]{dimA, dimAplus1});
             }
-            case Square: {
+            case Square -> {
                 return new RectangleOnHex(dimA, dimA);
             }
-            case Rectangle: {
+            case Rectangle -> {
                 return new RectangleOnHex(dimA, (dimB != null) ? dimB : dimA);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Shape " + st + " not supported for hex tiling.");
             }
         }

@@ -9,7 +9,7 @@ import game.equipment.container.Container;
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
 import game.util.equipment.Region;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import util.Sites;
 import util.UnionInfoD;
 import util.state.State;

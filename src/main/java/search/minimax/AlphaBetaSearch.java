@@ -9,9 +9,9 @@ import expert_iteration.ExpertPolicy;
 import game.Game;
 import language.compiler.Compiler;
 import main.FileHandling;
-import main.collections.FVector;
-import main.collections.FastArrayList;
-import main.grammar.Report;
+import collections.FVector;
+import collections.FastArrayList;
+import grammar.Report;
 import metadata.ai.Ai;
 import metadata.ai.heuristics.Heuristics;
 import metadata.ai.heuristics.terms.HeuristicTerm;
@@ -585,7 +585,7 @@ public class AlphaBetaSearch extends ExpertPolicy
         return alphaBeta;
     }
     
-    private class ScoredMove implements Comparable<ScoredMove>
+    private static class ScoredMove implements Comparable<ScoredMove>
     {
         public final Move move;
         public final float score;
@@ -598,13 +598,7 @@ public class AlphaBetaSearch extends ExpertPolicy
         @Override
         public int compareTo(final ScoredMove other) {
             final float delta = other.score - this.score;
-            if (delta < 0.0f) {
-                return -1;
-            }
-            if (delta > 0.0f) {
-                return 1;
-            }
-            return 0;
+            return Float.compare(delta, 0.0f);
         }
     }
 }

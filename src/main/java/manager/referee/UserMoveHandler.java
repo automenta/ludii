@@ -6,7 +6,7 @@ package manager.referee;
 
 import game.rules.play.moves.Moves;
 import game.types.board.SiteType;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import manager.Manager;
 import manager.utils.ContextSnapshot;
 import manager.utils.PuzzleSelectionType;

@@ -69,23 +69,23 @@ public final class SitesDistance extends BaseRegionFunction
     public long gameFlags(final Game game) {
         long gameFlags = this.fromFn.gameFlags(game) | this.distanceFn.gameFlags(game);
         switch (this.relation) {
-            case Adjacent: {
+            case Adjacent -> {
                 gameFlags |= 0x400000000L;
                 break;
             }
-            case All: {
+            case All -> {
                 gameFlags |= 0x4000000000L;
                 break;
             }
-            case Diagonal: {
+            case Diagonal -> {
                 gameFlags |= 0x1000000000L;
                 break;
             }
-            case OffDiagonal: {
+            case OffDiagonal -> {
                 gameFlags |= 0x2000000000L;
                 break;
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 gameFlags |= 0x800000000L;
                 break;
             }

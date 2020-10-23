@@ -11,9 +11,9 @@ import game.functions.ints.IntConstant;
 import language.compiler.exceptions.TerminalNotFoundException;
 import language.grammar.Grammar;
 import main.StringRoutines;
-import main.grammar.Instance;
-import main.grammar.Report;
-import main.grammar.Symbol;
+import grammar.Instance;
+import grammar.Report;
+import grammar.Symbol;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +45,8 @@ public class ArgTerminal extends Arg
                 try {
                     value = Integer.parseInt(valueName);
                 }
-                catch (NumberFormatException e) {
+                catch (NumberFormatException | NullPointerException e) {
                     e.printStackTrace();
-                    return false;
-                }
-                catch (NullPointerException e2) {
-                    e2.printStackTrace();
                     return false;
                 }
                 Symbol symbol2 = grammar.symbolMap().get("IntConstant").get(0);
@@ -84,12 +80,8 @@ public class ArgTerminal extends Arg
                 try {
                     value3 = Float.parseFloat(valueName2);
                 }
-                catch (NumberFormatException e3) {
+                catch (NumberFormatException | NullPointerException e3) {
                     e3.printStackTrace();
-                    return false;
-                }
-                catch (NullPointerException e4) {
-                    e4.printStackTrace();
                     return false;
                 }
                 Symbol symbol4 = grammar.symbolMap().get("FloatConstant").get(0);
@@ -123,7 +115,7 @@ public class ArgTerminal extends Arg
                 }
             }
         }
-        return this.instances.size() != 0;
+        return !this.instances.isEmpty();
     }
     
     @Override
@@ -139,7 +131,7 @@ public class ArgTerminal extends Arg
         }
         if (depth != -1) {
             for (final Instance instance : this.instances) {
-                final Symbol symbol = instance.symbol();
+                final Symbol symbol = instance.symbol;
                 System.out.println(pre + "T: > " + symbol + " (" + symbol.path() + ") " + symbol.keyword() + ".");
             }
         }
@@ -149,7 +141,7 @@ public class ArgTerminal extends Arg
         for (int n = 0; n < this.instances.size(); ++n) {
             final Instance instance = this.instances.get(n);
             if (depth != -1) {
-                System.out.println(pre + "\n" + pre + "Instance " + n + " is " + instance.symbol().grammarLabel() + ": symbol=" + instance.symbol() + " (path=" + instance.symbol().path() + ").");
+                System.out.println(pre + "\n" + pre + "Instance " + n + " is " + instance.symbol.grammarLabel() + ": symbol=" + instance.symbol + " (path=" + instance.symbol.path() + ").");
             }
             final Class<?> cls = instance.cls();
             if (depth != -1) {

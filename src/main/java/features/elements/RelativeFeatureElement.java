@@ -46,10 +46,10 @@ public class RelativeFeatureElement extends FeatureElement
     public RelativeFeatureElement(final String string) {
         this.type = null;
         this.not = false;
-        final int startWalkStringIdx = string.indexOf("{");
+        final int startWalkStringIdx = string.indexOf('{');
         String typeString = string.substring(0, startWalkStringIdx);
         final String walkString = string.substring(startWalkStringIdx);
-        if (typeString.startsWith("!")) {
+        if (!typeString.isEmpty() && typeString.charAt(0) == '!') {
             this.not = true;
             typeString = typeString.substring("!".length());
         }
@@ -121,7 +121,7 @@ public class RelativeFeatureElement extends FeatureElement
             return false;
         }
         if (other instanceof AbsoluteFeatureElement) {
-            return this.walk.steps().size() == 0;
+            return this.walk.steps().isEmpty();
         }
         final RelativeFeatureElement otherRel = (RelativeFeatureElement)other;
         return generalisationResult.strictlyGeneralises && this.walk.equals(otherRel.walk());

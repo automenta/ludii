@@ -37,10 +37,10 @@ public final class ForEach extends Effect
     
     public static Moves construct(final ForEachGroupType forEachType, @Opt final SiteType type, @Opt final Direction directions, @Opt @Name final BooleanFunction If, final Moves moves, @Opt final Then then) {
         switch (forEachType) {
-            case Group: {
+            case Group -> {
                 return new ForEachGroup(type, directions, If, moves, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("ForEach(): A ForEachGroupType is not implemented.");
             }
         }
@@ -48,10 +48,10 @@ public final class ForEach extends Effect
     
     public static Moves construct(final ForEachDieType forEachType, @Opt final IntFunction handDiceIndex, @Opt @Name final BooleanFunction combined, @Opt @Name final BooleanFunction replayDouble, @Opt @Name final BooleanFunction If, final Moves moves, @Opt final Then then) {
         switch (forEachType) {
-            case Die: {
+            case Die -> {
                 return new ForEachDie(handDiceIndex, combined, replayDouble, If, moves, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("ForEach(): A ForEachDieType is not implemented.");
             }
         }
@@ -69,10 +69,10 @@ public final class ForEach extends Effect
             throw new IllegalArgumentException("ForEach(): With ForEachDirectionType one to, moves parameter must be non-null.");
         }
         switch (forEachType) {
-            case Direction: {
+            case Direction -> {
                 return new ForEachDirection(from, directions, between, to, moves, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("ForEach(): A ForEachDirectionType is not implemented.");
             }
         }
@@ -80,10 +80,10 @@ public final class ForEach extends Effect
     
     public static Moves construct(final ForEachSiteType forEachType, final RegionFunction regionFn, final Moves generator, @Opt @Name final Moves noMoveYet, @Opt final Then then) {
         switch (forEachType) {
-            case Site: {
+            case Site -> {
                 return new ForEachSite(regionFn, generator, noMoveYet, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("ForEach(): A ForEachSiteType is not implemented.");
             }
         }
@@ -91,10 +91,10 @@ public final class ForEach extends Effect
     
     public static Moves construct(final ForEachValueType forEachType, @Name final IntFunction min, @Name final IntFunction max, final Moves generator, @Opt final Then then) {
         switch (forEachType) {
-            case Value: {
+            case Value -> {
                 return new ForEachValue(min, max, generator, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("ForEach(): A ForEachValueType is not implemented.");
             }
         }
@@ -132,10 +132,10 @@ public final class ForEach extends Effect
             throw new IllegalArgumentException("ForEach(): With ForEachPieceType zero or one player, role parameter must be non-null.");
         }
         switch (forEachType) {
-            case Piece: {
+            case Piece -> {
                 return new ForEachPiece(item, items, container, containerName, specificMoves, player, role, top, type, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("ForEach(): A ForEachPieceType is not implemented.");
             }
         }
@@ -163,10 +163,10 @@ public final class ForEach extends Effect
             throw new IllegalArgumentException("ForEach(): With ForEachPieceType zero or one player, role parameter must be non-null.");
         }
         switch (forEachType) {
-            case Player: {
+            case Player -> {
                 return new ForEachPlayer(container, containerName, specificMoves, role, player, top, type, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("ForEach(): A ForEachPlayerType is not implemented.");
             }
         }

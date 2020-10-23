@@ -3,7 +3,7 @@
  */
 package options;
 
-import root.StringRoutines;
+import main.StringRoutines;
 
 import java.util.ArrayList;
 import java.util.BitSet;

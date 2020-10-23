@@ -7,7 +7,7 @@ package metadata.ai.heuristics.terms;
 import annotations.Name;
 import annotations.Opt;
 import game.Game;
-import main.collections.FVector;
+import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import util.Context;
 
@@ -19,7 +19,7 @@ public class Score extends HeuristicTerm
     
     @Override
     public float computeValue(final Context context, final int player, final float absWeightThreshold) {
-        return (float)context.score(player);
+        return context.score(player);
     }
     
     @Override

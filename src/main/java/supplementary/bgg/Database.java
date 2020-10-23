@@ -45,9 +45,7 @@ public class Database
                 final AliasesData aliasesData = AliasesData.loadData();
                 final List<String> loadedAliases = aliasesData.aliasesForGameName(gameName);
                 if (loadedAliases != null) {
-                    for (final String alias : loadedAliases) {
-                        aliases.add(alias);
-                    }
+                    aliases.addAll(loadedAliases);
                 }
                 else {
                     aliases = new ArrayList<>();

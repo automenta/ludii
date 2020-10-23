@@ -55,7 +55,7 @@ public final class CountLiberties extends BaseIntFunction
             groupSites.add(from);
         }
         final int what = cs.what(from, this.type);
-        if (groupSites.size() > 0) {
+        if (!groupSites.isEmpty()) {
             context.setFrom(from);
             final TIntArrayList sitesExplored = new TIntArrayList();
             int i = 0;

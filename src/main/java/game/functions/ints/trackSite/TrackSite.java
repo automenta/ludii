@@ -22,10 +22,10 @@ public final class TrackSite extends BaseIntFunction
     
     public static IntFunction construct(final TrackSiteType trackSiteType, @Or @Opt final Player player, @Or @Opt final RoleType role, @Opt final String name) {
         switch (trackSiteType) {
-            case EndSite: {
+            case EndSite -> {
                 return new TrackSiteEndTrack(player, role, name);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("TrackSite(): A TrackSiteType is not implemented.");
             }
         }
@@ -33,10 +33,10 @@ public final class TrackSite extends BaseIntFunction
     
     public static IntFunction construct(final TrackSiteMoveType trackSiteType, @Opt @Name final IntFunction from, @Opt @Or final RoleType role, @Opt @Or final Player player, @Opt @Or final String name, @Name final IntFunction steps) {
         switch (trackSiteType) {
-            case Move: {
+            case Move -> {
                 return new TrackSiteMove(from, role, player, name, steps);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("TrackSite(): A TrackSiteMoveType is not implemented.");
             }
         }

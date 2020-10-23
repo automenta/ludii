@@ -62,11 +62,7 @@ public class BggData
                 final String date = subs[2].trim();
                 final BggGame game = new BggGame(this.games.size(), bggId, name, date, subs);
                 this.games.add(game);
-                List<BggGame> nameList = this.gamesByName.get(name.toLowerCase());
-                if (nameList == null) {
-                    nameList = new ArrayList<>();
-                    this.gamesByName.put(name.toLowerCase(), nameList);
-                }
+                List<BggGame> nameList = this.gamesByName.computeIfAbsent(name.toLowerCase(), k -> new ArrayList<>());
                 nameList.add(game);
                 this.gamesByBggId.put(bggId, game);
                 if (!name.equals("scrabble")) {

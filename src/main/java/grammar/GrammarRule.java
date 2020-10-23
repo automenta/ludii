@@ -50,7 +50,7 @@ public class GrammarRule {
     }
 
     public void alphabetiseClauses() {
-        Collections.sort(this.rhs, (a, b) -> a.symbol().keyword().compareTo(b.symbol().keyword()));
+        this.rhs.sort(Comparator.comparing(a -> a.symbol().keyword()));
         for (int n = 0; n < this.rhs.size(); ++n) {
             Clause clause = this.rhs.get(n);
             if (clause.args() == null) continue;

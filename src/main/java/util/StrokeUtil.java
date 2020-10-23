@@ -12,28 +12,28 @@ public class StrokeUtil
 {
     public static BasicStroke getStrokeFromStyle(final LineStyle lineStyle, final BasicStroke strokeThin, final BasicStroke strokeThick) {
         switch (lineStyle) {
-            case Hidden: {
+            case Hidden -> {
                 return new BasicStroke(0.0f);
             }
-            case Thick: {
+            case Thick -> {
                 return strokeThick;
             }
-            case ThickDashed: {
+            case ThickDashed -> {
                 return getDashedStroke(strokeThick.getLineWidth());
             }
-            case ThickDotted: {
+            case ThickDotted -> {
                 return getDottedStroke(strokeThick.getLineWidth());
             }
-            case Thin: {
+            case Thin -> {
                 return strokeThick;
             }
-            case ThinDashed: {
+            case ThinDashed -> {
                 return getDashedStroke(strokeThin.getLineWidth());
             }
-            case ThinDotted: {
+            case ThinDotted -> {
                 return getDottedStroke(strokeThin.getLineWidth());
             }
-            default: {
+            default -> {
                 return null;
             }
         }

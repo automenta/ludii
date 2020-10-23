@@ -31,10 +31,10 @@ public class All extends BaseBooleanFunction
             throw new IllegalArgumentException("All(): With AllPuzzleType zero or one except or excepts parameter must be non-null.");
         }
         switch (allType) {
-            case Different: {
+            case Different -> {
                 return new AllDifferent(elementType, region, except, excepts);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("All(): A AllPuzzleType is not implemented.");
             }
         }

@@ -25,16 +25,16 @@ public final class IsRepeat extends BaseBooleanFunction
     public boolean eval(final Context context) {
         final long hashState = context.state().stateHash();
         switch (this.type) {
-            case InTurn: {
+            case InTurn -> {
                 return context.trial().previousStateWithinATurn().contains(hashState);
             }
-            case InGame: {
+            case InGame -> {
                 return context.trial().previousState().contains(hashState);
             }
-            case Situational: {
+            case Situational -> {
                 return context.trial().previousState().contains(hashState);
             }
-            default: {
+            default -> {
                 return false;
             }
         }

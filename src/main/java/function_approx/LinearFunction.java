@@ -6,7 +6,7 @@ package function_approx;
 
 import gnu.trove.list.array.TFloatArrayList;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
+import collections.FVector;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

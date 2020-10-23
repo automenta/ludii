@@ -14,7 +14,7 @@ import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
 import gnu.trove.list.array.TIntArrayList;
-import main.math.Polygon;
+import math.Polygon;
 import util.Context;
 
 import java.awt.geom.Rectangle2D;
@@ -43,8 +43,8 @@ public class CustomOnSquare extends Basis
         this.sides = new TIntArrayList();
         this.basis = BasisType.Square;
         this.shape = ShapeType.Custom;
-        for (int n = 0; n < sides.length; ++n) {
-            this.sides.add(sides[n].eval());
+        for (DimFunction side : sides) {
+            this.sides.add(side.eval());
         }
         this.diagonals = diagonals;
     }

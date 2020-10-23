@@ -27,7 +27,7 @@ public final class CentrePoint extends BaseIntFunction
         if (this.precomputedInteger != -1) {
             return this.precomputedInteger;
         }
-        if (this.type != null && this.type.equals(SiteType.Edge)) {
+        if (this.type != null && this.type == SiteType.Edge) {
             return -1;
         }
         final Topology graph = context.topology();

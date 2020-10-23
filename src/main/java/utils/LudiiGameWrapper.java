@@ -8,7 +8,7 @@ import game.Game;
 import game.equipment.component.Component;
 import game.equipment.container.Container;
 import main.FileHandling;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import topology.TopologyElement;
 import util.GameLoader;
 import util.Move;
@@ -215,13 +215,7 @@ public final class LudiiGameWrapper
         final int numBoardSites = graphElements.size();
         final List<? extends TopologyElement> sortedGraphElements = new ArrayList<TopologyElement>(graphElements);
         sortedGraphElements.sort((Comparator<TopologyElement>) (o1, o2) -> {
-            if (o1.centroid().getX() < o2.centroid().getX()) {
-                return -1;
-            }
-            if (o1.centroid().getX() == o2.centroid().getX()) {
-                return 0;
-            }
-            return 1;
+            return Double.compare(o1.centroid().getX(), o2.centroid().getX());
         });
         int currIdx = 0;
         double currXPos = sortedGraphElements.get(0).centroid().getX();
@@ -235,13 +229,7 @@ public final class LudiiGameWrapper
         }
         final int maxBoardIndexX = currIdx;
         sortedGraphElements.sort((Comparator<TopologyElement>) (o1, o2) -> {
-            if (o1.centroid().getY() < o2.centroid().getY()) {
-                return -1;
-            }
-            if (o1.centroid().getY() == o2.centroid().getY()) {
-                return 0;
-            }
-            return 1;
+            return Double.compare(o1.centroid().getY(), o2.centroid().getY());
         });
         currIdx = 0;
         double currYPos = sortedGraphElements.get(0).centroid().getY();

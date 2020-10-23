@@ -4,7 +4,7 @@
 
 package search.pns;
 
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import util.Context;
 import util.Move;
 

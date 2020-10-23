@@ -6,7 +6,7 @@ package utils;
 
 import game.equipment.container.Container;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import util.Context;
 import util.Move;
 import util.Trial;
@@ -241,7 +241,7 @@ public final class LudiiStateWrapper
                             flatTensor[yCoords[contStartSite + site2] + tensorDimY * (xCoords[contStartSite + site2] + channel * tensorDimX)] = 1.0f;
                         }
                         final int channel2 = currentChannel + 10 * numPieceTypes;
-                        flatTensor[yCoords[contStartSite + site2] + tensorDimY * (xCoords[contStartSite + site2] + channel2 * tensorDimX)] = (float)stackSize;
+                        flatTensor[yCoords[contStartSite + site2] + tensorDimY * (xCoords[contStartSite + site2] + channel2 * tensorDimX)] = stackSize;
                     }
                 }
             }
@@ -253,7 +253,7 @@ public final class LudiiStateWrapper
                 final ContainerState cs2 = this.context.state().containerStates()[c];
                 final int contStartSite = this.game.game.equipment().sitesFrom()[c];
                 for (int site2 = 0; site2 < cont.numSites(); ++site2) {
-                    flatTensor[yCoords[contStartSite + site2] + tensorDimY * (xCoords[contStartSite + site2] + currentChannel * tensorDimX)] = (float)cs2.countCell(contStartSite + site2);
+                    flatTensor[yCoords[contStartSite + site2] + tensorDimY * (xCoords[contStartSite + site2] + currentChannel * tensorDimX)] = cs2.countCell(contStartSite + site2);
                 }
             }
             ++currentChannel;
@@ -263,7 +263,7 @@ public final class LudiiStateWrapper
                 final int amount = this.context.state().amount(p2);
                 final int startFill = tensorDimY * currentChannel * tensorDimX;
                 final int endFill = startFill + tensorDimY * tensorDimX;
-                Arrays.fill(flatTensor, startFill, endFill, (float)amount);
+                Arrays.fill(flatTensor, startFill, endFill, amount);
                 ++currentChannel;
             }
         }

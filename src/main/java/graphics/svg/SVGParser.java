@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class SVGParser
 {
@@ -52,7 +51,6 @@ public class SVGParser
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
                 content += line;
             }
-            reader.close();
         }
         this.parse(content);
     }
@@ -67,13 +65,13 @@ public class SVGParser
                 if (pos == -1) {
                     break;
                 }
-                to = content.indexOf(">", pos);
+                to = content.indexOf('>', pos);
                 if (to == -1) {
                     System.out.println("* Failed to close expression: " + content.substring(pos));
                     break;
                 }
                 String expr;
-                for (expr = content.substring(pos, to + 1), expr = expr.replaceAll(",", " "), expr = expr.replaceAll(";", " "), expr = expr.replaceAll("\n", " "), expr = expr.replaceAll("\r", " "), expr = expr.replaceAll("\t", " "), expr = expr.replaceAll("\b", " "), expr = expr.replaceAll("\f", " "), expr = expr.replaceAll("-", " -"); expr.contains("  "); expr = expr.replaceAll("  ", " ")) {}
+                for (expr = content.substring(pos, to + 1), expr = expr.replaceAll(",", " "), expr = expr.replaceAll(";", " "), expr = expr.replaceAll("\n", " "), expr = expr.replaceAll("\r", " "), expr = expr.replaceAll("\t", " "), expr = expr.replaceAll("\b", " "), expr = expr.replaceAll("\f", " "), expr = expr.replaceAll("-", " -"); expr.contains("  "); expr = expr.replaceAll(" {2}", " ")) {}
                 final Element element = ElementFactory.get().generate(label);
                 if (!element.load(expr)) {
                     return false;
@@ -88,16 +86,10 @@ public class SVGParser
     }
     
     void sortElements() {
-        Collections.sort(this.svg.elements(), (a, b) -> {
+        this.svg.elements().sort((a, b) -> {
             final int filePosA = ((BaseElement) a).filePos();
             final int filePosB = ((BaseElement) b).filePos();
-            if (filePosA < filePosB) {
-                return -1;
-            }
-            if (filePosA > filePosB) {
-                return 1;
-            }
-            return 0;
+            return Integer.compare(filePosA, filePosB);
         });
     }
     

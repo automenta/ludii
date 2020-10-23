@@ -4,7 +4,7 @@
 
 package search.mcts.selection;
 
-import main.collections.FVector;
+import collections.FVector;
 import search.mcts.nodes.BaseNode;
 
 import java.util.concurrent.ThreadLocalRandom;

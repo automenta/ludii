@@ -3,7 +3,7 @@
  */
 package options;
 
-import root.StringRoutines;
+import main.StringRoutines;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,7 +94,7 @@ public class Option {
         this.description = str.substring(c + 1, cc);
         str = str.substring(0, c).trim();
         List<String> argTags = category.argTags();
-        while ((c = str.indexOf("<")) >= 0) {
+        while ((c = str.indexOf('<')) >= 0) {
             String arg;
             if (c > 0 && str.charAt(c - 1) == '(') {
                 str = str.substring(c + 1).trim();

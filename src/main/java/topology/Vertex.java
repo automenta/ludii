@@ -5,7 +5,7 @@
 package topology;
 
 import game.types.board.SiteType;
-import main.math.Point3D;
+import math.Point3D;
 
 import java.io.Serializable;
 import java.util.ArrayList;

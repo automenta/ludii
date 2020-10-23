@@ -9,15 +9,15 @@ public final class ZobristHashUtilities
     public static final long INITIAL_VALUE = 0L;
     public static final long UNKNOWN = -1L;
     
-    public static final ZobristHashGenerator getHashGenerator() {
+    public static ZobristHashGenerator getHashGenerator() {
         return new ZobristHashGenerator();
     }
     
-    public static final long getNext(final ZobristHashGenerator generator) {
+    public static long getNext(final ZobristHashGenerator generator) {
         return generator.next();
     }
     
-    public static final long[] getSequence(final ZobristHashGenerator generator, final int dim) {
+    public static long[] getSequence(final ZobristHashGenerator generator, final int dim) {
         final long[] results = new long[dim];
         for (int i = 0; i < dim; ++i) {
             results[i] = generator.next();
@@ -25,7 +25,7 @@ public final class ZobristHashUtilities
         return results;
     }
     
-    public static final long[][] getSequence(final ZobristHashGenerator generator, final int dim1, final int dim2) {
+    public static long[][] getSequence(final ZobristHashGenerator generator, final int dim1, final int dim2) {
         final long[][] results = new long[dim1][];
         for (int i = 0; i < dim1; ++i) {
             results[i] = getSequence(generator, dim2);
@@ -33,7 +33,7 @@ public final class ZobristHashUtilities
         return results;
     }
     
-    public static final long[][][] getSequence(final ZobristHashGenerator generator, final int dim1, final int dim2, final int dim3) {
+    public static long[][][] getSequence(final ZobristHashGenerator generator, final int dim1, final int dim2, final int dim3) {
         final long[][][] results = new long[dim1][][];
         for (int i = 0; i < dim1; ++i) {
             results[i] = getSequence(generator, dim2, dim3);

@@ -6,7 +6,7 @@ package supplementary.experiments;
 
 import game.Game;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.ListUtils;
+import collections.ListUtils;
 import util.AI;
 import util.Context;
 import util.GameLoader;
@@ -138,7 +138,7 @@ public class EvalGamesSet
                             numGamesToPlay += numGamesToPlay % aiListPermutations.size();
                         }
                         else {
-                            System.err.println(String.format("Warning: number of games to play (%d) is not divisible by the number of permutations of list of AIs (%d)", numGamesToPlay, aiListPermutations.size()));
+                            System.err.printf("Warning: number of games to play (%d) is not divisible by the number of permutations of list of AIs (%d)%n", numGamesToPlay, aiListPermutations.size());
                         }
                     }
                 }

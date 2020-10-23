@@ -83,12 +83,12 @@ public final class ActionMoveN extends BaseAction
                     if (countAtIndex > 0) {
                         onTrackIndices.remove(trackIdx, what, this.count, indexA);
                         final TIntArrayList newWhatIndice = onTrackIndices.locToIndexFrom(trackIdx, this.to, indexA);
-                        if (newWhatIndice.size() > 0) {
+                        if (!newWhatIndice.isEmpty()) {
                             onTrackIndices.add(trackIdx, what, this.count, newWhatIndice.getQuick(0));
                             break;
                         }
                         final TIntArrayList newWhatIndiceIfNotAfter = onTrackIndices.locToIndex(trackIdx, this.to);
-                        if (newWhatIndiceIfNotAfter.size() > 0) {
+                        if (!newWhatIndiceIfNotAfter.isEmpty()) {
                             onTrackIndices.add(trackIdx, what, this.count, newWhatIndiceIfNotAfter.getQuick(0));
                         }
                         break;
@@ -97,9 +97,9 @@ public final class ActionMoveN extends BaseAction
                         ++k;
                     }
                 }
-                if (indicesLocA.size() == 0) {
+                if (indicesLocA.isEmpty()) {
                     final TIntArrayList indicesLocB = onTrackIndices.locToIndex(trackIdx, this.to);
-                    if (indicesLocB.size() == 0) {
+                    if (indicesLocB.isEmpty()) {
                         continue;
                     }
                     onTrackIndices.add(trackIdx, what, 1, indicesLocB.getQuick(0));
@@ -165,7 +165,7 @@ public final class ActionMoveN extends BaseAction
     @Override
     public String toTurnFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
-        String newFrom = this.from + "";
+        String newFrom = String.valueOf(this.from);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.typeFrom == SiteType.Cell || (this.typeFrom == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.from] : 0;
             if (cid == 0) {
@@ -173,13 +173,13 @@ public final class ActionMoveN extends BaseAction
                 newFrom = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.from).label();
             }
         }
-        if (this.typeFrom != null && !this.typeFrom.equals(context.board().defaultSite())) {
+        if (this.typeFrom != null && this.typeFrom != context.board().defaultSite()) {
             sb.append(this.typeFrom + " " + newFrom);
         }
         else {
             sb.append(newFrom);
         }
-        String newTo = this.to + "";
+        String newTo = String.valueOf(this.to);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid2 = (this.typeTo == SiteType.Cell || (this.typeTo == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.to] : 0;
             if (cid2 == 0) {
@@ -187,7 +187,7 @@ public final class ActionMoveN extends BaseAction
                 newTo = context.game().equipment().containers()[cid2].topology().getGraphElements(realType2).get(this.to).label();
             }
         }
-        if (this.typeTo != null && !this.typeTo.equals(context.board().defaultSite())) {
+        if (this.typeTo != null && this.typeTo != context.board().defaultSite()) {
             sb.append("-" + this.typeTo + " " + newTo);
         }
         else {
@@ -203,7 +203,7 @@ public final class ActionMoveN extends BaseAction
     public String toMoveFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("(Move ");
-        String newFrom = this.from + "";
+        String newFrom = String.valueOf(this.from);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.typeFrom == SiteType.Cell || (this.typeFrom == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.from] : 0;
             if (cid == 0) {
@@ -211,13 +211,13 @@ public final class ActionMoveN extends BaseAction
                 newFrom = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.from).label();
             }
         }
-        if (this.typeFrom != null && this.typeTo != null && (!this.typeFrom.equals(context.board().defaultSite()) || !this.typeFrom.equals(this.typeTo))) {
+        if (this.typeFrom != null && this.typeTo != null && (this.typeFrom != context.board().defaultSite() || this.typeFrom != this.typeTo)) {
             sb.append(this.typeFrom + " " + newFrom);
         }
         else {
             sb.append(newFrom);
         }
-        String newTo = this.to + "";
+        String newTo = String.valueOf(this.to);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid2 = (this.typeTo == SiteType.Cell || (this.typeTo == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.to] : 0;
             if (cid2 == 0) {
@@ -225,7 +225,7 @@ public final class ActionMoveN extends BaseAction
                 newTo = context.game().equipment().containers()[cid2].topology().getGraphElements(realType2).get(this.to).label();
             }
         }
-        if (this.typeFrom != null && this.typeTo != null && (!this.typeTo.equals(context.board().defaultSite()) || !this.typeFrom.equals(this.typeTo))) {
+        if (this.typeFrom != null && this.typeTo != null && (this.typeTo != context.board().defaultSite() || this.typeFrom != this.typeTo)) {
             sb.append(" - " + this.typeTo + " " + newTo);
         }
         else {

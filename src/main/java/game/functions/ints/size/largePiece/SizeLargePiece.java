@@ -36,9 +36,8 @@ public final class SizeLargePiece extends BaseIntFunction
         int count = 0;
         final SiteType realType = (this.type != null) ? this.type : context.game().board().defaultSite();
         final int[] sites = this.region.eval(context).sites();
-        for (int i = 0; i < sites.length; ++i) {
-            final int site = sites[i];
-            final int cid = realType.equals(SiteType.Cell) ? context.containerId()[site] : 0;
+        for (final int site : sites) {
+            final int cid = realType == SiteType.Cell ? context.containerId()[site] : 0;
             final ContainerState cs = context.containerState(cid);
             final int what = cs.what(site, realType);
             if (what != 0) {
@@ -46,8 +45,7 @@ public final class SizeLargePiece extends BaseIntFunction
                 if (component.isLargePiece()) {
                     final TIntArrayList locs = component.locs(context, context.topology().centre(realType).get(0).index(), 0, context.topology());
                     count += locs.size();
-                }
-                else {
+                } else {
                     ++count;
                 }
             }

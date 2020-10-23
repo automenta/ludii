@@ -43,10 +43,10 @@ public class ActionSet extends BaseAction
         final int contID = context.containerId()[0];
         final ContainerState sc = context.state().containerStates()[contID];
         final ContainerDeductionPuzzleState ps = (ContainerDeductionPuzzleState)sc;
-        if (this.type.equals(SiteType.Vertex)) {
+        if (this.type == SiteType.Vertex) {
             ps.setVert(this.var, this.value);
         }
-        else if (this.type.equals(SiteType.Edge)) {
+        else if (this.type == SiteType.Edge) {
             ps.setEdge(this.var, this.value);
         }
         else {
@@ -104,7 +104,7 @@ public class ActionSet extends BaseAction
     @Override
     public String toTurnFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
-        String newTo = this.var + "";
+        String newTo = String.valueOf(this.var);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.type == SiteType.Cell || (this.type == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.var] : 0;
             if (cid == 0) {
@@ -112,7 +112,7 @@ public class ActionSet extends BaseAction
                 newTo = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.var).label();
             }
         }
-        if (this.type != null && !this.type.equals(context.board().defaultSite())) {
+        if (this.type != null && this.type != context.board().defaultSite()) {
             sb.append(this.type + " " + newTo);
         }
         else {
@@ -126,7 +126,7 @@ public class ActionSet extends BaseAction
     public String toMoveFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("(");
-        String newTo = this.var + "";
+        String newTo = String.valueOf(this.var);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.type == SiteType.Cell || (this.type == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.var] : 0;
             if (cid == 0) {
@@ -134,7 +134,7 @@ public class ActionSet extends BaseAction
                 newTo = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.var).label();
             }
         }
-        if (this.type != null && !this.type.equals(context.board().defaultSite())) {
+        if (this.type != null && this.type != context.board().defaultSite()) {
             sb.append(this.type + " " + newTo);
         }
         else {

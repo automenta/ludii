@@ -142,7 +142,7 @@ public final class Equipment extends BaseLudeme implements Serializable
                         final Board puzzleBoard = (Board)c;
                         if (puzzleBoard.cellRange().max() != 0) {
                             for (int num = puzzleBoard.cellRange().min(); num <= puzzleBoard.cellRange().max(); ++num) {
-                                final Piece number = new Piece((Object)num + "", RoleType.P1, null, null, null, null);
+                                final Piece number = new Piece(String.valueOf((Object) num), RoleType.P1, null, null, null, null);
                                 SettingsGeneral.setMaxNumberValue(puzzleBoard.cellRange().max());
                                 componentsWIP.add(number);
                             }
@@ -181,9 +181,7 @@ public final class Equipment extends BaseLudeme implements Serializable
                     else if (item.type() == ItemType.Dominoes) {
                         final Dominoes dominoes = (Dominoes)item;
                         final ArrayList<Domino> listDominoes = dominoes.generateDominoes();
-                        for (final Domino domino : listDominoes) {
-                            componentsWIP.add(domino);
-                        }
+                        componentsWIP.addAll(listDominoes);
                     }
                 }
                 else if (ItemType.isRegion(item.type())) {
@@ -196,28 +194,28 @@ public final class Equipment extends BaseLudeme implements Serializable
                     final Hints hints = (Hints)item;
                     final int minSize = Math.min(hints.where().length, hints.values().length);
                     final SiteType puzzleType = hints.getType();
-                    if (puzzleType.equals(SiteType.Vertex)) {
+                    if (puzzleType == SiteType.Vertex) {
                         this.setVertexWithHints(new Integer[minSize][]);
                         this.setVertexHints(new Integer[minSize]);
                     }
-                    else if (puzzleType.equals(SiteType.Edge)) {
+                    else if (puzzleType == SiteType.Edge) {
                         this.setEdgeWithHints(new Integer[minSize][]);
                         this.setEdgeHints(new Integer[minSize]);
                     }
-                    else if (puzzleType.equals(SiteType.Cell)) {
+                    else if (puzzleType == SiteType.Cell) {
                         this.setCellWithHints(new Integer[minSize][]);
                         this.setCellHints(new Integer[minSize]);
                     }
                     for (int i = 0; i < minSize; ++i) {
-                        if (puzzleType.equals(SiteType.Vertex)) {
+                        if (puzzleType == SiteType.Vertex) {
                             this.verticesWithHints()[i] = hints.where()[i];
                             this.vertexHints()[i] = hints.values()[i];
                         }
-                        else if (puzzleType.equals(SiteType.Edge)) {
+                        else if (puzzleType == SiteType.Edge) {
                             this.edgesWithHints()[i] = hints.where()[i];
                             this.edgeHints()[i] = hints.values()[i];
                         }
-                        else if (puzzleType.equals(SiteType.Cell)) {
+                        else if (puzzleType == SiteType.Cell) {
                             this.cellsWithHints()[i] = hints.where()[i];
                             this.cellHints()[i] = hints.values()[i];
                         }
@@ -225,7 +223,7 @@ public final class Equipment extends BaseLudeme implements Serializable
                 }
             }
         }
-        if (containersWIP.size() == 0) {
+        if (containersWIP.isEmpty()) {
             containersWIP.add(new Board(new RectangleOnSquare(new DimConstant(3), null, null, null), null, null, null, null, null));
         }
         if (componentsWIP.size() == 1 && !game.isDeductionPuzzle()) {
@@ -235,10 +233,10 @@ public final class Equipment extends BaseLudeme implements Serializable
                 componentsWIP.add(piece);
             }
         }
-        this.containers = containersWIP.toArray(new Container[containersWIP.size()]);
-        this.components = componentsWIP.toArray(new Component[componentsWIP.size()]);
-        this.regions = regionsWIP.toArray(new Regions[regionsWIP.size()]);
-        this.maps = mapsWIP.toArray(new Map[mapsWIP.size()]);
+        this.containers = containersWIP.toArray(new Container[0]);
+        this.components = componentsWIP.toArray(new Component[0]);
+        this.regions = regionsWIP.toArray(new Regions[0]);
+        this.maps = mapsWIP.toArray(new Map[0]);
         this.initContainerAndParameters(game);
         for (final Container cont : this.containers) {
             if (cont != null) {
@@ -519,16 +517,16 @@ public final class Equipment extends BaseLudeme implements Serializable
     
     public Integer[] hints(final SiteType type) {
         switch (type) {
-            case Edge: {
+            case Edge -> {
                 return this.edgeHints();
             }
-            case Vertex: {
+            case Vertex -> {
                 return this.vertexHints();
             }
-            case Cell: {
+            case Cell -> {
                 return this.cellHints();
             }
-            default: {
+            default -> {
                 return new Integer[0];
             }
         }
@@ -536,16 +534,16 @@ public final class Equipment extends BaseLudeme implements Serializable
     
     public Integer[][] withHints(final SiteType type) {
         switch (type) {
-            case Edge: {
+            case Edge -> {
                 return this.edgesWithHints();
             }
-            case Vertex: {
+            case Vertex -> {
                 return this.verticesWithHints();
             }
-            case Cell: {
+            case Cell -> {
                 return this.cellsWithHints();
             }
-            default: {
+            default -> {
                 return new Integer[0][0];
             }
         }

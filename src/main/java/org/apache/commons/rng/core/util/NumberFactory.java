@@ -34,7 +34,7 @@ public final class NumberFactory
     public static double makeDouble(final int v, final int w) {
         final long high = (long)(v >>> 6) << 26;
         final int low = w >>> 6;
-        return (high | (long)low) * 2.220446049250313E-16;
+        return (high | low) * 2.220446049250313E-16;
     }
     
     public static float makeFloat(final int v) {
@@ -42,7 +42,7 @@ public final class NumberFactory
     }
     
     public static long makeLong(final int v, final int w) {
-        return (long)v << 32 | ((long)w & 0xFFFFFFFFL);
+        return (long)v << 32 | (w & 0xFFFFFFFFL);
     }
     
     public static int makeInt(final long v) {
@@ -71,7 +71,7 @@ public final class NumberFactory
         long v = 0L;
         for (int i = 0; i < 8; ++i) {
             final int shift = i * 8;
-            v |= ((long)input[i] & 0xFFL) << shift;
+            v |= (input[i] & 0xFFL) << shift;
         }
         return v;
     }

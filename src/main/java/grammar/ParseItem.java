@@ -3,7 +3,7 @@
  */
 package grammar;
 
-import root.Constants;
+import main.Constants;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -11,13 +11,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class ParseItem {
-    private final Token token;
+    public final Token token;
     private final List<ParseItem> arguments = new ArrayList<>();
-    private final ParseItem parent;
+    public final ParseItem parent;
     private final List<Instance> instances = new ArrayList<>();
     private boolean doesParse = false;
     private boolean visited = false;
-    private final int depth;
+    public final int depth;
 
     public ParseItem(Token token, ParseItem parent) {
         this.token = token;
@@ -71,13 +71,13 @@ public class ParseItem {
         }
         this.visited = true;
         switch (this.token.type()) {
-            case Terminal: {
+            case Terminal -> {
                 return this.parseTerminal(expected, tab);
             }
-            case Array: {
+            case Array -> {
                 return this.parseArray(expected, report, tab);
             }
-            case Class: {
+            case Class -> {
                 return this.parseClass(expected, report, tab);
             }
         }
@@ -160,7 +160,7 @@ public class ParseItem {
                 if (tab != null) {
                     System.out.println(tab + (c + 1) + ". Trying clause: " + clause);
                 }
-                if (this.arguments.size() > 0 && clause.args() == null) {
+                if (!this.arguments.isEmpty() && clause.args() == null) {
                     if (tab == null) continue;
                     System.out.println(tab + "   X: Item has arguments but clauses does not.");
                     continue;
@@ -195,9 +195,8 @@ public class ParseItem {
                     int index = 0;
                     for (a = 0; a < numSlots; ++a) {
                         if (!combo.get(a)) {
-                            boolean canSkip;
                             ClauseArg clauseArg = clause.args().get(a);
-                            boolean bl = canSkip = clauseArg.optional() || clauseArg.orGroup() > 0;
+                            boolean canSkip = clauseArg.optional() || clauseArg.orGroup() > 0;
                             if (canSkip) continue;
                             break;
                         }
@@ -272,7 +271,7 @@ public class ParseItem {
         if (this.token.name() != null) {
             sb.append(this.token.name());
         }
-        if (this.arguments.size() > 0) {
+        if (!this.arguments.isEmpty()) {
             sb.append("\n");
             for (ParseItem arg : this.arguments) {
                 sb.append(arg.dump(indent + "    "));
@@ -304,7 +303,7 @@ public class ParseItem {
                 if (instance == null || instance.clauses() == null) continue;
                 for (int c = 0; c < instance.clauses().size(); ++c) {
                     Clause clause = instance.clauses().get(c);
-                    sb.append("" + (c + 1) + ". " + clause.symbol().grammarLabel() + ": " + clause.toString());
+                    sb.append((c + 1) + ". " + clause.symbol().grammarLabel() + ": " + clause.toString());
                     sb.append(" => " + instance.symbol().cls().getSimpleName());
                     sb.append("\n");
                 }

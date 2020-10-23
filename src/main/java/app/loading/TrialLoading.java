@@ -152,7 +152,6 @@ public class TrialLoading
                         Manager.app.repaint();
                     });
                 }
-                return;
             });
             DesktopApp.setSavedTrial(null);
             SettingsManager.canSendToDatabase = false;

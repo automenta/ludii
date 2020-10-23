@@ -26,28 +26,28 @@ public enum EditorActions
             return EditorActions.NO_ACTION;
         }
         switch (e.getKeyCode()) {
-            case 68: {
+            case 68 -> {
                 return EditorActions.DELETE_LINE;
             }
-            case 89: {
+            case 89 -> {
                 return EditorActions.REDO;
             }
-            case 90: {
+            case 90 -> {
                 return EditorActions.UNDO;
             }
-            case 46: {
+            case 46 -> {
                 return EditorActions.AUTOSUGGEST;
             }
-            case 67: {
+            case 67 -> {
                 return EditorActions.COPY_SELECTION;
             }
-            case 88: {
+            case 88 -> {
                 return EditorActions.REMOVE_SELECTION;
             }
-            case 86: {
+            case 86 -> {
                 return EditorActions.PASTE_BUFFER;
             }
-            default: {
+            default -> {
                 return EditorActions.NO_ACTION;
             }
         }

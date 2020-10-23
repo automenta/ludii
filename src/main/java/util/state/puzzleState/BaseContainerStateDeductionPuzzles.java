@@ -9,7 +9,7 @@ import game.equipment.container.Container;
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
 import game.util.equipment.Region;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import util.Sites;
 import util.UnionInfoD;
 import util.state.State;
@@ -583,7 +583,7 @@ public abstract class BaseContainerStateDeductionPuzzles implements ContainerSta
         if (type == SiteType.Cell || this.container().index() != 0 || type == null) {
             return this.isEmptyCell(site);
         }
-        if (type.equals(SiteType.Edge)) {
+        if (type == SiteType.Edge) {
             return this.isEmptyEdge(site);
         }
         return this.isEmptyVertex(site);

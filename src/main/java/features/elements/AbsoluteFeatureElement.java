@@ -57,10 +57,10 @@ public class AbsoluteFeatureElement extends FeatureElement
     public AbsoluteFeatureElement(final String string) {
         this.type = null;
         this.not = false;
-        final int startPosStringIdx = string.indexOf("{");
+        final int startPosStringIdx = string.indexOf('{');
         String typeString = string.substring(0, startPosStringIdx);
         String posString = string.substring(startPosStringIdx);
-        if (typeString.startsWith("!")) {
+        if (!typeString.isEmpty() && typeString.charAt(0) == '!') {
             this.not = true;
             typeString = typeString.substring("!".length());
         }

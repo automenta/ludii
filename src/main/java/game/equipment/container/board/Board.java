@@ -18,10 +18,12 @@ import game.util.graph.Edge;
 import game.util.graph.Face;
 import game.util.graph.Graph;
 import game.util.graph.Vertex;
-import main.math.Vector;
+import math.Vector;
 import metadata.graphics.util.ContainerStyleType;
 import topology.Cell;
 import topology.Topology;
+
+import java.util.Arrays;
 
 public class Board extends Container
 {
@@ -62,15 +64,15 @@ public class Board extends Container
             final Values[] valuesLocal = array = ((valuesArray != null) ? valuesArray : new Values[] { values });
             for (final Values valuesGraphElement : array) {
                 switch (valuesGraphElement.type()) {
-                    case Cell: {
+                    case Cell -> {
                         this.cellRange = valuesGraphElement.range();
                         break;
                     }
-                    case Edge: {
+                    case Edge -> {
                         this.edgeRange = valuesGraphElement.range();
                         break;
                     }
-                    case Vertex: {
+                    case Vertex -> {
                         this.vertexRange = valuesGraphElement.range();
                         break;
                     }
@@ -89,9 +91,7 @@ public class Board extends Container
         }
         else {
             if (tracks != null) {
-                for (final Track t : tracks) {
-                    this.tracks.add(t);
-                }
+                this.tracks.addAll(Arrays.asList(tracks));
             }
             else if (track != null) {
                 this.tracks.add(track);
@@ -201,16 +201,16 @@ public class Board extends Container
     
     public Range getRange(final SiteType type) {
         switch (type) {
-            case Vertex: {
+            case Vertex -> {
                 return this.vertexRange();
             }
-            case Cell: {
+            case Cell -> {
                 return this.cellRange();
             }
-            case Edge: {
+            case Edge -> {
                 return this.edgeRange();
             }
-            default: {
+            default -> {
                 return null;
             }
         }

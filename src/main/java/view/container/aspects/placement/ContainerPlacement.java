@@ -6,7 +6,7 @@ package view.container.aspects.placement;
 
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import topology.Cell;
 import topology.Edge;
 import topology.Topology;
@@ -43,7 +43,7 @@ public class ContainerPlacement
         double min = 1.0;
         if (this.container().defaultSite() == SiteType.Cell) {
             final List<Cell> cells = this.topology().cells();
-            if (cells.size() > 0) {
+            if (!cells.isEmpty()) {
                 for (final Cell cell : cells) {
                     final double acc = GraphUtil.calculateCellRadius(cell);
                     if (acc < min) {
@@ -54,7 +54,7 @@ public class ContainerPlacement
         }
         else {
             final List<Vertex> vertices = this.topology().vertices();
-            if (vertices.size() > 0) {
+            if (!vertices.isEmpty()) {
                 for (final Vertex vertex : vertices) {
                     for (final Vertex v : vertex.neighbours()) {
                         final double dist = MathRoutines.distance(v.centroid(), vertex.centroid()) * 0.5;

@@ -33,15 +33,14 @@ public class GameOtherPanel extends BaseGamePanel
         model.addColumn("Game");
         model.addColumn("Players");
         model.addColumn("Details");
-        for (int i = 0; i < joinableGames.length; ++i) {
+        for (String joinableGame : joinableGames) {
             try {
-                final String gameDetails = joinableGames[i];
+                final String gameDetails = joinableGame;
                 final String[] splitDetails = gameDetails.split("NEXT_COL");
                 String playerTimeString = "";
                 if (Integer.parseInt(splitDetails[6]) % 60 == 0) {
                     playerTimeString = Integer.parseInt(splitDetails[6]) / 60 + ":00";
-                }
-                else {
+                } else {
                     playerTimeString = Integer.parseInt(splitDetails[6]) / 60 + ":" + Integer.parseInt(splitDetails[6]) % 60;
                 }
                 if (playerTimeString.equals("0:00")) {
@@ -61,9 +60,9 @@ public class GameOtherPanel extends BaseGamePanel
                 info.setNotes(splitDetails[12]);
                 info.setGameHash(splitDetails[13]);
                 this.tableStoredInformation.add(info);
-                model.addRow(new Object[] { splitDetails[0], splitDetails[1].substring(0, splitDetails[1].length() - 4), splitDetails[8], "Details" });
+                model.addRow(new Object[]{splitDetails[0], splitDetails[1].substring(0, splitDetails[1].length() - 4), splitDetails[8], "Details"});
+            } catch (Exception ex) {
             }
-            catch (Exception ex) {}
         }
         return model;
     }

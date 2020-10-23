@@ -30,8 +30,7 @@ public class ClassEnumerator
     public static List<Class<?>> processDirectory(final File directory, final String pkgname) {
         final ArrayList<Class<?>> classes = new ArrayList<>();
         final String[] files = directory.list();
-        for (int i = 0; i < files.length; ++i) {
-            final String fileName = files[i];
+        for (final String fileName : files) {
             String className = null;
             if (fileName.endsWith(".class")) {
                 className = pkgname + '.' + fileName.substring(0, fileName.length() - 6);

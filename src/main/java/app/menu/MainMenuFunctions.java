@@ -35,11 +35,11 @@ import language.parser.Parser;
 import main.Constants;
 import main.FileHandling;
 import main.StringRoutines;
-import main.grammar.Description;
-import main.grammar.Report;
-import main.options.GameOptions;
-import main.options.Option;
-import main.options.Ruleset;
+import grammar.Description;
+import grammar.Report;
+import options.GameOptions;
+import options.Option;
+import options.Ruleset;
 import manager.Manager;
 import manager.ai.AIDetails;
 import manager.ai.AIUtil;
@@ -150,7 +150,7 @@ public class MainMenuFunctions extends JMenuBar
         }
         else if (source.getText().equals("Export Thumbnails")) {
             DesktopApp.frame().setSize(464, 464);
-            EventQueue.invokeLater(() -> EventQueue.invokeLater(() -> Thumbnails.generateThumbnails()));
+            EventQueue.invokeLater(() -> EventQueue.invokeLater(Thumbnails::generateThumbnails));
         }
         else if (source.getText().equals("Export All Thumbnails")) {
             DesktopApp.frame().setSize(464, 464);
@@ -230,7 +230,7 @@ public class MainMenuFunctions extends JMenuBar
                         Manager.ref().interruptAI();
                         DesktopApp.frame().setContentPane(DesktopApp.view());
                         final int rate = Manager.ref().timeRandomPlayouts();
-                        DesktopApp.playerApp().addTextToStatusPanel("" + rate + " random playouts/s.\n");
+                        DesktopApp.playerApp().addTextToStatusPanel(rate + " random playouts/s.\n");
                         DesktopApp.playerApp().setTemporaryMessage("");
                         DesktopApp.playerApp().setTemporaryMessage("Analysis Complete.\n");
                         Manager.app.repaint();
@@ -250,7 +250,7 @@ public class MainMenuFunctions extends JMenuBar
                 MainMenuFunctions.timeRandomPlayoutsThread = new Thread(() -> {
                     int rate = Manager.ref().timeRandomPlayouts();
                     EventQueue.invokeLater(() -> {
-                        DesktopApp.playerApp().addTextToStatusPanel("" + rate + " random playouts/s.\n");
+                        DesktopApp.playerApp().addTextToStatusPanel(rate + " random playouts/s.\n");
                         DesktopApp.playerApp().setTemporaryMessage("");
                         DesktopApp.playerApp().setTemporaryMessage("Analysis Complete.\n");
                         Manager.app.repaint();
@@ -269,18 +269,15 @@ public class MainMenuFunctions extends JMenuBar
             final Field[] fields = GameType.class.getFields();
             final String[] flags = new String[fields.length];
             final long[] flagsValues = new long[fields.length];
-            final StringBuffer properties = new StringBuffer("The properties of the game are: \n\n");
+            final StringBuilder properties = new StringBuilder("The properties of the game are: \n\n");
             for (int i = 0; i < fields.length; ++i) {
                 flags[i] = fields[i].toString();
                 flags[i] = flags[i].substring(flags[i].lastIndexOf(46) + 1);
                 try {
                     flagsValues[i] = fields[i].getLong(GameType.class);
                 }
-                catch (IllegalArgumentException e2) {
+                catch (IllegalArgumentException | IllegalAccessException e2) {
                     e2.printStackTrace();
-                }
-                catch (IllegalAccessException e3) {
-                    e3.printStackTrace();
                 }
             }
             for (int i = 0; i < flagsValues.length; ++i) {
@@ -838,7 +835,7 @@ public class MainMenuFunctions extends JMenuBar
                                     final String selectedOptString = StringRoutines.join("/", option.menuHeadings());
                                     for (int k = 0; k < currentOptions.size(); ++k) {
                                         final String currOption = currentOptions.get(k);
-                                        if (currOption.substring(0, currOption.lastIndexOf("/")).equals(selectedOptString.substring(0, selectedOptString.lastIndexOf("/")))) {
+                                        if (currOption.substring(0, currOption.lastIndexOf('/')).equals(selectedOptString.substring(0, selectedOptString.lastIndexOf('/')))) {
                                             currentOptions.remove(k);
                                             break;
                                         }

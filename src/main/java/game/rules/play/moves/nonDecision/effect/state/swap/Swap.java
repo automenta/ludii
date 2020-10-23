@@ -24,10 +24,10 @@ public final class Swap extends Effect
     
     public static Moves construct(final SwapSitesType swapType, @Opt final IntFunction locA, @Opt final IntFunction locB, @Opt final Then then) {
         switch (swapType) {
-            case Pieces: {
+            case Pieces -> {
                 return new SwapPieces(locA, locB, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Swap(): A SwapSitesType is not implemented.");
             }
         }
@@ -55,10 +55,10 @@ public final class Swap extends Effect
             throw new IllegalArgumentException("Swap(): Exactly one player2 or role2 parameter must be non-null.");
         }
         switch (takeType) {
-            case Players: {
+            case Players -> {
                 return new SwapPlayers(player1, role1, player2, role2, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Swap(): A SwapSitesType is not implemented.");
             }
         }

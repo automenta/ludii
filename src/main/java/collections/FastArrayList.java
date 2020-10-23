@@ -2,7 +2,7 @@
 // Decompiled by Procyon v0.5.36
 // 
 
-package main.collections;
+package collections;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,7 +22,7 @@ public class FastArrayList<E> implements Iterable<E>, Serializable
     protected transient int modCount;
     
     public FastArrayList() {
-        this(10);
+        this(DEFAULT_CAPACITY);
     }
     
     public FastArrayList(final int initialCapacity) {
@@ -36,6 +36,7 @@ public class FastArrayList<E> implements Iterable<E>, Serializable
         this.size = this.data.length;
     }
     
+    @SafeVarargs
     public FastArrayList(final E... elements) {
         this.modCount = 0;
         this.data = Arrays.copyOf(elements, elements.length);

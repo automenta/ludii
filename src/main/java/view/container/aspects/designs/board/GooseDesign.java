@@ -4,7 +4,7 @@
 
 package view.container.aspects.designs.board;
 
-import main.math.MathRoutines;
+import math.MathRoutines;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 import topology.Cell;
 import util.Context;
@@ -26,7 +26,7 @@ public class GooseDesign extends BoardDesign
         final Rectangle placement = this.boardStyle.placement();
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.002f;
-        final float swThin = (float)Math.max(1, (int)(0.002f * placement.width + 0.5));
+        final float swThin = Math.max(1, (int)(0.002f * placement.width + 0.5));
         final float swThick = 2.0f * swThin;
         this.setStrokesAndColours(context, new Color(200, 200, 200), null, null, null, null, null, new Color(140, 140, 140), swThin, swThick);
         final int r = (int)(MathRoutines.distance(this.topology().cells().get(0).centroid(), this.topology().cells().get(1).centroid()) * placement.width * 0.475 + 0.5);

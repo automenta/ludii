@@ -60,7 +60,7 @@ public final class SVGLoader
                     final List<String> names = new ArrayList<>();
                     visit(path, names);
                     Collections.sort(names);
-                    SVGLoader.choices = names.toArray(new String[names.size()]);
+                    SVGLoader.choices = names.toArray(new String[0]);
                 }
                 catch (URISyntaxException exception) {
                     exception.printStackTrace();

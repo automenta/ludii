@@ -138,8 +138,8 @@ public final class CommandLineArgParse
         String currentOptionName = null;
         List<Object> currentValues = null;
         try {
-            for (int i = 0; i < args.length; ++i) {
-                currentToken = args[i];
+            for (String arg : args) {
+                currentToken = arg;
                 final String token = this.caseSensitive ? currentToken : currentToken.toLowerCase();
                 if (token.equals("-h") || token.equals("--help")) {
                     this.printHelp(System.out);
@@ -158,16 +158,14 @@ public final class CommandLineArgParse
                     currentValues = new ArrayList<>(1);
                     currentValues.add(tokenToVal(token, currentOption.type));
                     ++nextNamelessOption;
-                }
-                else if (this.namedOptions.containsKey(token)) {
+                } else if (this.namedOptions.containsKey(token)) {
                     if (!this.finishArgOption(currentOption, currentOptionName, currentValues)) {
                         return false;
                     }
                     currentOption = this.namedOptions.get(token);
                     currentOptionName = currentToken;
                     currentValues = new ArrayList<>();
-                }
-                else {
+                } else {
                     currentValues.add(tokenToVal(token, currentOption.type));
                 }
             }
@@ -266,8 +264,7 @@ public final class CommandLineArgParse
             out.println();
         }
         out.println("Required named arguments:");
-        for (int i = 0; i < this.allOptions.size(); ++i) {
-            final ArgOption option = this.allOptions.get(i);
+        for (final ArgOption option : this.allOptions) {
             if (option.names != null && option.required) {
                 printOptionLine(option, out);
             }
@@ -275,8 +272,7 @@ public final class CommandLineArgParse
         out.println();
         out.println("Optional named arguments:");
         out.println(" -h, --help                                                      Show this help message.");
-        for (int i = 0; i < this.allOptions.size(); ++i) {
-            final ArgOption option = this.allOptions.get(i);
+        for (final ArgOption option : this.allOptions) {
             if (option.names != null && !option.required) {
                 printOptionLine(option, out);
             }
@@ -309,7 +305,7 @@ public final class CommandLineArgParse
                 }
             }
             String metaVar;
-            for (metaVar = option.names[0].toUpperCase(); metaVar.startsWith("-"); metaVar = metaVar.substring(1)) {}
+            for (metaVar = option.names[0].toUpperCase(); !metaVar.isEmpty() && metaVar.charAt(0) == '-'; metaVar = metaVar.substring(1)) {}
             metaVar = metaVar.replaceAll("-", "_");
             if (option.numValsStr == null) {
                 if (option.numVals > 0) {
@@ -351,7 +347,7 @@ public final class CommandLineArgParse
                     return false;
                 }
             }
-            else if (currentOption.numValsStr.equals("+") && currentValues.size() == 0) {
+            else if (currentOption.numValsStr.equals("+") && currentValues.isEmpty()) {
                 System.err.println("Error: " + currentOptionName + " requires more than 0 values, but only received 0 values.");
                 return false;
             }
@@ -374,7 +370,7 @@ public final class CommandLineArgParse
                 if (currentOption.expectsList()) {
                     this.providedNamelessValues.add(currentValues);
                 }
-                else if (currentValues.size() == 0 && currentOption.type == OptionTypes.Boolean) {
+                else if (currentValues.isEmpty() && currentOption.type == OptionTypes.Boolean) {
                     this.providedNamelessValues.add(Boolean.TRUE);
                 }
                 else {
@@ -389,7 +385,7 @@ public final class CommandLineArgParse
                     if (currentOption.expectsList()) {
                         this.providedValues.put(name, currentValues);
                     }
-                    else if (currentValues.size() == 0 && currentOption.type == OptionTypes.Boolean) {
+                    else if (currentValues.isEmpty() && currentOption.type == OptionTypes.Boolean) {
                         this.providedValues.put(name, Boolean.TRUE);
                     }
                     else {
@@ -527,7 +523,7 @@ public final class CommandLineArgParse
             if (this.legalVals != null) {
                 sb.append(" legalVals=" + Arrays.toString(this.legalVals));
             }
-            if (this.help.length() > 0) {
+            if (!this.help.isEmpty()) {
                 sb.append("\t\t" + this.help);
             }
             sb.append("]");

@@ -10,6 +10,8 @@ import features.elements.RelativeFeatureElement;
 import features.patterns.Pattern;
 import gnu.trove.list.array.TFloatArrayList;
 
+import java.util.Objects;
+
 public class RelativeFeature extends Feature
 {
     protected final Walk toPosition;
@@ -99,16 +101,16 @@ public class RelativeFeature extends Feature
     @Override
     public Feature rotatedCopy(final float rotation) {
         final RelativeFeature copy = new RelativeFeature(this);
-        if (copy.toPosition != null && copy.toPosition().steps().size() > 0) {
+        if (copy.toPosition != null && !copy.toPosition().steps().isEmpty()) {
             copy.toPosition().steps().setQuick(0, copy.toPosition().steps().getQuick(0) + rotation);
         }
-        if (copy.fromPosition != null && copy.fromPosition().steps().size() > 0) {
+        if (copy.fromPosition != null && !copy.fromPosition().steps().isEmpty()) {
             copy.fromPosition().steps().setQuick(0, copy.fromPosition().steps().getQuick(0) + rotation);
         }
-        if (copy.lastToPosition != null && copy.lastToPosition().steps().size() > 0) {
+        if (copy.lastToPosition != null && !copy.lastToPosition().steps().isEmpty()) {
             copy.lastToPosition().steps().setQuick(0, copy.lastToPosition().steps().getQuick(0) + rotation);
         }
-        if (copy.lastFromPosition != null && copy.lastFromPosition().steps().size() > 0) {
+        if (copy.lastFromPosition != null && !copy.lastFromPosition().steps().isEmpty()) {
             copy.lastFromPosition().steps().setQuick(0, copy.lastFromPosition().steps().getQuick(0) + rotation);
         }
         for (final FeatureElement element : copy.pattern().featureElements()) {
@@ -230,7 +232,7 @@ public class RelativeFeature extends Feature
             return false;
         }
         final RelativeFeature otherFeature = (RelativeFeature)other;
-        return (this.toPosition == otherFeature.toPosition || (this.toPosition != null && this.toPosition.equals(otherFeature.toPosition))) && (this.fromPosition == otherFeature.fromPosition || (this.fromPosition != null && this.fromPosition.equals(otherFeature.fromPosition))) && (this.lastToPosition == otherFeature.lastToPosition || (this.lastToPosition != null && this.lastToPosition.equals(otherFeature.lastToPosition))) && (this.lastFromPosition == otherFeature.lastFromPosition || (this.lastFromPosition != null && this.lastFromPosition.equals(otherFeature.lastFromPosition)));
+        return (Objects.equals(this.toPosition, otherFeature.toPosition)) && (Objects.equals(this.fromPosition, otherFeature.fromPosition)) && (Objects.equals(this.lastToPosition, otherFeature.lastToPosition)) && (Objects.equals(this.lastFromPosition, otherFeature.lastFromPosition));
     }
     
     @Override
@@ -242,7 +244,7 @@ public class RelativeFeature extends Feature
             return false;
         }
         final RelativeFeature otherFeature = (RelativeFeature)other;
-        return (this.toPosition == otherFeature.toPosition || (this.toPosition != null && this.toPosition.equals(otherFeature.toPosition))) && (this.fromPosition == otherFeature.fromPosition || (this.fromPosition != null && this.fromPosition.equals(otherFeature.fromPosition))) && (this.lastToPosition == otherFeature.lastToPosition || (this.lastToPosition != null && this.lastToPosition.equals(otherFeature.lastToPosition))) && (this.lastFromPosition == otherFeature.lastFromPosition || (this.lastFromPosition != null && this.lastFromPosition.equals(otherFeature.lastFromPosition)));
+        return (Objects.equals(this.toPosition, otherFeature.toPosition)) && (Objects.equals(this.fromPosition, otherFeature.fromPosition)) && (Objects.equals(this.lastToPosition, otherFeature.lastToPosition)) && (Objects.equals(this.lastFromPosition, otherFeature.lastFromPosition));
     }
     
     @Override
@@ -271,7 +273,7 @@ public class RelativeFeature extends Feature
         if (this.lastFromPosition != null) {
             str = String.format("last_from=<%s>:%s", this.lastFromPosition, str);
         }
-        if (this.comment.length() > 0) {
+        if (!this.comment.isEmpty()) {
             str = String.format("%s:comment=\"%s\"", str, this.comment);
         }
         return "rel:" + str;

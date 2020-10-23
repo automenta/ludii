@@ -28,7 +28,7 @@ public class AllConnected extends BaseBooleanFunction
     public boolean eval(final Context context) {
         final ContainerState ps = context.state().containerStates()[0];
         final int numEdge = context.board().topology().edges().size();
-        if (this.typeRegion.equals(RegionTypeStatic.Vertices)) {
+        if (this.typeRegion == RegionTypeStatic.Vertices) {
             for (int i = 0; i < numEdge; ++i) {
                 if (!ps.isResolvedEdges(i)) {
                     return true;

@@ -6,7 +6,7 @@ package supplementary;
 
 import language.grammar.Grammar;
 import main.StringRoutines;
-import main.grammar.Symbol;
+import grammar.Symbol;
 
 import java.util.ArrayList;
 import java.util.List;

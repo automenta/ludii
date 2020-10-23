@@ -9,7 +9,7 @@ import annotations.Opt;
 import game.Game;
 import game.equipment.other.Regions;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
+import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import util.Context;
 
@@ -38,7 +38,7 @@ public class OwnRegionsCount extends HeuristicTerm
                 sumCounts += context.containerState(0).countCell(site);
             }
         }
-        return (float)sumCounts;
+        return sumCounts;
     }
     
     @Override

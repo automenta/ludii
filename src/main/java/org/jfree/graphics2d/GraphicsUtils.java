@@ -48,9 +48,9 @@ public final class GraphicsUtils
     
     public static GeneralPath createPolygon(final int[] xPoints, final int[] yPoints, final int nPoints, final boolean close) {
         final GeneralPath p = new GeneralPath();
-        p.moveTo((float)xPoints[0], (float)yPoints[0]);
+        p.moveTo(xPoints[0], yPoints[0]);
         for (int i = 1; i < nPoints; ++i) {
-            p.lineTo((float)xPoints[i], (float)yPoints[i]);
+            p.lineTo(xPoints[i], yPoints[i]);
         }
         if (close) {
             p.closePath();
@@ -70,8 +70,8 @@ public final class GraphicsUtils
         final Hashtable properties = new Hashtable();
         final String[] keys = img.getPropertyNames();
         if (keys != null) {
-            for (int i = 0; i < keys.length; ++i) {
-                properties.put(keys[i], img.getProperty(keys[i]));
+            for (String key : keys) {
+                properties.put(key, img.getProperty(key));
             }
         }
         final BufferedImage result = new BufferedImage(cm, raster, isAlphaPremultiplied, properties);

@@ -16,10 +16,10 @@ public class No extends BaseBooleanFunction
     
     public static BooleanFunction construct(final NoType noType, final RoleType playerFn) {
         switch (noType) {
-            case Moves: {
+            case Moves -> {
                 return new NoMoves(playerFn);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("No(): A NoType is not implemented.");
             }
         }

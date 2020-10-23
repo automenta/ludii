@@ -104,105 +104,79 @@ public class DeveloperGUI
         g2d.setStroke(new BasicStroke(2.0f, 0, 1));
         final List<TopologyElement> allGraphElementsToDraw = new ArrayList<>();
         if (SettingsVC.drawCornerCells) {
-            for (final TopologyElement v : graph.corners(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.corners(SiteType.Cell));
         }
         g2d.setColor(new Color(255, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCornerConcaveCells) {
-            for (final TopologyElement v : graph.cornersConcave(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.cornersConcave(SiteType.Cell));
         }
         g2d.setColor(new Color(255, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCornerConvexCells) {
-            for (final TopologyElement v : graph.cornersConvex(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.cornersConvex(SiteType.Cell));
         }
         g2d.setColor(new Color(255, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawOuterCells) {
-            for (final TopologyElement v : graph.outer(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.outer(SiteType.Cell));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawMajorCells) {
-            for (final TopologyElement v : graph.major(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.major(SiteType.Cell));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawMinorCells) {
-            for (final TopologyElement v : graph.minor(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.minor(SiteType.Cell));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawPerimeterCells) {
-            for (final TopologyElement v : graph.perimeter(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.perimeter(SiteType.Cell));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawInnerCells) {
-            for (final TopologyElement v : graph.inner(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.inner(SiteType.Cell));
         }
         g2d.setColor(new Color(127, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawTopCells) {
-            for (final TopologyElement v : graph.top(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.top(SiteType.Cell));
         }
         g2d.setColor(new Color(0, 127, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawBottomCells) {
-            for (final TopologyElement v : graph.bottom(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.bottom(SiteType.Cell));
         }
         g2d.setColor(new Color(0, 0, 127, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawLeftCells) {
-            for (final TopologyElement v : graph.left(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.left(SiteType.Cell));
         }
         g2d.setColor(new Color(255, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawRightCells) {
-            for (final TopologyElement v : graph.right(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.right(SiteType.Cell));
         }
         g2d.setColor(new Color(255, 0, 255, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCenterCells) {
-            for (final TopologyElement v : graph.centre(SiteType.Cell)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.centre(SiteType.Cell));
         }
         g2d.setColor(new Color(0, 127, 127, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
@@ -215,9 +189,7 @@ public class DeveloperGUI
             final String DirectionName = entry.getKey().uniqueName().toString();
             if (SettingsVC.drawSideCells.containsKey(DirectionName) && SettingsVC.drawSideCells.get(DirectionName)) {
                 try {
-                    for (final TopologyElement c : entry.getValue()) {
-                        allGraphElementsToDraw.add(c);
-                    }
+                    allGraphElementsToDraw.addAll(entry.getValue());
                 }
                 catch (Exception ex) {}
             }
@@ -226,105 +198,79 @@ public class DeveloperGUI
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCornerVertices) {
-            for (final TopologyElement v : graph.corners(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.corners(SiteType.Vertex));
         }
         g2d.setColor(new Color(255, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCornerConcaveVertices) {
-            for (final TopologyElement v : graph.cornersConcave(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.cornersConcave(SiteType.Vertex));
         }
         g2d.setColor(new Color(255, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCornerConvexVertices) {
-            for (final TopologyElement v : graph.cornersConvex(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.cornersConvex(SiteType.Vertex));
         }
         g2d.setColor(new Color(255, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawMajorVertices) {
-            for (final TopologyElement v : graph.major(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.major(SiteType.Vertex));
         }
         g2d.setColor(new Color(255, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawMinorVertices) {
-            for (final TopologyElement v : graph.minor(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.minor(SiteType.Vertex));
         }
         g2d.setColor(new Color(255, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawPerimeterVertices) {
-            for (final TopologyElement v : graph.perimeter(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.perimeter(SiteType.Vertex));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawOuterVertices) {
-            for (final TopologyElement v : graph.outer(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.outer(SiteType.Vertex));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawInnerVertices) {
-            for (final TopologyElement v : graph.inner(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.inner(SiteType.Vertex));
         }
         g2d.setColor(new Color(127, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawTopVertices) {
-            for (final TopologyElement v : graph.top(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.top(SiteType.Vertex));
         }
         g2d.setColor(new Color(0, 127, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawBottomVertices) {
-            for (final TopologyElement v : graph.bottom(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.bottom(SiteType.Vertex));
         }
         g2d.setColor(new Color(0, 0, 127, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawLeftVertices) {
-            for (final TopologyElement v : graph.left(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.left(SiteType.Vertex));
         }
         g2d.setColor(new Color(255, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawRightVertices) {
-            for (final TopologyElement v : graph.right(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.right(SiteType.Vertex));
         }
         g2d.setColor(new Color(255, 0, 255, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCenterVertices) {
-            for (final TopologyElement v : graph.centre(SiteType.Vertex)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.centre(SiteType.Vertex));
         }
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         if (SettingsVC.drawPhasesVertices) {
@@ -336,9 +282,7 @@ public class DeveloperGUI
             final String DirectionName = entry.getKey().uniqueName().toString();
             if (SettingsVC.drawSideVertices.containsKey(DirectionName) && SettingsVC.drawSideVertices.get(DirectionName)) {
                 try {
-                    for (final TopologyElement v2 : entry.getValue()) {
-                        allGraphElementsToDraw.add(v2);
-                    }
+                    allGraphElementsToDraw.addAll(entry.getValue());
                 }
                 catch (Exception ex2) {}
             }
@@ -349,9 +293,7 @@ public class DeveloperGUI
         for (int i = 0; i < SettingsVC.drawColumnsCells.size(); ++i) {
             if (SettingsVC.drawColumnsCells.get(i)) {
                 try {
-                    for (final TopologyElement v3 : graph.columns(SiteType.Cell).get(i)) {
-                        allGraphElementsToDraw.add(v3);
-                    }
+                    allGraphElementsToDraw.addAll(graph.columns(SiteType.Cell).get(i));
                 }
                 catch (Exception ex3) {}
             }
@@ -362,9 +304,7 @@ public class DeveloperGUI
         for (int i = 0; i < SettingsVC.drawColumnsVertices.size(); ++i) {
             if (SettingsVC.drawColumnsVertices.get(i)) {
                 try {
-                    for (final TopologyElement v3 : graph.columns(SiteType.Vertex).get(i)) {
-                        allGraphElementsToDraw.add(v3);
-                    }
+                    allGraphElementsToDraw.addAll(graph.columns(SiteType.Vertex).get(i));
                 }
                 catch (Exception ex4) {}
             }
@@ -375,9 +315,7 @@ public class DeveloperGUI
         for (int i = 0; i < SettingsVC.drawRowsCells.size(); ++i) {
             if (SettingsVC.drawRowsCells.get(i)) {
                 try {
-                    for (final TopologyElement v3 : graph.rows(SiteType.Cell).get(i)) {
-                        allGraphElementsToDraw.add(v3);
-                    }
+                    allGraphElementsToDraw.addAll(graph.rows(SiteType.Cell).get(i));
                 }
                 catch (Exception ex5) {}
             }
@@ -388,9 +326,7 @@ public class DeveloperGUI
         for (int i = 0; i < SettingsVC.drawRowsVertices.size(); ++i) {
             if (SettingsVC.drawRowsVertices.get(i)) {
                 try {
-                    for (final TopologyElement v3 : graph.rows(SiteType.Vertex).get(i)) {
-                        allGraphElementsToDraw.add(v3);
-                    }
+                    allGraphElementsToDraw.addAll(graph.rows(SiteType.Vertex).get(i));
                 }
                 catch (Exception ex6) {}
             }
@@ -399,153 +335,115 @@ public class DeveloperGUI
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCornerEdges) {
-            for (final TopologyElement v : graph.corners(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.corners(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCornerConcaveEdges) {
-            for (final TopologyElement v : graph.cornersConcave(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.cornersConcave(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCornerConvexEdges) {
-            for (final TopologyElement v : graph.cornersConvex(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.cornersConvex(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawMajorEdges) {
-            for (final TopologyElement v : graph.major(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.major(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawMinorEdges) {
-            for (final TopologyElement v : graph.minor(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.minor(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawAxialEdges) {
-            for (final TopologyElement v : graph.axial(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.axial(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawHorizontalEdges) {
-            for (final TopologyElement v : graph.horizontal(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.horizontal(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawVerticalEdges) {
-            for (final TopologyElement v : graph.vertical(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.vertical(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawAngledEdges) {
-            for (final TopologyElement v : graph.angled(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.angled(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawSlashEdges) {
-            for (final TopologyElement v : graph.slash(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.slash(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawSloshEdges) {
-            for (final TopologyElement v : graph.slosh(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.slosh(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawPerimeterEdges) {
-            for (final TopologyElement v : graph.perimeter(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.perimeter(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawOuterEdges) {
-            for (final TopologyElement v : graph.outer(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.outer(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawInnerEdges) {
-            for (final TopologyElement v : graph.inner(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.inner(SiteType.Edge));
         }
         g2d.setColor(new Color(127, 0, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawTopEdges) {
-            for (final TopologyElement v : graph.top(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.top(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 127, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawBottomEdges) {
-            for (final TopologyElement v : graph.bottom(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.bottom(SiteType.Edge));
         }
         g2d.setColor(new Color(0, 0, 127, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawLeftEdges) {
-            for (final TopologyElement v : graph.left(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.left(SiteType.Edge));
         }
         g2d.setColor(new Color(255, 255, 0, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawRightEdges) {
-            for (final TopologyElement v : graph.right(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.right(SiteType.Edge));
         }
         g2d.setColor(new Color(255, 0, 255, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
         allGraphElementsToDraw.clear();
         if (SettingsVC.drawCentreEdges) {
-            for (final TopologyElement v : graph.centre(SiteType.Edge)) {
-                allGraphElementsToDraw.add(v);
-            }
+            allGraphElementsToDraw.addAll(graph.centre(SiteType.Edge));
         }
         g2d.setColor(new Color(255, 0, 255, 125));
         drawGraphElementList(g2d, allGraphElementsToDraw, containerStyle);
@@ -558,9 +456,7 @@ public class DeveloperGUI
             final String DirectionName = entry.getKey().uniqueName().toString();
             if (SettingsVC.drawSideEdges.containsKey(DirectionName) && SettingsVC.drawSideEdges.get(DirectionName)) {
                 try {
-                    for (final TopologyElement c : entry.getValue()) {
-                        allGraphElementsToDraw.add(c);
-                    }
+                    allGraphElementsToDraw.addAll(entry.getValue());
                 }
                 catch (Exception ex7) {}
             }
@@ -570,9 +466,9 @@ public class DeveloperGUI
     }
     
     private static void drawGraphElementList(final Graphics2D g2d, final List<TopologyElement> graphElementList, final ContainerStyle containerStyle) {
-        for (int i = 0; i < graphElementList.size(); ++i) {
+        for (TopologyElement topologyElement : graphElementList) {
             final int circleSize = 20;
-            final Point drawPosn = containerStyle.screenPosn(graphElementList.get(i).centroid());
+            final Point drawPosn = containerStyle.screenPosn(topologyElement.centroid());
             g2d.drawOval(drawPosn.x - 10, drawPosn.y - 10, 20, 20);
         }
     }
@@ -583,7 +479,7 @@ public class DeveloperGUI
             final List<List<TopologyElement>> phases = context.topology().phases(type);
             for (int phase = 0; phase < phases.size(); ++phase) {
                 for (final TopologyElement elementToPrint : phases.get(phase)) {
-                    final String str = phase + "";
+                    final String str = String.valueOf(phase);
                     final Point drawPosn = containerStyle.screenPosn(elementToPrint.centroid());
                     g2d.drawString(str, drawPosn.x, drawPosn.y);
                 }
@@ -599,7 +495,7 @@ public class DeveloperGUI
             final int[] distance = context.board().topology().distancesToOtherSite(type)[element.index()];
             for (int i = 0; i < distance.length; ++i) {
                 final TopologyElement elementToPrint = context.board().topology().getGraphElement(type, i);
-                final String str = distance[i] + "";
+                final String str = String.valueOf(distance[i]);
                 final Rectangle2D bounds = g2d.getFontMetrics().getStringBounds(str, g2d);
                 final Point drawPosn = containerStyle.screenPosn(elementToPrint.centroid());
                 g2d.drawString(str, (int)(drawPosn.x - bounds.getWidth()), (int)(drawPosn.y + bounds.getHeight()));

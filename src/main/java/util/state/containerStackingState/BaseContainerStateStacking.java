@@ -203,7 +203,7 @@ public abstract class BaseContainerStateStacking extends BaseContainerState
         if (type == SiteType.Cell || this.container().index() != 0 || type == null) {
             return this.isEmptyCell(site);
         }
-        if (type.equals(SiteType.Edge)) {
+        if (type == SiteType.Edge) {
             return this.isEmptyEdge(site);
         }
         return this.isEmptyVertex(site);

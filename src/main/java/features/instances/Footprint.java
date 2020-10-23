@@ -4,7 +4,7 @@
 
 package features.instances;
 
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 
 public final class Footprint
 {

@@ -95,7 +95,7 @@ public final class DirectionCapture extends Effect
         return moves;
     }
     
-    private final boolean isTarget(final Context context, final int location) {
+    private boolean isTarget(final Context context, final int location) {
         context.setTo(location);
         return this.targetRule.eval(context);
     }

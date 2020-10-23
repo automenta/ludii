@@ -7,7 +7,7 @@ package metadata.ai.heuristics.terms;
 import annotations.Name;
 import annotations.Opt;
 import game.Game;
-import main.collections.FVector;
+import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import util.Context;
 

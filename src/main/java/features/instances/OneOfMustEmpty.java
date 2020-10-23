@@ -5,7 +5,7 @@
 package features.instances;
 
 import game.types.board.SiteType;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import util.state.State;
 import util.state.containerState.ContainerState;
 
@@ -26,19 +26,19 @@ public final class OneOfMustEmpty implements BitwiseTest
         final ContainerState container = state.containerStates()[0];
         ChunkSet chunkSet = null;
         switch (this.graphElementType) {
-            case Cell: {
+            case Cell -> {
                 chunkSet = container.emptyChunkSetCell();
                 break;
             }
-            case Vertex: {
+            case Vertex -> {
                 chunkSet = container.emptyChunkSetVertex();
                 break;
             }
-            case Edge: {
+            case Edge -> {
                 chunkSet = container.emptyChunkSetEdge();
                 break;
             }
-            default: {
+            default -> {
                 chunkSet = null;
                 break;
             }

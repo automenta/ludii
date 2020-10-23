@@ -10,7 +10,7 @@ import game.Game;
 import game.equipment.component.Component;
 import game.equipment.container.Container;
 import main.StringRoutines;
-import main.collections.FVector;
+import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import metadata.ai.misc.Pair;
 import util.Context;
@@ -79,7 +79,7 @@ public class Material extends HeuristicTerm
         final List<? extends Location>[] pieces = owned.positions(player);
         for (int i = 0; i < pieces.length; ++i) {
             final int compIdx = owned.reverseMap(player, i);
-            featureVector.addToEntry(compIdx, (float)pieces[i].size());
+            featureVector.addToEntry(compIdx, pieces[i].size());
         }
         if (this.handIndices != null) {
             final List<? extends Location>[] neutralPieces = owned.positions(0);
@@ -88,7 +88,7 @@ public class Material extends HeuristicTerm
                 for (final Location pos : neutralPieces[j]) {
                     final int site = pos.site();
                     if (context.game().equipment().containerId()[site] == this.handIndices[player]) {
-                        featureVector.addToEntry(compIdx2, (float)context.state().containerStates()[this.handIndices[player]].countCell(site));
+                        featureVector.addToEntry(compIdx2, context.state().containerStates()[this.handIndices[player]].countCell(site));
                     }
                 }
             }
@@ -149,7 +149,7 @@ public class Material extends HeuristicTerm
         if (this.weight != 1.0f) {
             sb.append(" weight:" + this.weight);
         }
-        if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && this.pieceWeightNames[0].length() > 0)) {
+        if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && !this.pieceWeightNames[0].isEmpty())) {
             sb.append(" pieceWeights:{\n");
             for (int i = 0; i < this.pieceWeightNames.length; ++i) {
                 sb.append("        (pair " + StringRoutines.quote(this.pieceWeightNames[i]) + " " + this.gameAgnosticWeightsArray[i] + ")\n");
@@ -165,7 +165,7 @@ public class Material extends HeuristicTerm
         boolean shouldPrint = false;
         boolean haveRelevantPieces = false;
         final StringBuilder pieceWeightsSb = new StringBuilder();
-        if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && this.pieceWeightNames[0].length() > 0)) {
+        if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && !this.pieceWeightNames[0].isEmpty())) {
             for (int i = 0; i < this.pieceWeightNames.length; ++i) {
                 if (Math.abs(this.weight * this.gameAgnosticWeightsArray[i]) >= threshold) {
                     pieceWeightsSb.append("        (pair " + StringRoutines.quote(this.pieceWeightNames[i]) + " " + this.gameAgnosticWeightsArray[i] + ")\n");

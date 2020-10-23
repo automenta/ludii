@@ -66,7 +66,7 @@ public final class ActionForfeit extends BaseAction
             return false;
         }
         final ActionForfeit other = (ActionForfeit)obj;
-        return this.player.equals(other.player);
+        return this.player == other.player;
     }
     
     @Override

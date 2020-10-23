@@ -11,7 +11,7 @@ import game.equipment.other.Map;
 import game.types.board.SiteType;
 import game.types.board.StoreType;
 import graphics.ImageProcessing;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import topology.Topology;
 import util.Context;
 import util.SettingsColour;
@@ -43,7 +43,7 @@ public class MancalaComponents extends ContainerComponents
         final Rectangle placement = this.boardStyle.placement();
         final int cellRadiusPixels = this.boardStyle.cellRadiusPixels();
         final int indexHoleBL;
-        final boolean withStore = (indexHoleBL = ((!(context.board() instanceof MancalaBoard) || !((MancalaBoard)context.board()).storeType().equals(StoreType.None)) ? 1 : 0)) != 0;
+        final boolean withStore = (indexHoleBL = ((!(context.board() instanceof MancalaBoard) || ((MancalaBoard) context.board()).storeType() != StoreType.None) ? 1 : 0)) != 0;
         final Point ptA = this.boardStyle.screenPosn(this.boardStyle.topology().vertices().get(indexHoleBL).centroid());
         final Point ptB = this.boardStyle.screenPosn(this.boardStyle.topology().vertices().get(indexHoleBL + 1).centroid());
         final double unit = MathRoutines.distance(ptA, ptB);
@@ -72,7 +72,7 @@ public class MancalaComponents extends ContainerComponents
             final int cx = pt.x;
             final int cy = pt.y;
             final int swRing = (int)(this.boardStyle.cellRadius() * placement.width / 10.0);
-            final BasicStroke strokeRink = new BasicStroke((float)swRing, 0, 0);
+            final BasicStroke strokeRink = new BasicStroke(swRing, 0, 0);
             g2d.setStroke(strokeRink);
             if (context.game().metadata().graphics().showPlayerHoles()) {
                 for (int i = 0; i < context.players().size(); ++i) {

@@ -15,10 +15,10 @@ public class Was extends BaseBooleanFunction
     
     public static BooleanFunction construct(final WasType wasType) {
         switch (wasType) {
-            case Pass: {
+            case Pass -> {
                 return new WasPass();
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Was(): A wasType is not implemented.");
             }
         }

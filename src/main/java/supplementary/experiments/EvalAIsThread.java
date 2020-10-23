@@ -6,7 +6,7 @@ package supplementary.experiments;
 
 import game.Game;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.ListUtils;
+import collections.ListUtils;
 import manager.Manager;
 import manager.ai.AIDetails;
 import manager.referee.Referee;

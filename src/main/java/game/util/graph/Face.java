@@ -6,8 +6,8 @@ package game.util.graph;
 
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
-import main.math.MathRoutines;
-import main.math.Point3D;
+import math.MathRoutines;
+import math.Point3D;
 
 import java.util.ArrayList;
 import java.util.BitSet;

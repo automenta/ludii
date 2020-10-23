@@ -21,7 +21,7 @@ public class PloyDesign extends BoardDesign
     @Override
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
-        this.setStrokesAndColours(context, new Color(102, 0, 153), null, new Color(153, 0, 204), null, null, null, null, (float)(int)(0.01 * this.boardStyle.placement().width + 0.5), (float)(int)(0.01 * this.boardStyle.placement().width + 0.5));
+        this.setStrokesAndColours(context, new Color(102, 0, 153), null, new Color(153, 0, 204), null, null, null, null, (int)(0.01 * this.boardStyle.placement().width + 0.5), (int)(0.01 * this.boardStyle.placement().width + 0.5));
         this.drawBoardOutline(g2d);
         this.drawInnerCellEdges(g2d, context);
         this.drawOuterCellEdges(g2d, context);

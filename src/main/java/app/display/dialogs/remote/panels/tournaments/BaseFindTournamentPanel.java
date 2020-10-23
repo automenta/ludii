@@ -31,15 +31,14 @@ public abstract class BaseFindTournamentPanel extends BaseFindPanel
         model.addColumn("Host");
         model.addColumn("#");
         model.addColumn("Details");
-        for (int i = 0; i < joinableGames.length; ++i) {
+        for (String joinableGame : joinableGames) {
             try {
-                final String gameDetails = joinableGames[i];
+                final String gameDetails = joinableGame;
                 final String[] splitDetails = gameDetails.split("NEXT_COL");
                 String playerTimeString = "";
                 if (Integer.parseInt(splitDetails[6]) % 60 == 0) {
                     playerTimeString = Integer.parseInt(splitDetails[6]) / 60 + ":00";
-                }
-                else {
+                } else {
                     playerTimeString = Integer.parseInt(splitDetails[6]) / 60 + ":" + Integer.parseInt(splitDetails[6]) % 60;
                 }
                 if (playerTimeString.equals("0:00")) {
@@ -48,8 +47,7 @@ public abstract class BaseFindTournamentPanel extends BaseFindPanel
                 String roundTimeString = "";
                 if (Integer.parseInt(splitDetails[7]) % 60 == 0) {
                     roundTimeString = Integer.parseInt(splitDetails[7]) / 60 + ":00";
-                }
-                else {
+                } else {
                     roundTimeString = Integer.parseInt(splitDetails[7]) / 60 + ":" + Integer.parseInt(splitDetails[7]) % 60;
                 }
                 if (roundTimeString.equals("0:00")) {
@@ -72,9 +70,9 @@ public abstract class BaseFindTournamentPanel extends BaseFindPanel
                 info.setNotes(splitDetails[13]);
                 this.tableStoredInformation.add(info);
                 final String numberJoinedPlayers = splitDetails[9].split(":")[0];
-                model.addRow(new Object[] { splitDetails[0], splitDetails[2].substring(0, splitDetails[2].length() - 4), splitDetails[1], splitDetails[4], numberJoinedPlayers, "Details" });
+                model.addRow(new Object[]{splitDetails[0], splitDetails[2].substring(0, splitDetails[2].length() - 4), splitDetails[1], splitDetails[4], numberJoinedPlayers, "Details"});
+            } catch (Exception ex) {
             }
-            catch (Exception ex) {}
         }
         return model;
     }

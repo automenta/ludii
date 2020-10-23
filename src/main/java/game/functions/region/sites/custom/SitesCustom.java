@@ -45,8 +45,8 @@ public final class SitesCustom extends BaseRegionFunction
         if (this.precomputedRegion != null) {
             return this.precomputedRegion.contains(location);
         }
-        for (int i = 0; i < this.sitesFn.length; ++i) {
-            if (this.sitesFn[i] != null && location == this.sitesFn[i].eval(context)) {
+        for (IntFunction intFunction : this.sitesFn) {
+            if (intFunction != null && location == intFunction.eval(context)) {
                 return true;
             }
         }

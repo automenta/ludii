@@ -94,12 +94,12 @@ public class ContainerUtil
     }
     
     private static void normaliseGraphElementsBetween(final ArrayList<? extends TopologyElement> graphElements, final double min, final double max) {
-        for (int i = 0; i < graphElements.size(); ++i) {
-            final double oldX = graphElements.get(i).centroid().getX();
-            final double oldY = graphElements.get(i).centroid().getY();
+        for (TopologyElement graphElement : graphElements) {
+            final double oldX = graphElement.centroid().getX();
+            final double oldY = graphElement.centroid().getY();
             final double newX = (oldX - min) / (max - min);
             final double newY = (oldY - min) / (max - min);
-            graphElements.get(i).setCentroid(newX, newY, 0.0);
+            graphElement.setCentroid(newX, newY, 0.0);
         }
     }
     
@@ -132,12 +132,12 @@ public class ContainerUtil
         final double currentMidY = (maxY + minY) / 2.0;
         final double differenceX = currentMidX - 0.5;
         final double differenceY = currentMidY - 0.5;
-        for (int i = 0; i < graphElements.size(); ++i) {
-            final double oldX = graphElements.get(i).centroid().getX();
-            final double oldY = graphElements.get(i).centroid().getY();
+        for (TopologyElement graphElement : graphElements) {
+            final double oldX = graphElement.centroid().getX();
+            final double oldY = graphElement.centroid().getY();
             final double newX = oldX - differenceX;
             final double newY = oldY - differenceY;
-            graphElements.get(i).setCentroid(newX, newY, 0.0);
+            graphElement.setCentroid(newX, newY, 0.0);
         }
     }
     
@@ -179,7 +179,7 @@ public class ContainerUtil
                 }
                 else if (componentStackType == PieceStackType.Ring) {
                     int cellRadiusStack = cellRadiusPixels;
-                    if (siteType.equals(SiteType.Cell)) {
+                    if (siteType == SiteType.Cell) {
                         cellRadiusStack = (int)(GraphUtil.calculateCellRadius(container.topology().cells().get(site)) * Bridge.getContainerStyle(container.index()).placement().getWidth());
                     }
                     int stackSizeNew = stackSize;
@@ -248,8 +248,8 @@ public class ContainerUtil
             final Cell neighbour = topology.cells().get(step.to().id());
             if (vertex.orthogonal().contains(neighbour)) {
                 boolean neighbourInRegion = false;
-                for (int j = 0; j < surroundedRegions.size(); ++j) {
-                    if (surroundedRegions.get(j).site == neighbour.index()) {
+                for (MetadataImageInfo surroundedRegion : surroundedRegions) {
+                    if (surroundedRegion.site == neighbour.index()) {
                         neighbourInRegion = true;
                     }
                 }

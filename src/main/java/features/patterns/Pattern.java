@@ -12,6 +12,7 @@ import features.graph_search.Path;
 import gnu.trove.list.array.TFloatArrayList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Pattern
@@ -33,9 +34,7 @@ public class Pattern
         this.allowsReflection = true;
         this.matchMoverDirection = false;
         this.featureElements = new ArrayList<>(elements.length);
-        for (final FeatureElement element : elements) {
-            this.featureElements.add(element);
-        }
+        this.featureElements.addAll(Arrays.asList(elements));
     }
     
     public Pattern(final List<FeatureElement> elements) {
@@ -76,7 +75,7 @@ public class Pattern
                     currIdx += "rots=all,".length();
                 }
                 else {
-                    final int rotsListEnd = string.indexOf("]", currIdx);
+                    final int rotsListEnd = string.indexOf(']', currIdx);
                     String rotsListSubstring = string.substring(currIdx, rotsListEnd + 2);
                     currIdx += rotsListSubstring.length();
                     rotsListSubstring = rotsListSubstring.substring("rots=[".length(), rotsListSubstring.length() - "],".length());
@@ -88,7 +87,7 @@ public class Pattern
                 }
             }
             else if (string.startsWith("els=", currIdx)) {
-                final int elsListEnd = string.indexOf("]", currIdx);
+                final int elsListEnd = string.indexOf(']', currIdx);
                 String elsListSubstring = string.substring(currIdx, elsListEnd + 1);
                 currIdx += elsListSubstring.length();
                 elsListSubstring = elsListSubstring.substring("els=[".length(), elsListSubstring.length() - "]".length());
@@ -166,7 +165,7 @@ public class Pattern
     public void prependStep(final int direction) {
         for (final FeatureElement element : this.featureElements) {
             if (element instanceof RelativeFeatureElement) {
-                ((RelativeFeatureElement)element).walk().prependStep((float)direction);
+                ((RelativeFeatureElement)element).walk().prependStep(direction);
             }
             else {
                 System.err.println("Warning: trying to prepend a step to an Absolute Feature Element!");

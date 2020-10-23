@@ -5,7 +5,7 @@
 package game;
 
 import game.rules.play.moves.Moves;
-import main.collections.FVector;
+import collections.FVector;
 import util.*;
 
 import java.util.List;

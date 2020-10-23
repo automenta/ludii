@@ -49,11 +49,11 @@ public class Tournament
         final int totalNumberPlayers = this.agentsToPlay.size();
         final List<int[]> matchUpsFlipped = generate(totalNumberPlayers, 2);
         this.matchUps = generate(totalNumberPlayers, 2);
-        for (int j = 0; j < this.matchUps.size(); ++j) {
-            for (int i = 0; i < this.matchUps.get(j).length / 2; ++i) {
-                final int temp = this.matchUps.get(j)[i];
-                this.matchUps.get(j)[i] = this.matchUps.get(j)[this.matchUps.get(j).length - i - 1];
-                this.matchUps.get(j)[this.matchUps.get(j).length - i - 1] = temp;
+        for (int[] up : this.matchUps) {
+            for (int i = 0; i < up.length / 2; ++i) {
+                final int temp = up[i];
+                up[i] = up[up.length - i - 1];
+                up[up.length - i - 1] = temp;
             }
         }
         this.matchUps.addAll(matchUpsFlipped);
@@ -61,7 +61,7 @@ public class Tournament
     }
     
     public void startNextTournamentGame() {
-        if (this.gamesToPlay.size() > 0 && this.matchUps.size() > 0) {
+        if (!this.gamesToPlay.isEmpty() && !this.matchUps.isEmpty()) {
             this.matchUp = this.matchUps.get(this.matchUpIndex);
             for (int i = 0; i < this.matchUp.length; ++i) {
                 final Object agent = this.agentsToPlay.get(this.matchUp[i]);
@@ -93,8 +93,8 @@ public class Tournament
         else {
             System.out.println("FINAL RESULTS SHORT");
             String finalResultsToSend = "FINAL RESULTS SHORT";
-            for (int j = 0; j < this.results.size(); ++j) {
-                final String result = Arrays.toString(this.results.get(j));
+            for (String[] strings : this.results) {
+                final String result = Arrays.toString(strings);
                 System.out.println(result);
                 finalResultsToSend += result;
             }

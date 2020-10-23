@@ -8,7 +8,7 @@ import bridge.Bridge;
 import game.equipment.component.Component;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import metadata.graphics.util.PieceStackType;
 import topology.Cell;
 import topology.TopologyElement;
@@ -49,17 +49,15 @@ public class ContainerComponents
         final int cellRadiusPixels = this.containerStyle.cellRadiusPixels();
         if (container != null && state.containerStates().length > container.index()) {
             final ContainerState cs = state.containerStates()[container.index()];
-            for (int j = 0; j < allGraphElements.size(); ++j) {
-                final TopologyElement graphElement = allGraphElements.get(j);
+            for (final TopologyElement graphElement : allGraphElements) {
                 final Point2D posn = graphElement.centroid();
-                final int site = allGraphElements.get(j).index();
+                final int site = graphElement.index();
                 int what = cs.what(site, graphElement.elementType());
                 int count = cs.count(site, graphElement.elementType());
                 if (what != 0) {
                     if (what == -1) {
                         System.out.println("** GameView.drawState(): Couldn't find item for value " + what + ".");
-                    }
-                    else {
+                    } else {
                         for (int stackSize = cs.sizeStack(site, graphElement.elementType()), level = 0; level < stackSize; ++level) {
                             double transparency = 0.0;
                             final int rotation = 0;
@@ -70,7 +68,7 @@ public class ContainerComponents
                                 int localState = cs.state(site, level, graphElement.elementType());
                                 if (component.isDie()) {
                                     final FastArrayList<Move> moves = new FastArrayList<>(context.game().moves(context).moves());
-                                    if (moves.size() > 0) {
+                                    if (!moves.isEmpty()) {
                                         final ArrayList<Action> allSameActionsOld = new ArrayList<>(moves.get(0).actions());
                                         final ArrayList<Action> allSameActionsNew = new ArrayList<>();
                                         final ArrayList<Action> allSameActionsNew2 = new ArrayList<>();
@@ -85,9 +83,9 @@ public class ContainerComponents
                                                 }
                                             }
                                         }
-                                        for (int i = 0; i < allSameActionsNew.size(); ++i) {
-                                            if (allSameActionsNew.get(i) instanceof ActionUpdateDice) {
-                                                allSameActionsNew2.add(allSameActionsNew.get(i));
+                                        for (Action action : allSameActionsNew) {
+                                            if (action instanceof ActionUpdateDice) {
+                                                allSameActionsNew2.add(action);
                                             }
                                         }
                                         for (final Action a : allSameActionsNew2) {
@@ -101,17 +99,17 @@ public class ContainerComponents
                                 if (SettingsVC.selectedLocation.site() == site && SettingsVC.selectedLocation.level() == level && SettingsVC.selectedLocation.siteType() == graphElement.elementType()) {
                                     transparency = 0.5;
                                 }
-                                int imageSize = (int)(cellRadiusPixels * 2 * this.pieceScale() * Bridge.getComponentStyle(component.index()).scale());
+                                int imageSize = (int) (cellRadiusPixels * 2 * this.pieceScale() * Bridge.getComponentStyle(component.index()).scale());
                                 if (container.index() > 0 && context.metadata().graphics().noHandScale()) {
-                                    imageSize /= (int)Bridge.getComponentStyle(component.index()).scale();
+                                    imageSize /= (int) Bridge.getComponentStyle(component.index()).scale();
                                 }
                                 imageSize = Math.max(imageSize, 2);
                                 final PieceStackType componentStackType = context.metadata().graphics().stackType(container, context, site, graphElement.elementType(), localState);
                                 final Point2D.Double stackOffset = ContainerUtil.calculateStackOffset(context, container, componentStackType, cellRadiusPixels, level, site, graphElement.elementType(), stackSize, localState);
                                 final Point point = drawPosn;
-                                point.x += (int)stackOffset.x;
+                                point.x += (int) stackOffset.x;
                                 final Point point2 = drawPosn;
-                                point2.y += (int)stackOffset.y;
+                                point2.y += (int) stackOffset.y;
                                 final Point point3 = drawPosn;
                                 point3.x -= imageSize / 2;
                                 final Point point4 = drawPosn;
@@ -129,8 +127,7 @@ public class ContainerComponents
                                     Location location;
                                     if (SettingsVC.pieceBeingDragged) {
                                         location = SettingsVC.selectedLocation;
-                                    }
-                                    else {
+                                    } else {
                                         location = SettingsVC.animatedLocation;
                                     }
                                     if (location.equalsLoc(new FullLocation(site, level, graphElement.elementType())) || (location.site() == site && location.siteType() == graphElement.elementType() && location.level() < level && !componentStackType.midStackSelectionValid())) {

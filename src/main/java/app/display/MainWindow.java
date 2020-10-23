@@ -631,7 +631,7 @@ public final class MainWindow extends JPanel implements MouseListener, MouseMoti
     }
     
     public static void setTemporaryMessage(final String s) {
-        if (s.length() == 0) {
+        if (s.isEmpty()) {
             MainWindow.temporaryMessage = "";
             MainWindow.volatileMessage = "";
         }

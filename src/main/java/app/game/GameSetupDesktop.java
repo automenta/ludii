@@ -14,8 +14,8 @@ import app.loading.GameLoading;
 import app.menu.MainMenu;
 import app.sandbox.SandboxUtil;
 import game.Game;
-import main.grammar.Description;
-import main.grammar.Report;
+import grammar.Description;
+import grammar.Report;
 import manager.Manager;
 import manager.ai.AIDetails;
 import manager.ai.AIMenuName;
@@ -47,7 +47,6 @@ public class GameSetupDesktop
                 if (DesktopApp.view() != null) {
                     SpinnerFunctions.startSpinner();
                 }
-                return;
             });
         }
         catch (Exception ex) {}
@@ -84,7 +83,7 @@ public class GameSetupDesktop
             SettingsManager.canSendToDatabase = true;
             GameLoading.loadGameSpecificPreference();
             System.out.println("\nCompiled " + game.name() + " successfully.");
-            if (!DesktopApp.savedStatusTabString.equals("")) {
+            if (!DesktopApp.savedStatusTabString.isEmpty()) {
                 DesktopApp.playerApp().addTextToStatusPanel("\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\n");
             }
             DesktopApp.playerApp().addTextToStatusPanel("Compiled " + game.name() + " successfully.\n");
@@ -150,7 +149,7 @@ public class GameSetupDesktop
         MainWindow.getPanels().clear();
         MainWindow.tabPanel().resetTabs();
         final String sandboxError = SandboxUtil.isSandboxAllowed(game);
-        if (!sandboxError.equals("") && SettingsVC.sandboxMode) {
+        if (!sandboxError.isEmpty() && SettingsVC.sandboxMode) {
             SettingsVC.sandboxMode = false;
             MainWindow.setTemporaryMessage(sandboxError);
         }
@@ -168,10 +167,9 @@ public class GameSetupDesktop
     
     public static void setupNetworkGame(final String gameName, final List<String> gameOptions, final String inputLine) {
         try {
-            if (!inputLine.equals("") && Integer.parseInt(inputLine) > 0) {
+            if (!inputLine.isEmpty() && Integer.parseInt(inputLine) > 0) {
                 final List<String> formattedGameOptions = new ArrayList<>();
-                for (int i = 0; i < gameOptions.size(); ++i) {
-                    String formattedString = gameOptions.get(i);
+                for (String formattedString : gameOptions) {
                     formattedString = formattedString.replaceAll("_", " ");
                     formattedString = formattedString.replaceAll("\\|", "/");
                     formattedGameOptions.add(formattedString);
@@ -202,7 +200,7 @@ public class GameSetupDesktop
             }
         }
         catch (Exception E) {
-            if (inputLine.length() > 0) {
+            if (!inputLine.isEmpty()) {
                 Manager.app.addTextToStatusPanel(inputLine);
             }
         }

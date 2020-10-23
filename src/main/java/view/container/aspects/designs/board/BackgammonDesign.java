@@ -30,7 +30,7 @@ public class BackgammonDesign extends BoardDesign
     public String createSVGImage(final Context context) {
         this.boardPlacement.customiseGraphElementLocations(context);
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
-        this.setStrokesAndColours(context, new Color(120, 190, 240), new Color(125, 75, 0), new Color(210, 230, 255), null, null, null, new Color(0, 0, 0), (float)Math.max(1, (int)(0.0025 * this.boardStyle.placement().width + 0.5)), (float)(int)(2.0 * Math.max(1, (int)(0.0025 * this.boardStyle.placement().width + 0.5))));
+        this.setStrokesAndColours(context, new Color(120, 190, 240), new Color(125, 75, 0), new Color(210, 230, 255), null, null, null, new Color(0, 0, 0), Math.max(1, (int)(0.0025 * this.boardStyle.placement().width + 0.5)), (int)(2.0 * Math.max(1, (int)(0.0025 * this.boardStyle.placement().width + 0.5))));
         this.drawBackgammonBoard(g2d);
         return g2d.getSVGDocument();
     }
@@ -78,22 +78,22 @@ public class BackgammonDesign extends BoardDesign
                     final int by2 = dy;
                     final int by3 = by2 - (int)(4.5 * unit + 0.5);
                     if (counter % 2 == 0) {
-                        pathD.moveTo((float)tx0, (float)ty0);
-                        pathD.lineTo((float)(tx0 + unit), (float)ty0);
+                        pathD.moveTo(tx0, ty0);
+                        pathD.lineTo((tx0 + unit), ty0);
                         pathD.lineTo(tx0 + 0.5 * unit, ty2);
                         pathD.closePath();
-                        pathL.moveTo((float)bx2, (float)by2);
-                        pathL.lineTo((float)(bx2 + unit), (float)by2);
+                        pathL.moveTo(bx2, by2);
+                        pathL.lineTo((bx2 + unit), by2);
                         pathL.lineTo(bx2 + 0.5 * unit, by3);
                         pathL.closePath();
                     }
                     else {
-                        pathL.moveTo((float)tx0, (float)ty0);
-                        pathL.lineTo((float)(tx0 + unit), (float)ty0);
+                        pathL.moveTo(tx0, ty0);
+                        pathL.lineTo((tx0 + unit), ty0);
                         pathL.lineTo(tx0 + 0.5 * unit, ty2);
                         pathL.closePath();
-                        pathD.moveTo((float)bx2, (float)by2);
-                        pathD.lineTo((float)(bx2 + unit), (float)by2);
+                        pathD.moveTo(bx2, by2);
+                        pathD.lineTo((bx2 + unit), by2);
                         pathD.lineTo(bx2 + 0.5 * unit, by3);
                         pathD.closePath();
                     }

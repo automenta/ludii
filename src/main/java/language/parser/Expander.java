@@ -7,9 +7,9 @@ package language.parser;
 import exception.UnusedOptionException;
 import main.FileHandling;
 import main.StringRoutines;
-import main.grammar.Description;
-import main.grammar.Report;
-import main.options.*;
+import grammar.Description;
+import grammar.Report;
+import options.*;
 
 import java.io.File;
 import java.net.URL;
@@ -72,11 +72,11 @@ public class Expander
     
     static String cleanUp(final String strIn, final Report report) {
         String str;
-        for (str = strIn, str = str.replaceAll("\n", " "), str = str.replaceAll("\r", " "), str = str.replaceAll("\t", " "); str.contains("    "); str = str.replaceAll("    ", " ")) {}
+        for (str = strIn, str = str.replaceAll("\n", " "), str = str.replaceAll("\r", " "), str = str.replaceAll("\t", " "); str.contains("    "); str = str.replaceAll(" {4}", " ")) {}
         while (str.contains("  ")) {
-            str = str.replaceAll("  ", " ");
+            str = str.replaceAll(" {2}", " ");
         }
-        for (str = str.replaceAll(" \\)", "\\)"), str = str.replaceAll("\\( ", "\\("), str = str.replaceAll(" \\}", "\\}"), str = str.replaceAll("\\{ ", "\\{"); str.contains(": "); str = str.replaceAll(": ", ":")) {}
+        for (str = str.replaceAll(" \\)", "\\)"), str = str.replaceAll("\\( ", "\\("), str = str.replaceAll(" }", "\\}"), str = str.replaceAll("\\{ ", "\\{"); str.contains(": "); str = str.replaceAll(": ", ":")) {}
         str = handleDoubleBrackets(str, report);
         if (report.isError()) {
             return null;
@@ -139,7 +139,7 @@ public class Expander
         }
         for (int cat = 0; cat < description.gameOptions().numCategories(); ++cat) {
             final OptionCategory category = description.gameOptions().categories().get(cat);
-            if (category.options().size() > 0) {
+            if (!category.options().isEmpty()) {
                 final Option option = category.options().get(optionSelections[cat]);
                 if (option.arguments().isEmpty()) {
                     return str;
@@ -153,7 +153,7 @@ public class Expander
         return str;
     }
     
-    private static final String extractOptions(final String strIn, final Description description, final Report report) {
+    private static String extractOptions(final String strIn, final Description description, final Report report) {
         String str;
         int c;
         int cc;
@@ -228,7 +228,7 @@ public class Expander
         return str;
     }
     
-    private static final String extractRulesets(final String strIn, final Description description, final Report report) {
+    private static String extractRulesets(final String strIn, final Description description, final Report report) {
         description.clearRulesets();
         String str = strIn;
         int c = str.indexOf("(rulesets");
@@ -318,7 +318,6 @@ public class Expander
                         if (report.isError()) {
                             return null;
                         }
-                        continue;
                     }
                 }
                 if (didExpand[0]) {
@@ -334,7 +333,6 @@ public class Expander
                         if (report.isError()) {
                             return null;
                         }
-                        continue;
                     }
                 }
                 if (didExpand[0]) {
@@ -405,8 +403,8 @@ public class Expander
             report.addError("Badly fomred '(define \"name\"...' in '" + Report.clippedString(desc, 20) + "'.");
             return null;
         }
-        final int openingQuoteIdx = desc.indexOf("\"");
-        final int closingQuoteIdx = desc.indexOf("\"", openingQuoteIdx + 1);
+        final int openingQuoteIdx = desc.indexOf('"');
+        final int closingQuoteIdx = desc.indexOf('"', openingQuoteIdx + 1);
         final String key = desc.substring(openingQuoteIdx, closingQuoteIdx + 1);
         desc = desc.substring(c + 1).trim();
         final Define define = new Define(key, desc);
@@ -456,7 +454,7 @@ public class Expander
         return null;
     }
     
-    private static final List<String> extractDefineArgs(final String argString, final Report report) {
+    private static List<String> extractDefineArgs(final String argString, final Report report) {
         final List<String> args = new ArrayList<>();
         String str = argString.trim();
         if (str.charAt(0) == '(') {
@@ -763,7 +761,6 @@ public class Expander
                         report.addError("Metadata has option requirement for option or ruleset that does not exist: " + requiredOption);
                         return null;
                     }
-                    continue;
                 }
             }
             boolean failedRequirement = false;
@@ -773,7 +770,7 @@ public class Expander
                     break;
                 }
             }
-            final StringBuffer stringBuffer = new StringBuffer(str);
+            final StringBuilder stringBuffer = new StringBuilder(str);
             if (failedRequirement) {
                 stringBuffer.replace(optsCondStartIdx, optsCondClosingBracketIdx + 1, "");
             }
@@ -794,7 +791,6 @@ public class Expander
                 if (c <= 0) {
                     return str;
                 }
-                continue;
             }
             else if (str.charAt(c) == '/' && str.charAt(c + 1) == '/') {
                 int cc;

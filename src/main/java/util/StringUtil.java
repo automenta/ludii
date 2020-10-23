@@ -58,7 +58,7 @@ public class StringUtil
         final FontRenderContext frc = g2d.getFontRenderContext();
         final TextLayout tl = new TextLayout(string, g2d.getFont(), frc);
         final Shape shape = tl.getOutline(null);
-        g2dNew.setStroke(new BasicStroke((float)(g2d.getFont().getSize() / 5)));
+        g2dNew.setStroke(new BasicStroke((g2d.getFont().getSize() / 5)));
         g2dNew.draw(shape);
         g2dNew.draw(shape);
         g2dNew.setColor(originalFontColour);

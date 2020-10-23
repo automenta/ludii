@@ -127,17 +127,17 @@ public class ProofNumberSearch extends AI
         }
         else {
             switch (node.value()) {
-                case FALSE: {
+                case FALSE -> {
                     node.setProofNumber(Integer.MAX_VALUE);
                     node.setDisproofNumber(0);
                     break;
                 }
-                case TRUE: {
+                case TRUE -> {
                     node.setProofNumber(0);
                     node.setDisproofNumber(Integer.MAX_VALUE);
                     break;
                 }
-                case UNKNOWN: {
+                case UNKNOWN -> {
                     if (node.nodeType() == PNSNode.PNSNodeTypes.AND_NODE) {
                         node.setProofNumber(Math.max(1, node.children.length));
                         node.setDisproofNumber(1);

@@ -46,7 +46,6 @@ public class TournamentHostPanel extends BaseFindTournamentPanel
                         RemoteDialog.bringDialogToFront();
                         Manager.app.addTextToStatusPanel(inputLine + "\n");
                     }
-                    in.close();
                 }
             }
             catch (Exception e2) {

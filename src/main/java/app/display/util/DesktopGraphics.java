@@ -103,7 +103,7 @@ public class DesktopGraphics implements PlatformGraphics
         if (imageInfo.count() > 1 && cs.isVisibleCell(imageInfo.site(), imageInfo.level(), mover)) {
             drawValue(g2d, imageInfo, Integer.toString(imageInfo.count()));
         }
-        else if (componentStackType.equals(PieceStackType.Count) && cs.sizeStack(imageInfo.site(), imageInfo.graphElementType()) > 1) {
+        else if (componentStackType == PieceStackType.Count && cs.sizeStack(imageInfo.site(), imageInfo.graphElementType()) > 1) {
             drawValue(g2d, imageInfo, Integer.toString(cs.sizeStack(imageInfo.site(), imageInfo.graphElementType())));
         }
     }

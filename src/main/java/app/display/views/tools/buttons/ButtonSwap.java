@@ -30,22 +30,22 @@ public class ButtonSwap extends ToolButton
         g2d.setColor(this.getButtonColour());
         g2d.setStroke(new BasicStroke(3.0f, 0, 1));
         final GeneralPath path = new GeneralPath();
-        path.moveTo((float)(this.cx - 6), (float)(this.cy - 3));
-        path.lineTo((float)(this.cx - 6), (float)(this.cy - 7));
-        path.lineTo((float)(this.cx + 7), (float)(this.cy - 7));
-        path.lineTo((float)(this.cx + 5), (float)(this.cy - 12));
-        path.lineTo((float)(this.cx + 18), (float)(this.cy - 5));
-        path.lineTo((float)(this.cx + 5), (float)(this.cy + 2));
-        path.lineTo((float)(this.cx + 7), (float)(this.cy - 3));
-        path.lineTo((float)(this.cx - 6), (float)(this.cy - 3));
-        path.moveTo((float)(this.cx + 6), (float)(this.cy + 3));
-        path.lineTo((float)(this.cx + 6), (float)(this.cy + 7));
-        path.lineTo((float)(this.cx - 7), (float)(this.cy + 7));
-        path.lineTo((float)(this.cx - 5), (float)(this.cy + 12));
-        path.lineTo((float)(this.cx - 18), (float)(this.cy + 5));
-        path.lineTo((float)(this.cx - 5), (float)(this.cy - 2));
-        path.lineTo((float)(this.cx - 7), (float)(this.cy + 3));
-        path.lineTo((float)(this.cx + 6), (float)(this.cy + 3));
+        path.moveTo((this.cx - 6), (this.cy - 3));
+        path.lineTo((this.cx - 6), (this.cy - 7));
+        path.lineTo((this.cx + 7), (this.cy - 7));
+        path.lineTo((this.cx + 5), (this.cy - 12));
+        path.lineTo((this.cx + 18), (this.cy - 5));
+        path.lineTo((this.cx + 5), (this.cy + 2));
+        path.lineTo((this.cx + 7), (this.cy - 3));
+        path.lineTo((this.cx - 6), (this.cy - 3));
+        path.moveTo((this.cx + 6), (this.cy + 3));
+        path.lineTo((this.cx + 6), (this.cy + 7));
+        path.lineTo((this.cx - 7), (this.cy + 7));
+        path.lineTo((this.cx - 5), (this.cy + 12));
+        path.lineTo((this.cx - 18), (this.cy + 5));
+        path.lineTo((this.cx - 5), (this.cy - 2));
+        path.lineTo((this.cx - 7), (this.cy + 3));
+        path.lineTo((this.cx + 6), (this.cy + 3));
         g2d.fill(path);
     }
     

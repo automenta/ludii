@@ -15,8 +15,8 @@ import game.rules.play.moves.nonDecision.effect.state.MoveAgain;
 import game.rules.play.moves.nonDecision.operators.logical.If;
 import game.rules.play.moves.nonDecision.operators.logical.Or;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import util.*;
 import util.action.others.ActionSwap;
 

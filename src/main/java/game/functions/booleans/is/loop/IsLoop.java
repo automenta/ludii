@@ -114,8 +114,8 @@ public final class IsLoop extends BaseBooleanFunction
         }
         final TIntArrayList ownersOfEnclosedSite = (this.rolesArray == null) ? null : new TIntArrayList();
         if (this.rolesArray != null) {
-            for (int i = 0; i < this.rolesArray.length; ++i) {
-                ownersOfEnclosedSite.add(this.rolesArray[i].eval(context));
+            for (IntFunction intFunction : this.rolesArray) {
+                ownersOfEnclosedSite.add(intFunction.eval(context));
             }
         }
         final TIntArrayList aroundSites = new TIntArrayList();
@@ -131,14 +131,13 @@ public final class IsLoop extends BaseBooleanFunction
                     if (!ownersOfEnclosedSite.contains(whoTo) || this.outerIndices.contains(to)) {
                         continue;
                     }
-                    aroundSites.add(to);
                 }
                 else {
                     if (whatTo == what || this.outerIndices.contains(to)) {
                         continue;
                     }
-                    aroundSites.add(to);
                 }
+                aroundSites.add(to);
             }
         }
         final TIntArrayList sitesToCheckInPreviousGroup = new TIntArrayList();
@@ -215,7 +214,7 @@ public final class IsLoop extends BaseBooleanFunction
                     int indexSiteLoop = 0;
                     final TIntArrayList exploredLoop = new TIntArrayList();
                     while (!loopFound) {
-                        if (loop.size() == 0) {
+                        if (loop.isEmpty()) {
                             break;
                         }
                         final int siteLoop = loop.get(indexSiteLoop);
@@ -277,8 +276,7 @@ public final class IsLoop extends BaseBooleanFunction
             regionToCheck = new int[] { this.startFn.eval(context) };
         }
         final DirectionsFunction directionFunction = new Directions(RelativeDirection.Forward, null, RelationType.Orthogonal, null);
-        for (int p = 0; p < regionToCheck.length; ++p) {
-            final int from = regionToCheck[p];
+        for (final int from : regionToCheck) {
             final int colourLoop = this.colourFn.eval(context);
             final int cid = context.containerId()[from];
             final Topology graph = context.topology();
@@ -295,13 +293,12 @@ public final class IsLoop extends BaseBooleanFunction
                 final Component component = context.components()[what];
                 final int rotation = cs.rotation(site, SiteType.Cell) * 2 / ratioAdjOrtho;
                 final Path[] paths = Arrays.copyOf(component.paths(), component.paths().length);
-                for (int i = 0; i < paths.length; ++i) {
-                    final Path path = paths[i];
+                for (final Path path : paths) {
                     if (path.colour() == colourLoop) {
                         final List<AbsoluteDirection> directionsStep1 = directionFunction.convertToAbsolute(SiteType.Cell, cell, null, null, path.side1(rotation, graph.numEdges()), context);
                         final AbsoluteDirection directionSide1 = directionsStep1.get(0);
                         final List<Step> stepsSide1 = graph.trajectories().steps(SiteType.Cell, cell.index(), SiteType.Cell, directionSide1);
-                        if (stepsSide1.size() != 0) {
+                        if (!stepsSide1.isEmpty()) {
                             final int site1Connected = stepsSide1.get(0).to().id();
                             if (originTileConnected.getQuick(index) != site1Connected && site1Connected == from) {
                                 return true;
@@ -315,7 +312,7 @@ public final class IsLoop extends BaseBooleanFunction
                         final List<AbsoluteDirection> directionsSide2 = directionFunction.convertToAbsolute(SiteType.Cell, cell, null, null, path.side2(rotation, graph.numEdges()), context);
                         final AbsoluteDirection directionSide2 = directionsSide2.get(0);
                         final List<Step> stepsSide2 = graph.trajectories().steps(SiteType.Cell, cell.index(), SiteType.Cell, directionSide2);
-                        if (stepsSide2.size() != 0) {
+                        if (!stepsSide2.isEmpty()) {
                             final int site2Connected = stepsSide2.get(0).to().id();
                             if (originTileConnected.getQuick(index) != site2Connected && site2Connected == from) {
                                 return true;
@@ -410,8 +407,8 @@ public final class IsLoop extends BaseBooleanFunction
         }
         final TIntArrayList ownersOfEnclosedSite = (this.rolesArray == null) ? null : new TIntArrayList();
         if (this.rolesArray != null) {
-            for (int i = 0; i < this.rolesArray.length; ++i) {
-                ownersOfEnclosedSite.add(this.rolesArray[i].eval(context));
+            for (IntFunction intFunction : this.rolesArray) {
+                ownersOfEnclosedSite.add(intFunction.eval(context));
             }
         }
         final TIntArrayList aroundSites = new TIntArrayList();
@@ -427,14 +424,13 @@ public final class IsLoop extends BaseBooleanFunction
                     if (!ownersOfEnclosedSite.contains(whoTo) || this.outerIndices.contains(to)) {
                         continue;
                     }
-                    aroundSites.add(to);
                 }
                 else {
                     if (whatTo == what || this.outerIndices.contains(to)) {
                         continue;
                     }
-                    aroundSites.add(to);
                 }
+                aroundSites.add(to);
             }
         }
         final TIntArrayList sitesToCheckInPreviousGroup = new TIntArrayList();

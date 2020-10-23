@@ -101,9 +101,8 @@ public class IsLine extends BaseBooleanFunction
             pivots = new int[] { this.through.eval(context) };
         }
         final Topology graph = context.topology();
-        final boolean playOnCell = (this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
-        for (int p = 0; p < pivots.length; ++p) {
-            final int locn = pivots[p];
+        final boolean playOnCell = (this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
+        for (final int locn : pivots) {
             if (locn < 0) {
                 return false;
             }
@@ -119,15 +118,14 @@ public class IsLine extends BaseBooleanFunction
             if (!playOnCell && locn >= graph.vertices().size()) {
                 return false;
             }
-            final TopologyElement vertexLoc = playOnCell ? ((Cell)graph.cells().get(locn)) : ((Vertex)graph.vertices().get(locn));
+            final TopologyElement vertexLoc = playOnCell ? graph.cells().get(locn) : graph.vertices().get(locn);
             final ContainerState state2 = context.state().containerStates()[context.containerId()[vertexLoc.index()]];
             final TIntArrayList whats2 = new TIntArrayList();
             final int whatLocn = state2.what(locn, this.type);
             if (this.whatFn == null) {
                 if (this.whoFn == null) {
                     whats2.add(whatLocn);
-                }
-                else if (this.whoFn != null) {
+                } else if (this.whoFn != null) {
                     final int who = this.whoFn.eval(context);
                     for (int j = 1; j < context.components().length; ++j) {
                         final Component component = context.components()[j];
@@ -136,8 +134,7 @@ public class IsLine extends BaseBooleanFunction
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 for (final IntFunction what3 : this.whatFn) {
                     whats2.add(what3.eval(context));
                 }
@@ -181,13 +178,11 @@ public class IsLine extends BaseBooleanFunction
                                 return true;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         if (count == len) {
                             context.setTo(origTo);
                             return true;
                         }
-                        continue;
                     }
                 }
                 context.setTo(origTo);
@@ -221,8 +216,7 @@ public class IsLine extends BaseBooleanFunction
         else {
             pivots = new int[] { this.through.eval(context) };
         }
-        for (int p = 0; p < pivots.length; ++p) {
-            final int locn = pivots[p];
+        for (final int locn : pivots) {
             if (locn == -1) {
                 return false;
             }
@@ -234,14 +228,14 @@ public class IsLine extends BaseBooleanFunction
             }
             final int contId2 = 0;
             final Topology graph = context.containers()[0].topology();
-            final boolean playOnCell = (this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
+            final boolean playOnCell = (this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
             if (playOnCell && locn >= graph.cells().size()) {
                 return false;
             }
             if (!playOnCell && locn >= graph.vertices().size()) {
                 return false;
             }
-            final ContainerDeductionPuzzleState state2 = (ContainerDeductionPuzzleState)context.state().containerStates()[0];
+            final ContainerDeductionPuzzleState state2 = (ContainerDeductionPuzzleState) context.state().containerStates()[0];
             if (!state2.isResolved(locn, this.type)) {
                 return false;
             }
@@ -249,8 +243,7 @@ public class IsLine extends BaseBooleanFunction
             final int whatLocn = state2.what(locn, this.type);
             if (this.whatFn == null) {
                 whats2.add(whatLocn);
-            }
-            else {
+            } else {
                 for (final IntFunction what3 : this.whatFn) {
                     whats2.add(what3.eval(context));
                 }
@@ -303,13 +296,11 @@ public class IsLine extends BaseBooleanFunction
                             return true;
                         }
                     }
-                }
-                else {
+                } else {
                     if (count == len) {
                         context.setTo(origTo);
                         return true;
                     }
-                    continue;
                 }
             }
             context.setTo(origTo);
@@ -485,7 +476,6 @@ public class IsLine extends BaseBooleanFunction
                     if (count2 == len) {
                         return true;
                     }
-                    continue;
                 }
             }
             return false;
@@ -555,7 +545,6 @@ public class IsLine extends BaseBooleanFunction
                 if (count3 == len) {
                     return true;
                 }
-                continue;
             }
         }
         return false;
@@ -576,7 +565,7 @@ public class IsLine extends BaseBooleanFunction
     @Override
     public long gameFlags(final Game game) {
         long flags = this.length.gameFlags(game);
-        if (this.type != null && (this.type.equals(SiteType.Edge) || this.type.equals(SiteType.Vertex))) {
+        if (this.type != null && (this.type == SiteType.Edge || this.type == SiteType.Vertex)) {
             flags |= 0x800000L;
         }
         if (this.exactly != null) {
@@ -661,9 +650,8 @@ public class IsLine extends BaseBooleanFunction
             pivots = new int[] { this.through.eval(context) };
         }
         final Topology graph = context.topology();
-        final boolean playOnCell = (this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
-        for (int p = 0; p < pivots.length; ++p) {
-            final int locn = pivots[p];
+        final boolean playOnCell = (this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
+        for (final int locn : pivots) {
             if (locn == -1) {
                 return new ArrayList<>();
             }
@@ -679,15 +667,14 @@ public class IsLine extends BaseBooleanFunction
             if (!playOnCell && locn >= graph.vertices().size()) {
                 return new ArrayList<>();
             }
-            final TopologyElement vertexLoc = playOnCell ? ((Cell)graph.cells().get(locn)) : ((Vertex)graph.vertices().get(locn));
+            final TopologyElement vertexLoc = playOnCell ? graph.cells().get(locn) : graph.vertices().get(locn);
             final ContainerState state2 = context.state().containerStates()[context.containerId()[vertexLoc.index()]];
             final TIntArrayList whats2 = new TIntArrayList();
             final int whatLocn = state2.what(locn, this.type);
             if (this.whatFn == null) {
                 if (this.whoFn == null) {
                     whats2.add(whatLocn);
-                }
-                else if (this.whoFn != null) {
+                } else if (this.whoFn != null) {
                     final int who = this.whoFn.eval(context);
                     for (int j = 1; j < context.components().length; ++j) {
                         final Component component = context.components()[j];
@@ -696,8 +683,7 @@ public class IsLine extends BaseBooleanFunction
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 for (final IntFunction what3 : this.whatFn) {
                     whats2.add(what3.eval(context));
                 }
@@ -745,13 +731,11 @@ public class IsLine extends BaseBooleanFunction
                                 return winningSites;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         if (count == len) {
                             context.setTo(origTo);
                             return winningSites;
                         }
-                        continue;
                     }
                 }
                 context.setTo(origTo);

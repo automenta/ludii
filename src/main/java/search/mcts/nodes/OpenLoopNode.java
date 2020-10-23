@@ -5,8 +5,8 @@
 package search.mcts.nodes;
 
 import game.Game;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import search.mcts.MCTS;
 import util.Context;
 import util.Move;
@@ -153,9 +153,9 @@ public final class OpenLoopNode extends BaseNode
         this.moveIdxToNode = new OpenLoopNode[this.currentLegalMoves.size()];
         for (int i = 0; i < this.moveIdxToNode.length; ++i) {
             final Move move = this.currentLegalMoves.get(i);
-            for (int j = 0; j < this.children.size(); ++j) {
-                if (move.equals(this.children.get(j).parentMoveWithoutConseq)) {
-                    this.moveIdxToNode[i] = this.children.get(j);
+            for (OpenLoopNode child : this.children) {
+                if (move.equals(child.parentMoveWithoutConseq)) {
+                    this.moveIdxToNode[i] = child;
                     break;
                 }
             }

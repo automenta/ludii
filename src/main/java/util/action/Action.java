@@ -89,10 +89,10 @@ public interface Action extends Serializable
             return "";
         }
         final String beginData = detailedString.substring(fromIndex);
-        int toIndex = beginData.indexOf(",");
+        int toIndex = beginData.indexOf(',');
         if (data.equals("masked") || data.equals("invisible")) {
-            final String afterData = beginData.substring(beginData.indexOf("=") + 1);
-            int toSpecialIndex = afterData.indexOf("=");
+            final String afterData = beginData.substring(beginData.indexOf('=') + 1);
+            int toSpecialIndex = afterData.indexOf('=');
             if (toSpecialIndex == -1) {
                 return afterData.substring(0, afterData.length() - 1);
             }
@@ -103,12 +103,12 @@ public interface Action extends Serializable
         }
         else {
             if (toIndex == -1) {
-                toIndex = beginData.indexOf("]");
+                toIndex = beginData.indexOf(']');
             }
             if (toIndex == -1) {
                 return "";
             }
-            return beginData.substring(beginData.indexOf("=") + 1, toIndex);
+            return beginData.substring(beginData.indexOf('=') + 1, toIndex);
         }
     }
 }

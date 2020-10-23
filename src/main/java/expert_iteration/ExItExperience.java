@@ -4,8 +4,8 @@
 
 package expert_iteration;
 
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import util.Context;
 import util.Move;
 import util.state.State;

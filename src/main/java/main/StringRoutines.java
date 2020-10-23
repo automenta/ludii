@@ -125,14 +125,14 @@ public final class StringRoutines
         while (c < str.length()) {
             final char chC = str.charAt(c);
             switch (chC) {
-                case '\\': {
+                case '\\' -> {
                     if (c < str.length() - 1 && str.charAt(c + 1) == '\"') {
                         ++c;
                         break;
                     }
                     break;
                 }
-                case '\"': {
+                case '\"' -> {
                     return c;
                 }
             }
@@ -145,21 +145,21 @@ public final class StringRoutines
         return className.substring(0, 1).toLowerCase() + className.substring(1);
     }
     
-    public static final String highlightText(final String fullText, final String highlight, final String tag, final String colour) {
+    public static String highlightText(final String fullText, final String highlight, final String tag, final String colour) {
         final String replacement = "<" + tag + " color=" + colour + ">" + highlight + "</" + tag + ">";
         System.out.println(highlight + " --> " + replacement);
         return fullText.replace(highlight, replacement);
     }
     
-    public static final String escapeText(final String text) {
+    public static String escapeText(final String text) {
         return text.replace("&", "&amp;").replace("'", "&apos;").replace("\"", "&quot;").replace("<", "&lt;").replace(">", "&gt;").replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").replace(" ", "&nbsp;").replace("\n", "<br/>");
     }
     
-    public static final String cleanGameName(final String gameName) {
+    public static String cleanGameName(final String gameName) {
         return gameName.trim().replaceAll(Pattern.quote(" "), "_").replaceAll(Pattern.quote(".lud"), "").replaceAll(Pattern.quote("'"), "").replaceAll(Pattern.quote("("), "").replaceAll(Pattern.quote(")"), "");
     }
     
-    public static final String cleanWhitespace(final String str) {
+    public static String cleanWhitespace(final String str) {
         return str.trim().replaceAll("\\s+", " ");
     }
     
@@ -174,6 +174,7 @@ public final class StringRoutines
     }
     
     public static boolean isFloat(final String str) {
+        if (str.charAt(0)=='\"') return false; //HACK quick elide quoted strings
         try {
             Float.parseFloat(str);
         }
@@ -293,7 +294,7 @@ public final class StringRoutines
     }
     
     public static boolean isTokenChar(final char ch) {
-        return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '_' || ch == '\"' || ch == '-' || ch == '.' || ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%' || ch == '=' || ch == '!' || ch == 'v' || ch == '^' || ch == '~' || ch == '<' || ch == '>' || ch == '&' || ch == '|' || ch == '#';
+        return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch == '_' || ch == '\"' || ch == '.' || ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%' || ch == '=' || ch == '!' || ch == 'v' || ch == '^' || ch == '~' || ch == '<' || ch == '>' || ch == '&' || ch == '|' || ch == '#';
     }
     
     public static int numberAtEnd(final String strIn) {
@@ -344,7 +345,7 @@ public final class StringRoutines
     }
     
     public static String join(final String joinStr, final List<String> strings) {
-        return join(joinStr, strings.toArray(new String[strings.size()]));
+        return join(joinStr, strings.toArray(new String[0]));
     }
     
     public static String join(final String joinStr, final String... strings) {
@@ -374,7 +375,7 @@ public final class StringRoutines
         return newString;
     }
     
-    public static final String gameName(final String str) {
+    public static String gameName(final String str) {
         int c = str.indexOf("(game ");
         if (c < 0) {
             return null;

@@ -52,10 +52,10 @@ public final class Set extends Effect
             throw new IllegalArgumentException("Set(): With SetSuitType only one suit or suits parameter must be non-null.");
         }
         switch (setType) {
-            case TrumpSuit: {
+            case TrumpSuit -> {
                 return new SetTrumpSuit(suit, suits, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetSuitType is not implemented.");
             }
         }
@@ -73,10 +73,10 @@ public final class Set extends Effect
             throw new IllegalArgumentException("Set(): With SetPlayerType only one who or nextPlayers parameter can be non-null.");
         }
         switch (setType) {
-            case NextPlayer: {
+            case NextPlayer -> {
                 return new SetNextPlayer(who, nextPlayers, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetPlayerType is not implemented.");
             }
         }
@@ -94,10 +94,10 @@ public final class Set extends Effect
             throw new IllegalArgumentException("Set(): With SetDirectionType zero or one directions or direction parameter must be non-null.");
         }
         switch (setType) {
-            case Direction: {
+            case Direction -> {
                 return new SetDirection(to, directions, direction, previous, next, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetDirectionType is not implemented.");
             }
         }
@@ -115,13 +115,13 @@ public final class Set extends Effect
             throw new IllegalArgumentException("Set(): With SetType Only one player or role parameter m be non-null.");
         }
         switch (setType) {
-            case Value: {
+            case Value -> {
                 return new SetValue(player, role, value, then);
             }
-            case Score: {
+            case Score -> {
                 return new SetScore(player, role, value, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetType is not implemented.");
             }
         }
@@ -129,10 +129,10 @@ public final class Set extends Effect
     
     public static Moves construct(final SetPendingType setType, @Opt @Or final IntFunction value, @Opt @Or final RegionFunction region, @Opt final Then then) {
         switch (setType) {
-            case Pending: {
+            case Pending -> {
                 return new SetPending(value, region, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetPendingType is not implemented.");
             }
         }
@@ -140,16 +140,16 @@ public final class Set extends Effect
     
     public static Moves construct(final SetValueType setType, @Opt final IntFunction newValue, @Opt final Then then) {
         switch (setType) {
-            case Counter: {
+            case Counter -> {
                 return new SetCounter(newValue, then);
             }
-            case Var: {
+            case Var -> {
                 return new SetVar(newValue, then);
             }
-            case Pot: {
+            case Pot -> {
                 return new SetPot(newValue, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetIntegerType is not implemented.");
             }
         }
@@ -157,13 +157,13 @@ public final class Set extends Effect
     
     public static Moves construct(final SetSiteType setType, @Opt final SiteType type, @Name final IntFunction at, final IntFunction value, @Opt final Then then) {
         switch (setType) {
-            case Count: {
+            case Count -> {
                 return new SetCount(type, at, value, then);
             }
-            case State: {
+            case State -> {
                 return new SetState(type, at, value, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetSiteType is not implemented.");
             }
         }
@@ -191,16 +191,16 @@ public final class Set extends Effect
             throw new IllegalArgumentException("Set(): With SetRegionPlayerType one who or role parameter can be non-null.");
         }
         switch (setType) {
-            case Masked: {
+            case Masked -> {
                 return new SetMasked(type, site, region, who, role, stack, then);
             }
-            case Visible: {
+            case Visible -> {
                 return new SetVisible(type, site, level, who, role, then);
             }
-            case Invisible: {
+            case Invisible -> {
                 return new SetInvisible(type, site, region, who, role, stack, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Set(): A SetRegionPlayerType is not implemented.");
             }
         }

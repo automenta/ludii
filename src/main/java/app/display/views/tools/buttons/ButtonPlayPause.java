@@ -33,29 +33,28 @@ public class ButtonPlayPause extends ToolButton
         g2d.setStroke(new BasicStroke(3.0f, 0, 1));
         GeneralPath path = new GeneralPath();
         if (SettingsManager.agentsPaused) {
-            path.moveTo((float)(this.cx + 9), (float)this.cy);
-            path.lineTo((float)(this.cx - 7), (float)(this.cy - 9));
-            path.lineTo((float)(this.cx - 7), (float)(this.cy + 9));
-            g2d.fill(path);
+            path.moveTo((this.cx + 9), this.cy);
+            path.lineTo((this.cx - 7), (this.cy - 9));
+            path.lineTo((this.cx - 7), (this.cy + 9));
         }
         else {
-            path.moveTo((float)(this.cx - 7), (float)(this.cy + 9));
-            path.lineTo((float)(this.cx - 7), (float)(this.cy - 9));
-            path.lineTo((float)(this.cx - 2), (float)(this.cy - 9));
-            path.lineTo((float)(this.cx - 2), (float)(this.cy + 9));
+            path.moveTo((this.cx - 7), (this.cy + 9));
+            path.lineTo((this.cx - 7), (this.cy - 9));
+            path.lineTo((this.cx - 2), (this.cy - 9));
+            path.lineTo((this.cx - 2), (this.cy + 9));
             g2d.fill(path);
             path = new GeneralPath();
-            path.moveTo((float)(this.cx + 2), (float)(this.cy + 9));
-            path.lineTo((float)(this.cx + 2), (float)(this.cy - 9));
-            path.lineTo((float)(this.cx + 7), (float)(this.cy - 9));
-            path.lineTo((float)(this.cx + 7), (float)(this.cy + 9));
-            g2d.fill(path);
+            path.moveTo((this.cx + 2), (this.cy + 9));
+            path.lineTo((this.cx + 2), (this.cy - 9));
+            path.lineTo((this.cx + 7), (this.cy - 9));
+            path.lineTo((this.cx + 7), (this.cy + 9));
         }
+        g2d.fill(path);
     }
     
     @Override
     protected boolean isEnabled() {
-        if (Manager.ref().context().game().mode().mode().equals(ModeType.Simulation)) {
+        if (Manager.ref().context().game().mode().mode() == ModeType.Simulation) {
             return true;
         }
         boolean AnyAIPlayer = false;

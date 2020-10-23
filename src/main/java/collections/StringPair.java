@@ -3,7 +3,7 @@
  */
 package collections;
 
-import root.StringRoutines;
+import main.StringRoutines;
 
 import java.util.regex.Pattern;
 

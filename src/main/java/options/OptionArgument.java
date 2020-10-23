@@ -8,7 +8,7 @@ public class OptionArgument {
     private final String expression;
 
     public OptionArgument(String name, String expression) {
-        this.name = name == null ? null : name;
+        this.name = name;
         this.expression = expression;
     }
 

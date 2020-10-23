@@ -65,7 +65,7 @@ public class DialogUtil
             if (!str.contains("<br />") && width - 5 < stringBounds.getWidth()) {
                 String newStr;
                 if (str.contains(" ")) {
-                    final int lastIndex = str.lastIndexOf(" ");
+                    final int lastIndex = str.lastIndexOf(' ');
                     newStr = str.substring(0, lastIndex) + "<br />" + str.substring(lastIndex);
                 }
                 else {

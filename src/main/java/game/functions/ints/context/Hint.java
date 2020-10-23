@@ -32,17 +32,17 @@ public final class Hint extends BaseIntFunction
         Integer[][] regions = null;
         Integer[] hints = null;
         switch (this.type) {
-            case Edge: {
+            case Edge -> {
                 regions = context.game().equipment().edgesWithHints();
                 hints = context.game().equipment().edgeHints();
                 break;
             }
-            case Vertex: {
+            case Vertex -> {
                 regions = context.game().equipment().verticesWithHints();
                 hints = context.game().equipment().vertexHints();
                 break;
             }
-            case Cell: {
+            case Cell -> {
                 regions = context.game().equipment().cellsWithHints();
                 hints = context.game().equipment().cellHints();
                 break;
@@ -71,16 +71,16 @@ public final class Hint extends BaseIntFunction
             flags |= this.siteFn.gameFlags(game);
         }
         if (this.type != null) {
-            if (this.type.equals(SiteType.Edge) || this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Edge || this.type == SiteType.Vertex) {
                 flags |= 0x800000L;
             }
-            if (this.type.equals(SiteType.Edge)) {
+            if (this.type == SiteType.Edge) {
                 flags |= 0x4000000L;
             }
-            if (this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Vertex) {
                 flags |= 0x1000000L;
             }
-            if (this.type.equals(SiteType.Cell)) {
+            if (this.type == SiteType.Cell) {
                 flags |= 0x2000000L;
             }
         }

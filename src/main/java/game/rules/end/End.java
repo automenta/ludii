@@ -86,7 +86,7 @@ public class End implements Rule
             int rank = 1;
             int onlyOneActive = -1;
             switch (applyResult.result()) {
-                case Win: {
+                case Win -> {
                     if (whoRole.equals(RoleType.All)) {
                         if (context.game().players().count() > 1) {
                             final double score = 1.0;
@@ -96,8 +96,7 @@ public class End implements Rule
                                     context.trial().ranking()[player] = 1.0;
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             context.trial().ranking()[1] = 0.0;
                         }
                         context.setAllInactive();
@@ -106,7 +105,7 @@ public class End implements Rule
                     }
                     context.setActive(who, false);
                     context.addWinner(who);
-                    rank = (int)context.computeNextWinRank();
+                    rank = (int) context.computeNextWinRank();
                     context.trial().ranking()[who] = rank;
                     onlyOneActive = context.onlyOneActive();
                     if (onlyOneActive != 0) {
@@ -131,7 +130,7 @@ public class End implements Rule
                     }
                     break;
                 }
-                case Loss: {
+                case Loss -> {
                     if (whoRole.equals(RoleType.All)) {
                         if (context.game().players().count() > 1) {
                             final double score = context.game().players().count();
@@ -140,8 +139,7 @@ public class End implements Rule
                                     context.trial().ranking()[player] = score;
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             context.trial().ranking()[1] = 0.0;
                         }
                         context.setAllInactive();
@@ -155,12 +153,13 @@ public class End implements Rule
                     if (state.next() == who && context.game().players().count() != 1) {
                         int next;
                         for (next = who; !context.active(next) && context.active(); next = 1) {
-                            if (++next > context.game().players().count()) {}
+                            if (++next > context.game().players().count()) {
+                            }
                         }
                         state.setNext(next);
                     }
                     if (context.trial().ranking().length > 2) {
-                        rank = (int)context.computeNextLossRank();
+                        rank = (int) context.computeNextLossRank();
                         final int numEndResultApplies = context.numEndResultsDecided();
                         context.trial().ranking()[who] = rank + numEndResultApplies / 2.0;
                         if (numEndResultApplies != 0) {
@@ -178,8 +177,7 @@ public class End implements Rule
                                     break;
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             onlyOneActive = context.onlyOneActive();
                             if (onlyOneActive != 0) {
                                 context.trial().ranking()[onlyOneActive] = rank - 1;
@@ -205,7 +203,7 @@ public class End implements Rule
                     trial.setStatus(new Status(0));
                     break;
                 }
-                case Draw: {
+                case Draw -> {
                     if (context.game().players().count() > 1) {
                         final double score = context.computeNextDrawRank();
                         for (int player = 1; player < context.trial().ranking().length; ++player) {
@@ -213,8 +211,7 @@ public class End implements Rule
                                 context.trial().ranking()[player] = score;
                             }
                         }
-                    }
-                    else if (context.game().players().count() == 1) {
+                    } else if (context.game().players().count() == 1) {
                         context.trial().ranking()[1] = 0.0;
                     }
                     context.setAllInactive();
@@ -226,18 +223,17 @@ public class End implements Rule
                     }
                     break;
                 }
-                case Tie: {
+                case Tie -> {
                     context.setAllInactive();
                     trial.setStatus(new Status(state.numPlayers() + 1));
                     break;
                 }
-                case Abandon:
-                case Crash: {
+                case Abandon, Crash -> {
                     context.setAllInactive();
                     trial.setStatus(new Status(-1));
                     break;
                 }
-                default: {
+                default -> {
                     System.out.println("** End.apply(): Result type " + applyResult.result() + " not recognised.");
                     break;
                 }
@@ -268,7 +264,7 @@ public class End implements Rule
             final Trial trial = context.trial();
             final int who = new Id(null, whoRole).eval(context);
             switch (applyResult.result()) {
-                case Win: {
+                case Win -> {
                     context.setActive(who, false);
                     context.addWinner(who);
                     int rank;
@@ -308,10 +304,10 @@ public class End implements Rule
                     }
                     break;
                 }
-                case Loss: {
+                case Loss -> {
                     break;
                 }
-                case Draw: {
+                case Draw -> {
                     if (context.game().players().count() > 1) {
                         final double score = (context.numActive() + 1) / 2.0 + context.numWinners();
                         for (int player2 = 1; player2 < context.trial().ranking().length; ++player2) {
@@ -319,8 +315,7 @@ public class End implements Rule
                                 context.trial().ranking()[player2] = score;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         context.trial().ranking()[1] = 0.0;
                     }
                     trial.setStatus(new Status(0));
@@ -331,16 +326,15 @@ public class End implements Rule
                     }
                     break;
                 }
-                case Tie: {
+                case Tie -> {
                     trial.setStatus(new Status(context.game().players().count() + 1));
                     break;
                 }
-                case Abandon:
-                case Crash: {
+                case Abandon, Crash -> {
                     trial.setStatus(new Status(-1));
                     break;
                 }
-                default: {
+                default -> {
                     System.out.println("** End.apply(): Result type " + applyResult.result() + " not recognised.");
                     break;
                 }
@@ -354,7 +348,7 @@ public class End implements Rule
         final RoleType whoRole = applyResult.who();
         final int team = new Id(null, whoRole).eval(context);
         switch (applyResult.result()) {
-            case Win: {
+            case Win -> {
                 final TIntArrayList teamMembers = new TIntArrayList();
                 for (int pid = 1; pid <= context.game().players().count(); ++pid) {
                     if (context.state().playerInTeam(pid, team)) {
@@ -415,24 +409,23 @@ public class End implements Rule
                 }
                 break;
             }
-            case Loss: {
+            case Loss -> {
                 break;
             }
-            case Draw: {
+            case Draw -> {
                 break;
             }
-            case Tie: {
+            case Tie -> {
                 context.setAllInactive();
                 trial.setStatus(new Status(state.numPlayers() + 1));
                 break;
             }
-            case Abandon:
-            case Crash: {
+            case Abandon, Crash -> {
                 context.setAllInactive();
                 trial.setStatus(new Status(-1));
                 break;
             }
-            default: {
+            default -> {
                 System.out.println("** End.apply(): Result type " + applyResult.result() + " not recognised.");
                 break;
             }

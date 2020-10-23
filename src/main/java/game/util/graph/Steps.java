@@ -6,7 +6,7 @@ package game.util.graph;
 
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
-import main.math.MathRoutines;
+import math.MathRoutines;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -123,7 +123,7 @@ public class Steps
     }
     
     public static void sort(final List<Step> list) {
-        final List<ItemScore> rank = new ArrayList<ItemScore>();
+        final List<ItemScore> rank = new ArrayList<>();
         for (int n = 0; n < list.size(); ++n) {
             final Step step = list.get(n);
             final double theta = MathRoutines.angle(step.from().pt2D(), step.to().pt2D());
@@ -135,7 +135,7 @@ public class Steps
         for (ItemScore itemScore : rank) {
             list.add(list.get(itemScore.id()));
         }
-        if (rank.size() > 0) {
+        if (!rank.isEmpty()) {
             list.subList(0, rank.size()).clear();
         }
     }

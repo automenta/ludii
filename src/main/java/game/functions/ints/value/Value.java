@@ -22,10 +22,10 @@ public final class Value extends BaseIntFunction
     
     public static IntFunction construct(final ValueSimpleType valueType) {
         switch (valueType) {
-            case Pending: {
+            case Pending -> {
                 return new ValuePending();
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Value(): A ValueSimpleType is not implemented.");
             }
         }
@@ -43,10 +43,10 @@ public final class Value extends BaseIntFunction
             throw new IllegalArgumentException("Value(): With ValuePlayerType exactly one indexPlayer or role parameter must be non-null.");
         }
         switch (valueType) {
-            case Player: {
+            case Player -> {
                 return new ValuePlayer(indexPlayer, role);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Value(): A ValuePlayerType is not implemented.");
             }
         }
@@ -54,10 +54,10 @@ public final class Value extends BaseIntFunction
     
     public static IntFunction construct(final ValueComponentType valueType, @Name final IntFunction of) {
         switch (valueType) {
-            case Piece: {
+            case Piece -> {
                 return new ValuePiece(of);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Value(): A ValueComponentType is not implemented.");
             }
         }

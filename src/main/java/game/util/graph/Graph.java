@@ -13,9 +13,9 @@ import game.types.board.BasisType;
 import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import gnu.trove.list.array.TIntArrayList;
-import main.math.MathRoutines;
-import main.math.Point3D;
-import main.math.Vector;
+import math.MathRoutines;
+import math.Point3D;
+import math.Vector;
 import util.Context;
 
 import java.awt.geom.Point2D;
@@ -38,7 +38,7 @@ public class Graph extends BaseGraphFunction
     
     public Graph(@Name final Float[][] vertices, @Opt @Name final Integer[][] edges) {
         this.vertices = new ArrayList<>();
-        this.edges = new ArrayList<Edge>();
+        this.edges = new ArrayList<>();
         this.faces = new ArrayList<>();
         this.perimeters = new ArrayList<>();
         this.trajectories = new Trajectories();
@@ -148,16 +148,16 @@ public class Graph extends BaseGraphFunction
     
     public List<? extends GraphElement> elements(final SiteType type) {
         switch (type) {
-            case Vertex: {
+            case Vertex -> {
                 return this.vertices;
             }
-            case Edge: {
+            case Edge -> {
                 return edges;
             }
-            case Cell: {
+            case Cell -> {
                 return this.faces;
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -165,16 +165,16 @@ public class Graph extends BaseGraphFunction
     
     public GraphElement element(final SiteType type, final int id) {
         switch (type) {
-            case Vertex: {
+            case Vertex -> {
                 return this.vertices.get(id);
             }
-            case Edge: {
+            case Edge -> {
                 return edges.get(id);
             }
-            case Cell: {
+            case Cell -> {
                 return this.faces.get(id);
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -326,13 +326,13 @@ public class Graph extends BaseGraphFunction
             return true;
         }
         BasisType refBasis = null;
-        if (this.faces.size() > 0) {
+        if (!this.faces.isEmpty()) {
             refBasis = this.faces.get(0).basis();
         }
-        else if (edges.size() > 0) {
+        else if (!edges.isEmpty()) {
             refBasis = edges.get(0).basis();
         }
-        else if (this.vertices.size() > 0) {
+        else if (!this.vertices.isEmpty()) {
             refBasis = this.vertices.get(0).basis();
         }
         if (refBasis == null || refBasis == BasisType.NoBasis) {
@@ -734,15 +734,15 @@ public class Graph extends BaseGraphFunction
     
     public void remove(final GraphElement element, final boolean removeOrphans) {
         switch (element.siteType()) {
-            case Vertex: {
+            case Vertex -> {
                 this.removeVertex(element.id());
                 break;
             }
-            case Edge: {
+            case Edge -> {
                 this.removeEdge(element.id());
                 break;
             }
-            case Cell: {
+            case Cell -> {
                 this.removeFace(element.id(), removeOrphans);
                 break;
             }
@@ -937,7 +937,7 @@ public class Graph extends BaseGraphFunction
     
     public void reorder(final SiteType type) {
         final List<? extends GraphElement> elements = this.elements(type);
-        final List<ItemScore> rank = new ArrayList<ItemScore>();
+        final List<ItemScore> rank = new ArrayList<>();
         for (int n = 0; n < elements.size(); ++n) {
             final GraphElement ge = elements.get(n);
             final double score = ge.pt().y() * 100.0 + ge.pt().x();
@@ -948,22 +948,22 @@ public class Graph extends BaseGraphFunction
             final GraphElement ge = elements.get(rank.get(es).id());
             ge.setId(es);
             switch (type) {
-                case Vertex: {
-                    this.vertices.add((Vertex)ge);
+                case Vertex -> {
+                    this.vertices.add((Vertex) ge);
                     break;
                 }
-                case Edge: {
-                    edges.add((Edge)ge);
+                case Edge -> {
+                    edges.add((Edge) ge);
                     break;
                 }
-                case Cell: {
-                    this.faces.add((Face)ge);
+                case Cell -> {
+                    this.faces.add((Face) ge);
                     break;
                 }
             }
         }
-        for (int es = 0; es < rank.size(); ++es) {
-            elements.remove(0);
+        if (rank.size() > 0) {
+            elements.subList(0, rank.size()).clear();
         }
         for (int n = 0; n < elements.size(); ++n) {
             elements.get(n).setId(n);
@@ -973,12 +973,10 @@ public class Graph extends BaseGraphFunction
     private void setVertices(final Number[][] positions) {
         this.vertices.clear();
         if (positions != null) {
-            for (int v = 0; v < positions.length; ++v) {
-                final Number[] position = positions[v];
+            for (final Number[] position : positions) {
                 if (position.length == 2) {
                     this.addVertex(position[0].floatValue(), position[1].floatValue(), 0.0);
-                }
-                else {
+                } else {
                     this.addVertex(position[0].floatValue(), position[1].floatValue(), position[2].floatValue());
                 }
             }
@@ -988,8 +986,8 @@ public class Graph extends BaseGraphFunction
     private void setEdges(final Integer[][] pairs) {
         edges.clear();
         if (pairs != null) {
-            for (int e = 0; e < pairs.length; ++e) {
-                this.findOrAddEdge(pairs[e][0], pairs[e][1]);
+            for (Integer[] pair : pairs) {
+                this.findOrAddEdge(pair[0], pair[1]);
             }
         }
     }

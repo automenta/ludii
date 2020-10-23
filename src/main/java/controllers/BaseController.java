@@ -8,7 +8,7 @@ import bridge.Bridge;
 import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import topology.Cell;
 import topology.Edge;
 import topology.Vertex;
@@ -150,13 +150,13 @@ public abstract class BaseController implements Controller
         final ContainerStyle containerStyle = Bridge.getContainerStyle(this.container.index());
         final double furthestPossibleDistance = this.calculateFurthestDistance(context) * 2.0;
         double minDist = 1000.0;
-        for (int i = 0; i < validLocations.size(); ++i) {
+        for (WorldLocation validLocation : validLocations) {
             double dist = 99999.0;
-            final int site = validLocations.get(i).location().site();
-            if (validLocations.get(i).location().siteType() == SiteType.Edge) {
-                if (validLocations.get(i).location().site() < context.board().topology().edges().size()) {
-                    final Vertex va = context.board().topology().edges().get(validLocations.get(i).location().site()).vA();
-                    final Vertex vb = context.board().topology().edges().get(validLocations.get(i).location().site()).vB();
+            final int site = validLocation.location().site();
+            if (validLocation.location().siteType() == SiteType.Edge) {
+                if (validLocation.location().site() < context.board().topology().edges().size()) {
+                    final Vertex va = context.board().topology().edges().get(validLocation.location().site()).vA();
+                    final Vertex vb = context.board().topology().edges().get(validLocation.location().site()).vB();
                     final Point vaPoint = containerStyle.screenPosn(containerStyle.drawnVertices().get(va.index()).centroid());
                     final Point vbPoint = containerStyle.screenPosn(containerStyle.drawnVertices().get(vb.index()).centroid());
                     final Point2D.Double vaPointDouble = new Point2D.Double(vaPoint.getX(), vaPoint.getY());
@@ -165,15 +165,14 @@ public abstract class BaseController implements Controller
                     dist = MathRoutines.distanceToLineSegment(clickedPoint, vaPointDouble, vbPointDouble);
                     dist += Bridge.getContainerStyle(this.container.index()).cellRadiusPixels() / 4;
                 }
-            }
-            else {
-                final Point sitePosn = containerStyle.screenPosn(validLocations.get(i).position());
+            } else {
+                final Point sitePosn = containerStyle.screenPosn(validLocation.position());
                 final int dx = pt.x - sitePosn.x;
                 final int dy = pt.y - sitePosn.y;
                 dist = Math.sqrt(dx * dx + dy * dy);
             }
             if (dist < minDist && dist < furthestPossibleDistance) {
-                location = new FullLocation(site, validLocations.get(i).location().level(), validLocations.get(i).location().siteType());
+                location = new FullLocation(site, validLocation.location().level(), validLocation.location().siteType());
                 minDist = dist;
             }
         }

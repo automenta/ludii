@@ -47,21 +47,16 @@ public class EditorLookAndFeel
         }
         final int index = Math.max(0, depth % EditorLookAndFeel.CURLY_BRACKET_COLOURS_BY_DEPTH.length);
         switch (type) {
-            case OPEN_ANGLE:
-            case CLOSE_ANGLE: {
+            case OPEN_ANGLE, CLOSE_ANGLE -> {
                 return EditorLookAndFeel.RULE_COLOUR;
             }
-            case OPEN_CURLY:
-            case CLOSE_CURLY: {
+            case OPEN_CURLY, CLOSE_CURLY -> {
                 return EditorLookAndFeel.CURLY_BRACKET_COLOURS_BY_DEPTH[index];
             }
-            case OPEN_ROUND:
-            case CLOSE_ROUND:
-            case OPEN_SQUARE:
-            case CLOSE_SQUARE: {
+            case OPEN_ROUND, CLOSE_ROUND, OPEN_SQUARE, CLOSE_SQUARE -> {
                 return EditorLookAndFeel.BRACKET_COLOURS_BY_DEPTH[index];
             }
-            default: {
+            default -> {
                 System.out.println("Unexpected bracket type received!");
                 return EditorLookAndFeel.DEFAULT_COLOUR;
             }

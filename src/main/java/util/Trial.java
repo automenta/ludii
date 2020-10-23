@@ -10,7 +10,7 @@ import game.rules.play.moves.Moves;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
 import main.Status;
-import main.collections.FastTLongArrayList;
+import collections.FastTLongArrayList;
 import org.apache.commons.rng.core.RandomProviderDefaultState;
 import util.state.State;
 
@@ -256,7 +256,6 @@ public final class Trial implements Serializable
                 out.writeObject(this);
                 out.reset();
                 out.flush();
-                out.close();
             }
             catch (IOException e1) {
                 e1.printStackTrace();
@@ -279,13 +278,10 @@ public final class Trial implements Serializable
                 writer.println("SANDBOX=" + trialContainsSandbox);
                 writer.println("LUDII_VERSION=1.0.8");
             }
-            catch (IOException e1) {
-                e1.printStackTrace();
-            }
         }
     }
     
-    public String convertTrialToString(final String gameName, final List<String> gameOptions, final RandomProviderDefaultState gameStartRngState) throws IOException {
+    public String convertTrialToString(final String gameName, final List<String> gameOptions, final RandomProviderDefaultState gameStartRngState) {
         final StringBuilder sb = new StringBuilder();
         sb.append("game=" + gameName + "\n");
         sb.append("START GAME OPTIONS\n");
@@ -302,8 +298,8 @@ public final class Trial implements Serializable
             }
         }
         sb.append("\n");
-        for (int i = 0; i < this.moves.size(); ++i) {
-            sb.append("Move=" + this.moves.get(i).toTrialFormat(null) + "\n");
+        for (Move value : this.moves) {
+            sb.append("Move=" + value.toTrialFormat(null) + "\n");
         }
         if (this.auxilTrialData != null) {
             if (this.auxilTrialData.storeLegalMovesHistorySizes) {
@@ -314,8 +310,8 @@ public final class Trial implements Serializable
             if (this.auxilTrialData.storeLegalMovesHistory) {
                 for (final List<Move> legal : this.auxilTrialData.legalMovesHistory) {
                     sb.append("NEW LEGAL MOVES LIST\n");
-                    for (int j = 0; j < legal.size(); ++j) {
-                        sb.append(legal.get(j).toTrialFormat(null) + "\n");
+                    for (Move move : legal) {
+                        sb.append(move.toTrialFormat(null) + "\n");
                     }
                     sb.append("END LEGAL MOVES LIST\n");
                 }

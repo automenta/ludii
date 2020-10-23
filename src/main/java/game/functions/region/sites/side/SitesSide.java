@@ -46,7 +46,7 @@ public final class SitesSide extends BaseRegionFunction
         if (this.precomputedRegion != null) {
             return this.precomputedRegion;
         }
-        final boolean useCells = (this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
+        final boolean useCells = (this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
         final Topology graph = context.topology();
         if (this.role != null && this.role == RoleType.Shared) {
             return new Region(useCells ? graph.outer(SiteType.Cell) : graph.outer(SiteType.Vertex));
@@ -107,7 +107,7 @@ public final class SitesSide extends BaseRegionFunction
             this.index.preprocess(game);
         }
         if (this.isStatic()) {
-            if (this.type.equals(SiteType.Cell)) {
+            if (this.type == SiteType.Cell) {
                 this.precomputedRegion = new Region(game.equipment().containers()[0].topology().sides(SiteType.Cell).get(this.direction));
             }
             else {

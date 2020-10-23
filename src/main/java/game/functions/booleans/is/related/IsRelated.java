@@ -63,7 +63,7 @@ public final class IsRelated extends BaseBooleanFunction
         if ((this.type == null && context.game().board().defaultSite() != SiteType.Vertex) || this.type == SiteType.Cell) {
             final Cell cellA = graph.cells().get(location);
             switch (this.relationType) {
-                case Adjacent: {
+                case Adjacent -> {
                     for (final int st : sites) {
                         final Cell cellB = graph.cells().get(st);
                         if (cellB.adjacent().contains(cellA)) {
@@ -72,7 +72,7 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case Diagonal: {
+                case Diagonal -> {
                     for (final int st : sites) {
                         final Cell cellB = graph.cells().get(st);
                         if (cellB.diagonal().contains(cellA)) {
@@ -81,7 +81,7 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case All: {
+                case All -> {
                     for (final int st : sites) {
                         final Cell cellB = graph.cells().get(st);
                         if (cellB.neighbours().contains(cellA)) {
@@ -90,7 +90,7 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case OffDiagonal: {
+                case OffDiagonal -> {
                     for (final int st : sites) {
                         final Cell cellB = graph.cells().get(st);
                         if (cellB.off().contains(cellA)) {
@@ -99,7 +99,7 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case Orthogonal: {
+                case Orthogonal -> {
                     for (final int st : sites) {
                         final Cell cellB = graph.cells().get(st);
                         if (cellB.orthogonal().contains(cellA)) {
@@ -113,7 +113,7 @@ public final class IsRelated extends BaseBooleanFunction
         else if ((this.type == null && context.game().board().defaultSite() != SiteType.Vertex) || this.type == SiteType.Vertex) {
             final Vertex vertexA = graph.vertices().get(location);
             switch (this.relationType) {
-                case Adjacent: {
+                case Adjacent -> {
                     for (final int st : sites) {
                         for (final Vertex v : vertexA.adjacent()) {
                             if (v.index() == st) {
@@ -123,7 +123,7 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case Diagonal: {
+                case Diagonal -> {
                     for (final int st : sites) {
                         for (final Vertex v : vertexA.diagonal()) {
                             if (v.index() == st) {
@@ -133,7 +133,7 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case All: {
+                case All -> {
                     for (final int st : sites) {
                         for (final Vertex v : vertexA.neighbours()) {
                             if (v.index() == st) {
@@ -143,7 +143,7 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case OffDiagonal: {
+                case OffDiagonal -> {
                     for (final int st : sites) {
                         for (final Vertex v : vertexA.off()) {
                             if (v.index() == st) {
@@ -153,7 +153,7 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case Orthogonal: {
+                case Orthogonal -> {
                     for (final int st : sites) {
                         for (final Vertex v : vertexA.orthogonal()) {
                             if (v.index() == st) {
@@ -168,7 +168,7 @@ public final class IsRelated extends BaseBooleanFunction
         else {
             final Edge edgeA = graph.edges().get(location);
             switch (this.relationType) {
-                case Adjacent: {
+                case Adjacent -> {
                     for (final int st : sites) {
                         for (final Edge edgeB : edgeA.vA().edges()) {
                             if (edgeB.index() == st) {
@@ -183,10 +183,10 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case Diagonal: {
+                case Diagonal -> {
                     return false;
                 }
-                case All: {
+                case All -> {
                     for (final int st : sites) {
                         for (final Edge edgeB : edgeA.vA().edges()) {
                             if (edgeB.index() == st) {
@@ -201,10 +201,10 @@ public final class IsRelated extends BaseBooleanFunction
                     }
                     break;
                 }
-                case OffDiagonal: {
+                case OffDiagonal -> {
                     return false;
                 }
-                case Orthogonal: {
+                case Orthogonal -> {
                     for (final int st : sites) {
                         for (final Edge edgeB : edgeA.vA().edges()) {
                             if (edgeB.index() == st) {
@@ -238,16 +238,16 @@ public final class IsRelated extends BaseBooleanFunction
     public long gameFlags(final Game game) {
         long gameFlags = this.region.gameFlags(game) | this.site.gameFlags(game);
         if (this.type != null) {
-            if (this.type.equals(SiteType.Edge) || this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Edge || this.type == SiteType.Vertex) {
                 gameFlags |= 0x800000L;
             }
-            if (this.type.equals(SiteType.Edge)) {
+            if (this.type == SiteType.Edge) {
                 gameFlags |= 0x4000000L;
             }
-            if (this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Vertex) {
                 gameFlags |= 0x1000000L;
             }
-            if (this.type.equals(SiteType.Cell)) {
+            if (this.type == SiteType.Cell) {
                 gameFlags |= 0x2000000L;
             }
         }

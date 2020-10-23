@@ -40,7 +40,6 @@ public class DatabaseFunctions
                     final URLConnection yc = phpLudii.openConnection();
                     try (final BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()))) {
                         while (in.readLine() != null) {}
-                        in.close();
                     }
                 }
                 catch (Exception E) {
@@ -79,8 +78,8 @@ public class DatabaseFunctions
             md.update(passwordToHash.getBytes());
             final byte[] bytes = md.digest();
             final StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; ++i) {
-                sb.append(Integer.toString((bytes[i] & 0xFF) + 256, 16).substring(1));
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xFF) + 256, 16).substring(1));
             }
             generatedPassword = sb.toString();
         }
@@ -113,7 +112,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -133,7 +131,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -153,7 +150,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -180,7 +176,6 @@ public class DatabaseFunctions
                         E.printStackTrace();
                     }
                 }
-                in.close();
             }
         }
         catch (Exception E2) {
@@ -198,7 +193,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -218,7 +212,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -238,7 +231,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -258,7 +250,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -278,7 +269,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -304,7 +294,6 @@ public class DatabaseFunctions
                         e.printStackTrace();
                     }
                 }
-                in.close();
             }
         }
         catch (Exception e2) {
@@ -335,7 +324,6 @@ public class DatabaseFunctions
                 while (in.readLine() != null) {
                     System.out.println(in.readLine());
                 }
-                in.close();
             }
         }
         catch (Exception e) {
@@ -349,7 +337,6 @@ public class DatabaseFunctions
             final URLConnection yc = phpLudii.openConnection();
             try (final BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()))) {
                 while (in.readLine() != null) {}
-                in.close();
             }
         }
         catch (Exception e) {
@@ -365,7 +352,6 @@ public class DatabaseFunctions
                 while (in.readLine() != null) {
                     Manager.app.addTextToStatusPanel(in.readLine() + "\n");
                 }
-                in.close();
             }
         }
         catch (Exception e) {
@@ -379,7 +365,6 @@ public class DatabaseFunctions
             final URLConnection yc = phpLudii.openConnection();
             try (final BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()))) {
                 while (in.readLine() != null) {}
-                in.close();
             }
         }
         catch (Exception e) {
@@ -391,8 +376,8 @@ public class DatabaseFunctions
         final String[] allPlayers = GetAllPlayers().split("_next_");
         for (int playerId = 0; playerId < SettingsNetwork.onlinePlayers.length; ++playerId) {
             SettingsNetwork.onlinePlayers[playerId] = false;
-            for (int i = 0; i < allPlayers.length; ++i) {
-                if (Manager.aiSelected()[ContextSnapshot.getContext().state().playerToAgent(playerId)].name().equals(allPlayers[i].split("NEXT_COL")[1]) && allPlayers[i].split("NEXT_COL")[2].equals("yes")) {
+            for (String allPlayer : allPlayers) {
+                if (Manager.aiSelected()[ContextSnapshot.getContext().state().playerToAgent(playerId)].name().equals(allPlayer.split("NEXT_COL")[1]) && allPlayer.split("NEXT_COL")[2].equals("yes")) {
                     SettingsNetwork.onlinePlayers[playerId] = true;
                 }
             }
@@ -417,7 +402,7 @@ public class DatabaseFunctions
                             }
                         }
                         for (int i = numberMovesMade; i < allMoves.length; ++i) {
-                            if (!allMoves[i].equals("")) {
+                            if (!allMoves[i].isEmpty()) {
                                 final Move j = new Move(allMoves[i]);
                                 Manager.ref().applyNetworkMoveToGame(j);
                             }
@@ -428,7 +413,6 @@ public class DatabaseFunctions
                         e.printStackTrace();
                     }
                 }
-                in.close();
             }
         }
         catch (Exception e2) {
@@ -459,7 +443,6 @@ public class DatabaseFunctions
                     }
                     catch (Exception ex) {}
                 }
-                in.close();
             }
         }
         catch (Exception e) {
@@ -483,12 +466,11 @@ public class DatabaseFunctions
                                     Manager.app.addTextToStatusPanel("Player " + (i + 1) + " has proposed a draw.\n");
                                 }
                                 SettingsNetwork.drawProposedPlayers[i] = true;
-                                foundDrawList = true;
                             }
                             else {
                                 SettingsNetwork.drawProposedPlayers[i] = false;
-                                foundDrawList = true;
                             }
+                            foundDrawList = true;
                         }
                     }
                     catch (Exception ex) {}
@@ -496,7 +478,6 @@ public class DatabaseFunctions
                 if (!foundDrawList) {
                     Arrays.fill(SettingsNetwork.drawProposedPlayers, false);
                 }
-                in.close();
             }
         }
         catch (Exception e) {
@@ -521,11 +502,8 @@ public class DatabaseFunctions
                         E.printStackTrace();
                     }
                 }
-                in.close();
             }
-            for (int i = 0; i < playerNames.length; ++i) {
-                playerNamesFinal[i] = playerNames[i];
-            }
+            System.arraycopy(playerNames, 0, playerNamesFinal, 0, playerNames.length);
             return playerNamesFinal;
         }
         catch (Exception e) {
@@ -543,7 +521,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     System.out.println(inputLine);
                 }
-                in.close();
             }
         }
         catch (Exception e) {
@@ -585,7 +562,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     System.out.println(inputLine);
                 }
-                in.close();
             }
         }
         catch (Exception E) {
@@ -603,7 +579,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     System.out.println(inputLine);
                 }
-                in.close();
             }
         }
         catch (Exception E) {
@@ -633,7 +608,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     rng += inputLine;
                 }
-                in.close();
             }
         }
         catch (Exception E) {
@@ -652,7 +626,6 @@ public class DatabaseFunctions
                 while ((inputLine = in.readLine()) != null) {
                     returnString += inputLine;
                 }
-                in.close();
             }
             return returnString;
         }
@@ -691,7 +664,6 @@ public class DatabaseFunctions
                 final URLConnection yc = phpLudii.openConnection();
                 try (final BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()))) {
                     while (in.readLine() != null) {}
-                    in.close();
                 }
             }
         }

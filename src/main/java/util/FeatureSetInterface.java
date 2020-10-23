@@ -5,8 +5,8 @@
 package util;
 
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import util.state.State;
 
 import java.util.List;

@@ -23,11 +23,7 @@ import util.SettingsVC;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
@@ -272,7 +268,6 @@ public class RemoteDialog extends JDialog
                         }
                         catch (Exception ex) {}
                     }
-                    in.close();
                 }
             }
             catch (Exception E) {
@@ -318,7 +313,6 @@ public class RemoteDialog extends JDialog
                         }
                         catch (Exception ex) {}
                     }
-                    in.close();
                 }
             }
             catch (Exception E) {

@@ -7,8 +7,8 @@ package search.mcts;
 import expert_iteration.ExItExperience;
 import expert_iteration.ExpertPolicy;
 import game.Game;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import metadata.ai.features.Features;
 import org.json.JSONObject;
 import policies.softmax.SoftmaxFromMetadata;
@@ -311,7 +311,7 @@ public class MCTS extends ExpertPolicy
                 }
             }
             else {
-                aiDistribution.set(i, (float)child.numVisits());
+                aiDistribution.set(i, child.numVisits());
                 valueEstimates.set(i, (float)child.averageScore(mover, this.rootNode.contextRef().state()));
             }
             if (valueEstimates.get(i) > 1.0f) {

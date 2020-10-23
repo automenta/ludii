@@ -3,7 +3,7 @@
  */
 package grammar.ebnf;
 
-import root.StringRoutines;
+import main.StringRoutines;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +32,7 @@ public class EBNFRule {
         str = str.replaceAll("<<", "<#");
         str = str.replaceAll("<>", "<@");
         str = str.replaceAll("<>", "#>");
-        if ((str = str.replaceAll(">>", "@>")).length() == 0) {
+        if ((str = str.replaceAll(">>", "@>")).isEmpty()) {
             System.out.println("** Empty RHS for rule: " + input);
             return;
         }

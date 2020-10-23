@@ -7,8 +7,8 @@ package search.mcts.nodes;
 import expert_iteration.ExItExperience;
 import game.Game;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import policies.softmax.SoftmaxPolicy;
 import search.mcts.MCTS;
 import util.Context;
@@ -115,25 +115,25 @@ public abstract class BaseNode
     
     public double valueEstimateUnvisitedChildren(final int player, final State state) {
         switch (this.mcts.qInit()) {
-            case DRAW: {
+            case DRAW -> {
                 return 0.0;
             }
-            case INF: {
+            case INF -> {
                 return 10000.0;
             }
-            case LOSS: {
+            case LOSS -> {
                 return -1.0;
             }
-            case PARENT: {
+            case PARENT -> {
                 if (this.numVisits == 0) {
                     return 10000.0;
                 }
                 return this.averageScore(player, state);
             }
-            case WIN: {
+            case WIN -> {
                 return 1.0;
             }
-            default: {
+            default -> {
                 return 0.0;
             }
         }
@@ -190,7 +190,7 @@ public abstract class BaseNode
                 else {
                     visitCount2 = child2.numVisits;
                 }
-                policy.set(k, (float)visitCount2);
+                policy.set(k, visitCount2);
             }
             if (tau != 1.0) {
                 policy.raiseToPower(1.0 / tau);

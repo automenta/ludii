@@ -33,11 +33,11 @@ public class ChineseCheckersDesign extends BoardDesign
                 if (path.getCurrentPoint() == null) {
                     final Vertex prev = cell.vertices().get(cell.vertices().size() - 1);
                     final Point prevPosn = this.screenPosn(prev.centroid());
-                    path.moveTo((float)prevPosn.x, (float)prevPosn.y);
+                    path.moveTo(prevPosn.x, prevPosn.y);
                 }
                 final Vertex corner = cell.vertices().get(v);
                 final Point cornerPosn = this.screenPosn(corner.centroid());
-                path.lineTo((float)cornerPosn.x, (float)cornerPosn.y);
+                path.lineTo(cornerPosn.x, cornerPosn.y);
             }
             g2d.setColor(this.colorFillPhase0);
             if (cell.index() < 10) {

@@ -21,8 +21,7 @@ public class ReflectionUtils
     }
     
     public static List<Field> getAllFields(final Class<?> clazz) {
-        final List<Field> fields = new ArrayList<>();
-        fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
+        final List<Field> fields = new ArrayList<>(Arrays.asList(clazz.getDeclaredFields()));
         if (clazz.getSuperclass() != null) {
             fields.addAll(getAllFields(clazz.getSuperclass()));
         }

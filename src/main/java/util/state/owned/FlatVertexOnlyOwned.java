@@ -7,7 +7,7 @@ package util.state.owned;
 import game.Game;
 import game.types.board.SiteType;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FastTIntArrayList;
+import collections.FastTIntArrayList;
 import util.locations.FlatVertexOnlyLocation;
 
 import java.io.Serializable;

@@ -13,10 +13,10 @@ public class Player implements GraphicsItem
 {
     public static GraphicsItem construct(final PlayerColourType playerType, final RoleType roleType, final Colour colour) {
         switch (playerType) {
-            case Colour: {
+            case Colour -> {
                 return new PlayerColour(roleType, colour);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Player(): A PlayerColourType is not implemented.");
             }
         }

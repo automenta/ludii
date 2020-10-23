@@ -9,8 +9,8 @@ import game.rules.phase.Phase;
 import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.effect.state.MoveAgain;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import util.*;
 import util.action.others.ActionSwap;
 

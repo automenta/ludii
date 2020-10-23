@@ -68,7 +68,7 @@ public final class IsVisible extends BaseBooleanFunction
     @Override
     public long gameFlags(final Game game) {
         long gameFlags = this.locationId.gameFlags(game) | this.playerId.gameFlags(game);
-        if (this.type != null && (this.type.equals(SiteType.Edge) || this.type.equals(SiteType.Vertex))) {
+        if (this.type != null && (this.type == SiteType.Edge || this.type == SiteType.Vertex)) {
             gameFlags |= 0x800000L;
         }
         return gameFlags;

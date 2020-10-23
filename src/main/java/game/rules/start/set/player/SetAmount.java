@@ -45,8 +45,7 @@ public final class SetAmount extends StartRule
                 players[i] = i + 1;
             }
         }
-        for (int i = 0; i < players.length; ++i) {
-            final int playerId = players[i];
+        for (final int playerId : players) {
             final ActionSetAmount actionAmount = new ActionSetAmount(playerId, amount);
             actionAmount.apply(context, true);
             final Move move = new Move(actionAmount);

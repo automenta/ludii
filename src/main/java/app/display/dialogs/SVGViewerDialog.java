@@ -44,7 +44,7 @@ public class SVGViewerDialog
         final svgLoaderNode root = new svgLoaderNode("svgs", File.separator + "svg" + File.separator);
         for (final String choice : choices) {
             String str = choice.replaceAll(Pattern.quote("\\"), "/");
-            if (str.startsWith("/")) {
+            if (!str.isEmpty() && str.charAt(0) == '/') {
                 str = str.substring(1);
             }
             final String[] parts = str.split("/");
@@ -186,7 +186,7 @@ public class SVGViewerDialog
                     filterField.setText(filterField.getText());
                     filterField.setFont(gainFont);
                 }
-                if (!SVGViewerDialog.lastKeyPressed.equals("")) {
+                if (!SVGViewerDialog.lastKeyPressed.isEmpty()) {
                     filterField.setText(filterField.getText() + SVGViewerDialog.lastKeyPressed);
                     SVGViewerDialog.lastKeyPressed = "";
                 }
@@ -195,7 +195,7 @@ public class SVGViewerDialog
             
             @Override
             public void focusLost(final FocusEvent e) {
-                if (filterField.getText().equals("Search SVG") || filterField.getText().length() == 0) {
+                if (filterField.getText().equals("Search SVG") || filterField.getText().isEmpty()) {
                     filterField.setText("Search SVG");
                 }
                 this.setTextColour();
@@ -372,9 +372,9 @@ public class SVGViewerDialog
                 return super.getChildAt(index);
             }
             int visibleIdx = -1;
-            final Enumeration<TreeNode> e = this.children.elements();
-            while (e.hasMoreElements()) {
-                final svgLoaderNode node = (svgLoaderNode) e.nextElement();
+            Iterator<TreeNode> iterator = this.children.iterator();
+            while (iterator.hasNext()) {
+                final svgLoaderNode node = (svgLoaderNode) iterator.next();
                 if (node.isVisible) {
                     ++visibleIdx;
                 }
@@ -390,9 +390,9 @@ public class SVGViewerDialog
                 return super.getChildCount();
             }
             int count = 0;
-            final Enumeration<TreeNode> e = this.children.elements();
-            while (e.hasMoreElements()) {
-                final svgLoaderNode node = (svgLoaderNode) e.nextElement();
+            Iterator<TreeNode> iterator = this.children.iterator();
+            while (iterator.hasNext()) {
+                final svgLoaderNode node = (svgLoaderNode) iterator.next();
                 if (node.isVisible) {
                     ++count;
                 }
@@ -406,9 +406,9 @@ public class SVGViewerDialog
             }
             else {
                 this.isVisible = false;
-                final Enumeration<TreeNode> e = this.children.elements();
-                while (e.hasMoreElements()) {
-                    final svgLoaderNode child = (svgLoaderNode) e.nextElement();
+                Iterator<TreeNode> iterator = this.children.iterator();
+                while (iterator.hasNext()) {
+                    final svgLoaderNode child = (svgLoaderNode) iterator.next();
                     child.updateVisibility(filterText);
                     if (child.isVisible) {
                         this.isVisible = true;
@@ -487,12 +487,12 @@ public class SVGViewerDialog
             if (filterText.equals("searchsvg")) {
                 filterText = "";
             }
-            if (filterText.length() > 0) {
+            if (!filterText.isEmpty()) {
                 root.updateVisibility(filterText);
                 model.setFilterActive(true);
             }
             model.reload();
-            if (filterText.length() == 0) {
+            if (filterText.isEmpty()) {
                 final Enumeration<TreeNode> bfsEnumeration = root.breadthFirstEnumeration();
                 while (bfsEnumeration.hasMoreElements()) {
                     final svgLoaderNode node = (svgLoaderNode) bfsEnumeration.nextElement();
@@ -523,7 +523,6 @@ public class SVGViewerDialog
                             this.setSelectionPath(new TreePath(node2.getPath()));
                             break;
                         }
-                        continue;
                     }
                 }
             }

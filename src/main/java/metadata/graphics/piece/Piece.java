@@ -27,10 +27,10 @@ public class Piece implements GraphicsItem
 {
     public static GraphicsItem construct(final PieceStyleType pieceType, @Opt final RoleType roleType, @Opt final String pieceName, final ComponentStyleType componentStyleType) {
         switch (pieceType) {
-            case Style: {
+            case Style -> {
                 return new PieceStyle(roleType, pieceName, componentStyleType);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Piece(): A PieceStyleType is not implemented.");
             }
         }
@@ -38,16 +38,16 @@ public class Piece implements GraphicsItem
     
     public static GraphicsItem construct(final PieceNameType pieceType, @Opt final RoleType roleType, @Opt @Name final String piece, @Opt @Name final Integer state, @Opt final String name) {
         switch (pieceType) {
-            case ExtendName: {
+            case ExtendName -> {
                 return new PieceExtendName(roleType, piece, state, (name == null) ? "" : name);
             }
-            case Rename: {
+            case Rename -> {
                 return new PieceRename(roleType, piece, state, (name == null) ? "" : name);
             }
-            case AddStateToName: {
+            case AddStateToName -> {
                 return new PieceAddStateToName(roleType, piece, state);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Piece(): A PieceNameType is not implemented.");
             }
         }
@@ -55,10 +55,10 @@ public class Piece implements GraphicsItem
     
     public static GraphicsItem construct(final PieceFamiliesType pieceType, final String[] pieceFamilies) {
         switch (pieceType) {
-            case Families: {
+            case Families -> {
                 return new PieceFamilies(pieceFamilies);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Piece(): A PieceFamiliesType is not implemented.");
             }
         }
@@ -66,13 +66,13 @@ public class Piece implements GraphicsItem
     
     public static GraphicsItem construct(final PieceGroundType pieceType, @Opt final RoleType roleType, @Opt final String pieceName, @Opt @Name final Integer state, @Name final String image, @Opt @Name final Colour fillColour, @Opt @Name final Colour edgeColour, @Opt @Name final Float scale) {
         switch (pieceType) {
-            case Background: {
+            case Background -> {
                 return new PieceBackground(roleType, pieceName, state, image, fillColour, edgeColour, scale);
             }
-            case Foreground: {
+            case Foreground -> {
                 return new PieceForeground(roleType, pieceName, state, image, fillColour, edgeColour, scale);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Piece(): A PieceGroundType is not implemented.");
             }
         }
@@ -80,10 +80,10 @@ public class Piece implements GraphicsItem
     
     public static GraphicsItem construct(final PieceColourType pieceType, @Opt final RoleType roleType, @Opt final String pieceName, @Opt @Name final Integer state, @Opt @Name final Colour fillColour, @Opt @Name final Colour strokeColour, @Opt @Name final Colour secondaryColour) {
         switch (pieceType) {
-            case Colour: {
+            case Colour -> {
                 return new PieceColour(roleType, pieceName, state, fillColour, strokeColour, secondaryColour);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Piece(): A PieceColourType is not implemented.");
             }
         }
@@ -91,10 +91,10 @@ public class Piece implements GraphicsItem
     
     public static GraphicsItem construct(final PieceReflectType pieceType, @Opt final RoleType roleType, @Opt final String pieceName, @Opt @Name final Boolean vertical, @Opt @Name final Boolean horizontal) {
         switch (pieceType) {
-            case Reflect: {
+            case Reflect -> {
                 return new PieceReflect(roleType, pieceName, vertical, horizontal);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Piece(): A PieceReflectType is not implemented.");
             }
         }
@@ -102,10 +102,10 @@ public class Piece implements GraphicsItem
     
     public static GraphicsItem construct(final PieceRotateType pieceType, @Opt final RoleType roleType, @Opt final String pieceName, @Name final Integer degrees) {
         switch (pieceType) {
-            case Rotate: {
+            case Rotate -> {
                 return new PieceRotate(roleType, pieceName, degrees);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Piece(): A PieceRotateType is not implemented.");
             }
         }
@@ -113,10 +113,10 @@ public class Piece implements GraphicsItem
     
     public static GraphicsItem construct(final PieceScaleType pieceType, @Opt final RoleType roleType, @Opt final String pieceName, final Float scale) {
         switch (pieceType) {
-            case Scale: {
+            case Scale -> {
                 return new PieceScale(roleType, pieceName, scale);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Piece(): A PieceScaleType is not implemented.");
             }
         }
@@ -126,10 +126,10 @@ public class Piece implements GraphicsItem
         switch (pieceType) {
             case Scale: {
                 switch (scaleByType) {
-                    case ByValue: {
+                    case ByValue -> {
                         return new PieceScaleByValue(value);
                     }
-                    default: {
+                    default -> {
                         throw new IllegalArgumentException("Piece(): A PieceScaleByType is not implemented.");
                     }
                 }

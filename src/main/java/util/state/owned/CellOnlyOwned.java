@@ -39,8 +39,8 @@ public final class CellOnlyOwned implements Owned, Serializable
             for (int i = 0; i < other.locations[p].length; ++i) {
                 final List<CellOnlyLocation> otherPositionsComp = other.locations[p][i];
                 final List<CellOnlyLocation> newPositionsComp = new ArrayList<>(otherPositionsComp.size());
-                for (int k = 0; k < otherPositionsComp.size(); ++k) {
-                    newPositionsComp.add((CellOnlyLocation)otherPositionsComp.get(k).copy());
+                for (CellOnlyLocation cellOnlyLocation : otherPositionsComp) {
+                    newPositionsComp.add((CellOnlyLocation) cellOnlyLocation.copy());
                 }
                 this.locations[p][i] = newPositionsComp;
             }

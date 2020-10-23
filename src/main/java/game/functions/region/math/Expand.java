@@ -87,7 +87,7 @@ public final class Expand extends BaseRegionFunction
     @Override
     public long gameFlags(final Game game) {
         long flags = this.baseRegion.gameFlags(game) | this.numSteps.gameFlags(game);
-        if (this.type != null && (this.type.equals(SiteType.Edge) || this.type.equals(SiteType.Vertex))) {
+        if (this.type != null && (this.type == SiteType.Edge || this.type == SiteType.Vertex)) {
             flags |= 0x800000L;
         }
         return flags;

@@ -21,11 +21,7 @@ import metrics.evaluation.playability.Duration;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -110,7 +106,7 @@ public class EvaluationDialog extends JDialog
         final JLabel lblAiAlgorithm = new JLabel("AI Algorithm");
         lblAiAlgorithm.setBounds(26, 212, 91, 15);
         contentPanel.add(lblAiAlgorithm);
-        final String[] comboBoxContents = GUIUtil.getAiStrings(false).toArray(new String[GUIUtil.getAiStrings(false).size()]);
+        final String[] comboBoxContents = GUIUtil.getAiStrings(false).toArray(new String[0]);
         final JComboBox<String> comboBoxAlgorithm = new JComboBox<>(comboBoxContents);
         comboBoxAlgorithm.setEnabled(false);
         comboBoxAlgorithm.setBounds(220, 207, 162, 24);
@@ -191,12 +187,12 @@ public class EvaluationDialog extends JDialog
             }
         });
         okButton.addActionListener(e -> {
-            if (Double.valueOf(EvaluationDialog.this.textFieldThinkTime.getText()) <= 0.0) {
+            if (Double.parseDouble(EvaluationDialog.this.textFieldThinkTime.getText()) <= 0.0) {
                 DesktopApp.playerApp().addTextToAnalysisPanel("Invalid think time, setting to 0.05");
                 EvaluationDialog.this.textFieldThinkTime.setText("0.05");
             }
             try {
-                if (Integer.valueOf(textFieldMaxTurns.getText()) <= 0) {
+                if (Integer.parseInt(textFieldMaxTurns.getText()) <= 0) {
                     DesktopApp.playerApp().addTextToAnalysisPanel("Invalid maximum number of turns, setting to 50");
                     textFieldMaxTurns.setText("50");
                 }
@@ -206,7 +202,7 @@ public class EvaluationDialog extends JDialog
                 textFieldMaxTurns.setText("50");
             }
             try {
-                if (Integer.valueOf(textFieldNumberTrials.getText()) <= 0) {
+                if (Integer.parseInt(textFieldNumberTrials.getText()) <= 0) {
                     DesktopApp.playerApp().addTextToAnalysisPanel("Invalid number of trials, setting to 10");
                     textFieldNumberTrials.setText("10");
                 }
@@ -216,7 +212,7 @@ public class EvaluationDialog extends JDialog
                 textFieldNumberTrials.setText("10");
             }
             try {
-                if (Double.valueOf(EvaluationDialog.this.textFieldMinIdealTurns.getText()) < 0.0) {
+                if (Double.parseDouble(EvaluationDialog.this.textFieldMinIdealTurns.getText()) < 0.0) {
                     DesktopApp.playerApp().addTextToAnalysisPanel("Invalid minimum number of ideal turns, setting to 0");
                     EvaluationDialog.this.textFieldMinIdealTurns.setText("0");
                 }
@@ -226,7 +222,7 @@ public class EvaluationDialog extends JDialog
                 EvaluationDialog.this.textFieldMinIdealTurns.setText("0");
             }
             try {
-                if (Double.valueOf(EvaluationDialog.this.textFieldMaxIdealTurns.getText()) <= 0.0) {
+                if (Double.parseDouble(EvaluationDialog.this.textFieldMaxIdealTurns.getText()) <= 0.0) {
                     DesktopApp.playerApp().addTextToAnalysisPanel("Invalid maximum number of ideal turns, setting to 1000");
                     EvaluationDialog.this.textFieldMaxIdealTurns.setText("1000");
                 }
@@ -235,37 +231,37 @@ public class EvaluationDialog extends JDialog
                 DesktopApp.playerApp().addTextToAnalysisPanel("Invalid maximum number of ideal turns, setting to 1000");
                 EvaluationDialog.this.textFieldMaxIdealTurns.setText("1000");
             }
-            final int maxTurns = Integer.valueOf(textFieldMaxTurns.getText());
-            final int numberIterations = Integer.valueOf(textFieldNumberTrials.getText());
+            final int maxTurns = Integer.parseInt(textFieldMaxTurns.getText());
+            final int numberIterations = Integer.parseInt(textFieldNumberTrials.getText());
             double thinkTime = 0.5;
             String AIName = null;
             final String string = comboBoxAIAgents.getSelectedItem().toString();
             switch (string) {
-                case "Random": {
+                case "Random" -> {
                     AIName = "Random";
                     break;
                 }
-                case "Very weak AI": {
+                case "Very weak AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 0.1;
                     break;
                 }
-                case "Weak AI": {
+                case "Weak AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 0.5;
                     break;
                 }
-                case "Strong AI": {
+                case "Strong AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 2.0;
                     break;
                 }
-                case "very strong AI": {
+                case "very strong AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 5.0;
                     break;
                 }
-                case "Custom": {
+                case "Custom" -> {
                     AIName = comboBoxAlgorithm.getSelectedItem().toString();
                     thinkTime = Double.valueOf(EvaluationDialog.this.textFieldThinkTime.getText());
                     break;
@@ -273,8 +269,8 @@ public class EvaluationDialog extends JDialog
             }
             for (final Metric m : metrics) {
                 if (m instanceof Duration) {
-                    ((Duration)m).setMinTurn(Double.valueOf(EvaluationDialog.this.textFieldMinIdealTurns.getText()));
-                    ((Duration)m).setMaxTurn(Double.valueOf(EvaluationDialog.this.textFieldMaxIdealTurns.getText()));
+                    ((Duration)m).setMinTurn(Double.parseDouble(EvaluationDialog.this.textFieldMinIdealTurns.getText()));
+                    ((Duration)m).setMaxTurn(Double.parseDouble(EvaluationDialog.this.textFieldMaxIdealTurns.getText()));
                 }
             }
             AIDesktop.AIEvalution(numberIterations, maxTurns, thinkTime, AIName, metrics, weights);

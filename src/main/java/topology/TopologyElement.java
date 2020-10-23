@@ -8,8 +8,8 @@ import game.types.board.RelationType;
 import game.types.board.SiteType;
 import game.util.directions.DirectionFacing;
 import game.util.graph.Properties;
-import main.math.Point3D;
-import main.math.RCL;
+import math.Point3D;
+import math.RCL;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -147,22 +147,22 @@ public abstract class TopologyElement
     
     public List<DirectionFacing> supportedDirections(final RelationType relationType) {
         switch (relationType) {
-            case Adjacent: {
+            case Adjacent -> {
                 return this.supportedAdjacentDirections;
             }
-            case Diagonal: {
+            case Diagonal -> {
                 return this.supportedDiagonalDirections;
             }
-            case All: {
+            case All -> {
                 return this.supportedDirections;
             }
-            case OffDiagonal: {
+            case OffDiagonal -> {
                 return this.supportedOffDirections;
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 return this.supportedOrthogonalDirections;
             }
-            default: {
+            default -> {
                 return this.supportedDirections;
             }
         }

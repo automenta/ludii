@@ -42,31 +42,31 @@ public class MailcapTokenizer
     public static String nameForToken(final int token) {
         String name = "really unknown";
         switch (token) {
-            case 0: {
+            case 0 -> {
                 name = "unknown";
                 break;
             }
-            case 1: {
+            case 1 -> {
                 name = "start";
                 break;
             }
-            case 2: {
+            case 2 -> {
                 name = "string";
                 break;
             }
-            case 5: {
+            case 5 -> {
                 name = "EOI";
                 break;
             }
-            case 47: {
+            case 47 -> {
                 name = "'/'";
                 break;
             }
-            case 59: {
+            case 59 -> {
                 name = "';'";
                 break;
             }
-            case 61: {
+            case 61 -> {
                 name = "'='";
                 break;
             }
@@ -88,7 +88,7 @@ public class MailcapTokenizer
                 if (this.isAutoquoting) {
                     if (c == ';' || c == '=') {
                         this.currentToken = c;
-                        this.currentTokenValue = new Character(c).toString();
+                        this.currentTokenValue = Character.toString(c);
                         ++this.dataIndex;
                     }
                     else {
@@ -100,12 +100,12 @@ public class MailcapTokenizer
                 }
                 else if (c == '/' || c == ';' || c == '=') {
                     this.currentToken = c;
-                    this.currentTokenValue = new Character(c).toString();
+                    this.currentTokenValue = Character.toString(c);
                     ++this.dataIndex;
                 }
                 else {
                     this.currentToken = 0;
-                    this.currentTokenValue = new Character(c).toString();
+                    this.currentTokenValue = Character.toString(c);
                     ++this.dataIndex;
                 }
             }
@@ -149,21 +149,7 @@ public class MailcapTokenizer
     private static boolean isSpecialChar(final char c) {
         boolean lAnswer = false;
         switch (c) {
-            case '\"':
-            case '(':
-            case ')':
-            case ',':
-            case '/':
-            case ':':
-            case ';':
-            case '<':
-            case '=':
-            case '>':
-            case '?':
-            case '@':
-            case '[':
-            case '\\':
-            case ']': {
+            case '\"', '(', ')', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']' -> {
                 lAnswer = true;
                 break;
             }
@@ -185,7 +171,7 @@ public class MailcapTokenizer
     
     private static String fixEscapeSequences(final String inputString) {
         final int inputLength = inputString.length();
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuilder buffer = new StringBuilder();
         buffer.ensureCapacity(inputLength);
         for (int i = 0; i < inputLength; ++i) {
             final char currentChar = inputString.charAt(i);

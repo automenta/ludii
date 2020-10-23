@@ -86,7 +86,7 @@ public class GraphDesign extends PuzzleDesign
         Stroke lineStroke = defaultLineStroke;
         final EdgeInfoGUI edgeInfoGUI = context.game().metadata().graphics().drawEdge(edgeType, relationType, connection);
         if (edgeInfoGUI != null) {
-            if (edgeInfoGUI.getStyle().equals(LineStyle.Hidden)) {
+            if (edgeInfoGUI.getStyle() == LineStyle.Hidden) {
                 return;
             }
             if (edgeInfoGUI.getColour() != null) {

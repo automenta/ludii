@@ -76,7 +76,7 @@ public class TileStyle extends BaseComponentStyle
                 g2d.setColor(Color.RED);
                 final double lineThicknessMultiplier = 0.33;
                 final int lineThickness = (int)(imageSize * 0.33);
-                g2d.setStroke(new BasicStroke((float)lineThickness, 0, 0));
+                g2d.setStroke(new BasicStroke(lineThickness, 0, 0));
                 this.drawPathLines(g2d, terminus, imageSize, numEdges);
             }
         }
@@ -93,44 +93,44 @@ public class TileStyle extends BaseComponentStyle
                 int bx = 0;
                 int by = 0;
                 switch (tilePath.side1()) {
-                    case 0: {
+                    case 0 -> {
                         ax = terminusSpacing * (tilePath.terminus1() + 1);
                         ay = 0;
                         break;
                     }
-                    case 1: {
+                    case 1 -> {
                         ax = imageSize;
                         ay = terminusSpacing * (tilePath.terminus1() + 1);
                         break;
                     }
-                    case 2: {
+                    case 2 -> {
                         ax = terminusSpacing * (tilePath.terminus1() + 1);
                         ay = imageSize;
                         break;
                     }
-                    case 3: {
+                    case 3 -> {
                         ax = 0;
                         ay = terminusSpacing * (tilePath.terminus1() + 1);
                         break;
                     }
                 }
                 switch (tilePath.side2()) {
-                    case 0: {
+                    case 0 -> {
                         bx = terminusSpacing * (tilePath.terminus2() + 1);
                         by = 0;
                         break;
                     }
-                    case 1: {
+                    case 1 -> {
                         bx = imageSize;
                         by = terminusSpacing * (tilePath.terminus2() + 1);
                         break;
                     }
-                    case 2: {
+                    case 2 -> {
                         bx = terminusSpacing * (tilePath.terminus2() + 1);
                         by = imageSize;
                         break;
                     }
-                    case 3: {
+                    case 3 -> {
                         bx = 0;
                         by = terminusSpacing * (tilePath.terminus2() + 1);
                         break;
@@ -142,8 +142,8 @@ public class TileStyle extends BaseComponentStyle
                 final int bbx = bx + (int)(0.666 * (imageSize / 2 - bx));
                 final int bby = by + (int)(0.666 * (imageSize / 2 - by));
                 final GeneralPath path2 = new GeneralPath();
-                path2.moveTo((float)ax, (float)ay);
-                path2.curveTo((float)aax, (float)aay, (float)bbx, (float)bby, (float)bx, (float)by);
+                path2.moveTo(ax, ay);
+                path2.curveTo(aax, aay, bbx, bby, bx, by);
                 g2d.setColor(SettingsColour.getDefaultPlayerColours()[tilePath.colour()]);
                 g2d.draw(path2);
             }

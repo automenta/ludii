@@ -20,7 +20,7 @@ public final class DimConstant extends BaseDimFunction
     
     @Override
     public String toString() {
-        final String str = "" + this.a;
+        final String str = String.valueOf(this.a);
         return str;
     }
 }

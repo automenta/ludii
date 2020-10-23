@@ -8,8 +8,8 @@ import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.ChunkSet;
-import main.collections.ListStack;
+import collections.ChunkSet;
+import collections.ListStack;
 import util.state.State;
 import util.zhash.ZobristHashGenerator;
 
@@ -81,16 +81,14 @@ public class ContainerStateCards extends BaseContainerStateStacking
         this.listStacks[site - this.offset].setWho(who);
         final TIntArrayList hiddenList = new TIntArrayList();
         hiddenList.add(0);
-        for (int i = 0; i < hidden.length; ++i) {
-            if (hidden[i]) {
+        for (boolean b : hidden) {
+            if (b) {
                 if (masked) {
                     hiddenList.add(1);
-                }
-                else {
+                } else {
                     hiddenList.add(2);
                 }
-            }
-            else {
+            } else {
                 hiddenList.add(0);
             }
         }

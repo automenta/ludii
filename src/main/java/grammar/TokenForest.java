@@ -3,7 +3,7 @@
  */
 package grammar;
 
-import root.StringRoutines;
+import main.StringRoutines;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +32,7 @@ public class TokenForest {
             return;
         }
         String str = strIn.trim();
-        while ((c = str.indexOf("(")) >= 0) {
+        while ((c = str.indexOf('(')) >= 0) {
             int cc = StringRoutines.matchingBracketAt(str, c);
             if (cc < 0) {
                 report.addError("Couldn't close clause '" + Report.clippedString(str.substring(c), 20) + "'.");
@@ -46,7 +46,7 @@ public class TokenForest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Token token : this.tokenTrees) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append("\n");
             }
             sb.append(token.toString());

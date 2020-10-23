@@ -35,7 +35,7 @@ public class FileHandling {
                     final List<String> names = new ArrayList<>();
                     visit(path, names);
                     Collections.sort(names);
-                    choices = names.toArray(new String[names.size()]);
+                    choices = names.toArray(new String[0]);
                 } catch (URISyntaxException exception) {
                     exception.printStackTrace();
                 }
@@ -133,14 +133,12 @@ public class FileHandling {
             }
         }
         if (dirURL.getProtocol().equals("jar")) {
-            final String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!"));
+            final String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf('!'));
             JarFile jar = null;
             try {
                 jar = new JarFile(URLDecoder.decode(jarPath, StandardCharsets.UTF_8));
-            } catch (UnsupportedEncodingException e2) {
+            } catch (IOException e2) {
                 e2.printStackTrace();
-            } catch (IOException e3) {
-                e3.printStackTrace();
             }
             final Enumeration<JarEntry> entries = jar.entries();
             final List<String> result = new ArrayList<>();
@@ -156,7 +154,7 @@ public class FileHandling {
                 e4.printStackTrace();
             }
             Collections.sort(result);
-            return result.toArray(new String[result.size()]);
+            return result.toArray(new String[0]);
         }
         return null;
     }
@@ -186,14 +184,12 @@ public class FileHandling {
         if (!dirURL.getProtocol().equals("jar")) {
             return null;
         }
-        final String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!"));
+        final String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf('!'));
         JarFile jar = null;
         try {
             jar = new JarFile(URLDecoder.decode(jarPath, StandardCharsets.UTF_8));
-        } catch (UnsupportedEncodingException e2) {
+        } catch (IOException e2) {
             e2.printStackTrace();
-        } catch (IOException e3) {
-            e3.printStackTrace();
         }
         final ZipEntry entry = jar.getEntry(path + filter);
         if (entry != null) {
@@ -214,7 +210,7 @@ public class FileHandling {
             e4.printStackTrace();
         }
         Collections.sort(result);
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 
     public static List<String> listFilesOfType(final String path, final String extension) {
@@ -238,66 +234,64 @@ public class FileHandling {
         }
     }
 
-    public static void findMissingConstructors() {
-        final List<String> files = listFilesOfType("/Users/cambolbro/Ludii/dev/Core/src/game", ".java");
-        System.out.println(files.size() + " .java files found.");
-        Label_0227_Outer:
-        for (final String path : files) {
-            int c;
-            for (c = path.length() - 1; c >= 0 && path.charAt(c) != '/'; --c) {
-            }
-            if (c < 0) {
-                continue;
-            }
-            final String className = path.substring(c + 1, path.length() - 5);
-            final String constructorName = "public " + className;
-            boolean abstractClass = false;
-
-            boolean constructorFound = false;
-            try {
-                final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
-                Throwable t = null;
-                Label_0314:
-                {
-                    try {
-                        while (true) {
-                            String line;
-                            do {
-                                line = reader.readLine();
-                                if (line != null) {
-                                    if (!line.contains("abstract class")) {
-                                        continue Label_0227_Outer;
-                                    }
-                                    abstractClass = true;
-                                    break Label_0314;
-                                }
-                            } while (!line.contains(constructorName) && !line.contains(" construct()"));
-                            constructorFound = true;
-                            break;
-                        }
-                    } catch (Throwable t2) {
-                        throw t2;
-                    } finally {
-                        if (t != null) {
-                            try {
-                                reader.close();
-                            } catch (Throwable exception) {
-                                t.addSuppressed(exception);
-                            }
-                        } else {
-                            reader.close();
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (abstractClass || constructorFound) {
-                continue;
-            }
-            System.out.println("Missing " + path);
-        }
-    }
+//    public static void findMissingConstructors() {
+//        final List<String> files = listFilesOfType("/Users/cambolbro/Ludii/dev/Core/src/game", ".java");
+//        System.out.println(files.size() + " .java files found.");
+//        Label_0227_Outer:
+//        for (final String path : files) {
+//            int c;
+//            for (c = path.length() - 1; c >= 0 && path.charAt(c) != '/'; --c) {
+//            }
+//            if (c < 0) {
+//                continue;
+//            }
+//            final String className = path.substring(c + 1, path.length() - 5);
+//            final String constructorName = "public " + className;
+//            boolean abstractClass = false;
+//
+//            boolean constructorFound = false;
+//            try {
+//                final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
+//                Throwable t = null;
+//                Label_0314:
+//                {
+//                    try {
+//                        while (true) {
+//                            String line;
+//                            do {
+//                                line = reader.readLine();
+//                                if (line != null) {
+//                                    if (!line.contains("abstract class")) {
+//                                        continue Label_0227_Outer;
+//                                    }
+//                                    abstractClass = true;
+//                                    break Label_0314;
+//                                }
+//                            } while (!line.contains(constructorName) && !line.contains(" construct()"));
+//                            constructorFound = true;
+//                            break;
+//                        }
+//                    } finally {
+//                        if (t != null) {
+//                            try {
+//                                reader.close();
+//                            } catch (Throwable exception) {
+//                                t.addSuppressed(exception);
+//                            }
+//                        } else {
+//                            reader.close();
+//                        }
+//                    }
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            if (abstractClass || constructorFound) {
+//                continue;
+//            }
+//            System.out.println("Missing " + path);
+//        }
+//    }
 
     public static void findEmptyRulesets() {
         final List<String> files = listFilesOfType("/Users/cambolbro/Ludii/dev/Common/res/lud", ".lud");
@@ -362,9 +356,9 @@ public class FileHandling {
                 System.out.println(name + "(" + str.length() + " chars).");
                 final String[] subs = str.split("\n");
                 writer.write("\n" + name + "(" + str.length() + " chars):\n");
-                for (int n = 0; n < subs.length; ++n) {
-                    if (subs[n].contains("(option ")) {
-                        writer.write(subs[n] + "\n");
+                for (String sub : subs) {
+                    if (sub.contains("(option ")) {
+                        writer.write(sub + "\n");
                     }
                 }
             }

@@ -45,11 +45,11 @@ public class ZhangShasha implements DistanceMetric
     
     private static String format(final String strIn) {
         String str;
-        for (str = strIn, str = str.replaceAll("==\\(", "equals\\("), str = str.replaceAll("!=\\(", "notEquals\\("), str = str.replaceAll("<=\\(", "le\\("), str = str.replaceAll(">=\\(", "ge\\("), str = str.replaceAll("<\\(", "lt\\("), str = str.replaceAll(">\\(", "gt\\("), str = str.replaceAll("=\\(", "setEquals\\("), str = str.replaceAll(":", ""); str.indexOf("( ") >= 0; str = str.replaceAll("\\( ", "\\(")) {}
-        while (str.indexOf(" )") >= 0) {
+        for (str = strIn, str = str.replaceAll("==\\(", "equals\\("), str = str.replaceAll("!=\\(", "notEquals\\("), str = str.replaceAll("<=\\(", "le\\("), str = str.replaceAll(">=\\(", "ge\\("), str = str.replaceAll("<\\(", "lt\\("), str = str.replaceAll(">\\(", "gt\\("), str = str.replaceAll("=\\(", "setEquals\\("), str = str.replaceAll(":", ""); str.contains("( "); str = str.replaceAll("\\( ", "\\(")) {}
+        while (str.contains(" )")) {
             str = str.replaceAll(" \\)", "\\)");
         }
-        while (str.indexOf("()") >= 0) {
+        while (str.contains("()")) {
             str = str.replaceAll("\\(\\)", "");
         }
         return str;

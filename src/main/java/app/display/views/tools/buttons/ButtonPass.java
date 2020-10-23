@@ -28,13 +28,13 @@ public class ButtonPass extends ToolButton
         g2d.setColor(this.getButtonColour());
         g2d.setStroke(new BasicStroke(3.0f, 0, 1));
         final GeneralPath path = new GeneralPath();
-        path.moveTo((float)(this.cx - 15), (float)(this.cy + 10));
-        path.curveTo((float)(this.cx - 15), (float)(this.cy + 0), (float)(this.cx - 8), (float)(this.cy - 7), (float)(this.cx + 2), (float)(this.cy - 7));
-        path.lineTo((float)(this.cx + 0), (float)(this.cy - 12));
-        path.lineTo((float)(this.cx + 15), (float)(this.cy - 5));
-        path.lineTo((float)(this.cx + 0), (float)(this.cy + 2));
-        path.lineTo((float)(this.cx + 2), (float)(this.cy - 3));
-        path.curveTo((float)(this.cx - 7), (float)(this.cy - 3), (float)(this.cx - 13), (float)(this.cy + 6), (float)(this.cx - 15), (float)(this.cy + 10));
+        path.moveTo((this.cx - 15), (this.cy + 10));
+        path.curveTo((this.cx - 15), (this.cy + 0), (this.cx - 8), (this.cy - 7), (this.cx + 2), (this.cy - 7));
+        path.lineTo((this.cx + 0), (this.cy - 12));
+        path.lineTo((this.cx + 15), (this.cy - 5));
+        path.lineTo((this.cx + 0), (this.cy + 2));
+        path.lineTo((this.cx + 2), (this.cy - 3));
+        path.curveTo((this.cx - 7), (this.cy - 3), (this.cx - 13), (this.cy + 6), (this.cx - 15), (this.cy + 10));
         g2d.fill(path);
     }
     
@@ -51,7 +51,7 @@ public class ButtonPass extends ToolButton
                 canPass = true;
             }
         }
-        if (legal.moves().size() == 0 && !ContextSnapshot.getContext().trial().over() && Manager.savedTrial() != null && Manager.savedTrial().moves().size() > 0) {
+        if (legal.moves().isEmpty() && !ContextSnapshot.getContext().trial().over() && Manager.savedTrial() != null && !Manager.savedTrial().moves().isEmpty()) {
             canPass = true;
         }
         if (canPass) {

@@ -40,10 +40,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveSwapType moveType, final SwapSitesType swapType, @Opt final IntFunction locA, @Opt final IntFunction locB, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Swap: {
-                moves = new SwapPieces(locA, locB, then);
-                break;
-            }
+            case Swap -> moves = new SwapPieces(locA, locB, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveSwapType is not implemented.");
@@ -55,10 +52,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveRemoveType moveType, @Opt final SiteType type, @Or final IntFunction locationFunction, @Or final RegionFunction regionFunction, @Opt @Name final WhenType at, @Opt @Name final IntFunction count, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Remove: {
-                moves = new Remove(type, locationFunction, regionFunction, at, count, then);
-                break;
-            }
+            case Remove -> moves = new Remove(type, locationFunction, regionFunction, at, count, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveRemoveType is not implemented.");
@@ -80,10 +74,7 @@ public final class Move extends Decision
         }
         Moves moves = null;
         switch (setType) {
-            case TrumpSuit: {
-                moves = new SetTrumpSuit(suit, suits, then);
-                break;
-            }
+            case TrumpSuit -> moves = new SetTrumpSuit(suit, suits, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A SetSuitType is not implemented.");
@@ -105,10 +96,7 @@ public final class Move extends Decision
         }
         Moves moves = null;
         switch (setType) {
-            case NextPlayer: {
-                moves = new SetNextPlayer(who, nextPlayers, then);
-                break;
-            }
+            case NextPlayer -> moves = new SetNextPlayer(who, nextPlayers, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A SetPlayerType is not implemented.");
@@ -130,10 +118,7 @@ public final class Move extends Decision
         }
         Moves moves = null;
         switch (setType) {
-            case Direction: {
-                moves = new SetDirection(to, directions, direction, previous, next, then);
-                break;
-            }
+            case Direction -> moves = new SetDirection(to, directions, direction, previous, next, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A SetDirectionType is not implemented.");
@@ -145,10 +130,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveStepType moveType, @Opt final From from, @Opt final Direction directions, final To to, @Opt @Name final Boolean stack, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Step: {
-                moves = new Step(from, directions, to, stack, then);
-                break;
-            }
+            case Step -> moves = new Step(from, directions, to, stack, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveStepType is not implemented.");
@@ -160,10 +142,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveSlideType moveType, @Opt final From from, @Opt final String track, @Opt final Direction directions, @Opt final Between between, @Opt final To to, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Slide: {
-                moves = new Slide(from, track, directions, between, to, then);
-                break;
-            }
+            case Slide -> moves = new Slide(from, track, directions, between, to, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveSlideType is not implemented.");
@@ -175,10 +154,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveShootType moveType, final Piece what, @Opt final From from, @Opt final AbsoluteDirection dirn, @Opt final Between between, @Opt final To to, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Shoot: {
-                moves = new Shoot(what, from, dirn, between, to, then);
-                break;
-            }
+            case Shoot -> moves = new Shoot(what, from, dirn, between, to, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveShootType is not implemented.");
@@ -190,10 +166,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveSelectType moveType, final From from, @Opt final To to, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Select: {
-                moves = new Select(from, to, then);
-                break;
-            }
+            case Select -> moves = new Select(from, to, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveSelectType is not implemented.");
@@ -205,14 +178,8 @@ public final class Move extends Decision
     public static Moves construct(final MoveMessageType moveType, @Or final String message, @Or final String[] messages, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Propose: {
-                moves = new Propose(message, messages, then);
-                break;
-            }
-            case Vote: {
-                moves = new Vote(message, messages, then);
-                break;
-            }
+            case Propose -> moves = new Propose(message, messages, then);
+            case Vote -> moves = new Vote(message, messages, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveProposeType is not implemented.");
@@ -224,10 +191,7 @@ public final class Move extends Decision
     public static Moves construct(final MovePromoteType moveType, @Opt final SiteType type, @Opt final IntFunction locationFn, final Piece what, @Opt @Or final Player who, @Opt @Or final RoleType role, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Promote: {
-                moves = new Promote(type, locationFn, what, who, role, then);
-                break;
-            }
+            case Promote -> moves = new Promote(type, locationFn, what, who, role, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MovePromotionType is not implemented.");
@@ -239,14 +203,8 @@ public final class Move extends Decision
     public static Moves construct(final MoveSimpleType moveType, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Pass: {
-                moves = new Pass(then);
-                break;
-            }
-            case PlayCard: {
-                moves = new PlayCard(then);
-                break;
-            }
+            case Pass -> moves = new Pass(then);
+            case PlayCard -> moves = new PlayCard(then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveSimpleType is not implemented.");
@@ -258,10 +216,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveLeapType moveType, @Opt final From from, final StepType[][] walk, @Opt @Name final BooleanFunction forward, @Opt @Name final BooleanFunction rotations, final To to, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Leap: {
-                moves = new Leap(from, walk, forward, rotations, to, then);
-                break;
-            }
+            case Leap -> moves = new Leap(from, walk, forward, rotations, to, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveLeapType is not implemented.");
@@ -273,10 +228,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveHopType moveType, @Opt final From from, @Opt final Direction directions, @Opt final Between between, final To to, @Opt @Name final Boolean stack, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Hop: {
-                moves = new Hop(from, directions, between, to, stack, then);
-                break;
-            }
+            case Hop -> moves = new Hop(from, directions, between, to, stack, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveHopType is not implemented.");
@@ -294,10 +246,7 @@ public final class Move extends Decision
     public static Moves construct(final MoveBetType moveType, @Or final Player who, @Or final RoleType role, final RangeFunction range, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Bet: {
-                moves = new Bet(who, role, range, then);
-                break;
-            }
+            case Bet -> moves = new Bet(who, role, range, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveBetType is not implemented.");
@@ -309,14 +258,8 @@ public final class Move extends Decision
     public static Moves construct(final MoveSiteType moveType, @Opt final Piece what, final To to, @Opt @Name final IntFunction count, @Opt @Name final Boolean stack, @Opt final Then then) {
         Moves moves = null;
         switch (moveType) {
-            case Add: {
-                moves = new Add(what, to, count, stack, then);
-                break;
-            }
-            case Claim: {
-                moves = new Claim(what, to, then);
-                break;
-            }
+            case Add -> moves = new Add(what, to, count, stack, then);
+            case Claim -> moves = new Claim(what, to, then);
         }
         if (moves == null) {
             throw new IllegalArgumentException("Move(): A MoveAddType is not implemented.");

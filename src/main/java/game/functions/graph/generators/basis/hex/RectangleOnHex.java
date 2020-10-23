@@ -14,7 +14,7 @@ import game.types.board.BasisType;
 import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import util.Context;
 
 import java.awt.geom.Point2D;

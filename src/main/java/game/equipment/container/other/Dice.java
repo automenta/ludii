@@ -92,9 +92,7 @@ public final class Dice extends Container
         this.start = other.start;
         if (other.biased != null) {
             this.biased = new Integer[other.biased.length];
-            for (int i = 0; i < other.biased.length; ++i) {
-                this.biased[i] = other.biased[i];
-            }
+            System.arraycopy(other.biased, 0, this.biased, 0, other.biased.length);
         }
         else {
             this.biased = null;
@@ -102,9 +100,7 @@ public final class Dice extends Container
         if (other.faces != null) {
             this.faces = new Integer[other.faces.length][];
             for (int i = 0; i < other.faces.length; ++i) {
-                for (int j = 0; j < other.faces[i].length; ++j) {
-                    this.faces[i][j] = other.faces[i][j];
-                }
+                System.arraycopy(other.faces[i], 0, this.faces[i], 0, other.faces[i].length);
             }
         }
         else {

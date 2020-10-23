@@ -10,7 +10,7 @@ import game.functions.graph.GraphFunction;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
 import game.util.graph.Poly;
-import main.math.Polygon;
+import math.Polygon;
 import util.Context;
 
 public final class Hole extends BaseGraphFunction

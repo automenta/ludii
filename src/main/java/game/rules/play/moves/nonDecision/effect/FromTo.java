@@ -233,8 +233,8 @@ public final class FromTo extends Effect
         final int nbPossibleStates = largePiece.walk().length * 4;
         final TIntArrayList currentLocs = largePiece.locs(context, from, localState, context.topology());
         final TIntArrayList newSitesTo = new TIntArrayList();
-        for (int i = 0; i < sitesTo.length; ++i) {
-            newSitesTo.add(sitesTo[i]);
+        for (int k : sitesTo) {
+            newSitesTo.add(k);
         }
         for (int i = 1; i < currentLocs.size(); ++i) {
             newSitesTo.add(currentLocs.getQuick(i));
@@ -244,7 +244,7 @@ public final class FromTo extends Effect
             for (int state = 0; state < nbPossibleStates; ++state) {
                 final TIntArrayList locs = largePiece.locs(context, to, state, context.topology());
                 if (locs != null) {
-                    if (locs.size() > 0) {
+                    if (!locs.isEmpty()) {
                         final ContainerState csTo = context.containerState(context.containerId()[locs.getQuick(0)]);
                         boolean valid = true;
                         for (int j = 0; j < locs.size(); ++j) {

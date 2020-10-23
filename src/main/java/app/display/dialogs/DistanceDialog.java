@@ -14,15 +14,13 @@ import distance.Levenshtein;
 import distance.ZhangShasha;
 import game.Game;
 import main.FileHandling;
-import main.grammar.Description;
+import grammar.Description;
 import manager.Manager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -110,7 +108,7 @@ public class DistanceDialog extends JDialog
         final JLabel lblAiAlgorithm = new JLabel("AI Algorithm");
         lblAiAlgorithm.setBounds(26, 212, 91, 15);
         contentPanel.add(lblAiAlgorithm);
-        final String[] comboBoxContents = GUIUtil.getAiStrings(false).toArray(new String[GUIUtil.getAiStrings(false).size()]);
+        final String[] comboBoxContents = GUIUtil.getAiStrings(false).toArray(new String[0]);
         final JComboBox<String> comboBoxAlgorithm = new JComboBox<>(comboBoxContents);
         comboBoxAlgorithm.setEnabled(false);
         comboBoxAlgorithm.setBounds(220, 207, 162, 24);
@@ -148,12 +146,12 @@ public class DistanceDialog extends JDialog
             }
         });
         okButton.addActionListener(e -> {
-            if (Double.valueOf(DistanceDialog.this.textFieldThinkTime.getText()) <= 0.0) {
+            if (Double.parseDouble(DistanceDialog.this.textFieldThinkTime.getText()) <= 0.0) {
                 DesktopApp.playerApp().addTextToAnalysisPanel("Invalid think time, setting to 0.05");
                 DistanceDialog.this.textFieldThinkTime.setText("0.05");
             }
             try {
-                if (Integer.valueOf(textFieldMaxTurns.getText()) <= 0) {
+                if (Integer.parseInt(textFieldMaxTurns.getText()) <= 0) {
                     DesktopApp.playerApp().addTextToAnalysisPanel("Invalid maximum number of turns, setting to 50");
                     textFieldMaxTurns.setText("50");
                 }
@@ -163,7 +161,7 @@ public class DistanceDialog extends JDialog
                 textFieldMaxTurns.setText("50");
             }
             try {
-                if (Integer.valueOf(textFieldNumberTrials.getText()) <= 0) {
+                if (Integer.parseInt(textFieldNumberTrials.getText()) <= 0) {
                     DesktopApp.playerApp().addTextToAnalysisPanel("Invalid number of trials, setting to 10");
                     textFieldNumberTrials.setText("10");
                 }
@@ -172,37 +170,37 @@ public class DistanceDialog extends JDialog
                 DesktopApp.playerApp().addTextToAnalysisPanel("Invalid number of trials, setting to 10");
                 textFieldNumberTrials.setText("10");
             }
-            final int maxTurns = Integer.valueOf(textFieldMaxTurns.getText());
-            final int numberTrials = Integer.valueOf(textFieldNumberTrials.getText());
+            final int maxTurns = Integer.parseInt(textFieldMaxTurns.getText());
+            final int numberTrials = Integer.parseInt(textFieldNumberTrials.getText());
             double thinkTime = 0.5;
             String AIName = null;
             final String string = comboBoxAIAgents.getSelectedItem().toString();
             switch (string) {
-                case "Random": {
+                case "Random" -> {
                     AIName = "Random";
                     break;
                 }
-                case "Very weak AI": {
+                case "Very weak AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 0.1;
                     break;
                 }
-                case "Weak AI": {
+                case "Weak AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 0.5;
                     break;
                 }
-                case "Strong AI": {
+                case "Strong AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 2.0;
                     break;
                 }
-                case "very strong AI": {
+                case "very strong AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 5.0;
                     break;
                 }
-                case "Custom": {
+                case "Custom" -> {
                     AIName = comboBoxAlgorithm.getSelectedItem().toString();
                     thinkTime = Double.valueOf(DistanceDialog.this.textFieldThinkTime.getText());
                     break;

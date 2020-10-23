@@ -187,7 +187,7 @@ public class AbsoluteFeature extends Feature
         if (this.lastFromPosition != -1) {
             str = String.format("last_from=<%s>:%s", this.lastFromPosition, str);
         }
-        if (this.comment.length() > 0) {
+        if (!this.comment.isEmpty()) {
             str = String.format("%s:comment=\"%s\"", str, this.comment);
         }
         return "abs:" + str;

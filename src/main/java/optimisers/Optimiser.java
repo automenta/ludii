@@ -4,7 +4,7 @@
 
 package optimisers;
 
-import main.collections.FVector;
+import collections.FVector;
 
 import java.io.Serializable;
 

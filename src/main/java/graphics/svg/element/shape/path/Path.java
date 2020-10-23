@@ -7,7 +7,7 @@ package graphics.svg.element.shape.path;
 import graphics.svg.SVGParser;
 import graphics.svg.element.Element;
 import graphics.svg.element.shape.Shape;
-import main.math.MathRoutines;
+import math.MathRoutines;
 
 import java.awt.*;
 import java.awt.geom.GeneralPath;
@@ -137,7 +137,7 @@ public class Path extends Shape
                 for (c = 0; c < str.length() && SVGParser.isNumeric(str.charAt(c)); ++c) {
                     sub += str.charAt(c);
                 }
-                Double result;
+                double result;
                 try {
                     result = Double.parseDouble(sub);
                 }

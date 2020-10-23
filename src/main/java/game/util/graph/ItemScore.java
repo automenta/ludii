@@ -24,6 +24,6 @@ public class ItemScore implements Comparable<ItemScore>
     
     @Override
     public int compareTo(final ItemScore other) {
-        return (this.score == other.score) ? 0 : ((this.score < other.score) ? -1 : 1);
+        return Double.compare(this.score, other.score);
     }
 }

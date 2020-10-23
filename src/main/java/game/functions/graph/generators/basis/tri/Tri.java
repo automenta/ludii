@@ -26,32 +26,32 @@ public class Tri extends Basis
     public static GraphFunction construct(@Opt final TriShapeType shape, final DimFunction dimA, @Opt final DimFunction dimB) {
         final TriShapeType st = (shape == null) ? TriShapeType.Triangle : shape;
         switch (st) {
-            case Hexagon: {
+            case Hexagon -> {
                 return new HexagonOnTri(dimA);
             }
-            case Triangle: {
+            case Triangle -> {
                 return new TriangleOnTri(dimA);
             }
-            case Diamond: {
+            case Diamond -> {
                 return new DiamondOnTri(dimA, null);
             }
-            case Prism: {
+            case Prism -> {
                 return new DiamondOnTri(dimA, (dimB != null) ? dimB : dimA);
             }
-            case Square: {
+            case Square -> {
                 return new RectangleOnTri(dimA, dimA);
             }
-            case Rectangle: {
+            case Rectangle -> {
                 return new RectangleOnTri(dimA, (dimB != null) ? dimB : dimA);
             }
-            case Star: {
+            case Star -> {
                 return new StarOnTri(dimA);
             }
-            case Limping: {
+            case Limping -> {
                 final DimFunction dimAplus1 = new Add(dimA, new DimConstant(1));
-                return new CustomOnTri(new DimFunction[] { dimA, dimAplus1 });
+                return new CustomOnTri(new DimFunction[]{dimA, dimAplus1});
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Shape " + st + " not supported for hex tiling.");
             }
         }

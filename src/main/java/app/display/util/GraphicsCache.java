@@ -73,7 +73,7 @@ public class GraphicsCache
         return containerComponentStateMaskedImages.get(maskedValue);
     }
     
-    private static final <T> ArrayList<ArrayList<ArrayList<ArrayList<T>>>> setupCache(final int containerId, final Component component, final int localState, final boolean secondary, final ArrayList<ArrayList<ArrayList<ArrayList<T>>>> allComponentImages2, final ArrayList<ArrayList<ArrayList<ArrayList<T>>>> allComponentImagesSecondary2) {
+    private static <T> ArrayList<ArrayList<ArrayList<ArrayList<T>>>> setupCache(final int containerId, final Component component, final int localState, final boolean secondary, final ArrayList<ArrayList<ArrayList<ArrayList<T>>>> allComponentImages2, final ArrayList<ArrayList<ArrayList<ArrayList<T>>>> allComponentImagesSecondary2) {
         final int componentId = component.index();
         ArrayList<ArrayList<ArrayList<ArrayList<T>>>> componentImageArray;
         if (secondary && component.isTile()) {
@@ -134,7 +134,7 @@ public class GraphicsCache
         int stateValue = localState;
         final Moves moves = context.game().moves(context);
         boolean useDieDetected = false;
-        if (moves.moves().size() > 0) {
+        if (!moves.moves().isEmpty()) {
             final ArrayList<Action> allSameActions = new ArrayList<>(moves.moves().get(0).actions());
             for (final Move m : moves.moves()) {
                 boolean differentAction = false;
@@ -198,7 +198,7 @@ public class GraphicsCache
     }
     
     public static BufferedImage getComponentImage(final int containerId, final int componentId, final int localState, final int masked) {
-        return (BufferedImage)GraphicsCache.allComponentImages.get(containerId).get(componentId).get(localState).get(masked);
+        return GraphicsCache.allComponentImages.get(containerId).get(componentId).get(localState).get(masked);
     }
     
     static {

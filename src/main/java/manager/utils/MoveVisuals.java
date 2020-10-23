@@ -10,8 +10,8 @@ import game.rules.end.If;
 import game.rules.end.Result;
 import game.types.board.SiteType;
 import game.types.play.ResultType;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import manager.Manager;
 import util.*;
 import util.locations.Location;
@@ -200,7 +200,7 @@ public class MoveVisuals
                 for (final Location location : endingLocations) {
                     drawEndingMoveLocation(g2d, context, endRule.result(), location);
                 }
-                if (endingLocations.size() > 0) {
+                if (!endingLocations.isEmpty()) {
                     break;
                 }
             }
@@ -209,10 +209,10 @@ public class MoveVisuals
     
     private static void drawEndingMoveLocation(final Graphics2D g2d, final Context context, final Result result, final Location location) {
         Color colour = new Color(0.0f, 0.0f, 1.0f, 0.5f);
-        if (result.result().equals(ResultType.Win)) {
+        if (result.result() == ResultType.Win) {
             colour = new Color(0.0f, 1.0f, 0.0f, 0.7f);
         }
-        else if (result.result().equals(ResultType.Loss)) {
+        else if (result.result() == ResultType.Loss) {
             colour = new Color(1.0f, 0.0f, 0.0f, 0.7f);
         }
         final int site = location.site();

@@ -54,40 +54,38 @@ public class FormatReader extends BufferedReader
         if (f == 37) {
             final char t = (char)fmt.next();
             switch (t) {
-                case 'S':
-                case 's': {
+                case 'S', 's' -> {
                     data.add(this.getString(c, fmt));
                     break;
                 }
-                case 'd': {
+                case 'd' -> {
                     data.add(this.getInteger(c, fmt, 10));
                     break;
                 }
-                case 'o': {
+                case 'o' -> {
                     data.add(this.getInteger(c, fmt, 8));
                     break;
                 }
-                case 'X':
-                case 'x': {
+                case 'X', 'x' -> {
                     data.add(this.getInteger(c, fmt, 16));
                     break;
                 }
-                case 'f': {
+                case 'f' -> {
                     data.add(this.getDouble(c, fmt));
                     break;
                 }
-                case 'c': {
+                case 'c' -> {
                     if (c != -1) {
-                        data.add((char)c);
+                        data.add((char) c);
                         break;
                     }
                     break;
                 }
-                case '%': {
+                case '%' -> {
                     test(c, 37, fmt.head());
                     break;
                 }
-                default: {
+                default -> {
                     throw new ParseException("Invalid format specifier: " + t, fmt.head());
                 }
             }
@@ -112,7 +110,7 @@ public class FormatReader extends BufferedReader
         return b.toString();
     }
     
-    private long getInteger(final int c, final TapeReader fmt, final int base) throws IOException, ParseException {
+    private long getInteger(final int c, final TapeReader fmt, final int base) throws IOException {
         return Long.parseLong(this.getString(c, fmt), base);
     }
     
@@ -127,7 +125,7 @@ public class FormatReader extends BufferedReader
         FormatReader.ls = System.getProperty("line.separator");
     }
     
-    private class TapeReader
+    private static class TapeReader
     {
         private final char[] tape;
         private int head;

@@ -49,16 +49,16 @@ public class EBNFClause {
         int c;
         String str = input.trim();
         switch (str.charAt(0)) {
-            case '(': {
+            case '(' -> {
                 this.isConstructor = true;
                 break;
             }
-            case '<': {
+            case '<' -> {
                 this.isRule = true;
                 this.token = str;
                 return;
             }
-            default: {
+            default -> {
                 this.isTerminal = true;
                 this.token = str;
                 return;

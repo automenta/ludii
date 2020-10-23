@@ -65,7 +65,7 @@ public class Then implements Serializable, Ludeme
     public int gameFlags(final Game game) {
         int gameFlags = 0;
         if (this.moves != null) {
-            gameFlags = (int)((long)gameFlags | this.moves.gameFlags(game));
+            gameFlags = (int)(gameFlags | this.moves.gameFlags(game));
         }
         return gameFlags;
     }

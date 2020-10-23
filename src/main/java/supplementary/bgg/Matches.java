@@ -43,7 +43,7 @@ public class Matches
     }
     
     public void normalise() {
-        if (this.scores.size() == 0) {
+        if (this.scores.isEmpty()) {
             this.score = 0.0;
         }
         else {

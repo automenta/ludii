@@ -26,8 +26,7 @@ public class ByScore extends Result
     public void eval(final Context context) {
         final Trial trial = context.trial();
         if (this.finalScore != null) {
-            for (int i = 0; i < this.finalScore.length; ++i) {
-                final Score score = this.finalScore[i];
+            for (final Score score : this.finalScore) {
                 final int pid = new Id(null, score.role()).eval(context);
                 final int scoreToSet = score.score().eval(context);
                 context.setScore(pid, scoreToSet);

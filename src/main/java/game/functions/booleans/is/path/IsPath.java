@@ -49,16 +49,16 @@ public class IsPath extends BaseBooleanFunction
             return false;
         }
         switch (this.indexType) {
-            case Vertex: {
+            case Vertex -> {
                 return this.evalVertex(context, siteId);
             }
-            case Edge: {
+            case Edge -> {
                 return this.evalEdge(context, siteId);
             }
-            case Cell: {
+            case Cell -> {
                 return this.evalCell(context, siteId);
             }
-            default: {
+            default -> {
                 return false;
             }
         }
@@ -169,8 +169,7 @@ public class IsPath extends BaseBooleanFunction
         final int v1 = kCell.index();
         int v2 = 0;
         final int startingVertex = v1;
-        for (int i = 0; i < nList.size(); ++i) {
-            final Cell iVertex = nList.get(i);
+        for (final topology.Cell iVertex : nList) {
             if (iVertex != kCell && state.who(iVertex.index(), this.indexType) == whoSiteId) {
                 v2 = iVertex.index();
                 isolated = false;
@@ -195,8 +194,7 @@ public class IsPath extends BaseBooleanFunction
                 if (minComponentsize < strongComponents) {
                     final TIntArrayList nList2 = new TIntArrayList();
                     final List<Cell> nList3 = graph.cells().get(kCell.index()).adjacent();
-                    for (int j = 0; j < nList3.size(); ++j) {
-                        final Cell iVertex2 = nList3.get(j);
+                    for (final topology.Cell iVertex2 : nList3) {
                         if (state.who(iVertex2.index(), this.indexType) == whoSiteId) {
                             nList2.add(iVertex2.index());
                         }
@@ -216,8 +214,7 @@ public class IsPath extends BaseBooleanFunction
                 if (strongComponents > maxRangeComponentsize) {
                     final TIntArrayList nList2 = new TIntArrayList();
                     final List<Cell> nList3 = graph.cells().get(kCell.index()).adjacent();
-                    for (int j = 0; j < nList3.size(); ++j) {
-                        final Cell iVertex2 = nList3.get(j);
+                    for (final topology.Cell iVertex2 : nList3) {
                         if (state.who(iVertex2.index(), this.indexType) == whoSiteId) {
                             nList2.add(iVertex2.index());
                         }
@@ -240,9 +237,9 @@ public class IsPath extends BaseBooleanFunction
         }
         final List<Cell> nListVertex = graph.cells().get(kCell.index()).adjacent();
         final TIntArrayList nList4 = new TIntArrayList();
-        for (int j = 0; j < nListVertex.size(); ++j) {
-            if (state.whoCell(nListVertex.get(j).index()) == whoSiteId) {
-                nList4.add(nListVertex.get(j).index());
+        for (topology.Cell listVertex : nListVertex) {
+            if (state.whoCell(listVertex.index()) == whoSiteId) {
+                nList4.add(listVertex.index());
             }
         }
         if (nList4.size() > 2 || nList4.size() < 1) {
@@ -284,8 +281,7 @@ public class IsPath extends BaseBooleanFunction
         final int v1 = kVertex.index();
         int v2 = 0;
         final int startingVertex = v1;
-        for (int i = 0; i < nList.size(); ++i) {
-            final Vertex iVertex = nList.get(i);
+        for (final topology.Vertex iVertex : nList) {
             if (iVertex != kVertex && state.who(iVertex.index(), this.indexType) == whoSiteId) {
                 v2 = iVertex.index();
                 isolated = false;
@@ -378,19 +374,18 @@ public class IsPath extends BaseBooleanFunction
         stackInfo.push(presentPosition);
         stackInfoBitset.set(presentPosition);
         TIntArrayList nList = new TIntArrayList();
-        if (this.indexType.equals(SiteType.Cell)) {
+        if (this.indexType == SiteType.Cell) {
             final List<Cell> nList2 = graph.cells().get(presentPosition).adjacent();
-            for (int i = 0; i < nList2.size(); ++i) {
-                final Cell iVertex = nList2.get(i);
+            for (final topology.Cell iVertex : nList2) {
                 if (state.who(iVertex.index(), this.indexType) == whoSiteId) {
                     nList.add(iVertex.index());
                 }
             }
         }
-        else if (this.indexType.equals(SiteType.Vertex)) {
+        else if (this.indexType == SiteType.Vertex) {
             nList = this.vertexToAdjacentNeighbourVertices1(context, presentPosition, whoSiteId);
         }
-        else if (this.indexType.equals(SiteType.Edge)) {
+        else if (this.indexType == SiteType.Edge) {
             nList = this.vertexToAdjacentNeighbourVertices(context, presentPosition, whoSiteId);
         }
         for (int j = 0; j != nList.size(); ++j) {
@@ -398,10 +393,10 @@ public class IsPath extends BaseBooleanFunction
             if (v3 != parent) {
                 if (visit[v3] == 0) {
                     this.strongComponent(context, v3, presentPosition, visit, low, stackInfo, stackInfoBitset, testBitset1, whoSiteId, index + 1, totalItems, v1, v2);
-                    low[presentPosition] = ((low[presentPosition] < low[v3]) ? low[presentPosition] : low[v3]);
+                    low[presentPosition] = (Math.min(low[presentPosition], low[v3]));
                 }
                 else if (stackInfoBitset.get(v3)) {
-                    low[presentPosition] = ((low[presentPosition] < visit[v3]) ? low[presentPosition] : visit[v3]);
+                    low[presentPosition] = (Math.min(low[presentPosition], visit[v3]));
                 }
             }
         }
@@ -486,16 +481,16 @@ public class IsPath extends BaseBooleanFunction
             newMinDepth = index;
             return newMinDepth + 1;
         }
-        if (this.indexType.equals(SiteType.Cell)) {
+        if (this.indexType == SiteType.Cell) {
             final List<Cell> nList1 = graph.cells().get(presentVertex).adjacent();
-            for (int i = 0; i < nList1.size(); ++i) {
-                final int iVertex = nList1.get(i).index();
+            for (topology.Cell cell : nList1) {
+                final int iVertex = cell.index();
                 if (iVertex != parent && state.who(iVertex, this.indexType) == whoSiteId) {
                     this.dfsMinCycleSzVertexCell(context, graph, vertexVisit, vertexIndex, newindex + 1, startingVertex, iVertex, presentVertex, newMinDepth, whoSiteId);
                 }
             }
         }
-        else if (this.indexType.equals(SiteType.Vertex)) {
+        else if (this.indexType == SiteType.Vertex) {
             final TIntArrayList nListVertex = this.vertexToAdjacentNeighbourVertices1(context, presentVertex, whoSiteId);
             for (int i = 0; i < nListVertex.size(); ++i) {
                 final int ni = nListVertex.get(i);
@@ -538,21 +533,21 @@ public class IsPath extends BaseBooleanFunction
             return index;
         }
         TIntArrayList nListVertex = new TIntArrayList();
-        if (this.indexType.equals(SiteType.Cell)) {
+        if (this.indexType == SiteType.Cell) {
             final List<Cell> nList = graph.cells().get(presentVertex).adjacent();
-            for (int i = 0; i < nList.size(); ++i) {
-                if (state.whoCell(nList.get(i).index()) == whoSiteId) {
-                    nListVertex.add(nList.get(i).index());
+            for (topology.Cell cell : nList) {
+                if (state.whoCell(cell.index()) == whoSiteId) {
+                    nListVertex.add(cell.index());
                 }
             }
         }
-        if (this.indexType.equals(SiteType.Vertex)) {
+        if (this.indexType == SiteType.Vertex) {
             nListVertex = this.vertexToAdjacentNeighbourVertices1(context, presentVertex, whoSiteId);
         }
         if (nListVertex.size() > 2) {
             return 1000000000;
         }
-        if (nListVertex.size() == 0) {
+        if (nListVertex.isEmpty()) {
             return index;
         }
         for (int j = 0; j < nListVertex.size(); ++j) {
@@ -587,9 +582,9 @@ public class IsPath extends BaseBooleanFunction
         final ContainerState state = context.state().containerStates()[0];
         final TIntArrayList nList = new TIntArrayList();
         final List<Vertex> nList2 = context.topology().vertices().get(v).adjacent();
-        for (int k = 0; k < nList2.size(); ++k) {
-            if (nList2.get(k).index() != v && state.who(nList2.get(k).index(), this.indexType) == whoSiteId) {
-                nList.add(nList2.get(k).index());
+        for (topology.Vertex vertex : nList2) {
+            if (vertex.index() != v && state.who(vertex.index(), this.indexType) == whoSiteId) {
+                nList.add(vertex.index());
             }
         }
         return nList;

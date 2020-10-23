@@ -68,7 +68,7 @@ public abstract class Container extends Item implements Serializable, Cloneable
     }
     
     public int numSites() {
-        if (!this.defaultSite.equals(SiteType.Cell)) {
+        if (this.defaultSite != SiteType.Cell) {
             return this.topology.getGraphElements(this.defaultSite).size();
         }
         return this.numSites;

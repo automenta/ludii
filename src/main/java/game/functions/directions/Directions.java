@@ -96,7 +96,7 @@ public class Directions extends DirectionsFunction implements Serializable
     }
     
     public boolean isAll() {
-        return this.absoluteDirections != null && this.absoluteDirections[0].equals(AbsoluteDirection.All);
+        return this.absoluteDirections != null && this.absoluteDirections[0] == AbsoluteDirection.All;
     }
     
     @Override
@@ -138,7 +138,7 @@ public class Directions extends DirectionsFunction implements Serializable
             facingDirection = RelativeDirection.FR.directions(facingDirection, directionsSupported).get(0);
         }
         for (final RelativeDirection relativeDirection : this.relativeDirections) {
-            if (relativeDirection.equals(RelativeDirection.SameDirection)) {
+            if (relativeDirection == RelativeDirection.SameDirection) {
                 final int lastFrom = new LastFrom(null).eval(context);
                 final int lastTo = new LastTo(null).eval(context);
                 boolean found = false;
@@ -160,7 +160,7 @@ public class Directions extends DirectionsFunction implements Serializable
                     }
                 }
             }
-            else if (relativeDirection.equals(RelativeDirection.OppositeDirection)) {
+            else if (relativeDirection == RelativeDirection.OppositeDirection) {
                 final int lastFrom = new LastFrom(null).eval(context);
                 final int lastTo = new LastTo(null).eval(context);
                 boolean found = false;

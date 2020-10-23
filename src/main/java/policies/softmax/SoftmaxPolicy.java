@@ -13,8 +13,8 @@ import game.rules.play.moves.Moves;
 import game.types.play.RoleType;
 import gnu.trove.list.array.TFloatArrayList;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import metadata.ai.features.Features;
 import metadata.ai.misc.Pair;
 import policies.Policy;
@@ -77,8 +77,8 @@ public class SoftmaxPolicy extends Policy
                 addFeatureSetWeights(featureSet.role().owner(), featureSet.featureStrings(), featureSet.featureWeights(), featureSetsList, linFuncs);
             }
         }
-        this.featureSets = featureSetsList.toArray(new FeatureSet[featureSetsList.size()]);
-        this.linearFunctions = linFuncs.toArray(new LinearFunction[linFuncs.size()]);
+        this.featureSets = featureSetsList.toArray(new FeatureSet[0]);
+        this.linearFunctions = linFuncs.toArray(new LinearFunction[0]);
     }
     
     @Override
@@ -198,7 +198,7 @@ public class SoftmaxPolicy extends Policy
         for (int i = 1; i < inputs.length; ++i) {
             final String input = inputs[i];
             if (input.toLowerCase().startsWith("policyweights=")) {
-                if (policyWeightsFilepaths.size() > 0) {
+                if (!policyWeightsFilepaths.isEmpty()) {
                     policyWeightsFilepaths.clear();
                 }
                 policyWeightsFilepaths.add(input.substring("policyweights=".length()));

@@ -109,7 +109,7 @@ public abstract class BaseComponentStyle implements ComponentStyle
         }
         else {
             try {
-                Integer.parseInt(this.svgName);
+//                Integer.parseInt(this.svgName);
                 this.createStringSVG(context, imageSize, localState, this.svgName);
             }
             catch (NumberFormatException ex) {
@@ -166,17 +166,17 @@ public abstract class BaseComponentStyle implements ComponentStyle
         if (this.component.isDie()) {
             this.showLocalState = ValueLocationType.None;
         }
-        if (!this.component.isDie() && (SettingsVC.getPieceFamily(context.game().name()).equals("Abstract") || (SettingsVC.getPieceFamily(context.game().name()).equals("") && metadataGraphics.pieceFamilies() != null && Arrays.asList(metadataGraphics.pieceFamilies()).contains("Abstract") && SettingsVC.abstractPriority))) {
+        if (!this.component.isDie() && (SettingsVC.getPieceFamily(context.game().name()).equals("Abstract") || (SettingsVC.getPieceFamily(context.game().name()).isEmpty() && metadataGraphics.pieceFamilies() != null && Arrays.asList(metadataGraphics.pieceFamilies()).contains("Abstract") && SettingsVC.abstractPriority))) {
             this.svgName = ImageConstants.customImageKeywords[0];
         }
         SettingsVC.pieceStyleExtension = SettingsVC.getPieceFamily(context.game().name());
-        if (SettingsVC.pieceStyleExtension.equals("") && metadataGraphics.pieceFamilies() != null) {
+        if (SettingsVC.pieceStyleExtension.isEmpty() && metadataGraphics.pieceFamilies() != null) {
             SettingsVC.pieceStyleExtension = metadataGraphics.pieceFamilies()[0];
             if (SettingsVC.pieceStyleExtension.equals("Abstract") && !SettingsVC.abstractPriority) {
                 SettingsVC.pieceStyleExtension = metadataGraphics.pieceFamilies()[1];
             }
         }
-        if (!Arrays.asList(ImageConstants.defaultFamilyKeywords).contains(SettingsVC.pieceStyleExtension) && !SettingsVC.pieceStyleExtension.equals("Abstract") && !SettingsVC.pieceStyleExtension.equals("")) {
+        if (!Arrays.asList(ImageConstants.defaultFamilyKeywords).contains(SettingsVC.pieceStyleExtension) && !SettingsVC.pieceStyleExtension.equals("Abstract") && !SettingsVC.pieceStyleExtension.isEmpty()) {
             this.svgName = this.svgName + "_" + SettingsVC.pieceStyleExtension;
         }
         if (this.colour == null) {
@@ -228,7 +228,7 @@ public abstract class BaseComponentStyle implements ComponentStyle
         if (imageSize % 2 == 1) {
             --imageSize;
         }
-        if (this.backgroundPath.length() > 0) {
+        if (!this.backgroundPath.isEmpty()) {
             g2d = this.getBackground(g2d, dim);
         }
         if (Arrays.asList(ImageConstants.customImageKeywords).contains(filePath1)) {
@@ -249,7 +249,7 @@ public abstract class BaseComponentStyle implements ComponentStyle
         else {
             SVGtoImage.loadFromString(g2d, filePath1, imageSize, 0, 0, edge, fill, true);
         }
-        if (this.foregroundPath.length() > 0) {
+        if (!this.foregroundPath.isEmpty()) {
             g2d = this.getForeground(g2d, dim);
         }
         final Font valueFontCorner = new Font("Arial", 1, dim / 4);
@@ -301,7 +301,7 @@ public abstract class BaseComponentStyle implements ComponentStyle
         if (localState < this.imageSVG.size()) {
             return this.imageSVG.get(localState);
         }
-        if (this.imageSVG.size() > 0) {
+        if (!this.imageSVG.isEmpty()) {
             return this.imageSVG.get(0);
         }
         return null;

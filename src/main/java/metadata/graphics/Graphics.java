@@ -77,9 +77,7 @@ public class Graphics implements Serializable
             throw new IllegalArgumentException("Only one of @Or should be different to null");
         }
         if (items != null) {
-            for (final GraphicsItem i : items) {
-                this.items.add(i);
-            }
+            this.items.addAll(Arrays.asList(items));
         }
         else {
             this.items.add(item);
@@ -611,7 +609,7 @@ public class Graphics implements Serializable
     
     public double stackScale(final Container container, final Context context, final int site, final SiteType siteType, final int state) {
         for (final GraphicsItem graphicsItem : this.items) {
-            if (graphicsItem instanceof StackType && (((StackType)graphicsItem).roleType() == null || MetadataFunctions.getRealOwner(context, ((StackType)graphicsItem).roleType()) == container.owner()) && (((StackType)graphicsItem).name() == null || ((StackType)graphicsItem).name().equals(container.name()) || ((StackType)graphicsItem).name().equals(StringRoutines.removeTrailingNumbers(container.name()))) && (((StackType)graphicsItem).index() == null || ((StackType)graphicsItem).index().equals(container.index())) && (((StackType)graphicsItem).sites() == null || Arrays.asList(((StackType)graphicsItem).sites()).contains(site)) && (((StackType)graphicsItem).graphElementType() == null || ((StackType)graphicsItem).graphElementType().equals(siteType)) && (((StackType)graphicsItem).state() == null || ((StackType)graphicsItem).state().equals(state))) {
+            if (graphicsItem instanceof StackType && (((StackType)graphicsItem).roleType() == null || MetadataFunctions.getRealOwner(context, ((StackType)graphicsItem).roleType()) == container.owner()) && (((StackType)graphicsItem).name() == null || ((StackType)graphicsItem).name().equals(container.name()) || ((StackType)graphicsItem).name().equals(StringRoutines.removeTrailingNumbers(container.name()))) && (((StackType)graphicsItem).index() == null || ((StackType)graphicsItem).index().equals(container.index())) && (((StackType)graphicsItem).sites() == null || Arrays.asList(((StackType)graphicsItem).sites()).contains(site)) && (((StackType)graphicsItem).graphElementType() == null || ((StackType) graphicsItem).graphElementType() == siteType) && (((StackType)graphicsItem).state() == null || ((StackType)graphicsItem).state().equals(state))) {
                 if (((StackType)graphicsItem).scale() >= 0.0 && ((StackType)graphicsItem).scale() <= 100.0) {
                     return ((StackType)graphicsItem).scale();
                 }
@@ -623,7 +621,7 @@ public class Graphics implements Serializable
     
     public PieceStackType stackType(final Container container, final Context context, final int site, final SiteType siteType, final int state) {
         for (final GraphicsItem graphicsItem : this.items) {
-            if (graphicsItem instanceof StackType && (((StackType)graphicsItem).roleType() == null || MetadataFunctions.getRealOwner(context, ((StackType)graphicsItem).roleType()) == container.owner()) && (((StackType)graphicsItem).name() == null || ((StackType)graphicsItem).name().equals(container.name()) || ((StackType)graphicsItem).name().equals(StringRoutines.removeTrailingNumbers(container.name()))) && (((StackType)graphicsItem).index() == null || ((StackType)graphicsItem).index().equals(container.index())) && (((StackType)graphicsItem).sites() == null || Arrays.asList(((StackType)graphicsItem).sites()).contains(site)) && (((StackType)graphicsItem).graphElementType() == null || ((StackType)graphicsItem).graphElementType().equals(siteType)) && (((StackType)graphicsItem).state() == null || ((StackType)graphicsItem).state().equals(state))) {
+            if (graphicsItem instanceof StackType && (((StackType)graphicsItem).roleType() == null || MetadataFunctions.getRealOwner(context, ((StackType)graphicsItem).roleType()) == container.owner()) && (((StackType)graphicsItem).name() == null || ((StackType)graphicsItem).name().equals(container.name()) || ((StackType)graphicsItem).name().equals(StringRoutines.removeTrailingNumbers(container.name()))) && (((StackType)graphicsItem).index() == null || ((StackType)graphicsItem).index().equals(container.index())) && (((StackType)graphicsItem).sites() == null || Arrays.asList(((StackType)graphicsItem).sites()).contains(site)) && (((StackType)graphicsItem).graphElementType() == null || ((StackType) graphicsItem).graphElementType() == siteType) && (((StackType)graphicsItem).state() == null || ((StackType)graphicsItem).state().equals(state))) {
                 return ((StackType)graphicsItem).stackType();
             }
         }

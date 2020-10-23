@@ -47,16 +47,16 @@ public class CSSException extends RuntimeException
             return this.e.getMessage();
         }
         switch (this.code) {
-            case 0: {
+            case 0 -> {
                 return "unknown error";
             }
-            case 1: {
+            case 1 -> {
                 return "not supported";
             }
-            case 2: {
+            case 2 -> {
                 return "syntax error";
             }
-            default: {
+            default -> {
                 return null;
             }
         }

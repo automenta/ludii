@@ -69,16 +69,16 @@ public final class IsWithin extends BaseBooleanFunction
     public long gameFlags(final Game game) {
         long gameFlags = this.pieceId.gameFlags(game) | this.region.gameFlags(game);
         if (this.type != null) {
-            if (this.type.equals(SiteType.Edge) || this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Edge || this.type == SiteType.Vertex) {
                 gameFlags |= 0x800000L;
             }
-            if (this.type.equals(SiteType.Edge)) {
+            if (this.type == SiteType.Edge) {
                 gameFlags |= 0x4000000L;
             }
-            if (this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Vertex) {
                 gameFlags |= 0x1000000L;
             }
-            if (this.type.equals(SiteType.Cell)) {
+            if (this.type == SiteType.Cell) {
                 gameFlags |= 0x2000000L;
             }
         }

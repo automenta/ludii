@@ -39,8 +39,8 @@ public final class FullOwned implements Owned, Serializable
             for (int i = 0; i < other.locations[p].length; ++i) {
                 final List<FullLocation> otherPositionsComp = other.locations[p][i];
                 final List<FullLocation> newPositionsComp = new ArrayList<>(otherPositionsComp.size());
-                for (int k = 0; k < otherPositionsComp.size(); ++k) {
-                    newPositionsComp.add((FullLocation)otherPositionsComp.get(k).copy());
+                for (FullLocation fullLocation : otherPositionsComp) {
+                    newPositionsComp.add((FullLocation) fullLocation.copy());
                 }
                 this.locations[p][i] = newPositionsComp;
             }

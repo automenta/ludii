@@ -12,11 +12,12 @@ import language.compiler.exceptions.NullGameException;
 import language.grammar.Grammar;
 import language.parser.Parser;
 import main.StringRoutines;
-import main.grammar.Description;
-import main.grammar.Report;
-import main.grammar.Token;
-import main.options.UserSelections;
+import grammar.Description;
+import grammar.Report;
+import grammar.Token;
+import options.UserSelections;
 import metadata.Metadata;
+import options.UserSelections;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -72,21 +73,29 @@ public class Compiler
             }
             throw new CompilerErrorWithMessageException(sb.toString());
         }
-        Game game = null;
-        game = (Game)compileTask(description.expanded(), "game", "game.Game", report, isVerbose);
+        Game game = (Game)compileTask(description.expanded(), "game", "game.Game", report, isVerbose);
         if (game == null) {
             System.out.println("** Compiler.compiler(): Could not compile game.");
             return null;
         }
-        game.setDescription(description);
-        game.create();
+
+
         Metadata md = null;
-        if (description.metadata() != null && description.metadata() != "") {
-            md = (Metadata)compileTask(description.metadata(), "metadata", "metadata.Metadata", report, isVerbose);
+        try {
+            if (description.metadata() != null && !description.metadata().isEmpty()) {
+                md = (Metadata) compileTask(description.metadata(), "metadata", "metadata.Metadata", report, isVerbose);
+            }
+        } catch (Exception e) {
+            //continue without having parsed metadata
+            e.printStackTrace();
+            md = null;
         }
         if (md == null) {
             md = new Metadata(null, null, null);
         }
+
+        game.setDescription(description);
+        game.create();
         game.setMetadata(md);
         return game;
     }

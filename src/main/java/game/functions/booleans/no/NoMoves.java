@@ -12,8 +12,6 @@ import game.types.play.RoleType;
 import util.Context;
 import util.state.State;
 
-import java.util.function.Supplier;
-
 @Hide
 public final class NoMoves extends BaseBooleanFunction
 {

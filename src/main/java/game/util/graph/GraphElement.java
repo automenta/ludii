@@ -7,7 +7,7 @@ package game.util.graph;
 import game.types.board.BasisType;
 import game.types.board.ShapeType;
 import game.types.board.SiteType;
-import main.math.Point3D;
+import math.Point3D;
 
 import java.awt.geom.Point2D;
 import java.util.List;

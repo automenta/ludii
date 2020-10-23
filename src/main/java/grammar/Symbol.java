@@ -247,7 +247,7 @@ public class Symbol {
         if (c >= 0) {
             this.name = this.name.substring(c);
         }
-        if (this.name.length() > 0 && this.name.charAt(0) == '.') {
+        if (!this.name.isEmpty() && this.name.charAt(0) == '.') {
             this.name = this.name.substring(1);
         }
         if (this.name.contains(">")) {

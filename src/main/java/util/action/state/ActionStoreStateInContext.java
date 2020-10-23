@@ -46,7 +46,7 @@ public class ActionStoreStateInContext extends BaseAction
     
     @Override
     public boolean equals(final Object obj) {
-        return this == obj || obj instanceof ActionStoreStateInContext;
+        return obj instanceof ActionStoreStateInContext;
     }
     
     @Override

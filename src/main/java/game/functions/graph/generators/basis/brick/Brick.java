@@ -24,24 +24,23 @@ public class Brick extends Basis
     public static GraphFunction construct(@Opt final BrickShapeType shape, final DimFunction dimA, @Opt final DimFunction dimB, @Opt @Name final Boolean trim) {
         final BrickShapeType st = (shape != null) ? shape : ((dimB == null || dimB == dimA) ? BrickShapeType.Square : BrickShapeType.Rectangle);
         switch (st) {
-            case Square:
-            case Rectangle: {
+            case Square, Rectangle -> {
                 return new SquareOrRectangleOnBrick(dimA, dimB, trim);
             }
-            case Limping: {
+            case Limping -> {
                 final DimFunction dimAplus1 = new Add(dimA, new DimConstant(1));
                 return new SquareOrRectangleOnBrick(dimA, dimAplus1, trim);
             }
-            case Diamond: {
+            case Diamond -> {
                 return new DiamondOrPrismOnBrick(dimA, null, trim);
             }
-            case Prism: {
+            case Prism -> {
                 return new DiamondOrPrismOnBrick(dimA, (dimB == null) ? dimA : dimB, trim);
             }
-            case Spiral: {
+            case Spiral -> {
                 return new SpiralOnBrick(dimA);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Shape " + st + " not supported for Brick tiling.");
             }
         }

@@ -85,7 +85,7 @@ public class Track extends BaseLudeme implements Serializable
                     final String step = steps[i];
                     final boolean stepIsNumber = isNumber(step);
                     if (stepIsNumber) {
-                        final int site = Integer.valueOf(step);
+                        final int site = Integer.parseInt(step);
                         current = ((site < game.board().topology().cells().size()) ? game.board().topology().cells().get(site) : null);
                         trackList.add(site);
                     }
@@ -155,7 +155,7 @@ public class Track extends BaseLudeme implements Serializable
                 final String step = steps[i];
                 final boolean stepIsNumber = isNumber(step);
                 if (stepIsNumber) {
-                    final int site = Integer.valueOf(step);
+                    final int site = Integer.parseInt(step);
                     current2 = ((site < game.board().topology().vertices().size()) ? game.board().topology().vertices().get(site) : null);
                     trackList.add(site);
                 }
@@ -306,7 +306,7 @@ public class Track extends BaseLudeme implements Serializable
         this.trackIdx = trackIdx;
     }
     
-    public class Elem implements Serializable
+    public static class Elem implements Serializable
     {
         private static final long serialVersionUID = 1L;
         public final int site;

@@ -17,7 +17,7 @@ import game.util.graph.Properties;
 import game.util.graph.*;
 import gnu.trove.list.array.TDoubleArrayList;
 import gnu.trove.list.array.TIntArrayList;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import util.Context;
 import util.GraphUtilities;
 import util.Trial;
@@ -339,22 +339,22 @@ public class Topology implements Serializable
     
     public List<DirectionFacing> supportedDirections(final RelationType relationType, final SiteType type) {
         switch (relationType) {
-            case Adjacent: {
+            case Adjacent -> {
                 return this.supportedAdjacentDirections.get(type);
             }
-            case Diagonal: {
+            case Diagonal -> {
                 return this.supportedDiagonalDirections.get(type);
             }
-            case All: {
+            case All -> {
                 return this.supportedDirections.get(type);
             }
-            case OffDiagonal: {
+            case OffDiagonal -> {
                 return this.supportedOffDirections.get(type);
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 return this.supportedOrthogonalDirections.get(type);
             }
-            default: {
+            default -> {
                 return this.supportedDirections.get(type);
             }
         }
@@ -472,16 +472,16 @@ public class Topology implements Serializable
     
     public TopologyElement getGraphElement(final SiteType graphElementType, final int index) {
         switch (graphElementType) {
-            case Vertex: {
+            case Vertex -> {
                 return this.vertices().get(index);
             }
-            case Edge: {
+            case Edge -> {
                 return this.edges().get(index);
             }
-            case Cell: {
+            case Cell -> {
                 return this.cells().get(index);
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -489,16 +489,16 @@ public class Topology implements Serializable
     
     public List<? extends TopologyElement> getGraphElements(final SiteType graphElementType) {
         switch (graphElementType) {
-            case Vertex: {
+            case Vertex -> {
                 return this.vertices();
             }
-            case Edge: {
+            case Edge -> {
                 return this.edges();
             }
-            case Cell: {
+            case Cell -> {
                 return this.cells();
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -506,16 +506,16 @@ public class Topology implements Serializable
     
     public int numSites(final SiteType type) {
         switch (type) {
-            case Vertex: {
+            case Vertex -> {
                 return this.vertices().size();
             }
-            case Edge: {
+            case Edge -> {
                 return this.edges().size();
             }
-            case Cell: {
+            case Cell -> {
                 return this.cells().size();
             }
-            default: {
+            default -> {
                 return -1;
             }
         }
@@ -537,31 +537,31 @@ public class Topology implements Serializable
             int currDist = 0;
             final TIntArrayList currList = new TIntArrayList();
             switch (relation) {
-                case Adjacent: {
+                case Adjacent -> {
                     for (final TopologyElement elem : element.adjacent()) {
                         currList.add(elem.index());
                     }
                     break;
                 }
-                case All: {
+                case All -> {
                     for (final TopologyElement elem : element.neighbours()) {
                         currList.add(elem.index());
                     }
                     break;
                 }
-                case Diagonal: {
+                case Diagonal -> {
                     for (final TopologyElement elem : element.diagonal()) {
                         currList.add(elem.index());
                     }
                     break;
                 }
-                case OffDiagonal: {
+                case OffDiagonal -> {
                     for (final TopologyElement elem : element.off()) {
                         currList.add(elem.index());
                     }
                     break;
                 }
-                case Orthogonal: {
+                case Orthogonal -> {
                     for (final TopologyElement elem : element.orthogonal()) {
                         currList.add(elem.index());
                     }
@@ -577,7 +577,7 @@ public class Topology implements Serializable
                         if (distances[idElem][idNeighbour] <= 0) {
                             distances[idElem][idNeighbour] = currDist;
                             switch (relation) {
-                                case Adjacent: {
+                                case Adjacent -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).adjacent()) {
                                         if (!nextList.contains(elem2.index()) && !currList.contains(elem2.index())) {
                                             nextList.add(elem2.index());
@@ -585,7 +585,7 @@ public class Topology implements Serializable
                                     }
                                     break;
                                 }
-                                case All: {
+                                case All -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).neighbours()) {
                                         if (!nextList.contains(elem2.index()) && !currList.contains(elem2.index())) {
                                             nextList.add(elem2.index());
@@ -593,7 +593,7 @@ public class Topology implements Serializable
                                     }
                                     break;
                                 }
-                                case Diagonal: {
+                                case Diagonal -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).diagonal()) {
                                         if (!nextList.contains(elem2.index()) && !currList.contains(elem2.index())) {
                                             nextList.add(elem2.index());
@@ -601,7 +601,7 @@ public class Topology implements Serializable
                                     }
                                     break;
                                 }
-                                case OffDiagonal: {
+                                case OffDiagonal -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).off()) {
                                         if (!nextList.contains(elem2.index()) && !currList.contains(elem2.index())) {
                                             nextList.add(elem2.index());
@@ -609,7 +609,7 @@ public class Topology implements Serializable
                                     }
                                     break;
                                 }
-                                case Orthogonal: {
+                                case Orthogonal -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).orthogonal()) {
                                         if (!nextList.contains(elem2.index()) && !currList.contains(elem2.index())) {
                                             nextList.add(elem2.index());
@@ -694,16 +694,14 @@ public class Topology implements Serializable
             }
             distances[i] = new int[numCells];
             final boolean[] startingPoint = new boolean[numCells];
-            for (int j = 0; j < regionSites.length; ++j) {
-                final int regionSite = regionSites[j];
+            for (final int regionSite : regionSites) {
                 if (regionSite < this.cells.size()) {
                     final Cell regionCell = this.cells.get(regionSite);
                     final boolean[] visited = new boolean[numCells];
                     int currDist = 0;
                     distances[i][regionSite] = currDist;
                     startingPoint[regionSite] = (visited[regionSite] = true);
-                    final List<Cell> currNeighbourList = new ArrayList<>();
-                    currNeighbourList.addAll(regionCell.adjacent());
+                    final List<Cell> currNeighbourList = new ArrayList<>(regionCell.adjacent());
                     final List<Cell> nextNeighbourList = new ArrayList<>();
                     while (!currNeighbourList.isEmpty()) {
                         ++currDist;
@@ -771,15 +769,13 @@ public class Topology implements Serializable
             }
             distances[i] = new int[numVertices];
             final boolean[] startingPoint = new boolean[numVertices];
-            for (int j = 0; j < regionSites.length; ++j) {
-                final int regionSite = regionSites[j];
+            for (final int regionSite : regionSites) {
                 final Vertex regionVertex = this.vertices.get(regionSite);
                 final boolean[] visited = new boolean[numVertices];
                 int currDist = 0;
                 distances[i][regionSite] = currDist;
                 startingPoint[regionSite] = (visited[regionSite] = true);
-                final List<Vertex> currNeighbourList = new ArrayList<>();
-                currNeighbourList.addAll(regionVertex.adjacent());
+                final List<Vertex> currNeighbourList = new ArrayList<>(regionVertex.adjacent());
                 final List<Vertex> nextNeighbourList = new ArrayList<>();
                 while (!currNeighbourList.isEmpty()) {
                     ++currDist;
@@ -825,8 +821,7 @@ public class Topology implements Serializable
             int currDist = 0;
             distances[cornerIdx] = currDist;
             startingPoint[cornerIdx] = (visited[cornerIdx] = true);
-            final List<TopologyElement> currNeighbourList = new ArrayList<>();
-            currNeighbourList.addAll(corner.adjacent());
+            final List<TopologyElement> currNeighbourList = new ArrayList<>(corner.adjacent());
             final List<TopologyElement> nextNeighbourList = new ArrayList<>();
             while (!currNeighbourList.isEmpty()) {
                 ++currDist;
@@ -1003,14 +998,14 @@ public class Topology implements Serializable
             if (!this.connectivities.get(type).contains(sortedOrthos.size())) {
                 this.connectivities.get(type).add(sortedOrthos.size());
             }
-            element.setSortedOrthos(sortedOrthos.toArray(new TopologyElement[sortedOrthos.size()]));
+            element.setSortedOrthos(sortedOrthos.toArray(new TopologyElement[0]));
         }
         this.connectivities.get(type).sort();
         this.connectivities.get(type).trimToSize();
     }
     
     public Point2D.Double centrePoint() {
-        if (this.centre.get(SiteType.Cell).size() == 0) {
+        if (this.centre.get(SiteType.Cell).isEmpty()) {
             return new Point2D.Double(0.5, 0.5);
         }
         double avgX = 0.0;
@@ -1404,12 +1399,12 @@ public class Topology implements Serializable
                 }
             }
         }
-        final Comparator<DirectionFacing> dirComparator = (d1, d2) -> d1.index() - d2.index();
-        Collections.sort(supportedDirection, dirComparator);
-        Collections.sort(supportedOrthogonalDirection, dirComparator);
-        Collections.sort(supportedDiagonalDirection, dirComparator);
-        Collections.sort(supportedAdjacentDirection, dirComparator);
-        Collections.sort(supportedOffDirection, dirComparator);
+        final Comparator<DirectionFacing> dirComparator = Comparator.comparingInt(DirectionFacing::index);
+        supportedDirection.sort(dirComparator);
+        supportedOrthogonalDirection.sort(dirComparator);
+        supportedDiagonalDirection.sort(dirComparator);
+        supportedAdjacentDirection.sort(dirComparator);
+        supportedOffDirection.sort(dirComparator);
     }
     
     public void computeDoesCross() {
@@ -1442,7 +1437,7 @@ public class Topology implements Serializable
     }
     
     public void computeNumEdgeIfRegular() {
-        if (this.isRegular() && this.cells.size() > 0) {
+        if (this.isRegular() && !this.cells.isEmpty()) {
             this.numEdges = this.cells.get(0).edges().size();
         }
     }

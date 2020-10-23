@@ -15,16 +15,16 @@ public class All extends BaseBooleanFunction
     
     public static BooleanFunction construct(final AllType allType) {
         switch (allType) {
-            case DiceUsed: {
+            case DiceUsed -> {
                 return new AllDiceUsed();
             }
-            case Passed: {
+            case Passed -> {
                 return new AllPassed();
             }
-            case DiceEqual: {
+            case DiceEqual -> {
                 return new AllDiceEqual();
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("All(): A AllType is not implemented.");
             }
         }

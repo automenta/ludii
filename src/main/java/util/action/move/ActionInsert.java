@@ -84,7 +84,7 @@ public final class ActionInsert extends BaseAction
             for (final Track track : context.board().tracks()) {
                 final int trackIdx = track.trackIdx();
                 final TIntArrayList indices = onTrackIndices.locToIndex(trackIdx, this.to);
-                if (indices.size() > 0) {
+                if (!indices.isEmpty()) {
                     onTrackIndices.add(trackIdx, this.what, 1, indices.getQuick(0));
                 }
             }
@@ -114,7 +114,7 @@ public final class ActionInsert extends BaseAction
             return false;
         }
         final ActionInsert other = (ActionInsert)obj;
-        return this.decision == other.decision && this.to == other.to && this.level == other.level && this.state == other.state && this.what == other.what && this.type.equals(other.type);
+        return this.decision == other.decision && this.to == other.to && this.level == other.level && this.state == other.state && this.what == other.what && this.type == other.type;
     }
     
     @Override
@@ -148,7 +148,7 @@ public final class ActionInsert extends BaseAction
     @Override
     public String toTurnFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
-        String newTo = this.to + "";
+        String newTo = String.valueOf(this.to);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.type == SiteType.Cell || (this.type == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.to] : 0;
             if (cid == 0) {
@@ -156,7 +156,7 @@ public final class ActionInsert extends BaseAction
                 newTo = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.to).label();
             }
         }
-        if (this.type != null && !this.type.equals(context.board().defaultSite())) {
+        if (this.type != null && this.type != context.board().defaultSite()) {
             sb.append(this.type + " " + newTo);
         }
         else {
@@ -182,7 +182,7 @@ public final class ActionInsert extends BaseAction
         if (this.what > 0 && this.what < context.components().length) {
             sb.append(context.components()[this.what].name());
         }
-        String newTo = this.to + "";
+        String newTo = String.valueOf(this.to);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.type == SiteType.Cell || (this.type == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.to] : 0;
             if (cid == 0) {
@@ -190,7 +190,7 @@ public final class ActionInsert extends BaseAction
                 newTo = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.to).label();
             }
         }
-        if (this.type != null && !this.type.equals(context.board().defaultSite())) {
+        if (this.type != null && this.type != context.board().defaultSite()) {
             sb.append(" to " + this.type + " " + newTo);
         }
         else {

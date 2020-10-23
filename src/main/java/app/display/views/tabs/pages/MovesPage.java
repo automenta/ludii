@@ -60,7 +60,7 @@ public class MovesPage extends TabPage
                         moveToPrint = moveToPrint + action.toMoveFormat(context.currentInstanceContext()) + ", ";
                     }
                 }
-                if (moveToPrint.length() > 0) {
+                if (!moveToPrint.isEmpty()) {
                     final int moveNumberToPrint = moveNumber - TrialUtil.getInstanceStartIndex(context) + 1;
                     return moveNumberToPrint + ". " + moveToPrint.substring(0, moveToPrint.length() - 2) + "\n";
                 }
@@ -80,7 +80,7 @@ public class MovesPage extends TabPage
                 for (final Action action : lastMove.actions()) {
                     moveToPrint = moveToPrint + action.toMoveFormat(context.currentInstanceContext()) + ", ";
                 }
-                if (moveToPrint.length() > 0) {
+                if (!moveToPrint.isEmpty()) {
                     final int moveNumberToPrint = moveNumber - TrialUtil.getInstanceStartIndex(context) + 1;
                     return moveNumberToPrint + ". " + moveToPrint.substring(0, moveToPrint.length() - 2) + "\n";
                 }
@@ -95,7 +95,7 @@ public class MovesPage extends TabPage
                         moveToPrint = moveToPrint + action.toTurnFormat(context.currentInstanceContext()) + ", ";
                     }
                 }
-                if (moveToPrint.length() > 0) {
+                if (!moveToPrint.isEmpty()) {
                     final int moveNumberToPrint = moveNumber - TrialUtil.getInstanceStartIndex(context) + 1;
                     return moveNumberToPrint + ". " + moveToPrint.substring(0, moveToPrint.length() - 2) + "\n";
                 }
@@ -115,7 +115,7 @@ public class MovesPage extends TabPage
                 for (final Action action : lastMove.actions()) {
                     moveToPrint = moveToPrint + action.toTurnFormat(context.currentInstanceContext()) + ", ";
                 }
-                if (moveToPrint.length() > 0) {
+                if (!moveToPrint.isEmpty()) {
                     final int moveNumberToPrint = moveNumber - TrialUtil.getInstanceStartIndex(context) + 1;
                     return moveNumberToPrint + ". " + moveToPrint.substring(0, moveToPrint.length() - 2) + "\n";
                 }
@@ -126,7 +126,7 @@ public class MovesPage extends TabPage
             final List<Action> actionsToPrint = new ArrayList<>(lastMove.actions());
             final StringBuilder completeActionLastMove = new StringBuilder();
             for (final Action a : actionsToPrint) {
-                if (completeActionLastMove.length() > 0) {
+                if (!completeActionLastMove.isEmpty()) {
                     completeActionLastMove.append(", ");
                 }
                 completeActionLastMove.append(a.toMoveFormat(context.currentInstanceContext()));
@@ -167,9 +167,9 @@ public class MovesPage extends TabPage
             }
             final int moveNumberToPrint3 = moveNumber - TrialUtil.getInstanceStartIndex(context) + 1;
             if (moverToPrint > 0) {
-                return moveNumberToPrint3 + ". (" + moverToPrint + ") " + completeActionLastMove.toString() + "\n";
+                return moveNumberToPrint3 + ". (" + moverToPrint + ") " + completeActionLastMove + "\n";
             }
-            return moveNumberToPrint3 + ". " + completeActionLastMove.toString() + "\n";
+            return moveNumberToPrint3 + ". " + completeActionLastMove + "\n";
         }
     }
     

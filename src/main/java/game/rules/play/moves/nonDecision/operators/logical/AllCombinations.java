@@ -10,7 +10,7 @@ import game.rules.play.moves.BaseMoves;
 import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.effect.Then;
 import game.rules.play.moves.nonDecision.operator.Operator;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import util.Context;
 import util.Move;
 

@@ -19,19 +19,19 @@ public interface Parser
     
     void setErrorHandler(final ErrorHandler p0);
     
-    void parseStyleSheet(final InputSource p0) throws CSSException, IOException;
+    void parseStyleSheet(final InputSource p0) throws CSSException;
     
-    void parseStyleSheet(final String p0) throws CSSException, IOException;
+    void parseStyleSheet(final String p0) throws CSSException;
     
-    void parseStyleDeclaration(final InputSource p0) throws CSSException, IOException;
+    void parseStyleDeclaration(final InputSource p0) throws CSSException;
     
-    void parseRule(final InputSource p0) throws CSSException, IOException;
+    void parseRule(final InputSource p0) throws CSSException;
     
     String getParserVersion();
     
-    SelectorList parseSelectors(final InputSource p0) throws CSSException, IOException;
+    SelectorList parseSelectors(final InputSource p0) throws CSSException;
     
-    LexicalUnit parsePropertyValue(final InputSource p0) throws CSSException, IOException;
+    LexicalUnit parsePropertyValue(final InputSource p0) throws CSSException;
     
-    boolean parsePriority(final InputSource p0) throws CSSException, IOException;
+    boolean parsePriority(final InputSource p0) throws CSSException;
 }

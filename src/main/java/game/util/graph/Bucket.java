@@ -14,12 +14,12 @@ public class Bucket
     private double total;
     
     public Bucket() {
-        this.items = new ArrayList<ItemScore>();
+        this.items = new ArrayList<>();
         this.total = 0.0;
     }
     
     public List<ItemScore> items() {
-        return Collections.unmodifiableList((List<? extends ItemScore>)this.items);
+        return Collections.unmodifiableList(this.items);
     }
     
     public double mean() {

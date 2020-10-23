@@ -22,9 +22,9 @@ import gnu.trove.map.hash.TObjectIntHashMap;
 import language.compiler.Compiler;
 import main.CommandLineArgParse;
 import main.FileHandling;
-import main.collections.FVector;
-import main.collections.FastArrayList;
-import main.grammar.Report;
+import collections.FVector;
+import collections.FastArrayList;
+import grammar.Report;
 import metadata.ai.features.Features;
 import metadata.ai.heuristics.Heuristics;
 import metadata.ai.misc.BestAgent;
@@ -182,32 +182,28 @@ public class ExpertIteration
                         if (ExpertIteration.this.expertAI.equals("BEST_AGENT")) {
                             try {
                                 final BestAgent bestAgent = (BestAgent)Compiler.compileObject(FileHandling.loadTextContentsFromFile(ExpertIteration.this.bestAgentsDataDir + "/BestAgent.txt"), "metadata.ai.misc.BestAgent", report);
-                                if (bestAgent.agent().equals("AlphaBeta")) {
-                                    ai = new AlphaBetaSearch(ExpertIteration.this.bestAgentsDataDir + "/BestHeuristics.txt");
-                                }
-                                else if (bestAgent.agent().equals("AlphaBetaMetadata")) {
-                                    ai = new AlphaBetaSearch();
-                                }
-                                else if (bestAgent.agent().equals("UCT")) {
-                                    ai = AIFactory.createAI("UCT");
-                                }
-                                else if (bestAgent.agent().equals("MC-GRAVE")) {
-                                    ai = AIFactory.createAI("MC-GRAVE");
-                                }
-                                else if (bestAgent.agent().equals("Biased MCTS")) {
-                                    final Features features = (Features)Compiler.compileObject(FileHandling.loadTextContentsFromFile(ExpertIteration.this.bestAgentsDataDir + "/BestFeatures.txt"), "metadata.ai.features.Features", report);
-                                    ai = MCTS.createBiasedMCTS(features, true);
-                                }
-                                else if (bestAgent.agent().equals("Biased MCTS (Uniform Playouts)")) {
-                                    final Features features = (Features)Compiler.compileObject(FileHandling.loadTextContentsFromFile(ExpertIteration.this.bestAgentsDataDir + "/BestFeatures.txt"), "metadata.ai.features.Features", report);
-                                    ai = MCTS.createBiasedMCTS(features, false);
-                                }
-                                else {
-                                    if (!bestAgent.agent().equals("Random")) {
-                                        System.err.println("Unrecognised best agent: " + bestAgent.agent());
-                                        return;
+                                switch (bestAgent.agent()) {
+                                    case "AlphaBeta" -> ai = new AlphaBetaSearch(ExpertIteration.this.bestAgentsDataDir + "/BestHeuristics.txt");
+                                    case "AlphaBetaMetadata" -> ai = new AlphaBetaSearch();
+                                    case "UCT" -> ai = AIFactory.createAI("UCT");
+                                    case "MC-GRAVE" -> ai = AIFactory.createAI("MC-GRAVE");
+                                    case "Biased MCTS" -> {
+                                        final Features features = (Features) Compiler.compileObject(FileHandling.loadTextContentsFromFile(ExpertIteration.this.bestAgentsDataDir + "/BestFeatures.txt"), "metadata.ai.features.Features", report);
+                                        ai = MCTS.createBiasedMCTS(features, true);
+                                        break;
                                     }
-                                    ai = MCTS.createUCT();
+                                    case "Biased MCTS (Uniform Playouts)" -> {
+                                        final Features features = (Features) Compiler.compileObject(FileHandling.loadTextContentsFromFile(ExpertIteration.this.bestAgentsDataDir + "/BestFeatures.txt"), "metadata.ai.features.Features", report);
+                                        ai = MCTS.createBiasedMCTS(features, false);
+                                        break;
+                                    }
+                                    default -> {
+                                        if (!bestAgent.agent().equals("Random")) {
+                                            System.err.println("Unrecognised best agent: " + bestAgent.agent());
+                                            return;
+                                        }
+                                        ai = MCTS.createUCT();
+                                    }
                                 }
                                 break Label_0743;
                             }
@@ -514,7 +510,7 @@ public class ExpertIteration
                                 gradVectorsPerPlayer.get(ceExploreMovers.getQuick(t)).add(gradLog2);
                             }
                             for (int p6 = 1; p6 <= numPlayers; ++p6) {
-                                if (gradVectorsPerPlayer.get(p6).size() > 0) {
+                                if (!gradVectorsPerPlayer.get(p6).isEmpty()) {
                                     final FVector meanGradientsCEExplore = FVector.mean(gradVectorsPerPlayer.get(p6));
                                     ceExploreOptimisers[p6].minimiseObjective(ceExploreFunctions[p6].trainableParams(), meanGradientsCEExplore);
                                 }
@@ -826,7 +822,7 @@ public class ExpertIteration
                     featureSet.instantiateFeatures(game, new int[] { p }, null);
                     featureSets[p] = featureSet;
                 }
-                if (newlyCreated.size() > 0) {
+                if (!newlyCreated.isEmpty()) {
                     final long[][][] frequencies = new long[numPlayers + 1][][];
                     for (int p2 = 1; p2 <= numPlayers; ++p2) {
                         final int numAtomicFeatures = featureSets[p2].getNumFeatures();
@@ -951,9 +947,7 @@ public class ExpertIteration
                     final List<TIntArrayList> sparseFeatureVectors = featureSet.computeSparseFeatureVectors(sample.state().state(), sample.state().lastDecisionMove(), sample.moves(), false);
                     final FVector errors = crossEntropyPolicy.computeDistributionErrors(crossEntropyPolicy.computeDistribution(sparseFeatureVectors, sample.state().state().mover()), sample.expertDistribution());
                     final Set<Feature> existingFeatures = new HashSet<>((int) Math.ceil(featureSet.getNumFeatures() / 0.75f), 0.75f);
-                    for (final Feature feature : featureSet.features()) {
-                        existingFeatures.add(feature);
-                    }
+                    existingFeatures.addAll(Arrays.asList(featureSet.features()));
                     for (int a = 0; a < sample.moves().size(); ++a) {
                         ++numCases;
                         final Set<CombinableFeatureInstancePair> observedCasePairs = new HashSet<>(256, 0.75f);
@@ -964,13 +958,7 @@ public class ExpertIteration
                                 final int featureIdxB = instanceB.feature().featureSetIndex();
                                 final float absWeightA = Math.abs(crossEntropyPolicy.linearFunction(sample.state().state().mover()).effectiveParams().get(featureIdxA));
                                 final float absWeightB = Math.abs(crossEntropyPolicy.linearFunction(sample.state().state().mover()).effectiveParams().get(featureIdxB));
-                                if (absWeightA == absWeightB) {
-                                    return 0;
-                                }
-                                if (absWeightA > absWeightB) {
-                                    return -1;
-                                }
-                                return 1;
+                                return Float.compare(absWeightB, absWeightA);
                             });
                             activeInstances = activeInstances.subList(0, featureDiscoveryMaxNumFeatureInstances);
                         }
@@ -1035,7 +1023,7 @@ public class ExpertIteration
                         bestPairIdx = scoredPairs.size() - 1;
                     }
                 }
-                while (scoredPairs.size() > 0) {
+                while (!scoredPairs.isEmpty()) {
                     final ScoredPair bestPair = scoredPairs.remove(bestPairIdx);
                     final FeatureSet newFeatureSet = featureSet.createExpandedFeatureSet(g, bestPair.pair.a, bestPair.pair.b);
                     if (newFeatureSet != null) {

@@ -8,14 +8,11 @@ import game.Game;
 import game.rules.phase.Phase;
 import game.rules.play.moves.Moves;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import util.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class AlternatingMove extends Model
@@ -65,7 +62,7 @@ public final class AlternatingMove extends Model
         if (!this.ready) {
             return null;
         }
-        return Arrays.asList(this.lastStepAI);
+        return Collections.singletonList(this.lastStepAI);
     }
     
     @Override
@@ -73,7 +70,7 @@ public final class AlternatingMove extends Model
         if (!this.ready) {
             return null;
         }
-        return Arrays.asList(this.lastStepMove);
+        return Collections.singletonList(this.lastStepMove);
     }
     
     @Override
@@ -225,6 +222,7 @@ public final class AlternatingMove extends Model
         }
         else {
             this.running = true;
+
         }
     }
     

@@ -69,7 +69,7 @@ public class OptimiserFactory
         else {
             System.err.println("Expecting Optimizer file to start with \"optimiser=\", but it starts with " + firstLine);
         }
-        System.err.println(String.format("Warning: cannot convert string \"%s\" to Optimiser; defaulting to vanilla SGD.", string));
+        System.err.printf("Warning: cannot convert string \"%s\" to Optimiser; defaulting to vanilla SGD.%n", string);
         return new SGD(0.05f);
     }
 }

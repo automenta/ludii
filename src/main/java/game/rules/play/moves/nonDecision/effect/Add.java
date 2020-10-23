@@ -99,7 +99,7 @@ public final class Add extends Effect
                                 final Action actionToAddAgain = (this.level == null) ? new ActionAdd(this.type, siteEval, componentId, 1, state, -1, null, null, null) : new ActionInsert(this.type, siteEval, this.level.eval(context), componentId, state);
                                 action.actions().add(actionToAddAgain);
                             }
-                            if (this.type.equals(SiteType.Edge)) {
+                            if (this.type == SiteType.Edge) {
                                 action.setFromNonDecision(siteEval);
                                 action.setToNonDecision(siteEval);
                                 action.setEdgeMove(siteEval);
@@ -138,7 +138,7 @@ public final class Add extends Effect
                                     final Action actionToAddAgain2 = (this.level == null) ? new ActionAdd(this.type, toSite, componentId, 1, state2, -1, null, null, null) : new ActionInsert(this.type, toSite, this.level.eval(context), componentId, state2);
                                     action2.actions().add(actionToAddAgain2);
                                 }
-                                if (this.type.equals(SiteType.Edge)) {
+                                if (this.type == SiteType.Edge) {
                                     action2.setFromNonDecision(toSite);
                                     action2.setToNonDecision(toSite);
                                     action2.setEdgeMove(toSite);
@@ -183,7 +183,7 @@ public final class Add extends Effect
                 if (localStateToAdd == -1 || localStateToAdd == state) {
                     final TIntArrayList locsLargePiece = largePiece.locs(context, siteEval, state, context.topology());
                     if (locsLargePiece != null) {
-                        if (locsLargePiece.size() > 0) {
+                        if (!locsLargePiece.isEmpty()) {
                             boolean valid = true;
                             for (int i = 0; i < locsLargePiece.size(); ++i) {
                                 final int siteToCheck = locsLargePiece.get(i);
@@ -215,7 +215,7 @@ public final class Add extends Effect
                 if (localStateToAdd == -1 || localStateToAdd == state2) {
                     final TIntArrayList locsLargePiece2 = largePiece.locs(context, toSite, state2, context.topology());
                     if (locsLargePiece2 != null) {
-                        if (locsLargePiece2.size() > 0) {
+                        if (!locsLargePiece2.isEmpty()) {
                             boolean valid2 = true;
                             for (int j = 0; j < locsLargePiece2.size(); ++j) {
                                 final int siteToCheck2 = locsLargePiece2.get(j);
@@ -308,19 +308,19 @@ public final class Add extends Effect
         else {
             maxNumStates = 0;
         }
-        if (this.type.equals(SiteType.Cell)) {
+        if (this.type == SiteType.Cell) {
             this.actionCache = new Move[game.players().count() + 1][][][];
             for (int p = 1; p < this.actionCache.length; ++p) {
                 this.actionCache[p] = new Move[game.numComponents() + 1][maxNumStates + 2][game.equipment().totalDefaultSites()];
             }
         }
-        else if (this.type.equals(SiteType.Edge)) {
+        else if (this.type == SiteType.Edge) {
             this.actionCache = new Move[game.players().count() + 1][][][];
             for (int p = 1; p < this.actionCache.length; ++p) {
                 this.actionCache[p] = new Move[game.players().count() + 1][maxNumStates + 2][game.board().topology().edges().size()];
             }
         }
-        else if (this.type.equals(SiteType.Vertex)) {
+        else if (this.type == SiteType.Vertex) {
             this.actionCache = new Move[game.players().count() + 1][][][];
             for (int p = 1; p < this.actionCache.length; ++p) {
                 this.actionCache[p] = new Move[game.numComponents() + 1][maxNumStates + 2][game.board().topology().vertices().size()];

@@ -8,7 +8,7 @@ import annotations.Opt;
 import game.Game;
 import game.rules.play.moves.nonDecision.effect.Then;
 import game.types.state.GameType;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import util.BaseLudeme;
 import util.Context;
 import util.Move;
@@ -87,7 +87,7 @@ public abstract class Moves extends BaseLudeme implements GameType
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         for (final Move m : this.moves) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append(m.toString());

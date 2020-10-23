@@ -41,7 +41,7 @@ public final class Scale extends BaseGraphFunction
             return graph;
         }
         final double sx = this.scaleXFn.eval(context);
-        final double sy = (this.scaleYFn != null) ? this.scaleYFn.eval(context) : ((double)this.scaleXFn.eval(context));
+        final double sy = (this.scaleYFn != null) ? this.scaleYFn.eval(context) : this.scaleXFn.eval(context);
         final double sz = (this.scaleZFn != null) ? this.scaleZFn.eval(context) : 1.0;
         graph.scale(sx, sy, sz);
         return graph;

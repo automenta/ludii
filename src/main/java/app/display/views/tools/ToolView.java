@@ -153,7 +153,6 @@ public class ToolView extends View
         EventQueue.invokeLater(() -> {
             Manager.app.updateTabs(context);
             SettingsDesktop.jumpingMoveSavedImage = null;
-            return;
         });
         SettingsVC.selectedLocation = new FullLocation(-1);
     }

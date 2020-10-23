@@ -26,7 +26,7 @@ public class JanggiDesign extends BoardDesign
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.005f;
         final float swThick;
-        final float swThin = swThick = (float)Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
+        final float swThin = swThick = Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
         this.setStrokesAndColours(context, new Color(100, 75, 50), new Color(100, 75, 50), new Color(255, 165, 0), null, null, null, new Color(0, 0, 0), swThin, swThick);
         this.drawBoardOutline(g2d);
         this.drawInnerCellEdges(g2d, context);
@@ -46,27 +46,27 @@ public class JanggiDesign extends BoardDesign
                 if ((va.getY() < 0.5 || vb.getY() > 0.5) && (va.getY() > 0.5 || vb.getY() < 0.5)) {
                     final Point vaWorld = this.screenPosn(vA.centroid());
                     final Point vbWorld = this.screenPosn(vB.centroid());
-                    path.moveTo((float)vaWorld.x, (float)vaWorld.y);
-                    path.lineTo((float)vbWorld.x, (float)vbWorld.y);
+                    path.moveTo(vaWorld.x, vaWorld.y);
+                    path.lineTo(vbWorld.x, vbWorld.y);
                 }
             }
         }
         Point screenPosn = this.screenPosn(this.topology().vertices().get(3).centroid());
-        path.moveTo((float)screenPosn.x, (float)screenPosn.y);
+        path.moveTo(screenPosn.x, screenPosn.y);
         screenPosn = this.screenPosn(this.topology().vertices().get(23).centroid());
-        path.lineTo((float)screenPosn.x, (float)screenPosn.y);
+        path.lineTo(screenPosn.x, screenPosn.y);
         screenPosn = this.screenPosn(this.topology().vertices().get(5).centroid());
-        path.moveTo((float)screenPosn.x, (float)screenPosn.y);
+        path.moveTo(screenPosn.x, screenPosn.y);
         screenPosn = this.screenPosn(this.topology().vertices().get(21).centroid());
-        path.lineTo((float)screenPosn.x, (float)screenPosn.y);
+        path.lineTo(screenPosn.x, screenPosn.y);
         screenPosn = this.screenPosn(this.topology().vertices().get(86).centroid());
-        path.moveTo((float)screenPosn.x, (float)screenPosn.y);
+        path.moveTo(screenPosn.x, screenPosn.y);
         screenPosn = this.screenPosn(this.topology().vertices().get(66).centroid());
-        path.lineTo((float)screenPosn.x, (float)screenPosn.y);
+        path.lineTo(screenPosn.x, screenPosn.y);
         screenPosn = this.screenPosn(this.topology().vertices().get(84).centroid());
-        path.moveTo((float)screenPosn.x, (float)screenPosn.y);
+        path.moveTo(screenPosn.x, screenPosn.y);
         screenPosn = this.screenPosn(this.topology().vertices().get(68).centroid());
-        path.lineTo((float)screenPosn.x, (float)screenPosn.y);
+        path.lineTo(screenPosn.x, screenPosn.y);
         g2d.draw(path);
     }
 }

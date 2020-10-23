@@ -106,7 +106,7 @@ public final class ActionSetMasked extends BaseAction
     @Override
     public String toTurnFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
-        String newTo = this.to + "";
+        String newTo = String.valueOf(this.to);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.type == SiteType.Cell || (this.type == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.to] : 0;
             if (cid == 0) {
@@ -114,7 +114,7 @@ public final class ActionSetMasked extends BaseAction
                 newTo = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.to).label();
             }
         }
-        if (this.type != null && !this.type.equals(context.board().defaultSite())) {
+        if (this.type != null && this.type != context.board().defaultSite()) {
             sb.append(this.type + " " + newTo);
         }
         else {
@@ -131,7 +131,7 @@ public final class ActionSetMasked extends BaseAction
     public String toMoveFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("(Set Masked at ");
-        String newTo = this.to + "";
+        String newTo = String.valueOf(this.to);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.type == SiteType.Cell || (this.type == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.to] : 0;
             if (cid == 0) {
@@ -139,7 +139,7 @@ public final class ActionSetMasked extends BaseAction
                 newTo = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.to).label();
             }
         }
-        if (this.type != null && !this.type.equals(context.board().defaultSite())) {
+        if (this.type != null && this.type != context.board().defaultSite()) {
             sb.append(this.type + " " + newTo);
         }
         else {

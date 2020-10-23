@@ -5,7 +5,7 @@ package options;
 
 import exception.DuplicateOptionUseException;
 import exception.UnusedOptionException;
-import root.StringRoutines;
+import main.StringRoutines;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,8 +30,8 @@ public class GameOptions {
 
     public void setOptionCategories(List<Option>[] optionsAvList) {
         this.categories.clear();
-        for (int n = 0; n < optionsAvList.length; ++n) {
-            this.categories.add(new OptionCategory(optionsAvList[n]));
+        for (List<Option> options : optionsAvList) {
+            this.categories.add(new OptionCategory(options));
         }
         this.optionsLoaded = true;
     }
@@ -94,8 +94,7 @@ public class GameOptions {
     public List<String> allOptionStrings(List<String> selectedOptionStrings) {
         ArrayList<String> strings = new ArrayList<>();
         boolean[] usedOptionStrings = new boolean[selectedOptionStrings.size()];
-        for (int cat = 0; cat < this.categories.size(); ++cat) {
-            OptionCategory category = this.categories.get(cat);
+        for (OptionCategory category : this.categories) {
             int maxPriority = Integer.MIN_VALUE;
             String activeOptionStr = null;
             for (int i = 0; i < category.options().size(); ++i) {
@@ -124,8 +123,7 @@ public class GameOptions {
     }
 
     public boolean optionExists(String optionString) {
-        for (int cat = 0; cat < this.categories.size(); ++cat) {
-            OptionCategory category = this.categories.get(cat);
+        for (OptionCategory category : this.categories) {
             for (int i = 0; i < category.options().size(); ++i) {
                 Option option = category.options().get(i);
                 String optionStr = StringRoutines.join("/", option.menuHeadings());

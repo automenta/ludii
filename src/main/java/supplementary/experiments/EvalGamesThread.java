@@ -134,7 +134,7 @@ public class EvalGamesThread extends Thread
             double finalScore = 0.0;
             for (int m = 0; m < this.metricsToEvaluate.size(); ++m) {
                 final Metric metric = this.metricsToEvaluate.get(m);
-                final double score = metric.apply(this.game, "", allStoredTrials.toArray(new Trial[allStoredTrials.size()]));
+                final double score = metric.apply(this.game, "", allStoredTrials.toArray(new Trial[0]));
                 final double weight = this.weights.get(m);
                 Manager.app.addTextToAnalysisPanel(metric.name() + ": " + df.format(score) + " (weight: " + weight + ")\n");
                 finalScore += score * weight;

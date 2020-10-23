@@ -131,9 +131,9 @@ implements Serializable {
     public float max() {
         float max = Float.NEGATIVE_INFINITY;
         int d = this.floats.length;
-        for (int i = 0; i < d; ++i) {
-            if (!(this.floats[i] > max)) continue;
-            max = this.floats[i];
+        for (float aFloat : this.floats) {
+            if (!(aFloat > max)) continue;
+            max = aFloat;
         }
         return max;
     }
@@ -141,22 +141,22 @@ implements Serializable {
     public float min() {
         float min = Float.POSITIVE_INFINITY;
         int d = this.floats.length;
-        for (int i = 0; i < d; ++i) {
-            if (!(this.floats[i] < min)) continue;
-            min = this.floats[i];
+        for (float aFloat : this.floats) {
+            if (!(aFloat < min)) continue;
+            min = aFloat;
         }
         return min;
     }
 
     public float mean() {
-        return this.sum() / (float)this.floats.length;
+        return this.sum() / this.floats.length;
     }
 
     public double norm() {
         float sumSquares = 0.0f;
         int d = this.floats.length;
-        for (int i = 0; i < d; ++i) {
-            sumSquares += this.floats[i] * this.floats[i];
+        for (float aFloat : this.floats) {
+            sumSquares += aFloat * aFloat;
         }
         return Math.sqrt(sumSquares);
     }
@@ -168,8 +168,8 @@ implements Serializable {
     public float sum() {
         float sum = 0.0f;
         int d = this.floats.length;
-        for (int i = 0; i < d; ++i) {
-            sum += this.floats[i];
+        for (float aFloat : this.floats) {
+            sum += aFloat;
         }
         return sum;
     }
@@ -358,14 +358,14 @@ implements Serializable {
         for (int i = 0; i < dim; ++i) {
             float prob = this.floats[i];
             if (!(prob > 0.0f)) continue;
-            entropy -= (double)prob * Math.log(prob);
+            entropy -= prob * Math.log(prob);
         }
         return entropy / Math.log(dim);
     }
 
     public boolean containsNaN() {
-        for (int i = 0; i < this.floats.length; ++i) {
-            if (!Float.isNaN(this.floats[i])) continue;
+        for (float aFloat : this.floats) {
+            if (!Float.isNaN(aFloat)) continue;
             return true;
         }
         return false;
@@ -427,7 +427,7 @@ implements Serializable {
         float[] estFloats = estDist.floats;
         float result = 0.0f;
         for (int i = 0; i < d; ++i) {
-            result = (float)((double)result - (double)trueFloats[i] * Math.log(estFloats[i]));
+            result = (float)(result - trueFloats[i] * Math.log(estFloats[i]));
         }
         return result;
     }
@@ -450,7 +450,7 @@ implements Serializable {
         float result = 0.0f;
         for (int i = 0; i < d; ++i) {
             if (trueFloats[i] == 0.0f) continue;
-            result = (float)((double)result - (double)trueFloats[i] * Math.log(estFloats[i] / trueFloats[i]));
+            result = (float)(result - trueFloats[i] * Math.log(estFloats[i] / trueFloats[i]));
         }
         return result;
     }
@@ -466,7 +466,7 @@ implements Serializable {
             }
         }
         FVector meanVector = FVector.wrap(means);
-        meanVector.mult(1.0f / (float)vectors.length);
+        meanVector.mult(1.0f / vectors.length);
         return meanVector;
     }
 
@@ -481,15 +481,15 @@ implements Serializable {
             }
         }
         FVector meanVector = FVector.wrap(means);
-        meanVector.mult(1.0f / (float)vectors.size());
+        meanVector.mult(1.0f / vectors.size());
         return meanVector;
     }
 
     public static FVector linspace(float start, float stop, int num, boolean endInclusive) {
         FVector result = new FVector(num);
-        float step = endInclusive ? (stop - start) / (float)(num - 1) : (stop - start) / (float)num;
+        float step = endInclusive ? (stop - start) / (num - 1) : (stop - start) / num;
         for (int i = 0; i < num; ++i) {
-            result.set(i, start + (float)i * step);
+            result.set(i, start + i * step);
         }
         return result;
     }

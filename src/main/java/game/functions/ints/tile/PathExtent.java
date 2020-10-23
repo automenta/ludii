@@ -66,8 +66,7 @@ public final class PathExtent extends BaseIntFunction
             regionToCheck = new int[] { this.startFn.eval(context) };
         }
         int maxExtent = 0;
-        for (int p = 0; p < regionToCheck.length; ++p) {
-            final int from = regionToCheck[p];
+        for (final int from : regionToCheck) {
             if (from == -1) {
                 return maxExtent;
             }
@@ -95,13 +94,12 @@ public final class PathExtent extends BaseIntFunction
                 final Component component = context.components()[what];
                 final int rotation = cs.rotation(site, SiteType.Cell) * 2 / ratioAdjOrtho;
                 final Path[] paths = Arrays.copyOf(component.paths(), component.paths().length);
-                for (int i = 0; i < paths.length; ++i) {
-                    final Path path = paths[i];
+                for (final Path path : paths) {
                     if (path.colour() == colourLoop) {
                         final List<AbsoluteDirection> directionsStep1 = directionFunction.convertToAbsolute(SiteType.Cell, cell, null, null, path.side1(rotation, graph.numEdges()), context);
                         final AbsoluteDirection directionSide1 = directionsStep1.get(0);
                         final List<Step> stepsSide1 = graph.trajectories().steps(SiteType.Cell, cell.index(), SiteType.Cell, directionSide1);
-                        if (stepsSide1.size() != 0) {
+                        if (!stepsSide1.isEmpty()) {
                             final int site1Connected = stepsSide1.get(0).to().id();
                             final Cell cell1Connected = graph.cells().get(site1Connected);
                             final int rowCell1 = cell1Connected.row();
@@ -123,7 +121,7 @@ public final class PathExtent extends BaseIntFunction
                         final List<AbsoluteDirection> directionsSide2 = directionFunction.convertToAbsolute(SiteType.Cell, cell, null, null, path.side2(rotation, graph.numEdges()), context);
                         final AbsoluteDirection directionSide2 = directionsSide2.get(0);
                         final List<Step> stepsSide2 = graph.trajectories().steps(SiteType.Cell, cell.index(), SiteType.Cell, directionSide2);
-                        if (stepsSide2.size() != 0) {
+                        if (!stepsSide2.isEmpty()) {
                             final int site2Connected = stepsSide2.get(0).to().id();
                             final Cell cell2Connected = graph.cells().get(site2Connected);
                             final int rowCell2 = cell2Connected.row();

@@ -52,16 +52,16 @@ public final class SitesConnected extends BaseRegionFunction
         }
         System.out.println("here");
         switch (this.ofType) {
-            case Vertex: {
+            case Vertex -> {
                 return null;
             }
-            case Edge: {
+            case Edge -> {
                 return this.evalEdge(context, siteId);
             }
-            case Cell: {
+            case Cell -> {
                 return null;
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -119,7 +119,7 @@ public final class SitesConnected extends BaseRegionFunction
                 final BitSet regionTemp = (BitSet)regionList.clone();
                 regionTemp.and(itemsList[j]);
                 regionTemp.xor(regionList);
-                if (regionTemp.length() == 0) {
+                if (regionTemp.isEmpty()) {
                     connectedFlag = true;
                     break;
                 }
@@ -129,7 +129,7 @@ public final class SitesConnected extends BaseRegionFunction
             return new Region(resultOwner.toArray());
         }
         switch (this.resultType) {
-            case Vertex: {
+            case Vertex -> {
                 for (int l = itemsList[j].nextSetBit(0); l >= 0; l = itemsList[j].nextSetBit(l + 1)) {
                     if (itemsList[j].get(l)) {
                         resultOwner.add(l);
@@ -137,7 +137,7 @@ public final class SitesConnected extends BaseRegionFunction
                 }
                 return new Region(resultOwner.toArray());
             }
-            case Edge: {
+            case Edge -> {
                 if (!this.shortestFlag && !this.closedFlag) {
                     for (int m = graph.edges().size() - 1; m >= 0; --m) {
                         if ((whoSiteId == numPlayers + 1 && state.who(m, SiteType.Edge) != 0) || (whoSiteId < numPlayers + 1 && state.who(m, SiteType.Edge) == whoSiteId)) {
@@ -167,10 +167,10 @@ public final class SitesConnected extends BaseRegionFunction
                 }
                 return new Region(resultOwner.toArray());
             }
-            case Cell: {
+            case Cell -> {
                 return null;
             }
-            default: {
+            default -> {
                 return null;
             }
         }

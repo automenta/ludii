@@ -8,8 +8,8 @@ import game.equipment.other.Regions;
 import game.types.board.SiteType;
 import gnu.trove.list.array.TIntArrayList;
 import graphics.svg.SVGtoImage;
-import main.math.MathRoutines;
-import main.math.Vector;
+import math.MathRoutines;
+import math.Vector;
 import metadata.graphics.util.BoardGraphicsType;
 import metadata.graphics.util.MetadataImageInfo;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
@@ -182,10 +182,10 @@ public class BoardDesign extends ContainerDesign
             final double bby = vertexB.centroid().getY() + 0.333 * dist * tangentB.y();
             final Point ptAA = this.boardStyle.screenPosn(new Point2D.Double(aax, aay));
             final Point ptBB = this.boardStyle.screenPosn(new Point2D.Double(bbx, bby));
-            path.curveTo((float)ptAA.x, (float)ptAA.y, (float)ptBB.x, (float)ptBB.y, (float)ptB.x, (float)ptB.y);
+            path.curveTo(ptAA.x, ptAA.y, ptBB.x, ptBB.y, ptB.x, ptB.y);
         }
         else {
-            path.lineTo((float)ptB.x, (float)ptB.y);
+            path.lineTo(ptB.x, ptB.y);
         }
     }
     
@@ -199,7 +199,7 @@ public class BoardDesign extends ContainerDesign
                 final Vertex vertexB = cell.vertices().get((v + 1) % cell.vertices().size());
                 if (v == 0) {
                     final Point ptA = this.boardStyle.screenPosn(vertexA.centroid());
-                    path.moveTo((float)ptA.x, (float)ptA.y);
+                    path.moveTo(ptA.x, ptA.y);
                 }
                 Edge edge = null;
                 for (final Edge edgeA : vertexA.edges()) {
@@ -253,13 +253,13 @@ public class BoardDesign extends ContainerDesign
                 edgesToDraw.add(edge);
             }
         }
-        while (edgesToDraw.size() > 0) {
+        while (!edgesToDraw.isEmpty()) {
             Edge edge2 = edgesToDraw.get(0);
             boolean nextEdgeFound = true;
             Vertex vertexA = edge2.vA();
             final Point2D centroidA = edge2.vA().centroid();
             final Point drawPosnA = this.boardStyle.screenPosn(centroidA);
-            path.moveTo((float)drawPosnA.x, (float)drawPosnA.y);
+            path.moveTo(drawPosnA.x, drawPosnA.y);
             Vertex vertexB = edge2.vB();
             Point2D centroidB = edge2.vB().centroid();
             while (nextEdgeFound) {
@@ -392,11 +392,11 @@ public class BoardDesign extends ContainerDesign
                 if (path.getCurrentPoint() == null) {
                     final Vertex prev = cell.vertices().get(cell.vertices().size() - 1);
                     final Point prevPosn = this.boardStyle.screenPosn(prev.centroid());
-                    path.moveTo((float)prevPosn.x, (float)prevPosn.y);
+                    path.moveTo(prevPosn.x, prevPosn.y);
                 }
                 final Vertex corner = cell.vertices().get(v);
                 final Point cornerPosn = this.boardStyle.screenPosn(corner.centroid());
-                path.lineTo((float)cornerPosn.x, (float)cornerPosn.y);
+                path.lineTo(cornerPosn.x, cornerPosn.y);
             }
             if (validLocations != null && !validLocations.contains(cell.index())) {
                 g2d.setColor(colorInvalid);
@@ -407,7 +407,7 @@ public class BoardDesign extends ContainerDesign
                 final Point firstCorner = this.boardStyle.screenPosn(cell.vertices().get(1).centroid());
                 final Point secondCorner = this.boardStyle.screenPosn(cell.vertices().get(3).centroid());
                 path.moveTo(firstCorner.getX(), firstCorner.y);
-                path.lineTo((float)secondCorner.x, (float)secondCorner.y);
+                path.lineTo(secondCorner.x, secondCorner.y);
                 g2d.draw(path);
             }
         }
@@ -420,29 +420,26 @@ public class BoardDesign extends ContainerDesign
         this.symbols.addAll(context.game().metadata().graphics().drawSymbol(context));
         this.regionsToFill.addAll(context.game().metadata().graphics().regionsToFill(context, SiteType.Cell));
         this.regionsToFill.addAll(context.game().metadata().graphics().regionsToFill(context, SiteType.Vertex));
-        final List<List<MetadataImageInfo>> regionsToColourEdgesTemp = new ArrayList<>();
-        regionsToColourEdgesTemp.addAll(context.game().metadata().graphics().regionsToFill(context, SiteType.Edge));
+        final List<List<MetadataImageInfo>> regionsToColourEdgesTemp = new ArrayList<>(context.game().metadata().graphics().regionsToFill(context, SiteType.Edge));
         for (int regionIndex = 0; regionIndex < regionsToColourEdgesTemp.size(); ++regionIndex) {
             this.regionsToColourEdges.add(new ArrayList<>());
             final List<MetadataImageInfo> regionInfo = regionsToColourEdgesTemp.get(regionIndex);
             for (final MetadataImageInfo imageInfo : regionInfo) {
                 final List<Edge> cellEdges = ContainerUtil.getOuterRegionEdges(regionInfo, imageInfo.site, this.boardStyle);
-                for (int e = 0; e < cellEdges.size(); ++e) {
+                for (Edge cellEdge : cellEdges) {
                     Color colour = imageInfo.mainColour;
                     if (colour == null) {
-                        final Regions r = ContainerUtil.getRegionOfEdge(context, cellEdges.get(e));
+                        final Regions r = ContainerUtil.getRegionOfEdge(context, cellEdge);
                         if (r != null) {
                             colour = SettingsColour.getDefaultPlayerColours()[r.role().owner()];
-                        }
-                        else {
+                        } else {
                             colour = this.colorDecoration();
                         }
                     }
-                    if (cellEdges.get(e).properties().get(2L) && (imageInfo.boardGraphicsType == null || imageInfo.boardGraphicsType == BoardGraphicsType.OuterEdges)) {
-                        this.regionsToColourEdges.get(regionIndex).add(new MetadataImageInfo(cellEdges.get(e).index(), SiteType.Edge, BoardGraphicsType.OuterEdges, colour));
-                    }
-                    else if (!cellEdges.get(e).properties().get(2L) && (imageInfo.boardGraphicsType == null || imageInfo.boardGraphicsType == BoardGraphicsType.InnerEdges)) {
-                        this.regionsToColourEdges.get(regionIndex).add(new MetadataImageInfo(cellEdges.get(e).index(), SiteType.Edge, BoardGraphicsType.InnerEdges, colour));
+                    if (cellEdge.properties().get(2L) && (imageInfo.boardGraphicsType == null || imageInfo.boardGraphicsType == BoardGraphicsType.OuterEdges)) {
+                        this.regionsToColourEdges.get(regionIndex).add(new MetadataImageInfo(cellEdge.index(), SiteType.Edge, BoardGraphicsType.OuterEdges, colour));
+                    } else if (!cellEdge.properties().get(2L) && (imageInfo.boardGraphicsType == null || imageInfo.boardGraphicsType == BoardGraphicsType.InnerEdges)) {
+                        this.regionsToColourEdges.get(regionIndex).add(new MetadataImageInfo(cellEdge.index(), SiteType.Edge, BoardGraphicsType.InnerEdges, colour));
                     }
                 }
             }
@@ -506,10 +503,10 @@ public class BoardDesign extends ContainerDesign
                 }
                 else {
                     final GeneralPath path = new GeneralPath();
-                    path.moveTo((float)this.boardStyle.screenPosn(v1.centroid()).x, (float)this.boardStyle.screenPosn(v1.centroid()).y);
+                    path.moveTo(this.boardStyle.screenPosn(v1.centroid()).x, this.boardStyle.screenPosn(v1.centroid()).y);
                     final Point2D curvePoint1 = new Point2D.Float(s.curve[0], s.curve[1]);
                     final Point2D curvePoint2 = new Point2D.Float(s.curve[2], s.curve[3]);
-                    path.curveTo((float)this.boardStyle.screenPosn(curvePoint1).x, (float)this.boardStyle.screenPosn(curvePoint1).y, (float)this.boardStyle.screenPosn(curvePoint2).x, (float)this.boardStyle.screenPosn(curvePoint2).y, (float)this.boardStyle.screenPosn(v2.centroid()).x, (float)this.boardStyle.screenPosn(v2.centroid()).y);
+                    path.curveTo(this.boardStyle.screenPosn(curvePoint1).x, this.boardStyle.screenPosn(curvePoint1).y, this.boardStyle.screenPosn(curvePoint2).x, this.boardStyle.screenPosn(curvePoint2).y, this.boardStyle.screenPosn(v2.centroid()).x, this.boardStyle.screenPosn(v2.centroid()).y);
                     g2d.draw(path);
                 }
             }

@@ -7,7 +7,7 @@ package app.display.views.tools.buttons;
 import app.display.dialogs.PossibleMovesDialog;
 import app.display.views.tools.ToolButton;
 import game.rules.play.moves.Moves;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import manager.utils.ContextSnapshot;
 import util.Context;
 import util.Move;
@@ -32,7 +32,7 @@ public class ButtonOther extends ToolButton
         g2d.fill(new Ellipse2D.Double(this.cx - 2.75, this.cy - 2.75 - 9.0, 5.5, 5.5));
         g2d.fill(new Ellipse2D.Double(this.cx - 2.75, this.cy - 2.75, 5.5, 5.5));
         g2d.fill(new Ellipse2D.Double(this.cx - 2.75, this.cy - 2.75 + 9.0, 5.5, 5.5));
-        if (this.otherPossibleMoves.size() > 0) {
+        if (!this.otherPossibleMoves.isEmpty()) {
             this.showPossibleMovesTemporaryMessage();
         }
     }
@@ -47,7 +47,7 @@ public class ButtonOther extends ToolButton
                 this.otherPossibleMoves.add(m);
             }
         }
-        if (this.otherPossibleMoves.size() > 0) {
+        if (!this.otherPossibleMoves.isEmpty()) {
             this.showPossibleMovesTemporaryMessage();
             return true;
         }

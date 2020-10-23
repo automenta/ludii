@@ -43,13 +43,13 @@ public class ActionReset extends BaseAction
         final int contID = context.containerId()[0];
         final ContainerState sc = context.state().containerStates()[contID];
         final ContainerDeductionPuzzleState ps = (ContainerDeductionPuzzleState)sc;
-        if (this.type.equals(SiteType.Vertex)) {
+        if (this.type == SiteType.Vertex) {
             ps.resetVariable(SiteType.Vertex, this.var, this.max);
         }
-        if (this.type.equals(SiteType.Edge)) {
+        if (this.type == SiteType.Edge) {
             ps.resetVariable(SiteType.Edge, this.var, this.max);
         }
-        if (this.type.equals(SiteType.Cell)) {
+        if (this.type == SiteType.Cell) {
             ps.resetVariable(SiteType.Cell, this.var, this.max);
         }
         return this;
@@ -105,7 +105,7 @@ public class ActionReset extends BaseAction
     public String toTurnFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Reset ");
-        String newTo = this.var + "";
+        String newTo = String.valueOf(this.var);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.type == SiteType.Cell || (this.type == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.var] : 0;
             if (cid == 0) {
@@ -113,7 +113,7 @@ public class ActionReset extends BaseAction
                 newTo = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.var).label();
             }
         }
-        if (this.type != null && !this.type.equals(context.board().defaultSite())) {
+        if (this.type != null && this.type != context.board().defaultSite()) {
             sb.append(this.type + " " + newTo);
         }
         else {
@@ -126,7 +126,7 @@ public class ActionReset extends BaseAction
     public String toMoveFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("(Reset ");
-        String newTo = this.var + "";
+        String newTo = String.valueOf(this.var);
         if (SettingsGeneral.isMoveCoord()) {
             final int cid = (this.type == SiteType.Cell || (this.type == null && context.board().defaultSite() == SiteType.Cell)) ? context.containerId()[this.var] : 0;
             if (cid == 0) {
@@ -134,7 +134,7 @@ public class ActionReset extends BaseAction
                 newTo = context.game().equipment().containers()[cid].topology().getGraphElements(realType).get(this.var).label();
             }
         }
-        if (this.type != null && !this.type.equals(context.board().defaultSite())) {
+        if (this.type != null && this.type != context.board().defaultSite()) {
             sb.append(this.type + " " + newTo);
         }
         else {

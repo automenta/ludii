@@ -17,7 +17,7 @@ import game.rules.play.moves.BaseMoves;
 import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.effect.Then;
 import game.rules.play.moves.nonDecision.operator.Operator;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import util.Context;
 import util.Move;
 import util.action.die.ActionUpdateDice;
@@ -55,8 +55,8 @@ public final class ForEachDie extends Operator
         boolean replayDouble = this.replayDoubleFn.eval(context);
         if (replayDouble) {
             final int firstDieValue = dieValues[0];
-            for (int i = 0; i < dieValues.length; ++i) {
-                if (dieValues[i] != firstDieValue) {
+            for (int dieValue : dieValues) {
+                if (dieValue != firstDieValue) {
                     replayDouble = false;
                     break;
                 }

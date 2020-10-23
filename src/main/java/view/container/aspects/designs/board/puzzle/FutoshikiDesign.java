@@ -44,7 +44,7 @@ public class FutoshikiDesign extends GraphDesign
         if (regionCellsIndeces.length == 1) {
             return regionCellsIndeces[0];
         }
-        Integer bestEdgeFoundIndex = 0;
+        int bestEdgeFoundIndex = 0;
         final Point2D posnA = context.topology().getGraphElements(context.board().defaultSite()).get(regionCellsIndeces[0]).centroid();
         final Point2D posnB = context.topology().getGraphElements(context.board().defaultSite()).get(regionCellsIndeces[1]).centroid();
         final Point2D midPoint = new Point2D.Double((posnA.getX() + posnB.getX()) / 2.0, (posnA.getY() + posnB.getY()) / 2.0);
@@ -89,6 +89,7 @@ public class FutoshikiDesign extends GraphDesign
                     for (int j = 0; j < this.hintValues.size(); ++j) {
                         if (this.hintValues.get(i) != null && this.hintValues.get(i) > maxHintvalue) {
                             maxHintvalue = this.hintValues.get(i);
+                            break;
                         }
                     }
                     Font valueFont = new Font("Arial", 1, this.boardStyle.cellRadiusPixels());

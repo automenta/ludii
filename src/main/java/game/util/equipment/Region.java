@@ -9,7 +9,7 @@ import game.equipment.container.board.Board;
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
 import game.util.graph.Step;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import topology.Edge;
 import topology.SiteFinder;
 import topology.Topology;
@@ -192,7 +192,7 @@ public final class Region extends BaseLudeme implements Serializable
     public static void expand(final Region region, final Topology graph, final int numLayers, final Context context, final AbsoluteDirection dirnChoice, final SiteType type) {
         for (int i = 0; i < numLayers; ++i) {
             final int[] sites = region.sites();
-            if (type.equals(SiteType.Edge)) {
+            if (type == SiteType.Edge) {
                 for (final int site : sites) {
                     final Edge edge = graph.edges().get(site);
                     for (final Edge edgeAdj : edge.adjacent()) {

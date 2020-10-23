@@ -33,7 +33,7 @@ public final class SitesBoard extends BaseRegionFunction
         if (this.type == SiteType.Edge) {
             return new Region(graph.edges());
         }
-        final boolean useCells = (this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
+        final boolean useCells = (this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex);
         return new Region(useCells ? graph.cells() : graph.vertices());
     }
     

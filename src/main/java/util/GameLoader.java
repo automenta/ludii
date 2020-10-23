@@ -8,11 +8,11 @@ import game.Game;
 import game.match.Subgame;
 import language.compiler.Compiler;
 import main.FileHandling;
-import main.grammar.Description;
-import main.grammar.Report;
-import main.options.GameOptions;
-import main.options.Option;
-import main.options.UserSelections;
+import grammar.Description;
+import grammar.Report;
+import options.GameOptions;
+import options.Option;
+import options.UserSelections;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

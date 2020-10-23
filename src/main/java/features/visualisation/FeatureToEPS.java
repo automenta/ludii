@@ -39,7 +39,7 @@ public class FeatureToEPS
         }
         final List<int[]> offsets = new ArrayList<>();
         final TFloatArrayList steps = walk.steps();
-        if (steps.size() > 0) {
+        if (!steps.isEmpty()) {
             final TIntArrayList connectionIndices = new TIntArrayList(2);
             float connectionIdxFloat = steps.get(0) * dirOffsets.length;
             float connectionIdxFractionalPart = connectionIdxFloat - (int)connectionIdxFloat;
@@ -59,8 +59,8 @@ public class FeatureToEPS
                 offsetPaths.add(currPath);
                 for (int step = 1; step < steps.size(); ++step) {
                     final List<List<int[]>> newOffsetPaths = new ArrayList<>();
-                    for (int i = 0; i < offsetPaths.size(); ++i) {
-                        currPath = offsetPaths.get(i);
+                    for (List<int[]> offsetPath : offsetPaths) {
+                        currPath = offsetPath;
                         final TIntArrayList contDirs = new TIntArrayList(2);
                         int fromDir = -1;
                         final int[] lastOffset = currPath.get(currPath.size() - 1);
@@ -75,8 +75,7 @@ public class FeatureToEPS
                         }
                         if (dirOffsets.length % 2 == 0) {
                             contDirs.add(fromDir + dirOffsets.length / 2);
-                        }
-                        else {
+                        } else {
                             contDirs.add(fromDir + dirOffsets.length / 2);
                             contDirs.add(fromDir + 1 + dirOffsets.length / 2);
                         }
@@ -84,18 +83,16 @@ public class FeatureToEPS
                             final int contDir = contDirs.getQuick(contDirIdx);
                             final TIntArrayList nextConnectionIndices = new TIntArrayList(2);
                             connectionIdxFloat = contDir + steps.get(step) * dirOffsets.length;
-                            connectionIdxFractionalPart = connectionIdxFloat - (int)connectionIdxFloat;
+                            connectionIdxFractionalPart = connectionIdxFloat - (int) connectionIdxFloat;
                             if (Math.abs(0.5f - connectionIdxFractionalPart) < 0.02f || Math.abs(0.5f + connectionIdxFractionalPart) < 0.02f) {
-                                nextConnectionIndices.add((int)Math.floor(connectionIdxFloat));
-                                nextConnectionIndices.add((int)Math.ceil(connectionIdxFloat));
-                            }
-                            else {
+                                nextConnectionIndices.add((int) Math.floor(connectionIdxFloat));
+                                nextConnectionIndices.add((int) Math.ceil(connectionIdxFloat));
+                            } else {
                                 nextConnectionIndices.add(Math.round(connectionIdxFloat));
                             }
                             for (int n = 0; n < nextConnectionIndices.size(); ++n) {
                                 connectionIdx = (nextConnectionIndices.getQuick(n) % dirOffsets.length + dirOffsets.length) % dirOffsets.length;
-                                final List<int[]> newCurrPath = new ArrayList<>();
-                                newCurrPath.addAll(currPath);
+                                final List<int[]> newCurrPath = new ArrayList<>(currPath);
                                 newCurrPath.add(dirOffsets[connectionIdx]);
                                 newOffsetPaths.add(newCurrPath);
                             }

@@ -63,9 +63,9 @@ public class Description {
         return this.parseTree;
     }
 
-    public void setParseTree(ParseItem tree) {
-        this.parseTree = tree;
-    }
+//    public void setParseTree(ParseItem tree) {
+//        this.parseTree = tree;
+//    }
 
     public void clearRulesets() {
         this.rulesets.clear();

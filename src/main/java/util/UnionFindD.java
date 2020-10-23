@@ -350,8 +350,8 @@ public class UnionFindD implements Serializable
     public static TIntArrayList elementIndices(final List<? extends TopologyElement> verticesList) {
         final int verticesListSz = verticesList.size();
         final TIntArrayList integerVerticesList = new TIntArrayList(verticesListSz);
-        for (int i = 0; i < verticesListSz; ++i) {
-            integerVerticesList.add(verticesList.get(i).index());
+        for (TopologyElement topologyElement : verticesList) {
+            integerVerticesList.add(topologyElement.index());
         }
         return integerVerticesList;
     }

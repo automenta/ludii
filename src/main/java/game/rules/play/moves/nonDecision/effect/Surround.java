@@ -106,12 +106,12 @@ public final class Surround extends Effect
         return moves;
     }
     
-    private final boolean isFriend(final Context context, final int location) {
+    private boolean isFriend(final Context context, final int location) {
         context.setTo(location);
         return this.friendRule.eval(context);
     }
     
-    private final boolean isTarget(final Context context, final int location) {
+    private boolean isTarget(final Context context, final int location) {
         context.setBetween(location);
         return this.targetRule.eval(context);
     }

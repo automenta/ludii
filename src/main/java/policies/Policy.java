@@ -4,8 +4,8 @@
 
 package policies;
 
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import search.mcts.playout.PlayoutStrategy;
 import util.AI;
 import util.Context;

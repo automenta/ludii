@@ -21,7 +21,7 @@ public class Filters
         final float sigmaRoot = (float)Math.sqrt(twoSigmaSquare * 3.141592653589793);
         float total = 0.0f;
         for (int i = -radius; i <= radius; ++i) {
-            final float distance = (float)(i * i);
+            final float distance = (i * i);
             final int index = i + radius;
             data[index] = (float)Math.exp(-distance / twoSigmaSquare) / sigmaRoot;
             total += data[index];

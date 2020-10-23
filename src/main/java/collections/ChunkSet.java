@@ -4,7 +4,7 @@
 package collections;
 
 import math.BitTwiddling;
-import root.Utilities;
+import main.Utilities;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -391,7 +391,7 @@ Serializable {
         long h = 1234L;
         int i = this.wordsInUse;
         while (--i >= 0) {
-            h ^= this.words[i] * (long)(i + 1);
+            h ^= this.words[i] * (i + 1);
         }
         return (int)(h >> 32 ^ h);
     }
@@ -536,7 +536,7 @@ Serializable {
         int n = wordIndex;
         this.words[n] = this.words[n] & (this.chunkMask << up ^ 0xFFFFFFFFFFFFFFFFL);
         int n2 = wordIndex;
-        this.words[n2] = this.words[n2] | ((long)value & this.chunkMask) << up;
+        this.words[n2] = this.words[n2] | (value & this.chunkMask) << up;
         this.recalculateWordsInUse();
         this.checkInvariants();
     }

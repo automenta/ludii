@@ -6,7 +6,7 @@ package view.container.aspects.designs.board;
 
 import game.Game;
 import game.equipment.other.Map;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 import topology.Cell;
 import topology.Vertex;
@@ -31,8 +31,8 @@ public class SnakesAndLaddersDesign extends BoardDesign
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.005f;
-        final float swThin = (float)Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
-        final float swThick = (float)Math.max(2, (int)(0.002 * this.boardStyle.placement().width + 0.5));
+        final float swThin = Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
+        final float swThick = Math.max(2, (int)(0.002 * this.boardStyle.placement().width + 0.5));
         final Color shade0 = new Color(210, 240, 255);
         final Color shade2 = new Color(190, 220, 255);
         final Color shadeEdge = MathRoutines.shade(shade0, 0.25);
@@ -197,11 +197,11 @@ public class SnakesAndLaddersDesign extends BoardDesign
                 if (path.getCurrentPoint() == null) {
                     final Vertex prev = cell.vertices().get(cell.vertices().size() - 1);
                     final Point prevPosn = this.screenPosn(prev.centroid());
-                    path.moveTo((float)prevPosn.x, (float)prevPosn.y);
+                    path.moveTo(prevPosn.x, prevPosn.y);
                 }
                 final Vertex corner = cell.vertices().get(v);
                 final Point cornerPosn = this.screenPosn(corner.centroid());
-                path.lineTo((float)cornerPosn.x, (float)cornerPosn.y);
+                path.lineTo(cornerPosn.x, cornerPosn.y);
             }
             if ((cell.col() + cell.row()) % 2 == 0) {
                 g2d.setColor(this.colorFillPhase1);

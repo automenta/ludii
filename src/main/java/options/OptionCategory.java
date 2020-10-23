@@ -3,7 +3,7 @@
  */
 package options;
 
-import root.StringRoutines;
+import main.StringRoutines;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -135,7 +135,7 @@ public class OptionCategory {
         if (c < 0) {
             throw new Exception("No option argument tags of form args:{...}: " + strIn);
         }
-        c = strIn.indexOf("{");
+        c = strIn.indexOf('{');
         if (c < 0) {
             throw new Exception("Couldn't find opening bracket '{' in option category " + strIn.substring(c));
         }
@@ -144,7 +144,7 @@ public class OptionCategory {
             throw new Exception("Couldn't find closing bracket '}' in option category " + strIn.substring(c));
         }
         String str = strIn.substring(c, cc).trim();
-        while ((a = str.indexOf("<")) >= 0) {
+        while ((a = str.indexOf('<')) >= 0) {
             int aa = StringRoutines.matchingBracketAt(str, a);
             if (aa < 0 || aa >= str.length()) {
                 throw new Exception("No closing bracket '>' for option argument: " + str);

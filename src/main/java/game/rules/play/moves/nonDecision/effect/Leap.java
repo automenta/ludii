@@ -73,8 +73,8 @@ public final class Leap extends Effect
         final int[] sites;
         final int[] sitesAfterWalk = sites = this.walk.eval(context).sites();
         for (final int to : sites) {
-            final TopologyElement fromV = ((this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex)) ? ((Cell)graph.cells().get(from)) : ((Vertex)graph.vertices().get(from));
-            final TopologyElement toV = ((this.type != null && this.type.equals(SiteType.Cell)) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex)) ? ((Cell)graph.cells().get(to)) : ((Vertex)graph.vertices().get(to));
+            final TopologyElement fromV = ((this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex)) ? graph.cells().get(from) : graph.vertices().get(from);
+            final TopologyElement toV = ((this.type != null && this.type == SiteType.Cell) || (this.type == null && context.game().board().defaultSite() != SiteType.Vertex)) ? graph.cells().get(to) : graph.vertices().get(to);
             if (facing == null || checkForward(facing, fromV, toV)) {
                 context.setTo(to);
                 if (this.goRule.eval(context)) {
@@ -105,31 +105,31 @@ public final class Leap extends Effect
     
     private static boolean checkForward(final CompassDirection facing, final TopologyElement from, final TopologyElement to) {
         switch (facing) {
-            case N: {
+            case N -> {
                 return from.row() < to.row();
             }
-            case NE: {
+            case NE -> {
                 return from.row() < to.row() && from.col() < to.col();
             }
-            case E: {
+            case E -> {
                 return from.col() < to.col();
             }
-            case SE: {
+            case SE -> {
                 return from.row() > to.row() && from.col() < to.col();
             }
-            case S: {
+            case S -> {
                 return from.row() > to.row();
             }
-            case SW: {
+            case SW -> {
                 return from.row() > to.row() && from.col() > to.col();
             }
-            case W: {
+            case W -> {
                 return from.col() > to.col();
             }
-            case NW: {
+            case NW -> {
                 return from.row() < to.row() && from.col() > to.col();
             }
-            default: {
+            default -> {
                 return false;
             }
         }

@@ -29,7 +29,7 @@ public class ShibumiDesign extends BoardDesign
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.005f;
-        final float swThin = (float)Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
+        final float swThin = Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
         final float swThick = 2.0f * swThin;
         this.setStrokesAndColours(context, null, null, null, null, new Color(66, 165, 245), new Color(255, 255, 255), null, swThin, swThick);
         this.drawBoardOutline(g2d);
@@ -43,14 +43,14 @@ public class ShibumiDesign extends BoardDesign
         final int rI = (int)(this.boardStyle.cellRadiusPixels() * 0.75);
         final Point[] pts = { this.screenPosn(corners.get(0).centroid()), this.screenPosn(corners.get(2).centroid()), this.screenPosn(corners.get(3).centroid()), this.screenPosn(corners.get(1).centroid()) };
         final GeneralPath path = new GeneralPath(0);
-        path.moveTo((float)pts[3].x, (float)(pts[3].y + rO));
-        path.quadTo((float)(pts[3].x + rO), (float)(pts[3].y + rO), (float)(pts[3].x + rO), (float)pts[3].y);
-        path.lineTo((float)(pts[2].x + rO), (float)pts[2].y);
-        path.quadTo((float)(pts[2].x + rO), (float)(pts[2].y - rO), (float)pts[2].x, (float)(pts[2].y - rO));
-        path.lineTo((float)pts[1].x, (float)(pts[1].y - rO));
-        path.quadTo((float)(pts[1].x - rO), (float)(pts[1].y - rO), (float)(pts[1].x - rO), (float)pts[1].y);
-        path.lineTo((float)(pts[0].x - rO), (float)pts[0].y);
-        path.quadTo((float)(pts[0].x - rO), (float)(pts[0].y + rO), (float)pts[0].x, (float)(pts[0].y + rO));
+        path.moveTo(pts[3].x, (pts[3].y + rO));
+        path.quadTo((pts[3].x + rO), (pts[3].y + rO), (pts[3].x + rO), pts[3].y);
+        path.lineTo((pts[2].x + rO), pts[2].y);
+        path.quadTo((pts[2].x + rO), (pts[2].y - rO), pts[2].x, (pts[2].y - rO));
+        path.lineTo(pts[1].x, (pts[1].y - rO));
+        path.quadTo((pts[1].x - rO), (pts[1].y - rO), (pts[1].x - rO), pts[1].y);
+        path.lineTo((pts[0].x - rO), pts[0].y);
+        path.quadTo((pts[0].x - rO), (pts[0].y + rO), pts[0].x, (pts[0].y + rO));
         path.closePath();
         for (final Vertex vertex : this.topology().vertices()) {
             if (vertex.layer() == 0) {

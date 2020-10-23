@@ -15,7 +15,7 @@ import util.zhash.ZobristHashGenerator;
 
 public class ContainerStateFactory
 {
-    public static final ContainerState createStateForContainer(final ZobristHashGenerator generator, final Game game, final Container container) {
+    public static ContainerState createStateForContainer(final ZobristHashGenerator generator, final Game game, final Container container) {
         final int containerSites = container.numSites();
         final int maxWhatValComponents = game.numComponents();
         final int maxWhatValNumPlayers = game.players().count();

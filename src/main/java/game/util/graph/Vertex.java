@@ -6,13 +6,12 @@ package game.util.graph;
 
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
-import main.math.MathRoutines;
-import main.math.Point3D;
+import math.MathRoutines;
+import math.Point3D;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Vertex extends GraphElement
@@ -143,7 +142,7 @@ public class Vertex extends GraphElement
     }
     
     void sortEdges() {
-        Collections.sort(this.edges, (a, b) -> {
+        this.edges.sort((a, b) -> {
             final Vertex va = a.otherVertex(Vertex.this.id());
             final Vertex vb = b.otherVertex(Vertex.this.id());
             final double dirnA = Math.atan2(va.pt.y() - Vertex.this.pt.y(), va.pt.x() - Vertex.this.pt.x());
@@ -156,7 +155,7 @@ public class Vertex extends GraphElement
     }
     
     void sortFaces() {
-        Collections.sort(this.faces, (a, b) -> {
+        this.faces.sort((a, b) -> {
             final double dirnA = Math.atan2(a.pt.y() - Vertex.this.pt.y(), a.pt.x() - Vertex.this.pt.x());
             final double dirnB = Math.atan2(b.pt.y() - Vertex.this.pt.y(), b.pt.x() - Vertex.this.pt.x());
             if (dirnA == dirnB) {

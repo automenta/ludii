@@ -126,10 +126,10 @@ public final class OverlayView extends View
     }
     
     private void drawExtraGameInformation(final Graphics2D g2d, final Context context) {
-        if (MainWindow.volatileMessage().length() > 0) {
+        if (!MainWindow.volatileMessage().isEmpty()) {
             this.drawStringBelowBoard(g2d, MainWindow.volatileMessage(), 0.98);
         }
-        else if (MainWindow.temporaryMessage().length() > 0) {
+        else if (!MainWindow.temporaryMessage().isEmpty()) {
             this.drawStringBelowBoard(g2d, MainWindow.temporaryMessage(), 0.98);
         }
         if (context.game().requiresBet()) {

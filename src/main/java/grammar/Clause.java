@@ -150,17 +150,15 @@ public class Clause {
             str = str + ")";
         } else {
             switch (this.symbol.type()) {
-                case Primitive: 
-                case Predefined: 
-                case Constant: {
+                case Primitive, Predefined, Constant -> {
                     str = this.symbol.keyword();
                     break;
                 }
-                case Class: {
+                case Class -> {
                     str = "<" + safeKeyword + ">";
                     break;
                 }
-                default: {
+                default -> {
                     str = str + "[UNKNOWN]";
                 }
             }

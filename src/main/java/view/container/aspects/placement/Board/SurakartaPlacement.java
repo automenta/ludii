@@ -29,15 +29,15 @@ public class SurakartaPlacement extends BoardPlacement
         }
         final double fullDim = maxDim + extra * 2;
         switch (this.topology().graph().basis()) {
-            case Square: {
+            case Square -> {
                 this.containerScale = 1.1 * maxDim / fullDim;
                 break;
             }
-            case Triangular: {
+            case Triangular -> {
                 this.containerScale = 0.9 * maxDim / fullDim;
                 break;
             }
-            default: {
+            default -> {
                 System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
                 break;
             }

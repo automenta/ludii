@@ -5,7 +5,7 @@
 package graphics.svg;
 
 import main.StringRoutines;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 
 import java.awt.*;
@@ -188,7 +188,7 @@ public class SVGtoImage
         for (int c = 0; c < data.length(); ++c) {
             final char ch = data.charAt(c);
             if (isSVGSymbol(ch)) {
-                tokens.add("" + ch);
+                tokens.add(String.valueOf(ch));
             }
             else if (StringRoutines.isNumeric(ch)) {
                 int cc = c;
@@ -249,103 +249,93 @@ public class SVGtoImage
                 }
                 lastOperator = ch;
                 switch (ch) {
-                    case 'A':
-                    case 'a': {
+                    case 'A', 'a' -> {
                         if (s >= tokens.size() - 7) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ArcTo, ch == 'A', new String[] { tokens.get(s), tokens.get(s + 1), tokens.get(s + 5), tokens.get(s + 6), tokens.get(s + 2), tokens.get(s + 3), tokens.get(s + 4) });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ArcTo, ch == 'A', new String[]{tokens.get(s), tokens.get(s + 1), tokens.get(s + 5), tokens.get(s + 6), tokens.get(s + 2), tokens.get(s + 3), tokens.get(s + 4)});
                         path.add(op);
                         s += 7;
                         continue;
                     }
-                    case 'M':
-                    case 'm': {
+                    case 'M', 'm' -> {
                         if (s >= tokens.size() - 2) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.MoveTo, ch == 'M', new String[] { tokens.get(s), tokens.get(s + 1) });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.MoveTo, ch == 'M', new String[]{tokens.get(s), tokens.get(s + 1)});
                         path.add(op);
                         s += 2;
                         continue;
                     }
-                    case 'L':
-                    case 'l': {
+                    case 'L', 'l' -> {
                         if (s >= tokens.size() - 2) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.LineTo, ch == 'L', new String[] { tokens.get(s), tokens.get(s + 1) });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.LineTo, ch == 'L', new String[]{tokens.get(s), tokens.get(s + 1)});
                         path.add(op);
                         s += 2;
                         continue;
                     }
-                    case 'H':
-                    case 'h': {
+                    case 'H', 'h' -> {
                         if (s >= tokens.size() - 1) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.HLineTo, ch == 'H', new String[] { tokens.get(s), "0" });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.HLineTo, ch == 'H', new String[]{tokens.get(s), "0"});
                         path.add(op);
                         ++s;
                         continue;
                     }
-                    case 'V':
-                    case 'v': {
+                    case 'V', 'v' -> {
                         if (s >= tokens.size() - 1) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.VLineTo, ch == 'V', new String[] { "0", tokens.get(s) });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.VLineTo, ch == 'V', new String[]{"0", tokens.get(s)});
                         path.add(op);
                         ++s;
                         continue;
                     }
-                    case 'Q':
-                    case 'q': {
+                    case 'Q', 'q' -> {
                         if (s >= tokens.size() - 4) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.QuadraticTo, ch == 'Q', new String[] { tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3) });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.QuadraticTo, ch == 'Q', new String[]{tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3)});
                         path.add(op);
                         s += 4;
                         continue;
                     }
-                    case 'C':
-                    case 'c': {
+                    case 'C', 'c' -> {
                         if (s >= tokens.size() - 6) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.CurveTo, ch == 'C', new String[] { tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3), tokens.get(s + 4), tokens.get(s + 5) });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.CurveTo, ch == 'C', new String[]{tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3), tokens.get(s + 4), tokens.get(s + 5)});
                         path.add(op);
                         s += 6;
                         continue;
                     }
-                    case 'S':
-                    case 's': {
+                    case 'S', 's' -> {
                         if (s >= tokens.size() - 4) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ShortCurveTo, ch == 'S', new String[] { tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3) });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ShortCurveTo, ch == 'S', new String[]{tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3)});
                         path.add(op);
                         s += 4;
                         continue;
                     }
-                    case 'T':
-                    case 't': {
+                    case 'T', 't' -> {
                         if (s >= tokens.size() - 2) {
                             return false;
                         }
-                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ShortQuadraticTo, ch == 'T', new String[] { tokens.get(s), tokens.get(s + 1) });
+                        final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ShortQuadraticTo, ch == 'T', new String[]{tokens.get(s), tokens.get(s + 1)});
                         path.add(op);
                         s += 2;
                         continue;
                     }
-                    case 'Z':
-                    case 'z': {
+                    case 'Z', 'z' -> {
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ClosePath, ch == 'Z', null);
                         path.add(op);
                         continue;
                     }
-                    default: {
+                    default -> {
                         return false;
                     }
                 }
@@ -389,7 +379,7 @@ public class SVGtoImage
             lastY = 0.0;
             for (final SVGPathOp op : path) {
                 switch (op.type()) {
-                    case ArcTo: {
+                    case ArcTo -> {
                         final double rx = op.pts().get(0).x;
                         final double ry = op.pts().get(0).y;
                         x = op.pts().get(1).x + (op.absolute() ? 0.0 : lastX);
@@ -427,29 +417,29 @@ public class SVGtoImage
                         }
                         break;
                     }
-                    case MoveTo: {
+                    case MoveTo -> {
                         x = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
                         y = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
                         lastX = x;
                         lastY = y;
                         break;
                     }
-                    case LineTo: {
+                    case LineTo -> {
                         x = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
                         y = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
                         lastX = x;
                         lastY = y;
                         break;
                     }
-                    case HLineTo: {
+                    case HLineTo -> {
                         x = (lastX = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX));
                         break;
                     }
-                    case VLineTo: {
+                    case VLineTo -> {
                         y = (lastY = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY));
                         break;
                     }
-                    case QuadraticTo: {
+                    case QuadraticTo -> {
                         x = op.pts().get(1).x + (op.absolute() ? 0.0 : lastX);
                         y = op.pts().get(1).y + (op.absolute() ? 0.0 : lastY);
                         lastX = x;
@@ -458,7 +448,7 @@ public class SVGtoImage
                         y2 = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
                         break;
                     }
-                    case CurveTo: {
+                    case CurveTo -> {
                         x = op.pts().get(2).x + (op.absolute() ? 0.0 : lastX);
                         y = op.pts().get(2).y + (op.absolute() ? 0.0 : lastY);
                         lastX = x;
@@ -469,14 +459,14 @@ public class SVGtoImage
                         y3 = op.pts().get(1).y + (op.absolute() ? 0.0 : lastY);
                         break;
                     }
-                    case ShortQuadraticTo: {
+                    case ShortQuadraticTo -> {
                         x = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
                         y = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
                         lastX = x;
                         lastY = y;
                         break;
                     }
-                    case ShortCurveTo: {
+                    case ShortCurveTo -> {
                         x = op.pts().get(1).x + (op.absolute() ? 0.0 : lastX);
                         y = op.pts().get(1).y + (op.absolute() ? 0.0 : lastY);
                         lastX = x;
@@ -485,7 +475,7 @@ public class SVGtoImage
                         y2 = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
                         break;
                     }
-                    case ClosePath: {
+                    case ClosePath -> {
                         x = lastX;
                         y = lastY;
                         break;
@@ -558,7 +548,7 @@ public class SVGtoImage
                     current = new Point2D.Double(0.0, 0.0);
                 }
                 switch (op.type()) {
-                    case ArcTo: {
+                    case ArcTo -> {
                         System.out.println("** Warning: Path ArcTo not fully supported yet.");
                         final double x2 = (lastX - x0) * scale;
                         final double y2 = (lastY - y0) * scale;
@@ -585,7 +575,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(1));
                         continue;
                     }
-                    case MoveTo: {
+                    case MoveTo -> {
                         if (fillColour != null && !pts.isEmpty()) {
                             if (MathRoutines.isClockwise(pts)) {
                                 path.closePath();
@@ -606,7 +596,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(0));
                         continue;
                     }
-                    case LineTo: {
+                    case LineTo -> {
                         x = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
                         y = (op.pts().get(0).y + (op.absolute() ? 0.0 : lastY) - y0) * scale;
                         lastX = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
@@ -616,7 +606,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(0));
                         continue;
                     }
-                    case HLineTo: {
+                    case HLineTo -> {
                         x = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
                         y = current.getY();
                         lastX = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
@@ -625,7 +615,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(0));
                         continue;
                     }
-                    case VLineTo: {
+                    case VLineTo -> {
                         x = current.getX();
                         y = (op.pts().get(0).y + (op.absolute() ? 0.0 : lastY) - y0) * scale;
                         lastY = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
@@ -634,7 +624,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(0));
                         continue;
                     }
-                    case QuadraticTo: {
+                    case QuadraticTo -> {
                         final double x2 = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
                         final double y2 = (op.pts().get(0).y + (op.absolute() ? 0.0 : lastY) - y0) * scale;
                         x = (op.pts().get(1).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -646,7 +636,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(1));
                         continue;
                     }
-                    case CurveTo: {
+                    case CurveTo -> {
                         final double x2 = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
                         final double y2 = (op.pts().get(0).y + (op.absolute() ? 0.0 : lastY) - y0) * scale;
                         final double x3 = (op.pts().get(1).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -660,7 +650,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(2));
                         continue;
                     }
-                    case ShortQuadraticTo: {
+                    case ShortQuadraticTo -> {
                         x = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
                         y = (op.pts().get(0).y + (op.absolute() ? 0.0 : lastY) - y0) * scale;
                         lastX = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
@@ -676,7 +666,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(1));
                         continue;
                     }
-                    case ShortCurveTo: {
+                    case ShortCurveTo -> {
                         final double x3 = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
                         final double y3 = (op.pts().get(0).y + (op.absolute() ? 0.0 : lastY) - y0) * scale;
                         x = (op.pts().get(1).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -694,7 +684,7 @@ public class SVGtoImage
                         pts.add(op.pts().get(1));
                         continue;
                     }
-                    case ClosePath: {
+                    case ClosePath -> {
                         path.closePath();
                         if (fillColour != null) {
                             g2d.setPaint(fillColour);

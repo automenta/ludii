@@ -12,8 +12,8 @@ import graphics.ImageProcessing;
 import language.parser.Parser;
 import language.parser.SelectionType;
 import language.parser.TokenRange;
-import main.grammar.Description;
-import main.grammar.Report;
+import grammar.Description;
+import grammar.Report;
 import manager.Manager;
 import manager.utils.ContextSnapshot;
 import manager.utils.SettingsManager;
@@ -166,7 +166,7 @@ public class EditorDialog extends JDialog
                     undoRecordTimer.stop();
                     EditorDialog.this.storeUndoText();
                     switch (EditorActions.fromKeyEvent(e)) {
-                        case DELETE_LINE: {
+                        case DELETE_LINE -> {
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed delete line");
                             }
@@ -174,7 +174,7 @@ public class EditorDialog extends JDialog
                             EditorDialog.this.deleteLine();
                             break;
                         }
-                        case REDO: {
+                        case REDO -> {
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed redo");
                             }
@@ -182,7 +182,7 @@ public class EditorDialog extends JDialog
                             EditorDialog.this.redo();
                             break;
                         }
-                        case UNDO: {
+                        case UNDO -> {
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed undo");
                             }
@@ -190,14 +190,14 @@ public class EditorDialog extends JDialog
                             EditorDialog.this.undo();
                             break;
                         }
-                        case NO_ACTION: {
+                        case NO_ACTION -> {
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed ignored " + KeyEvent.getKeyText(e.getKeyChar()));
                                 break;
                             }
                             break;
                         }
-                        case COPY_SELECTION: {
+                        case COPY_SELECTION -> {
                             EditorDialog.this.copySelection();
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed copy selection " + EditorDialog.this.pasteBuffer);
@@ -205,7 +205,7 @@ public class EditorDialog extends JDialog
                             }
                             break;
                         }
-                        case REMOVE_SELECTION: {
+                        case REMOVE_SELECTION -> {
                             EditorDialog.this.storeUndoText();
                             EditorDialog.this.removeSelection();
                             if (EditorDialog.this.trace) {
@@ -214,7 +214,7 @@ public class EditorDialog extends JDialog
                             }
                             break;
                         }
-                        case PASTE_BUFFER: {
+                        case PASTE_BUFFER -> {
                             EditorDialog.this.storeUndoText();
                             EditorDialog.this.pasteBuffer();
                             if (EditorDialog.this.trace) {
@@ -223,7 +223,7 @@ public class EditorDialog extends JDialog
                             }
                             break;
                         }
-                        case AUTOSUGGEST: {
+                        case AUTOSUGGEST -> {
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed autosuggest");
                             }
@@ -274,8 +274,8 @@ public class EditorDialog extends JDialog
         if (this.undoRecords.get(this.undoDescriptionsMarker).ignoreChanges(this.textArea)) {
             return;
         }
-        for (int i = this.undoRecords.size() - 1; i > this.undoDescriptionsMarker; --i) {
-            this.undoRecords.remove(i);
+        if (this.undoRecords.size() > this.undoDescriptionsMarker + 1) {
+            this.undoRecords.subList(this.undoDescriptionsMarker + 1, this.undoRecords.size()).clear();
         }
         ++this.undoDescriptionsMarker;
         this.undoRecords.add(new UndoRecord(this.textArea));
@@ -456,47 +456,37 @@ public class EditorDialog extends JDialog
             for (final String token : tokens) {
                 final EditorTokenType ttype = LudiiTokeniser.typeForToken(token, inAngle, lastTokenType);
                 switch (ttype) {
-                    case OPEN_CURLY: {
+                    case OPEN_CURLY -> {
                         appendToPane(this.textArea, token, EditorLookAndFeel.bracketColourByDepthAndType(ttype, curlyCount), ttype.isBold());
                         ++curlyCount;
                         break;
                     }
-                    case OPEN_ROUND:
-                    case OPEN_SQUARE: {
+                    case OPEN_ROUND, OPEN_SQUARE -> {
                         appendToPane(this.textArea, token, EditorLookAndFeel.bracketColourByDepthAndType(ttype, bracketCount), ttype.isBold());
                         ++bracketCount;
                         break;
                     }
-                    case CLOSE_CURLY: {
+                    case CLOSE_CURLY -> {
                         --curlyCount;
                         appendToPane(this.textArea, token, EditorLookAndFeel.bracketColourByDepthAndType(ttype, curlyCount), ttype.isBold());
                         break;
                     }
-                    case CLOSE_ROUND:
-                    case CLOSE_SQUARE: {
+                    case CLOSE_ROUND, CLOSE_SQUARE -> {
                         --bracketCount;
                         appendToPane(this.textArea, token, EditorLookAndFeel.bracketColourByDepthAndType(ttype, bracketCount), ttype.isBold());
                         break;
                     }
-                    case OPEN_ANGLE: {
+                    case OPEN_ANGLE -> {
                         inAngle = true;
                         appendToPane(this.textArea, token, ttype.fgColour(), ttype.isBold());
                         break;
                     }
-                    case CLOSE_ANGLE: {
+                    case CLOSE_ANGLE -> {
                         appendToPane(this.textArea, token, ttype.fgColour(), ttype.isBold());
                         inAngle = false;
                         break;
                     }
-                    case WHITESPACE:
-                    case INT:
-                    case FLOAT:
-                    case OTHER:
-                    case STRING:
-                    case LABEL:
-                    case CLASS:
-                    case ENUM:
-                    case RULE: {
+                    case WHITESPACE, INT, FLOAT, OTHER, STRING, LABEL, CLASS, ENUM, RULE -> {
                         appendToPane(this.textArea, token, ttype.fgColour(), ttype.isBold());
                         break;
                     }
@@ -515,7 +505,7 @@ public class EditorDialog extends JDialog
         this.checkParseState(gameDescription);
     }
     
-    private final void checkParseState(final String gameStr) {
+    private void checkParseState(final String gameStr) {
         try {
             final Description gameDescription = new Description(gameStr);
             final boolean success = Parser.parseTest(gameDescription, SettingsManager.userSelections, new Report(), false);
@@ -662,7 +652,7 @@ public class EditorDialog extends JDialog
         }
     }
     
-    static final void indentRange(final JTextPane textArea) {
+    static void indentRange(final JTextPane textArea) {
         System.out.println("### INDENT ###");
         final int start = textArea.getSelectionStart();
         final int end = textArea.getSelectionEnd();

@@ -11,8 +11,8 @@ import game.types.board.SiteType;
 import game.util.graph.Edge;
 import game.util.graph.Graph;
 import game.util.graph.Vertex;
-import main.math.MathRoutines;
-import main.math.Point3D;
+import math.MathRoutines;
+import math.Point3D;
 import util.Context;
 
 import java.awt.geom.Point2D;

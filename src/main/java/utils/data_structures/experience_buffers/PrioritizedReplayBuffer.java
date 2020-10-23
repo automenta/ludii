@@ -174,7 +174,6 @@ public class PrioritizedReplayBuffer implements Serializable, ExperienceBuffer
         try (final ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filepath)))) {
             out.writeObject(this);
             out.flush();
-            out.close();
         }
         catch (IOException e) {
             e.printStackTrace();

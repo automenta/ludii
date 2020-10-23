@@ -32,7 +32,7 @@ public class KakuroDesign extends PuzzleDesign
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.005f;
-        final float swThin = (float)Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
+        final float swThin = Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
         final float swThick = 2.0f * swThin;
         this.setStrokesAndColours(context, new Color(120, 190, 240), null, new Color(210, 230, 255), null, null, null, new Color(120, 190, 240), swThin, swThick);
         if (this.hintValues == null) {
@@ -87,6 +87,7 @@ public class KakuroDesign extends PuzzleDesign
                     for (int j = 0; j < this.hintValues.size(); ++j) {
                         if (this.hintValues.get(i) != null && this.hintValues.get(i) > maxHintvalue) {
                             maxHintvalue = this.hintValues.get(i);
+                            break;
                         }
                     }
                     if (maxHintvalue > 9) {

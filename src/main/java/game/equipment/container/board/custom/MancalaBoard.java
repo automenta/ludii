@@ -41,7 +41,7 @@ public class MancalaBoard extends Board
                 final int numColumns = columns;
                 final StoreType storeType = (store == null) ? StoreType.Outer : store;
                 final int numberStore = (numStores == null) ? 2 : numStores;
-                if (storeType.equals(StoreType.Inner) || numberStore != 2 || numRows < 2 || numRows > 4) {
+                if (storeType == StoreType.Inner || numberStore != 2 || numRows < 2 || numRows > 4) {
                     return Square.construct(null, new DimConstant(rows), null, null).eval(context, siteType);
                 }
                 if (numRows == 2) {
@@ -68,9 +68,9 @@ public class MancalaBoard extends Board
             public GraphFunction makeMancalaTwoRows(final StoreType storeType, final int numColumns) {
                 final GraphFunction bottomRow = Rectangle.construct(new DimConstant(1), new DimConstant(numColumns), null);
                 final GraphFunction topRow = new Shift(new FloatConstant(0.0f), new FloatConstant(1.0f), null, Rectangle.construct(new DimConstant(1), new DimConstant(numColumns), null));
-                if (!storeType.equals(StoreType.None)) {
+                if (storeType != StoreType.None) {
                     final GraphFunction leftStore = new Graph(new Float[][] { { -0.85f, 0.5f } }, null);
-                    final GraphFunction rightStore = new Shift(new FloatConstant(-0.15f), new FloatConstant(0.0f), null, new Graph(new Float[][] { { Float.valueOf(numColumns), 0.5f } }, null));
+                    final GraphFunction rightStore = new Shift(new FloatConstant(-0.15f), new FloatConstant(0.0f), null, new Graph(new Float[][] { {(float) numColumns, 0.5f } }, null));
                     return new Union(new GraphFunction[] { leftStore, bottomRow, topRow, rightStore }, Boolean.TRUE);
                 }
                 return new Union(new GraphFunction[] { bottomRow, topRow }, Boolean.TRUE);
@@ -80,9 +80,9 @@ public class MancalaBoard extends Board
                 final GraphFunction bottomRow = Rectangle.construct(new DimConstant(1), new DimConstant(numColumns), null);
                 final GraphFunction middleRow = new Shift(new FloatConstant(0.0f), new FloatConstant(1.0f), null, Rectangle.construct(new DimConstant(1), new DimConstant(numColumns), null));
                 final GraphFunction topRow = new Shift(new FloatConstant(0.0f), new FloatConstant(2.0f), null, Rectangle.construct(new DimConstant(1), new DimConstant(numColumns), null));
-                if (!storeType.equals(StoreType.None)) {
+                if (storeType != StoreType.None) {
                     final GraphFunction leftStore = new Graph(new Float[][] { { -1.0f, 1.0f } }, null);
-                    final GraphFunction rightStore = new Shift(new FloatConstant(0.0f), new FloatConstant(0.0f), null, new Graph(new Float[][] { { Float.valueOf(numColumns), 1.0f } }, null));
+                    final GraphFunction rightStore = new Shift(new FloatConstant(0.0f), new FloatConstant(0.0f), null, new Graph(new Float[][] { {(float) numColumns, 1.0f } }, null));
                     return new Union(new GraphFunction[] { leftStore, bottomRow, middleRow, topRow, rightStore }, Boolean.TRUE);
                 }
                 return new Union(new GraphFunction[] { bottomRow, middleRow, topRow }, Boolean.TRUE);
@@ -93,9 +93,9 @@ public class MancalaBoard extends Board
                 final GraphFunction bottomInnerRow = new Shift(new FloatConstant(0.0f), new FloatConstant(1.0f), null, Rectangle.construct(new DimConstant(1), new DimConstant(numColumns), null));
                 final GraphFunction topInnerRow = new Shift(new FloatConstant(0.0f), new FloatConstant(2.0f), null, Rectangle.construct(new DimConstant(1), new DimConstant(numColumns), null));
                 final GraphFunction topOuterRow = new Shift(new FloatConstant(0.0f), new FloatConstant(3.0f), null, Rectangle.construct(new DimConstant(1), new DimConstant(numColumns), null));
-                if (!storeType.equals(StoreType.None)) {
+                if (storeType != StoreType.None) {
                     final GraphFunction leftStore = new Graph(new Float[][] { { -0.9f, 1.5f } }, null);
-                    final GraphFunction rightStore = new Shift(new FloatConstant(-0.1f), new FloatConstant(0.0f), null, new Graph(new Float[][] { { Float.valueOf(numColumns), 1.5f } }, null));
+                    final GraphFunction rightStore = new Shift(new FloatConstant(-0.1f), new FloatConstant(0.0f), null, new Graph(new Float[][] { {(float) numColumns, 1.5f } }, null));
                     return new Union(new GraphFunction[] { leftStore, bottomOuterRow, bottomInnerRow, topInnerRow, topOuterRow, rightStore }, Boolean.TRUE);
                 }
                 return new Union(new GraphFunction[] { bottomOuterRow, bottomInnerRow, topInnerRow, topOuterRow }, Boolean.TRUE);
@@ -138,7 +138,7 @@ public class MancalaBoard extends Board
     
     public GraphFunction createTwoRowMancala() {
         final GraphFunction leftStore = new Graph(new Float[][] { { 0.85f, 0.5f } }, null);
-        final GraphFunction rightStore = new Shift(new FloatConstant(-0.15f), new FloatConstant(0.0f), null, new Graph(new Float[][] { { Float.valueOf(this.numColumns), 0.5f } }, null));
+        final GraphFunction rightStore = new Shift(new FloatConstant(-0.15f), new FloatConstant(0.0f), null, new Graph(new Float[][] { {(float) this.numColumns, 0.5f } }, null));
         final GraphFunction bottomRow = Rectangle.construct(new DimConstant(1), new DimConstant(this.numColumns), null);
         final GraphFunction topRow = new Shift(new FloatConstant(0.0f), new FloatConstant(1.0f), null, Rectangle.construct(new DimConstant(1), new DimConstant(this.numColumns), null));
         return new Union(new GraphFunction[] { leftStore, bottomRow, topRow, rightStore }, Boolean.TRUE);

@@ -6,8 +6,8 @@ package features.instances;
 
 import features.features.Feature;
 import game.types.board.SiteType;
-import main.collections.ChunkSet;
-import main.math.BitTwiddling;
+import collections.ChunkSet;
+import math.BitTwiddling;
 import util.state.State;
 import util.state.containerState.ContainerState;
 
@@ -94,22 +94,21 @@ public final class FeatureInstance implements BitwiseTest
                 }
                 if (this.mustEmpty == null) {
                     switch (this.graphElementType) {
-                        case Cell: {
+                        case Cell -> {
                             this.mustEmpty = new ChunkSet(1, container.emptyChunkSetCell().size());
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             this.mustEmpty = new ChunkSet(1, container.emptyChunkSetVertex().size());
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             this.mustEmpty = new ChunkSet(1, container.emptyChunkSetEdge().size());
                             break;
                         }
                     }
                 }
                 this.mustEmpty.set(testSite);
-                this.allRestrictionsNull = false;
             }
             else {
                 if (this.mustEmpty != null && this.mustEmpty.get(testSite)) {
@@ -117,23 +116,23 @@ public final class FeatureInstance implements BitwiseTest
                 }
                 if (this.mustNotEmpty == null) {
                     switch (this.graphElementType) {
-                        case Cell: {
+                        case Cell -> {
                             this.mustNotEmpty = new ChunkSet(1, container.emptyChunkSetCell().size());
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             this.mustNotEmpty = new ChunkSet(1, container.emptyChunkSetVertex().size());
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             this.mustNotEmpty = new ChunkSet(1, container.emptyChunkSetEdge().size());
                             break;
                         }
                     }
                 }
                 this.mustNotEmpty.set(testSite);
-                this.allRestrictionsNull = false;
             }
+            this.allRestrictionsNull = false;
         }
         else if (bitSetType == Feature.BitSetTypes.Who) {
             if (active) {
@@ -147,22 +146,22 @@ public final class FeatureInstance implements BitwiseTest
                     int chunkSize = 0;
                     int numChunks = 0;
                     switch (this.graphElementType) {
-                        case Cell: {
+                        case Cell -> {
                             chunkSize = container.chunkSizeWhoCell();
                             numChunks = container.numChunksWhoCell();
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             chunkSize = container.chunkSizeWhoEdge();
                             numChunks = container.numChunksWhoEdge();
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             chunkSize = container.chunkSizeWhoVertex();
                             numChunks = container.numChunksWhoVertex();
                             break;
                         }
-                        default: {
+                        default -> {
                             chunkSize = -1;
                             numChunks = -1;
                             break;
@@ -173,7 +172,6 @@ public final class FeatureInstance implements BitwiseTest
                 }
                 this.mustWho.setChunk(testSite, value);
                 this.mustWhoMask.setChunk(testSite, BitTwiddling.maskI(this.mustWhoMask.chunkSize()));
-                this.allRestrictionsNull = false;
             }
             else {
                 if (this.mustNotWhoMask != null && this.mustNotWhoMask.getChunk(testSite) != 0) {
@@ -186,22 +184,22 @@ public final class FeatureInstance implements BitwiseTest
                     int chunkSize = 0;
                     int numChunks = 0;
                     switch (this.graphElementType) {
-                        case Cell: {
+                        case Cell -> {
                             chunkSize = container.chunkSizeWhoCell();
                             numChunks = container.numChunksWhoCell();
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             chunkSize = container.chunkSizeWhoEdge();
                             numChunks = container.numChunksWhoEdge();
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             chunkSize = container.chunkSizeWhoVertex();
                             numChunks = container.numChunksWhoVertex();
                             break;
                         }
-                        default: {
+                        default -> {
                             chunkSize = -1;
                             numChunks = -1;
                             break;
@@ -212,8 +210,8 @@ public final class FeatureInstance implements BitwiseTest
                 }
                 this.mustNotWho.setChunk(testSite, value);
                 this.mustNotWhoMask.setChunk(testSite, BitTwiddling.maskI(this.mustNotWhoMask.chunkSize()));
-                this.allRestrictionsNull = false;
             }
+            this.allRestrictionsNull = false;
         }
         else {
             if (bitSetType != Feature.BitSetTypes.What) {
@@ -231,22 +229,22 @@ public final class FeatureInstance implements BitwiseTest
                     int chunkSize = 0;
                     int numChunks = 0;
                     switch (this.graphElementType) {
-                        case Cell: {
+                        case Cell -> {
                             chunkSize = container.chunkSizeWhatCell();
                             numChunks = container.numChunksWhatCell();
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             chunkSize = container.chunkSizeWhatEdge();
                             numChunks = container.numChunksWhatEdge();
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             chunkSize = container.chunkSizeWhatVertex();
                             numChunks = container.numChunksWhatVertex();
                             break;
                         }
-                        default: {
+                        default -> {
                             chunkSize = -1;
                             numChunks = -1;
                             break;
@@ -257,7 +255,6 @@ public final class FeatureInstance implements BitwiseTest
                 }
                 this.mustWhat.setChunk(testSite, value);
                 this.mustWhatMask.setChunk(testSite, BitTwiddling.maskI(this.mustWhatMask.chunkSize()));
-                this.allRestrictionsNull = false;
             }
             else {
                 if (this.mustNotWhatMask != null && this.mustNotWhatMask.getChunk(testSite) != 0) {
@@ -270,22 +267,22 @@ public final class FeatureInstance implements BitwiseTest
                     int chunkSize = 0;
                     int numChunks = 0;
                     switch (this.graphElementType) {
-                        case Cell: {
+                        case Cell -> {
                             chunkSize = container.chunkSizeWhatCell();
                             numChunks = container.numChunksWhatCell();
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             chunkSize = container.chunkSizeWhatEdge();
                             numChunks = container.numChunksWhatEdge();
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             chunkSize = container.chunkSizeWhatVertex();
                             numChunks = container.numChunksWhatVertex();
                             break;
                         }
-                        default: {
+                        default -> {
                             chunkSize = -1;
                             numChunks = -1;
                             break;
@@ -296,8 +293,8 @@ public final class FeatureInstance implements BitwiseTest
                 }
                 this.mustNotWhat.setChunk(testSite, value);
                 this.mustNotWhatMask.setChunk(testSite, BitTwiddling.maskI(this.mustNotWhatMask.chunkSize()));
-                this.allRestrictionsNull = false;
             }
+            this.allRestrictionsNull = false;
         }
         return true;
     }
@@ -309,7 +306,7 @@ public final class FeatureInstance implements BitwiseTest
         }
         final ContainerState container = state.containerStates()[0];
         switch (this.graphElementType) {
-            case Cell: {
+            case Cell -> {
                 if (this.mustEmpty != null && !container.emptyChunkSetCell().matches(this.mustEmpty, this.mustEmpty)) {
                     return false;
                 }
@@ -330,7 +327,7 @@ public final class FeatureInstance implements BitwiseTest
                 }
                 break;
             }
-            case Vertex: {
+            case Vertex -> {
                 if (this.mustEmpty != null && !container.emptyChunkSetVertex().matches(this.mustEmpty, this.mustEmpty)) {
                     return false;
                 }
@@ -351,7 +348,7 @@ public final class FeatureInstance implements BitwiseTest
                 }
                 break;
             }
-            case Edge: {
+            case Edge -> {
                 if (this.mustEmpty != null && !container.emptyChunkSetEdge().matches(this.mustEmpty, this.mustEmpty)) {
                     return false;
                 }
@@ -579,8 +576,7 @@ public final class FeatureInstance implements BitwiseTest
     }
     
     public static List<FeatureInstance> deduplicate(final List<FeatureInstance> instances) {
-        final Set<FeatureInstance> deduplicated = new HashSet<>();
-        deduplicated.addAll(instances);
+        final Set<FeatureInstance> deduplicated = new HashSet<>(instances);
         return new ArrayList<>(deduplicated);
     }
     

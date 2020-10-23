@@ -14,6 +14,7 @@ import javax.swing.text.html.StyleSheet;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SuggestionDialog extends JDialog implements KeyListener, ListSelectionListener, MouseListener, MouseMotionListener
@@ -100,7 +101,7 @@ public class SuggestionDialog extends JDialog implements KeyListener, ListSelect
             return;
         }
         System.out.println(this.suggestionInstances.size() + " suggestions found");
-        this.suggestionInstances.sort((a, b) -> a.label.compareTo(b.label));
+        this.suggestionInstances.sort(Comparator.comparing(a -> a.label));
         for (final SuggestionInstance si : this.suggestionInstances) {
             listModel.addElement(EditorHelpDataHelper.formatLabel(si.substitution));
         }
@@ -129,30 +130,19 @@ public class SuggestionDialog extends JDialog implements KeyListener, ListSelect
             return;
         }
         switch (keyChar) {
-            case '\u0003':
-            case '\t':
-            case '\f':
-            case '\u0010':
-            case '\u0011':
-            case '\u0012':
-            case '\u0013':
-            case '\u0014':
-            case '!':
-            case '\"':
-            case '#':
-            case '$': {
+            case '\u0003', '\t', '\f', '\u0010', '\u0011', '\u0012', '\u0013', '\u0014', '!', '\"', '#', '$' -> {
                 break;
             }
-            case '\n': {
+            case '\n' -> {
                 final int pos = this.list.getSelectedIndex();
                 this.insertListEntryAndClose(pos);
                 break;
             }
-            case '\u001b': {
+            case '\u001b' -> {
                 this.setVisible(false);
                 break;
             }
-            case '\b': {
+            case '\b' -> {
                 if (this.isPartial) {
                     this.parent.applyBackspace();
                     this.updateList();
@@ -160,7 +150,7 @@ public class SuggestionDialog extends JDialog implements KeyListener, ListSelect
                 }
                 break;
             }
-            case '\u007f': {
+            case '\u007f' -> {
                 if (this.isPartial) {
                     this.parent.applyDelete();
                     this.updateList();
@@ -168,7 +158,7 @@ public class SuggestionDialog extends JDialog implements KeyListener, ListSelect
                 }
                 break;
             }
-            default: {
+            default -> {
                 if (this.isPartial) {
                     this.parent.insertCharacter(e.getKeyChar());
                     this.updateList();
@@ -180,18 +170,18 @@ public class SuggestionDialog extends JDialog implements KeyListener, ListSelect
     }
     
     private void updateList() {
-        SwingUtilities.invokeLater(() -> SuggestionDialog.this.filter());
+        SwingUtilities.invokeLater(SuggestionDialog.this::filter);
     }
     
     @Override
     public void keyPressed(final KeyEvent e) {
         switch (e.getKeyCode()) {
-            case 37: {
+            case 37 -> {
                 this.parent.cursorLeft();
                 this.updateList();
                 break;
             }
-            case 39: {
+            case 39 -> {
                 this.parent.cursorRight();
                 this.updateList();
                 break;

@@ -13,8 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class LeaderboardDialog extends JDialog
@@ -44,19 +42,19 @@ public class LeaderboardDialog extends JDialog
             @Override
             public Class<?> getColumnClass(final int colNum) {
                 switch (colNum) {
-                    case 0: {
+                    case 0 -> {
                         return Integer.class;
                     }
-                    case 1: {
+                    case 1 -> {
                         return String.class;
                     }
-                    case 2: {
+                    case 2 -> {
                         return Integer.class;
                     }
-                    case 3: {
+                    case 3 -> {
                         return Float.class;
                     }
-                    default: {
+                    default -> {
                         return String.class;
                     }
                 }
@@ -74,13 +72,13 @@ public class LeaderboardDialog extends JDialog
         model.addColumn("Username");
         model.addColumn("Games Played");
         model.addColumn("Elo Rating");
-        for (int i = 0; i < allPlayers.length; ++i) {
+        for (String allPlayer : allPlayers) {
             try {
-                final String gameDetails = allPlayers[i];
+                final String gameDetails = allPlayer;
                 final String[] splitDetails = gameDetails.split("NEXT_COL");
-                model.addRow(new Object[] { Integer.valueOf(splitDetails[0]), splitDetails[1], Integer.valueOf(splitDetails[3]), Float.parseFloat(splitDetails[2]) });
+                model.addRow(new Object[]{Integer.valueOf(splitDetails[0]), splitDetails[1], Integer.valueOf(splitDetails[3]), Float.parseFloat(splitDetails[2])});
+            } catch (Exception ex) {
             }
-            catch (Exception ex) {}
         }
         final TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(sorter);

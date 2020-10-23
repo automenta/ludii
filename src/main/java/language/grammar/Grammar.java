@@ -5,11 +5,11 @@
 package language.grammar;
 
 import annotations.Alias;
+import grammar.*;
+import grammar.ebnf.EBNF;
 import main.Constants;
 import main.FileHandling;
 import main.StringRoutines;
-import main.grammar.*;
-import main.grammar.ebnf.EBNF;
 import metadata.MetadataItem;
 
 import java.io.BufferedWriter;
@@ -20,8 +20,17 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.*;
 
-public class Grammar
-{
+public class Grammar {
+    public static final String[][] Primitives =
+        new String[][]{{"int", "game.functions.ints"}, {"boolean", "game.functions.booleans"}, {"float", "game.functions.floats"}};
+    public static final String[][] Predefined =
+        new String[][]{{"java.lang.Integer", "game.functions.ints", "java.lang", "integer"}, {"java.lang.Boolean", "game.functions.booleans", "java.lang", "boolean"}, {"java.lang.Float", "game.functions.floats", "java.lang", "float"}, {"java.lang.String", "game.types", "java.lang", "string"}};
+    public static final String[][] ApplicationConstants =
+        new String[][]{{"Off", "int", "global", "-1"}, {"End", "int", "global", "-2"}, {"Undefined", "int", "global", "-1"}};
+    private static final Grammar singleton = new Grammar();
+
+
+    final String[][] Functions;
     private final List<Symbol> symbols;
     private final Map<String, List<Symbol>> symbolMap;
     private final Map<String, List<Symbol>> symbolsByPartialKeyword;
@@ -31,12 +40,8 @@ public class Grammar
     private Symbol rootGameSymbol;
     private Symbol rootMetadataSymbol;
     private EBNF ebnf;
-    public static final String[][] Primitives;
-    public static final String[][] Predefined;
-    final String[][] Functions;
-    public static final String[][] ApplicationConstants;
-    private static volatile Grammar singleton;
-    
+
+
     private Grammar() {
         this.symbols = new ArrayList<>();
         this.symbolMap = new HashMap<>();
@@ -47,39 +52,125 @@ public class Grammar
         this.rootGameSymbol = null;
         this.rootMetadataSymbol = null;
         this.ebnf = null;
-        this.Functions = new String[][] { { "IntFunction", "int" }, { "IntConstant", "int" }, { "BooleanFunction", "boolean" }, { "BooleanConstant", "boolean" }, { "FloatFunction", "float" }, { "FloatConstant", "float" }, { "IntArrayFunction", "ints" }, { "IntArrayConstant", "ints" }, { "RegionFunction", "sites" }, { "RegionConstant", "sites" }, { "RangeFunction", "range" }, { "RangeConstant", "range" }, { "DirectionsFunction", "directions" }, { "DirectionsConstant", "directions" }, { "GraphFunction", "graph" }, { "GraphConstant", "graph" }, { "GraphFunction", "tiling" }, { "GraphConstant", "tiling" }, { "DimFunction", "dim" }, { "DimConstant", "dim" } };
+        this.Functions = new String[][]{{"IntFunction", "int"}, {"IntConstant", "int"}, {"BooleanFunction", "boolean"}, {"BooleanConstant", "boolean"}, {"FloatFunction", "float"}, {"FloatConstant", "float"}, {"IntArrayFunction", "ints"}, {"IntArrayConstant", "ints"}, {"RegionFunction", "sites"}, {"RegionConstant", "sites"}, {"RangeFunction", "range"}, {"RangeConstant", "range"}, {"DirectionsFunction", "directions"}, {"DirectionsConstant", "directions"}, {"GraphFunction", "graph"}, {"GraphConstant", "graph"}, {"GraphFunction", "tiling"}, {"GraphConstant", "tiling"}, {"DimFunction", "dim"}, {"DimConstant", "dim"}};
         if (Constants.combos == null) {
             Constants.createCombos();
         }
         this.generate();
     }
-    
+
     public static Grammar grammar() {
-        if (Grammar.singleton == null) {
-            synchronized (Grammar.class) {
-                if (Grammar.singleton == null) {
-                    Grammar.singleton = new Grammar();
+//        if (Grammar.singleton == null) {
+//            synchronized (Grammar.class) {
+//                if (Grammar.singleton == null) {
+//                    Grammar.singleton = new Grammar();
+//                }
+//            }
+//        }
+        return Grammar.singleton;
+    }
+
+    public static int applicationConstantIndex(final String name) {
+        for (int ac = 0; ac < Grammar.ApplicationConstants.length; ++ac) {
+            if (Grammar.ApplicationConstants[ac][0].equals(name)) {
+                return ac;
+            }
+        }
+        return -1;
+    }
+
+    static void extractEnums(final Class<?> cls, final Symbol symbol, final List<Symbol> newSymbols) {
+        final Symbol symbolEnum = new Symbol(Symbol.SymbolType.Class, cls.getName(), null, cls);
+        symbolEnum.setReturnType(symbolEnum);
+        newSymbols.add(symbolEnum);
+        for (final Object enumObj : cls.getEnumConstants()) {
+            final String symbolName = enumObj.toString();
+            final String path = symbolEnum.path() + "." + symbolName;
+            String alias = null;
+            Field declaredField = null;
+            try {
+                declaredField = cls.getDeclaredField(((Enum) enumObj).name());
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            if (declaredField != null) {
+                final Annotation[] annotations2;
+                final Annotation[] annotations = annotations2 = declaredField.getAnnotations();
+                for (final Annotation annotation : annotations2) {
+                    if (annotation instanceof Alias) {
+                        final Alias anno = (Alias) annotation;
+                        alias = anno.alias();
+                    }
+                }
+            }
+            final Symbol symbolValue = new Symbol(Symbol.SymbolType.Constant, path, alias, symbolEnum.notionalLocation(), cls);
+            symbolValue.setReturnType(symbolEnum);
+            newSymbols.add(symbolValue);
+        }
+    }
+
+    static void prioritisePackageClass(final PackageInfo pack) {
+        final List<GrammarRule> promote = new ArrayList<>();
+        for (int r = pack.rules().size() - 1; r >= 0; --r) {
+            final GrammarRule rule = pack.rules().get(r);
+            if (pack.path().contains(rule.lhs().grammarLabel().toLowerCase()) && rule.lhs().grammarLabel().length() >= 3) {
+                pack.remove(r);
+                promote.add(rule);
+            }
+        }
+        for (GrammarRule rule : promote) {
+            pack.add(0, rule);
+        }
+        promote.clear();
+        for (int r = pack.rules().size() - 1; r >= 0; --r) {
+            final GrammarRule rule = pack.rules().get(r);
+            if (pack.path().equals(rule.lhs().name().toLowerCase())) {
+                pack.remove(r);
+                promote.add(rule);
+            }
+        }
+        for (GrammarRule rule : promote) {
+            pack.add(0, rule);
+        }
+    }
+
+    static void prioritiseSuperClasses(final PackageInfo pack) {
+        for (int n = 0; n < pack.rules().size(); ++n) {
+            final GrammarRule rule = pack.rules().get(n);
+            if (rule.lhs().name().equalsIgnoreCase(pack.shortName())) {
+                pack.remove(n);
+                pack.add(0, rule);
+            }
+        }
+        for (int a = 0; a < pack.rules().size(); ++a) {
+            final GrammarRule ruleA = pack.rules().get(a);
+            for (int b = a + 1; b < pack.rules().size(); ++b) {
+                final GrammarRule ruleB = pack.rules().get(b);
+                if (ruleB.lhs().isCollectionOf(ruleA.lhs())) {
+                    pack.remove(b);
+                    pack.remove(a);
+                    pack.add(a, ruleB);
+                    pack.add(b, ruleA);
                 }
             }
         }
-        return Grammar.singleton;
     }
-    
+
     public Map<String, List<Symbol>> symbolMap() {
         return this.symbolMap;
     }
-    
+
     public List<Symbol> symbols() {
         return Collections.unmodifiableList(this.symbols);
     }
-    
+
     public EBNF ebnf() {
         if (this.ebnf == null) {
             this.ebnf = new EBNF(grammar().toString());
         }
         return this.ebnf;
     }
-    
+
     void execute() {
         System.out.println("Ludii library 1.0.8.");
         this.generate();
@@ -87,12 +178,11 @@ public class Grammar
         System.out.println("Saving to file grammar-1.0.8.txt.");
         try {
             this.export("grammar-1.0.8.txt");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
     public void generate() {
         this.symbols.clear();
         this.rules.clear();
@@ -120,7 +210,8 @@ public class Grammar
         this.alphabetiseRuleClauses();
         this.removeDuplicateClauses();
         this.filterOutPrimitiveWrappers();
-        if (FileHandling.isCambolbro()) {}
+        if (FileHandling.isCambolbro()) {
+        }
         final boolean debug = false;
         if (debug) {
             System.out.println("\n+++++++++++++++++++ SYMBOLS ++++++++++++++++++++++");
@@ -164,19 +255,15 @@ public class Grammar
             System.out.println(this.rules.size() + " rules, " + numGrammar + " used in grammar, " + numMetadata + " used in metadata.");
         }
     }
-    
+
     void createSymbols() {
         for (int ps = 0; ps < Grammar.Primitives.length; ++ps) {
-            Class<?> cls = null;
-            if (Grammar.Primitives[ps][0].equals("int")) {
-                cls = Integer.TYPE;
-            }
-            else if (Grammar.Primitives[ps][0].equals("float")) {
-                cls = Float.TYPE;
-            }
-            else if (Grammar.Primitives[ps][0].equals("boolean")) {
-                cls = Boolean.TYPE;
-            }
+            Class<?> cls = switch (Grammar.Primitives[ps][0]) {
+                case "int" -> Integer.TYPE;
+                case "float" -> Float.TYPE;
+                case "boolean" -> Boolean.TYPE;
+                default -> null;
+            };
             final Symbol symbol = new Symbol(Symbol.SymbolType.Primitive, Grammar.Primitives[ps][0], null, Grammar.Primitives[ps][1], cls);
             symbol.setReturnType(symbol);
             this.symbols.add(symbol);
@@ -185,8 +272,7 @@ public class Grammar
             Class<?> cls = null;
             try {
                 cls = Class.forName(Grammar.Predefined[ps][0]);
-            }
-            catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
             final Symbol symbol = new Symbol(Symbol.SymbolType.Predefined, Grammar.Predefined[ps][0], null, Grammar.Predefined[ps][1], cls);
@@ -194,9 +280,7 @@ public class Grammar
             this.symbols.add(symbol);
         }
         Symbol symbolInt = null;
-        final Iterator<Symbol> iterator = this.symbols.iterator();
-        while (iterator.hasNext()) {
-            final Symbol symbol = iterator.next();
+        for (Symbol symbol : this.symbols) {
             if (symbol.grammarLabel().equals("int")) {
                 symbolInt = symbol;
                 break;
@@ -216,9 +300,7 @@ public class Grammar
         this.overrideReturnTypes();
         this.rootGameSymbol = null;
         this.rootMetadataSymbol = null;
-        final Iterator<Symbol> iterator2 = this.symbols.iterator();
-        while (iterator2.hasNext()) {
-            final Symbol symbol = iterator2.next();
+        for (Symbol symbol : this.symbols) {
             if (symbol.path().equals("game.Game")) {
                 this.rootGameSymbol = symbol;
             }
@@ -230,13 +312,12 @@ public class Grammar
             throw new RuntimeException("Cannot find game.Game or metadata.Metadata.");
         }
     }
-    
+
     public void findSymbolsFromClasses(final String rootPackageName) {
         Class<?> clsRoot = null;
         try {
             clsRoot = Class.forName(rootPackageName);
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         final ArrayList<Class<?>> classes = (ArrayList<Class<?>>) ClassEnumerator.getClassesForPackage(clsRoot.getPackage());
@@ -252,7 +333,7 @@ public class Grammar
             final Annotation[] annotations = annotations2 = cls.getAnnotations();
             for (final Annotation annotation : annotations2) {
                 if (annotation instanceof Alias) {
-                    final Alias anno = (Alias)annotation;
+                    final Alias anno = (Alias) annotation;
                     alias = anno.alias();
                 }
             }
@@ -263,14 +344,15 @@ public class Grammar
             final Package pack = cls.getPackage();
             String packageName;
             int p;
-            for (packageName = pack.getName(), p = 0; p < this.packages.size() && !this.packages.get(p).path().equals(packageName); ++p) {}
+            for (packageName = pack.getName(), p = 0; p < this.packages.size() && !this.packages.get(p).path().equals(packageName); ++p) {
+            }
             if (p < this.packages.size()) {
                 continue;
             }
             this.packages.add(new PackageInfo(packageName));
         }
     }
-    
+
     void disambiguateSymbols() {
         for (int sa = 0; sa < this.symbols.size(); ++sa) {
             final Symbol symbolA = this.symbols.get(sa);
@@ -297,7 +379,7 @@ public class Grammar
             }
         }
     }
-    
+
     void createSymbolMap() {
         this.symbolMap.clear();
         for (final Symbol symbol : this.symbols) {
@@ -305,8 +387,7 @@ public class Grammar
             List<Symbol> list = this.symbolMap.get(key);
             if (list != null) {
                 list.add(symbol);
-            }
-            else {
+            } else {
                 list = new ArrayList<>();
                 list.add(symbol);
                 this.symbolMap.put(key, list);
@@ -320,8 +401,7 @@ public class Grammar
                 List<Symbol> list2 = this.symbolsByPartialKeyword.get(key2);
                 if (list2 != null) {
                     list2.add(symbol);
-                }
-                else {
+                } else {
                     list2 = new ArrayList<>();
                     list2.add(symbol);
                     this.symbolsByPartialKeyword.put(key2, list2);
@@ -329,7 +409,7 @@ public class Grammar
             }
         }
     }
-    
+
     public List<Symbol> symbolListFromClassName(final String className) {
         final List<Symbol> list = this.symbolMap.get(className);
         if (list != null) {
@@ -342,11 +422,11 @@ public class Grammar
         }
         return null;
     }
-    
+
     public List<Symbol> symbolsWithPartialKeyword(final String partialKeyword) {
         return this.symbolsByPartialKeyword.get(partialKeyword);
     }
-    
+
     public List<String> classPaths(final String description, final int cursorAt, final boolean usePartial) {
         final List<String> list = new ArrayList<>();
         if (cursorAt <= 0 || cursorAt >= description.length()) {
@@ -365,7 +445,8 @@ public class Grammar
         int cc;
         char ch2;
         for (cc = cursorAt, ch2 = description.charAt(cc); cc < description.length() && StringRoutines.isTokenChar(ch2); ch2 = description.charAt(cc)) {
-            if (++cc < description.length()) {}
+            if (++cc < description.length()) {
+            }
         }
         if (cc >= description.length()) {
             System.out.println("** Grammar.classPaths(): Couldn't find end of token from position " + cursorAt + ".");
@@ -394,14 +475,11 @@ public class Grammar
         }
         if (fullKeyword.equals("true")) {
             list.add("true");
-        }
-        else if (fullKeyword.equals("false")) {
+        } else if (fullKeyword.equals("false")) {
             list.add("false");
-        }
-        else if (StringRoutines.isInteger(fullKeyword)) {
+        } else if (StringRoutines.isInteger(fullKeyword)) {
             list.add("int");
-        }
-        else if (StringRoutines.isFloat(fullKeyword) || StringRoutines.isDouble(fullKeyword)) {
+        } else if (StringRoutines.isFloat(fullKeyword) || StringRoutines.isDouble(fullKeyword)) {
             list.add("float");
         }
         final String keyword = usePartial ? partialKeyword : fullKeyword;
@@ -415,17 +493,16 @@ public class Grammar
                     list.add(symbol.path());
                 }
             }
-        }
-        else if (ch == '<' || isRule) {
+        } else if (ch == '<' || isRule) {
             for (final Symbol symbol : matches) {
                 list.add(symbol.path());
             }
-        }
-        else if (ch == ' ' || ch == '\n' || ch == '\r' || ch == '\t' || ch == ':' || ch == '{') {
+        } else if (ch == ' ' || ch == '\n' || ch == '\r' || ch == '\t' || ch == ':' || ch == '{') {
             for (final Symbol symbol : matches) {
                 if (symbol.cls() != null && symbol.cls().isEnum()) {
                     int lastDot;
-                    for (lastDot = symbol.path().length() - 1; lastDot >= 0 && symbol.path().charAt(lastDot) != '.'; --lastDot) {}
+                    for (lastDot = symbol.path().length() - 1; lastDot >= 0 && symbol.path().charAt(lastDot) != '.'; --lastDot) {
+                    }
                     final String enumString = symbol.path().substring(0, lastDot) + '$' + symbol.path().substring(lastDot + 1);
                     list.add(enumString);
                 }
@@ -441,16 +518,7 @@ public class Grammar
         }
         return list;
     }
-    
-    public static int applicationConstantIndex(final String name) {
-        for (int ac = 0; ac < Grammar.ApplicationConstants.length; ++ac) {
-            if (Grammar.ApplicationConstants[ac][0].equals(name)) {
-                return ac;
-            }
-        }
-        return -1;
-    }
-    
+
     void checkHiddenClasses() {
         for (final Symbol symbol : this.symbols) {
             final Class<?> cls = symbol.cls();
@@ -467,7 +535,7 @@ public class Grammar
             }
         }
     }
-    
+
     void checkAbstractClasses() {
         for (final Symbol symbol : this.symbols) {
             final Class<?> cls = symbol.cls();
@@ -480,7 +548,7 @@ public class Grammar
             symbol.setIsAbstract(true);
         }
     }
-    
+
     void handleEnums() {
         final List<Symbol> newSymbols = new ArrayList<>();
         for (final Symbol symbol : this.symbols) {
@@ -503,38 +571,7 @@ public class Grammar
             }
         }
     }
-    
-    static void extractEnums(final Class<?> cls, final Symbol symbol, final List<Symbol> newSymbols) {
-        final Symbol symbolEnum = new Symbol(Symbol.SymbolType.Class, cls.getName(), null, cls);
-        symbolEnum.setReturnType(symbolEnum);
-        newSymbols.add(symbolEnum);
-        for (final Object enumObj : cls.getEnumConstants()) {
-            final String symbolName = enumObj.toString();
-            final String path = symbolEnum.path() + "." + symbolName;
-            String alias = null;
-            Field declaredField = null;
-            try {
-                declaredField = cls.getDeclaredField(((Enum)enumObj).name());
-            }
-            catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-            if (declaredField != null) {
-                final Annotation[] annotations2;
-                final Annotation[] annotations = annotations2 = declaredField.getAnnotations();
-                for (final Annotation annotation : annotations2) {
-                    if (annotation instanceof Alias) {
-                        final Alias anno = (Alias)annotation;
-                        alias = anno.alias();
-                    }
-                }
-            }
-            final Symbol symbolValue = new Symbol(Symbol.SymbolType.Constant, path, alias, symbolEnum.notionalLocation(), cls);
-            symbolValue.setReturnType(symbolEnum);
-            newSymbols.add(symbolValue);
-        }
-    }
-    
+
     void overrideReturnTypes() {
         final List<Symbol> newSymbols = new ArrayList<>();
         for (final Symbol symbol : this.symbols) {
@@ -550,7 +587,7 @@ public class Grammar
             final Annotation[] classAnnotations = annotations = cls.getAnnotations();
             for (final Annotation annotation : annotations) {
                 if (annotation instanceof Alias) {
-                    final Alias anno = (Alias)annotation;
+                    final Alias anno = (Alias) annotation;
                     alias = anno.alias();
                 }
             }
@@ -561,8 +598,7 @@ public class Grammar
                     final Type returnType = method.getReturnType();
                     if (returnType == null) {
                         System.out.println("** Bad return type.");
-                    }
-                    else {
+                    } else {
                         final String returnTypeName = returnType.getTypeName();
                         if (!returnTypeName.equals("void")) {
                             final Symbol temp = new Symbol(null, returnTypeName, alias, cls);
@@ -587,7 +623,7 @@ public class Grammar
             }
         }
     }
-    
+
     Symbol findSymbolByPath(final String path) {
         for (final Symbol symbol : this.symbols) {
             if (symbol.path().equalsIgnoreCase(path)) {
@@ -596,7 +632,7 @@ public class Grammar
         }
         return null;
     }
-    
+
     void createRules() {
         for (final Symbol symbol : this.symbols) {
             if (symbol.hidden()) {
@@ -607,14 +643,12 @@ public class Grammar
                 final GrammarRule rule = this.getRule(lhs);
                 final Clause clause = new Clause(symbol);
                 rule.add(clause);
-            }
-            else {
+            } else {
                 final Symbol lhs = symbol;
                 final GrammarRule rule = this.getRule(lhs);
                 if (symbol.type() == Symbol.SymbolType.Class && !symbol.isAbstract()) {
                     this.expandConstructors(rule, symbol);
-                }
-                else {
+                } else {
                     final Clause clause = new Clause(symbol);
                     if (rule.containsClause(clause) || (symbol.type() != Symbol.SymbolType.Primitive && symbol.type() != Symbol.SymbolType.Predefined && lhs.path().equals(symbol.path())) || (lhs.matches(symbol) && lhs.nesting() > 0)) {
                         continue;
@@ -624,7 +658,7 @@ public class Grammar
             }
         }
     }
-    
+
     GrammarRule getRule(final Symbol lhs) {
         for (final GrammarRule rule : this.rules) {
             if (rule.lhs().matches(lhs)) {
@@ -635,7 +669,7 @@ public class Grammar
         this.rules.add(rule2);
         return rule2;
     }
-    
+
     GrammarRule findRule(final Symbol lhs) {
         for (final GrammarRule rule : this.rules) {
             if (rule.lhs().matches(lhs)) {
@@ -644,7 +678,7 @@ public class Grammar
         }
         return null;
     }
-    
+
     public PackageInfo findPackage(final String path) {
         for (final PackageInfo pack : this.packages) {
             if (path.equalsIgnoreCase(pack.path())) {
@@ -653,7 +687,7 @@ public class Grammar
         }
         return null;
     }
-    
+
     void expandConstructors(final GrammarRule rule, final Symbol symbol) {
         if (symbol.hidden()) {
             return;
@@ -663,24 +697,20 @@ public class Grammar
             return;
         }
         String alias = null;
-        final Annotation[] annotations2;
-        final Annotation[] classAnnotations = annotations2 = cls.getAnnotations();
+        final Annotation[] annotations2 = cls.getAnnotations();
         for (final Annotation annotation : annotations2) {
             if (annotation instanceof Alias) {
-                final Alias anno = (Alias)annotation;
-                alias = anno.alias();
+                alias = ((Alias) annotation).alias();
             }
         }
         List<Executable> ctors;
         if (cls.getConstructors().length > 0) {
             ctors = Arrays.asList(cls.getConstructors());
-        }
-        else {
+        } else {
             ctors = new ArrayList<>();
-            final Method[] declaredMethods;
-            final Method[] methods = declaredMethods = cls.getDeclaredMethods();
+            final Method[] declaredMethods = cls.getDeclaredMethods();
             for (final Method method : declaredMethods) {
-                if (method.getName().equals("construct") && Modifier.isStatic(method.getModifiers())) {
+                if (Modifier.isStatic(method.getModifiers()) && method.getName().equals("construct")) {
                     ctors.add(method);
                 }
             }
@@ -692,8 +722,7 @@ public class Grammar
             final Type[] types = ctor.getGenericParameterTypes();
             final Parameter[] parameters = ctor.getParameters();
             boolean isHidden = false;
-            for (int ca = 0; ca < ctorAnnotations.length; ++ca) {
-                final Annotation ann = ctorAnnotations[ca];
+            for (final Annotation ann : ctorAnnotations) {
                 if (ann.annotationType().getName().equals("annotations.Hide")) {
                     isHidden = true;
                 }
@@ -769,7 +798,7 @@ public class Grammar
             rule.add(clause);
         }
     }
-    
+
     Symbol findSymbolMatch(final Symbol symbol) {
         for (final Symbol sym : this.symbols) {
             if (sym.matches(symbol)) {
@@ -778,7 +807,7 @@ public class Grammar
         }
         return null;
     }
-    
+
     void crossReferenceSubclasses() {
         for (final Symbol symbol : this.symbols) {
             if (symbol.type() != Symbol.SymbolType.Class) {
@@ -810,7 +839,7 @@ public class Grammar
             ruleSuper.add(clause);
         }
     }
-    
+
     void addReturnTypeClauses() {
         for (final Symbol symbol : this.symbols) {
             if (symbol.type() == Symbol.SymbolType.Class) {
@@ -832,7 +861,7 @@ public class Grammar
             }
         }
     }
-    
+
     void addApplicationConstantsToRule() {
         Symbol symbolInt = null;
         for (final Symbol symbol : this.symbols) {
@@ -857,7 +886,7 @@ public class Grammar
             }
         }
     }
-    
+
     void linkToPackages() {
         for (final Symbol symbol : this.symbols) {
             symbol.setPack(this.findPackage(symbol.notionalLocation()));
@@ -869,7 +898,7 @@ public class Grammar
             }
         }
     }
-    
+
     void setDisplayOrder(final Symbol rootSymbol) {
         for (final PackageInfo pack : this.packages) {
             pack.listAlphabetically();
@@ -878,58 +907,7 @@ public class Grammar
         }
         this.setPackageOrder(rootSymbol);
     }
-    
-    static void prioritisePackageClass(final PackageInfo pack) {
-        final List<GrammarRule> promote = new ArrayList<>();
-        for (int r = pack.rules().size() - 1; r >= 0; --r) {
-            final GrammarRule rule = pack.rules().get(r);
-            if (pack.path().contains(rule.lhs().grammarLabel().toLowerCase()) && rule.lhs().grammarLabel().length() >= 3) {
-                pack.remove(r);
-                promote.add(rule);
-            }
-        }
-        final Iterator<GrammarRule> iterator = promote.iterator();
-        while (iterator.hasNext()) {
-            final GrammarRule rule = iterator.next();
-            pack.add(0, rule);
-        }
-        promote.clear();
-        for (int r = pack.rules().size() - 1; r >= 0; --r) {
-            final GrammarRule rule = pack.rules().get(r);
-            if (pack.path().equals(rule.lhs().name().toLowerCase())) {
-                pack.remove(r);
-                promote.add(rule);
-            }
-        }
-        final Iterator<GrammarRule> iterator2 = promote.iterator();
-        while (iterator2.hasNext()) {
-            final GrammarRule rule = iterator2.next();
-            pack.add(0, rule);
-        }
-    }
-    
-    static void prioritiseSuperClasses(final PackageInfo pack) {
-        for (int n = 0; n < pack.rules().size(); ++n) {
-            final GrammarRule rule = pack.rules().get(n);
-            if (rule.lhs().name().equalsIgnoreCase(pack.shortName())) {
-                pack.remove(n);
-                pack.add(0, rule);
-            }
-        }
-        for (int a = 0; a < pack.rules().size(); ++a) {
-            final GrammarRule ruleA = pack.rules().get(a);
-            for (int b = a + 1; b < pack.rules().size(); ++b) {
-                final GrammarRule ruleB = pack.rules().get(b);
-                if (ruleB.lhs().isCollectionOf(ruleA.lhs())) {
-                    pack.remove(b);
-                    pack.remove(a);
-                    pack.add(a, ruleB);
-                    pack.add(b, ruleA);
-                }
-            }
-        }
-    }
-    
+
     void linkDirectionsRules() {
         final Symbol symbolDirectionFacing = this.findSymbolByPath("game.util.directions.DirectionFacing");
         symbolDirectionFacing.setUsedInGrammar(true);
@@ -952,7 +930,7 @@ public class Grammar
         ruleDirection.add(new Clause(symbolAbsolute));
         ruleDirection.add(new Clause(symbolRelative));
     }
-    
+
     void handleDimFunctions() {
         final Symbol symbolDim = this.findSymbolByPath("game.functions.dim.BaseDimFunction");
         symbolDim.setUsedInGrammar(true);
@@ -969,7 +947,7 @@ public class Grammar
         }
         ruleDim.add(new Clause(symbolInt));
     }
-    
+
     void visitSymbols(final Symbol rootSymbol) {
         if (rootSymbol == null) {
             System.out.println("** GrammarWriter.visitSymbols() error: Null root symbol.");
@@ -978,15 +956,14 @@ public class Grammar
         final boolean isGame = rootSymbol.name().contains("Game");
         this.visitSymbol(rootSymbol, 0, isGame);
     }
-    
+
     void visitSymbol(final Symbol symbol, final int depth, final boolean isGame) {
         if (symbol == null) {
             return;
         }
         if (symbol.depth() == -1) {
             symbol.setDepth(depth);
-        }
-        else if (depth < symbol.depth()) {
+        } else if (depth < symbol.depth()) {
             symbol.setDepth(depth);
         }
         if (symbol.visited()) {
@@ -994,8 +971,7 @@ public class Grammar
         }
         if (isGame) {
             symbol.setUsedInGrammar(true);
-        }
-        else {
+        } else {
             symbol.setUsedInMetadata(true);
         }
         symbol.setVisited(true);
@@ -1029,7 +1005,7 @@ public class Grammar
             }
         }
     }
-    
+
     void setPackageOrder(final Symbol rootSymbol) {
         this.packageOrder.clear();
         if (rootSymbol == null) {
@@ -1040,10 +1016,10 @@ public class Grammar
             symbol.setVisited(false);
         }
         this.setPackageOrderRecurse(rootSymbol);
-        final String[] packsToMove = { "game.functions", "game.util", "game.types" };
-        for (int pm = 0; pm < packsToMove.length; ++pm) {
+        final String[] packsToMove = {"game.functions", "game.util", "game.types"};
+        for (String s : packsToMove) {
             for (int p = this.packageOrder.size() - 1; p >= 0; --p) {
-                if (this.packageOrder.get(p).path().contains(packsToMove[pm])) {
+                if (this.packageOrder.get(p).path().contains(s)) {
                     final PackageInfo packInfo = this.packageOrder.get(p);
                     this.packageOrder.remove(p);
                     this.packageOrder.add(packInfo);
@@ -1051,7 +1027,7 @@ public class Grammar
             }
         }
     }
-    
+
     void setPackageOrderRecurse(final Symbol symbol) {
         if (symbol == null || symbol.visited() || symbol.type() == Symbol.SymbolType.Constant) {
             return;
@@ -1065,7 +1041,8 @@ public class Grammar
             return;
         }
         int p;
-        for (p = 0; p < this.packageOrder.size() && !this.packageOrder.get(p).path().equals(pack.path()); ++p) {}
+        for (p = 0; p < this.packageOrder.size() && !this.packageOrder.get(p).path().equals(pack.path()); ++p) {
+        }
         if (p >= this.packageOrder.size()) {
             this.packageOrder.add(pack);
         }
@@ -1091,32 +1068,32 @@ public class Grammar
             }
         }
     }
-    
+
     void removeRedundantFunctionNames() {
         for (final GrammarRule rule : this.rules) {
-            for (int f = 0; f < this.Functions.length; ++f) {
-                if (rule.lhs().grammarLabel().equalsIgnoreCase(this.Functions[f][0])) {
+            for (String[] strings : this.Functions) {
+                if (rule.lhs().grammarLabel().equalsIgnoreCase(strings[0])) {
                     rule.lhs().setUsedInGrammar(false);
                     rule.lhs().setUsedInMetadata(false);
                 }
             }
             for (int c = rule.rhs().size() - 1; c >= 0; --c) {
                 final Clause clause = rule.rhs().get(c);
-                for (int f2 = 0; f2 < this.Functions.length; ++f2) {
-                    if (clause.symbol().grammarLabel().equalsIgnoreCase(this.Functions[f2][0])) {
+                for (String[] function : this.Functions) {
+                    if (clause.symbol().grammarLabel().equalsIgnoreCase(function[0])) {
                         rule.remove(c);
                     }
                 }
             }
         }
     }
-    
+
     void alphabetiseRuleClauses() {
         for (final GrammarRule rule : this.rules) {
             rule.alphabetiseClauses();
         }
     }
-    
+
     void removeDuplicateClauses() {
         for (final GrammarRule rule : this.rules) {
             for (int ca = rule.rhs().size() - 1; ca >= 0; --ca) {
@@ -1137,7 +1114,7 @@ public class Grammar
             }
         }
     }
-    
+
     void filterOutPrimitiveWrappers() {
         for (final GrammarRule rule : this.rules) {
             if ((rule.lhs().grammarLabel().equals("Integer") && rule.rhs().size() == 1 && rule.rhs().get(0).symbol().grammarLabel().equals("Integer")) || (rule.lhs().grammarLabel().equals("Float") && rule.rhs().size() == 1 && rule.rhs().get(0).symbol().grammarLabel().equals("Float")) || (rule.lhs().grammarLabel().equals("Boolean") && rule.rhs().size() == 1 && rule.rhs().get(0).symbol().grammarLabel().equals("Boolean")) || (rule.lhs().grammarLabel().equals("String") && rule.rhs().size() == 1 && rule.rhs().get(0).symbol().grammarLabel().equals("String"))) {
@@ -1184,7 +1161,7 @@ public class Grammar
             }
         }
     }
-    
+
     void instantiateSingleEnums() {
         for (final GrammarRule rule : this.rules) {
             for (final Clause clause : rule.rhs()) {
@@ -1210,20 +1187,20 @@ public class Grammar
             }
         }
     }
-    
+
     public String getLudemes() {
         String str = "";
         for (final Symbol s : this.symbols) {
             final String[] pathList = s.path().split("\\.");
             String strAbrev = "";
-            for (int i = 0; i < pathList.length; ++i) {
-                strAbrev += pathList[i].charAt(0);
+            for (String value : pathList) {
+                strAbrev += value.charAt(0);
             }
             str = str + "\n" + strAbrev + " : " + s.toString().replace("<", "").replace(">", "");
         }
         return str;
     }
-    
+
     public void export(final String fileName) throws IOException {
         final File file = new File(fileName);
         if (!file.exists()) {
@@ -1235,7 +1212,7 @@ public class Grammar
         writer.write(str);
         writer.close();
     }
-    
+
     @Override
     public String toString() {
         String str = "";
@@ -1243,20 +1220,14 @@ public class Grammar
             final String strP = pack.toString();
             str += strP;
         }
-        for (int f = 0; f < this.Functions.length; ++f) {
-            String name = this.Functions[f][0];
+        for (String[] function : this.Functions) {
+            String name = function[0];
             name = name.substring(0, 1).toLowerCase() + name.substring(1);
-            str = str.replace(name, this.Functions[f][1]);
+            str = str.replace(name, function[1]);
         }
         str = str.replace(" )", ")");
         str = str.replace("<String>", "string");
         return str;
     }
-    
-    static {
-        Primitives = new String[][] { { "int", "game.functions.ints" }, { "boolean", "game.functions.booleans" }, { "float", "game.functions.floats" } };
-        Predefined = new String[][] { { "java.lang.Integer", "game.functions.ints", "java.lang", "integer" }, { "java.lang.Boolean", "game.functions.booleans", "java.lang", "boolean" }, { "java.lang.Float", "game.functions.floats", "java.lang", "float" }, { "java.lang.String", "game.types", "java.lang", "string" } };
-        ApplicationConstants = new String[][] { { "Off", "int", "global", "-1" }, { "End", "int", "global", "-2" }, { "Undefined", "int", "global", "-1" } };
-        Grammar.singleton = null;
-    }
+
 }

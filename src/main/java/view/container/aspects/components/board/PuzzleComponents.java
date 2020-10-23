@@ -40,7 +40,7 @@ public class PuzzleComponents extends ContainerComponents
     
     @Override
     public void drawComponents(final Graphics2D g2d, final Context context) {
-        if (this.initialValues.size() == 0 && context.game().rules().start() != null) {
+        if (this.initialValues.isEmpty() && context.game().rules().start() != null) {
             final StartRule[] rules;
             final StartRule[] startRules = rules = context.game().rules().start().rules();
             for (final StartRule startRule : rules) {
@@ -90,7 +90,7 @@ public class PuzzleComponents extends ContainerComponents
             Bridge.graphicsRenderer().drawSVG(g2d, componentStyle.getImageSVG(0), new ImageInfo(drawPosn, site, 0, context.board().defaultSite(), component, 0, 0.0, 0, 1, imageSize, 1), componentStyle);
         }
         else {
-            final String str = "" + value;
+            final String str = String.valueOf(value);
             final Rectangle bounds = g2d.getFontMetrics().getStringBounds(str, g2d).getBounds();
             g2d.drawString(str, drawPosn.x - bounds.width / 2, drawPosn.y + bounds.height / 3);
         }

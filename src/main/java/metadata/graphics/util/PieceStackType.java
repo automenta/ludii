@@ -28,6 +28,6 @@ public enum PieceStackType implements GraphicsItem
     }
     
     public boolean midStackSelectionValid() {
-        return this.equals(PieceStackType.Ground) || this.equals(PieceStackType.Ring) || this.equals(PieceStackType.Fan) || this.equals(PieceStackType.Backgammon);
+        return this == PieceStackType.Ground || this == PieceStackType.Ring || this == PieceStackType.Fan || this == PieceStackType.Backgammon;
     }
 }

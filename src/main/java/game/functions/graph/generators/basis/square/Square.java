@@ -38,17 +38,17 @@ public class Square extends Basis
         }
         final SquareShapeType st = (shape == null) ? SquareShapeType.Square : shape;
         switch (st) {
-            case Square: {
+            case Square -> {
                 return new RectangleOnSquare(dim, dim, diagonals, pyramidal);
             }
-            case Limping: {
+            case Limping -> {
                 final DimFunction dimAplus1 = new Add(dim, new DimConstant(1));
                 return new RectangleOnSquare(dim, dimAplus1, diagonals, pyramidal);
             }
-            case Diamond: {
+            case Diamond -> {
                 return new DiamondOnSquare(dim, diagonals);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Shape " + st + " not supported for square tiling.");
             }
         }
@@ -148,9 +148,9 @@ public class Square extends Basis
             final int midRow2 = (toRow + fromRow) / 2;
             final int midCol2 = (toCol + fromCol) / 2;
             for (int numSteps = Math.max((toRow - fromRow) / 2, (toCol - fromCol) / 2) + 1, n = 0; n < numSteps; ++n) {
-                for (int d = 0; d < dsteps.length; ++d) {
-                    final Vertex vertexA3 = graph.findVertex(midRow2 + n * dsteps[d][0], midCol2 + n * dsteps[d][1], tolerance);
-                    final Vertex vertexB3 = graph.findVertex(midRow2 + (n + 1) * dsteps[d][0], midCol2 + (n + 1) * dsteps[d][1], tolerance);
+                for (int[] dstep : dsteps) {
+                    final Vertex vertexA3 = graph.findVertex(midRow2 + n * dstep[0], midCol2 + n * dstep[1], tolerance);
+                    final Vertex vertexB3 = graph.findVertex(midRow2 + (n + 1) * dstep[0], midCol2 + (n + 1) * dstep[1], tolerance);
                     if (vertexA3 != null) {
                         if (vertexB3 != null) {
                             graph.findOrAddEdge(vertexA3, vertexB3);

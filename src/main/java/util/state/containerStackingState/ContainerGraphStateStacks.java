@@ -804,10 +804,10 @@ public class ContainerGraphStateStacks extends ContainerStateStacks
     
     @Override
     public void addToEmpty(final int site, final SiteType graphType) {
-        if (graphType.equals(SiteType.Cell)) {
+        if (graphType == SiteType.Cell) {
             this.empty.add(site - this.offset);
         }
-        else if (graphType.equals(SiteType.Edge)) {
+        else if (graphType == SiteType.Edge) {
             this.emptyEdge.add(site);
         }
         else {
@@ -817,10 +817,10 @@ public class ContainerGraphStateStacks extends ContainerStateStacks
     
     @Override
     public void removeFromEmpty(final int site, final SiteType graphType) {
-        if (graphType.equals(SiteType.Cell)) {
+        if (graphType == SiteType.Cell) {
             this.empty.remove(site - this.offset);
         }
-        else if (graphType.equals(SiteType.Edge)) {
+        else if (graphType == SiteType.Edge) {
             this.emptyEdge.remove(site);
         }
         else {
@@ -835,10 +835,10 @@ public class ContainerGraphStateStacks extends ContainerStateStacks
     
     @Override
     public Region emptyRegion(final SiteType graphType) {
-        if (graphType.equals(SiteType.Cell)) {
+        if (graphType == SiteType.Cell) {
             return this.empty;
         }
-        if (graphType.equals(SiteType.Edge)) {
+        if (graphType == SiteType.Edge) {
             return this.emptyEdge;
         }
         return this.emptyVertex;

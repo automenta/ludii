@@ -77,7 +77,7 @@ public abstract class Feature
                 if (rots == null) {
                     rots = Walk.rotationsForNumOrthos(anchorSite.sortedOrthos().length);
                 }
-                if (rots.size() == 0) {
+                if (rots.isEmpty()) {
                     System.err.println("Warning: rots.size() == 0 in Feature.instantiateFeature()");
                 }
                 for (final int reflectionMult : reflections) {
@@ -109,7 +109,7 @@ public abstract class Feature
                             else {
                                 possibleToPositions = toWalk.resolveWalk(game, anchorSite, rot, reflectionMult);
                                 final TFloatArrayList steps = toWalk.steps();
-                                if (steps.size() > 0) {
+                                if (!steps.isEmpty()) {
                                     moreRotationsRelevant = true;
                                     if (!moreReflectionsRelevant) {
                                         for (int step = 0; step < steps.size(); ++step) {
@@ -131,7 +131,7 @@ public abstract class Feature
                                     else {
                                         possibleFromPositions = fromWalk.resolveWalk(game, anchorSite, rot, reflectionMult);
                                         final TFloatArrayList steps2 = fromWalk.steps();
-                                        if (steps2.size() > 0) {
+                                        if (!steps2.isEmpty()) {
                                             moreRotationsRelevant = true;
                                             if (!moreReflectionsRelevant) {
                                                 for (int step2 = 0; step2 < steps2.size(); ++step2) {
@@ -153,7 +153,7 @@ public abstract class Feature
                                             else {
                                                 possibleLastToPositions = lastToWalk.resolveWalk(game, anchorSite, rot, reflectionMult);
                                                 final TFloatArrayList steps3 = lastToWalk.steps();
-                                                if (steps3.size() > 0) {
+                                                if (!steps3.isEmpty()) {
                                                     moreRotationsRelevant = true;
                                                     if (!moreReflectionsRelevant) {
                                                         for (int step3 = 0; step3 < steps3.size(); ++step3) {
@@ -175,7 +175,7 @@ public abstract class Feature
                                                     else {
                                                         possibleLastFromPositions = lastFromWalk.resolveWalk(game, anchorSite, rot, reflectionMult);
                                                         final TFloatArrayList steps4 = lastFromWalk.steps();
-                                                        if (steps4.size() > 0) {
+                                                        if (!steps4.isEmpty()) {
                                                             moreRotationsRelevant = true;
                                                             if (!moreReflectionsRelevant) {
                                                                 for (int step4 = 0; step4 < steps4.size(); ++step4) {
@@ -219,7 +219,7 @@ public abstract class Feature
                                     final RelativeFeatureElement relElement = (RelativeFeatureElement)element;
                                     testSites = relElement.walk().resolveWalk(game, anchorSite, rot, reflectionMult);
                                     final TFloatArrayList steps5 = relElement.walk().steps();
-                                    if (steps5.size() > 0) {
+                                    if (!steps5.isEmpty()) {
                                         moreRotationsRelevant = true;
                                         if (!moreReflectionsRelevant) {
                                             for (int step5 = 0; step5 < steps5.size(); ++step5) {
@@ -551,7 +551,7 @@ public abstract class Feature
             if (this instanceof RelativeFeature) {
                 final RelativeFeature relFeature2 = (RelativeFeature)this;
                 for (final Walk walk4 : new Walk[] { relFeature2.fromPosition, relFeature2.toPosition, relFeature2.lastFromPosition, relFeature2.lastToPosition }) {
-                    if (walk4 != null && walk4.steps().size() > 0) {
+                    if (walk4 != null && !walk4.steps().isEmpty()) {
                         final float turn4 = walk4.steps().getQuick(0);
                         final int currentOccurrences2 = occurrencesMap.getOrDefault(turn4, 0);
                         occurrencesMap.put(turn4, currentOccurrences2 + 1);
@@ -578,7 +578,7 @@ public abstract class Feature
             if (this instanceof RelativeFeature) {
                 final RelativeFeature relFeature2 = (RelativeFeature)this;
                 for (final Walk walk4 : new Walk[] { relFeature2.fromPosition, relFeature2.toPosition, relFeature2.lastFromPosition, relFeature2.lastToPosition }) {
-                    if (walk4 != null && walk4.steps().size() > 0) {
+                    if (walk4 != null && !walk4.steps().isEmpty()) {
                         walk4.steps().set(0, walk4.steps().getQuick(0) - mostCommonTurn);
                     }
                 }

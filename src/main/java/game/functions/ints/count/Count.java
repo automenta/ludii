@@ -34,43 +34,43 @@ public final class Count extends BaseIntFunction
     
     public static IntFunction construct(final CountSimpleType countType, @Opt final SiteType type) {
         switch (countType) {
-            case Active: {
+            case Active -> {
                 return new CountActive();
             }
-            case Cells: {
+            case Cells -> {
                 return new CountCells();
             }
-            case Columns: {
+            case Columns -> {
                 return new CountColumns(type);
             }
-            case Edges: {
+            case Edges -> {
                 return new CountEdges();
             }
-            case Moves: {
+            case Moves -> {
                 return new CountMoves();
             }
-            case MovesThisTurn: {
+            case MovesThisTurn -> {
                 return new CountMovesThisTurn();
             }
-            case Phases: {
+            case Phases -> {
                 return new CountPhases();
             }
-            case Players: {
+            case Players -> {
                 return new CountPlayers();
             }
-            case Rows: {
+            case Rows -> {
                 return new CountRows(type);
             }
-            case Trials: {
+            case Trials -> {
                 return new CountTrials();
             }
-            case Turns: {
+            case Turns -> {
                 return new CountTurns();
             }
-            case Vertices: {
+            case Vertices -> {
                 return new CountVertices();
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Count(): A CountSimpleType is not implemented.");
             }
         }
@@ -94,25 +94,25 @@ public final class Count extends BaseIntFunction
             return new CountNumber(type, in, at);
         }
         switch (countType) {
-            case Adjacent: {
+            case Adjacent -> {
                 return new CountAdjacent(type, in, at);
             }
-            case Diagonal: {
+            case Diagonal -> {
                 return new CountDiagonal(type, in, at);
             }
-            case Neighbours: {
+            case Neighbours -> {
                 return new CountNeighbours(type, in, at);
             }
-            case Off: {
+            case Off -> {
                 return new CountOff(type, in, at);
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 return new CountOrthogonal(type, in, at);
             }
-            case Sites: {
+            case Sites -> {
                 return new CountSites(in, at, name);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Count(): A CountSiteType is not implemented.");
             }
         }
@@ -130,13 +130,13 @@ public final class Count extends BaseIntFunction
             throw new IllegalArgumentException("Count(): With CountComponentType zero or one 'role' or 'of' parameters must be non-null.");
         }
         switch (countType) {
-            case Pieces: {
+            case Pieces -> {
                 return new CountPieces(type, role, of, name, in);
             }
-            case Pips: {
+            case Pips -> {
                 return new CountPips(role, of);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Count(): A CountComponentType is not implemented.");
             }
         }
@@ -157,10 +157,10 @@ public final class Count extends BaseIntFunction
             throw new IllegalArgumentException("Count(): With CountGroupsType zero or one 'role' or 'of' or 'If' parameters must be non-null.");
         }
         switch (countType) {
-            case Groups: {
+            case Groups -> {
                 return new CountGroups(type, directions, role, of, If, min);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Count(): A CountGroupsType is not implemented.");
             }
         }
@@ -168,10 +168,10 @@ public final class Count extends BaseIntFunction
     
     public static IntFunction construct(final CountLibertiesType countType, @Opt final SiteType type, @Opt @Name final IntFunction at, @Opt final Direction directions, @Opt @Name final BooleanFunction If) {
         switch (countType) {
-            case Liberties: {
+            case Liberties -> {
                 return new CountLiberties(type, at, directions, If);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Count(): A CountLibertiesType is not implemented.");
             }
         }
@@ -179,10 +179,10 @@ public final class Count extends BaseIntFunction
     
     public static IntFunction construct(final CountStepsType countType, @Opt final SiteType type, @Opt final RelationType relation, @Opt final Step stepMove, final IntFunction site1, final IntFunction site2) {
         switch (countType) {
-            case Steps: {
+            case Steps -> {
                 return new CountSteps(type, relation, stepMove, site1, site2);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Count(): A CountStepsType is not implemented.");
             }
         }
@@ -190,10 +190,10 @@ public final class Count extends BaseIntFunction
     
     public static IntFunction construct(final CountStepsOnTrackType countType, @Opt @Or final RoleType role, @Opt @Or final Player player, @Opt @Or final String name, @Opt final IntFunction site1, @Opt final IntFunction site2) {
         switch (countType) {
-            case StepsOnTrack: {
+            case StepsOnTrack -> {
                 return new CountStepsOnTrack(role, player, name, site1, site2);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Count(): A CountStepsOnTrackType is not implemented.");
             }
         }

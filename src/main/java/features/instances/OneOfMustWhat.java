@@ -5,7 +5,7 @@
 package features.instances;
 
 import game.types.board.SiteType;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import util.state.State;
 import util.state.containerState.ContainerState;
 
@@ -27,16 +27,16 @@ public final class OneOfMustWhat implements BitwiseTest
     public final boolean matches(final State state) {
         final ContainerState container = state.containerStates()[0];
         switch (this.graphElementType) {
-            case Cell: {
+            case Cell -> {
                 return container.violatesNotWhatCell(this.mustWhatsMask, this.mustWhats, this.firstUsedWord);
             }
-            case Vertex: {
+            case Vertex -> {
                 return container.violatesNotWhatVertex(this.mustWhatsMask, this.mustWhats, this.firstUsedWord);
             }
-            case Edge: {
+            case Edge -> {
                 return container.violatesNotWhatEdge(this.mustWhatsMask, this.mustWhats, this.firstUsedWord);
             }
-            default: {
+            default -> {
                 return false;
             }
         }

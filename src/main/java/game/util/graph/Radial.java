@@ -5,7 +5,7 @@
 package game.util.graph;
 
 import game.util.directions.AbsoluteDirection;
-import main.math.MathRoutines;
+import math.MathRoutines;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;

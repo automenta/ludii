@@ -12,9 +12,9 @@ import game.equipment.container.board.Track;
 import game.types.play.RepetitionType;
 import main.FileHandling;
 import main.StringRoutines;
-import main.options.GameOptions;
-import main.options.Option;
-import main.options.Ruleset;
+import options.GameOptions;
+import options.Option;
+import options.Ruleset;
 import manager.Manager;
 import manager.network.SettingsNetwork;
 import manager.utils.ContextSnapshot;
@@ -28,7 +28,6 @@ import util.SettingsVC;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.io.File;
@@ -77,43 +76,43 @@ public class MainMenu extends JMenuBar
             for (int i = 0; i < MainMenu.recentGames.length && MainMenu.recentGames[i] != null; ++i) {
                 menuItem = new JMenuItem(MainMenu.recentGames[i]);
                 switch (i) {
-                    case 0: {
+                    case 0 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(49, 512));
                         break;
                     }
-                    case 1: {
+                    case 1 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(50, 512));
                         break;
                     }
-                    case 2: {
+                    case 2 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(51, 512));
                         break;
                     }
-                    case 3: {
+                    case 3 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(52, 512));
                         break;
                     }
-                    case 4: {
+                    case 4 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(53, 512));
                         break;
                     }
-                    case 5: {
+                    case 5 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(54, 512));
                         break;
                     }
-                    case 6: {
+                    case 6 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(55, 512));
                         break;
                     }
-                    case 7: {
+                    case 7 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(56, 512));
                         break;
                     }
-                    case 8: {
+                    case 8 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(57, 512));
                         break;
                     }
-                    case 9: {
+                    case 9 -> {
                         menuItem.setAccelerator(KeyStroke.getKeyStroke(48, 512));
                         break;
                     }
@@ -377,7 +376,7 @@ public class MainMenu extends JMenuBar
                         if (demo.contains("/demos/")) {
                             demo = demo.substring(demo.indexOf("/demos/"));
                         }
-                        if (!demo.startsWith("/")) {
+                        if (!(!demo.isEmpty() && demo.charAt(0) == '/')) {
                             demo = "/" + demo;
                         }
                         if (!demo.startsWith("/demos")) {
@@ -477,7 +476,7 @@ public class MainMenu extends JMenuBar
                 cbMenuItem.addItemListener(il);
                 menu.add(cbMenuItem);
             }
-            if (SettingsNetwork.getActiveGameId() == 0 && SandboxUtil.isSandboxAllowed(Manager.ref().context().game()).equals("")) {
+            if (SettingsNetwork.getActiveGameId() == 0 && SandboxUtil.isSandboxAllowed(Manager.ref().context().game()).isEmpty()) {
                 menu.addSeparator();
                 cbMenuItem = new JCheckBoxMenuItem("Sandbox Mode (Beta)");
                 cbMenuItem.setSelected(SettingsVC.sandboxMode);
@@ -582,7 +581,7 @@ public class MainMenu extends JMenuBar
             menu.add(cbMenuItem);
         }
         this.submenu = new JMenu("Pick Tracks to show");
-        if (ContextSnapshot.getContext().board().tracks().size() > 0) {
+        if (!ContextSnapshot.getContext().board().tracks().isEmpty()) {
             menu.addSeparator();
             this.submenu = new JMenu("Show Tracks");
             for (int trackNumber = 0; trackNumber < ContextSnapshot.getContext().board().tracks().size(); ++trackNumber) {
@@ -646,8 +645,7 @@ public class MainMenu extends JMenuBar
                     final JMenu submenu = new JMenu(headings.get(0));
                     optionsMenu.add(submenu);
                     final ButtonGroup group = new ButtonGroup();
-                    for (int i = 0; i < options.size(); ++i) {
-                        final Option option = options.get(i);
+                    for (final Option option : options) {
                         if (option.menuHeadings().size() < 2) {
                             System.out.println("** Not enough headings for menu option: " + option.menuHeadings());
                             return;
@@ -691,7 +689,7 @@ public class MainMenu extends JMenuBar
                 final List<String> names = new ArrayList<>();
                 visitFindDemos(path, names);
                 Collections.sort(names);
-                choices = names.toArray(new String[names.size()]);
+                choices = names.toArray(new String[0]);
             }
             catch (URISyntaxException exception) {
                 exception.printStackTrace();
@@ -731,9 +729,8 @@ public class MainMenu extends JMenuBar
         if (gameAlreadyIncluded == -1) {
             gameAlreadyIncluded = MainMenu.recentGames.length - 1;
         }
-        for (int i = gameAlreadyIncluded; i > 0; --i) {
-            MainMenu.recentGames[i] = MainMenu.recentGames[i - 1];
-        }
+        if (gameAlreadyIncluded >= 0)
+            System.arraycopy(MainMenu.recentGames, 0, MainMenu.recentGames, 1, gameAlreadyIncluded);
         MainMenu.recentGames[0] = GameMenuName;
     }
     

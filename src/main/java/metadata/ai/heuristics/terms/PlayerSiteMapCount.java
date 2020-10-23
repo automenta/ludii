@@ -8,7 +8,7 @@ import annotations.Name;
 import annotations.Opt;
 import game.Game;
 import game.equipment.other.Map;
-import main.collections.FVector;
+import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import util.Context;
 
@@ -29,7 +29,7 @@ public class PlayerSiteMapCount extends HeuristicTerm
                 sumCounts += context.containerState(0).countCell(playerVal);
             }
         }
-        return (float)sumCounts;
+        return sumCounts;
     }
     
     @Override

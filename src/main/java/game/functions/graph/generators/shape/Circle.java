@@ -14,13 +14,12 @@ import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
 import game.util.graph.Vertex;
-import main.math.MathRoutines;
-import main.math.Vector;
+import math.MathRoutines;
+import math.Vector;
 import util.Context;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Circle extends Basis
@@ -69,7 +68,7 @@ public class Circle extends Basis
             }
         }
         for (int ring2 = 0; ring2 < numRings + 1; ++ring2) {
-            Collections.sort(samples[ring2], (a, b) -> {
+            samples[ring2].sort((a, b) -> {
                 if (a.theta == b.theta) {
                     return 0;
                 }
@@ -142,7 +141,7 @@ public class Circle extends Basis
     public void preprocess(final Game game) {
     }
     
-    public class Sample
+    public static class Sample
     {
         public double x;
         public double y;

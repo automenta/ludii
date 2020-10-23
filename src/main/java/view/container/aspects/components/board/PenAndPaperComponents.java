@@ -112,11 +112,11 @@ public class PenAndPaperComponents extends PuzzleComponents
                     if (path.getCurrentPoint() == null) {
                         final Vertex prev = face.vertices().get(face.vertices().size() - 1);
                         final Point drawPrev = this.graphStyle.screenPosn(prev.centroid());
-                        path.moveTo((float)drawPrev.x, (float)drawPrev.y);
+                        path.moveTo(drawPrev.x, drawPrev.y);
                     }
                     final Vertex corner = face.vertices().get(v);
                     final Point drawCorner = this.graphStyle.screenPosn(corner.centroid());
-                    path.lineTo((float)drawCorner.x, (float)drawCorner.y);
+                    path.lineTo(drawCorner.x, drawCorner.y);
                 }
                 g2d.setColor(SettingsColour.playerColour(cs.whoCell(f), context));
                 g2d.fill(path);

@@ -121,7 +121,7 @@ public final class Enclose extends Effect
                         }
                     }
                 }
-                if (liberties.size() == 0) {
+                if (liberties.isEmpty()) {
                     for (int indexBetween = 0; indexBetween < enclosedGroup.size(); ++indexBetween) {
                         final int between3 = enclosedGroup.get(indexBetween);
                         context.setBetween(between3);
@@ -140,7 +140,7 @@ public final class Enclose extends Effect
         return moves;
     }
     
-    private final boolean isTarget(final Context context, final int location) {
+    private boolean isTarget(final Context context, final int location) {
         context.setBetween(location);
         return this.targetRule.eval(context);
     }

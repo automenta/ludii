@@ -44,9 +44,9 @@ public class GameJoinablePanel extends BaseGamePanel
         model.addColumn("Players");
         model.addColumn("Details");
         this.comboBox.clear();
-        for (int i = 0; i < joinableGames.length; ++i) {
+        for (String joinableGame : joinableGames) {
             try {
-                final String gameDetails = joinableGames[i];
+                final String gameDetails = joinableGame;
                 final String[] splitDetails = gameDetails.split("NEXT_COL");
                 final JComboBox<String> comboBoxActiveTemp = new JComboBox<>();
                 comboBoxActiveTemp.addItem("Any");
@@ -57,8 +57,7 @@ public class GameJoinablePanel extends BaseGamePanel
                 String playerTimeString = "";
                 if (Integer.parseInt(splitDetails[6]) % 60 == 0) {
                     playerTimeString = Integer.parseInt(splitDetails[6]) / 60 + ":00";
-                }
-                else {
+                } else {
                     playerTimeString = Integer.parseInt(splitDetails[6]) / 60 + ":" + Integer.parseInt(splitDetails[6]) % 60;
                 }
                 if (playerTimeString.equals("0:00")) {
@@ -78,9 +77,9 @@ public class GameJoinablePanel extends BaseGamePanel
                 info.setNotes(splitDetails[12]);
                 info.setGameHash(splitDetails[13]);
                 this.tableStoredInformation.add(info);
-                model.addRow(new Object[] { splitDetails[0], splitDetails[1].substring(0, splitDetails[1].length() - 4), "Any", splitDetails[8], "Details" });
+                model.addRow(new Object[]{splitDetails[0], splitDetails[1].substring(0, splitDetails[1].length() - 4), "Any", splitDetails[8], "Details"});
+            } catch (Exception ex) {
             }
-            catch (Exception ex) {}
         }
         return model;
     }
@@ -140,7 +139,6 @@ public class GameJoinablePanel extends BaseGamePanel
                             while ((inputLine = in.readLine()) != null) {
                                 GameSetupDesktop.setupNetworkGame(gameName, gameOptions, inputLine);
                             }
-                            in.close();
                         }
                     }
                     catch (Exception ex) {}
@@ -154,7 +152,6 @@ public class GameJoinablePanel extends BaseGamePanel
                         while ((inputLine2 = in2.readLine()) != null) {
                             GameSetupDesktop.setupNetworkGame(gameName, gameOptions, inputLine2);
                         }
-                        in2.close();
                     }
                 }
             }

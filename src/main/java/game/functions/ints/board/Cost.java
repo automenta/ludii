@@ -38,13 +38,13 @@ public final class Cost extends BaseIntFunction
         final Topology graph = context.topology();
         int sum = 0;
         for (final int site : sites) {
-            if (this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Vertex) {
                 sum += graph.vertices().get(site).cost();
             }
-            else if (this.type.equals(SiteType.Cell)) {
+            else if (this.type == SiteType.Cell) {
                 sum += graph.cells().get(site).cost();
             }
-            else if (this.type.equals(SiteType.Edge)) {
+            else if (this.type == SiteType.Edge) {
                 sum += graph.edges().get(site).cost();
             }
         }

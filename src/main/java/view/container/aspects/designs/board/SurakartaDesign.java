@@ -6,7 +6,7 @@ package view.container.aspects.designs.board;
 
 import game.equipment.container.board.Track;
 import game.types.board.SiteType;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
 import topology.Edge;
 import util.Context;
@@ -38,15 +38,15 @@ public class SurakartaDesign extends BoardDesign
     
     protected void drawBoard(final Graphics2D g2d) {
         switch (this.topology().graph().basis()) {
-            case Square: {
+            case Square -> {
                 this.drawBoardSquare(g2d);
                 break;
             }
-            case Triangular: {
+            case Triangular -> {
                 this.drawBoardTriangular(g2d);
                 break;
             }
-            default: {
+            default -> {
                 System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
                 break;
             }
@@ -62,10 +62,10 @@ public class SurakartaDesign extends BoardDesign
         final Point ptSE = this.screenPosn(this.topology().vertices().get(cols - 1).centroid());
         g2d.setColor(this.colorFillPhase0);
         final GeneralPath border = new GeneralPath();
-        border.moveTo((float)ptSW.x, (float)ptSW.y);
-        border.lineTo((float)ptNW.x, (float)ptNW.y);
-        border.lineTo((float)ptNE.x, (float)ptNE.y);
-        border.lineTo((float)ptSE.x, (float)ptSE.y);
+        border.moveTo(ptSW.x, ptSW.y);
+        border.lineTo(ptNW.x, ptNW.y);
+        border.lineTo(ptNE.x, ptNE.y);
+        border.lineTo(ptSE.x, ptSE.y);
         border.closePath();
         g2d.fill(border);
         g2d.setStroke(this.strokeThin);
@@ -121,9 +121,9 @@ public class SurakartaDesign extends BoardDesign
         final Point ptSE = this.screenPosn(this.topology().vertices().get(rows - 1).centroid());
         g2d.setColor(this.colorFillPhase0);
         final GeneralPath border = new GeneralPath();
-        border.moveTo((float)ptSW.x, (float)ptSW.y);
-        border.lineTo((float)ptTop.x, (float)ptTop.y);
-        border.lineTo((float)ptSE.x, (float)ptSE.y);
+        border.moveTo(ptSW.x, ptSW.y);
+        border.lineTo(ptTop.x, ptTop.y);
+        border.lineTo(ptSE.x, ptSE.y);
         border.closePath();
         g2d.fill(border);
         g2d.setStroke(this.strokeThin);

@@ -54,7 +54,7 @@ public class MatchRecord implements Serializable
                             if (!nextLine.startsWith("winner=")) {
                                 if (!nextLine.startsWith("rankings=")) {
                                     nextLine = reader.readLine();
-                                    continue Label_0308_Outer;
+                                    continue;
                                 }
                             }
                         }
@@ -123,19 +123,15 @@ public class MatchRecord implements Serializable
                                                 }
                                                 return new MatchRecord(trial, rngState, loadedGameName);
                                             }
-                                            continue;
                                         }
                                     }
-                                    continue;
                                 }
                             }
                             final Move move = new Move(nextLine.substring("Move=".length()));
                             trial.moves().add(move);
                         }
-                        continue;
                     }
                 }
-                continue;
             }
         }
     }

@@ -41,7 +41,7 @@ public class PachisiDesign extends BoardDesign
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.005f;
-        final float swThin = (float)Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
+        final float swThin = Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
         final float swThick = 2.0f * swThin;
         this.setStrokesAndColours(context, new Color(200, 200, 200), null, null, null, null, null, new Color(140, 140, 140), swThin, swThick);
         this.drawPachisiBoard(g2d);
@@ -64,10 +64,10 @@ public class PachisiDesign extends BoardDesign
                 final Vertex vertex = cell.vertices().get((n + 1) % cell.vertices().size());
                 final Point pt3 = this.screenPosn(vertex.centroid());
                 if (n == 0) {
-                    path.moveTo((float)pt3.x, (float)pt3.y);
+                    path.moveTo(pt3.x, pt3.y);
                 }
                 else {
-                    path.lineTo((float)pt3.x, (float)pt3.y);
+                    path.lineTo(pt3.x, pt3.y);
                 }
             }
             path.closePath();

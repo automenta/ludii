@@ -70,7 +70,7 @@ public final class Ahead extends BaseIntFunction
         AbsoluteDirection absoluteResult = this.absoluteDirection;
         if (this.relativeDirection != null) {
             switch (this.relativeDirection) {
-                case OppositeDirection: {
+                case OppositeDirection -> {
                     final int from = context.from();
                     final int to = context.to();
                     final List<DirectionFacing> directionsSupported = topology.supportedDirections(realType);
@@ -91,7 +91,7 @@ public final class Ahead extends BaseIntFunction
                     }
                     break;
                 }
-                case SameDirection: {
+                case SameDirection -> {
                     final int from = context.from();
                     final int to = context.to();
                     final List<DirectionFacing> directionsSupported = topology.supportedDirections(realType);
@@ -117,7 +117,7 @@ public final class Ahead extends BaseIntFunction
         if (absoluteResult == null) {
             final DirectionsFunction dirnChoice = new Directions(this.relativeDirection, null, null, null);
             final List<AbsoluteDirection> absDirections = dirnChoice.convertToAbsolute(realType, topology.getGraphElement(realType, site), null, null, null, context);
-            if (absDirections.size() == 0) {
+            if (absDirections.isEmpty()) {
                 return -1;
             }
             absoluteResult = absDirections.get(0);

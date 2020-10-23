@@ -62,7 +62,7 @@ public final class AutoIndenter
         for (int n = 0; n < lines.size(); ++n) {
             String str = lines.get(n);
             final int c = 0;
-            while (0 < str.length() && (str.charAt(0) == ' ' || str.charAt(0) == '\t')) {
+            while (!str.isEmpty() && (str.charAt(0) == ' ' || str.charAt(0) == '\t')) {
                 str = str.substring(1);
             }
             lines.remove(n);
@@ -80,7 +80,7 @@ public final class AutoIndenter
         }
     }
     
-    static final void moveDefinesToTop(final List<String> lines) {
+    static void moveDefinesToTop(final List<String> lines) {
         final List<String> defines = new ArrayList<>();
         int brackets = 0;
         boolean isDefine = false;
@@ -96,7 +96,7 @@ public final class AutoIndenter
                 brackets = 0;
             }
             if (isDefine) {
-                if (lineHasDefineString && defines.size() > 0) {
+                if (lineHasDefineString && !defines.isEmpty()) {
                     defines.add("");
                 }
                 defines.add(str);
@@ -131,7 +131,7 @@ public final class AutoIndenter
         }
     }
     
-    static final void extractAIMetadataToDefine(final List<String> lines) {
+    static void extractAIMetadataToDefine(final List<String> lines) {
         final List<String> define = new ArrayList<>();
         int brackets = 0;
         boolean isAI = false;
@@ -190,10 +190,10 @@ public final class AutoIndenter
         }
     }
     
-    static final void removeDoubleEmptyLines(final List<String> lines) {
+    static void removeDoubleEmptyLines(final List<String> lines) {
         int n = 1;
         while (n < lines.size()) {
-            if (lines.get(n).equals("") && lines.get(n - 1).equals("")) {
+            if (lines.get(n).isEmpty() && lines.get(n - 1).isEmpty()) {
                 lines.remove(n);
             }
             else {
@@ -202,7 +202,7 @@ public final class AutoIndenter
         }
     }
     
-    static final void insertSeparators(final List<String> lines) {
+    static void insertSeparators(final List<String> lines) {
         boolean optionFound = false;
         boolean rulesetsFound = false;
         for (int n = 2; n < lines.size(); ++n) {
@@ -222,7 +222,7 @@ public final class AutoIndenter
         }
     }
     
-    static final void indentLines(final List<String> lines) {
+    static void indentLines(final List<String> lines) {
         int indent = 0;
         for (int n = 0; n < lines.size(); ++n) {
             String str = lines.get(n);

@@ -86,7 +86,7 @@ public final class ForEachGroup extends Effect
                 if ((who == cs.who(from, this.type) && this.condition == null) || (this.condition != null && this.condition.eval(context))) {
                     groupSites.add(from);
                 }
-                if (groupSites.size() > 0) {
+                if (!groupSites.isEmpty()) {
                     context.setFrom(from);
                     final TIntArrayList sitesExplored = new TIntArrayList();
                     int m = 0;

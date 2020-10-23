@@ -5,7 +5,7 @@
 package features;
 
 import features.instances.Footprint;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import util.state.State;
 import util.state.containerState.ContainerState;
 
@@ -17,12 +17,7 @@ public class ActiveFeaturesCache
     protected final ThreadLocal<Map<FeatureSet.ProactiveFeaturesKey, CachedDataFootprint>> threadLocalCache;
     
     public ActiveFeaturesCache() {
-        this.threadLocalCache = new ThreadLocal<>() {
-            @Override
-            protected Map<FeatureSet.ProactiveFeaturesKey, CachedDataFootprint> initialValue() {
-                return new HashMap<>();
-            }
-        };
+        this.threadLocalCache = ThreadLocal.withInitial(() -> new HashMap<>());
     }
     
     public void cache(final State state, final int from, final int to, final int[] activeFeaturesToCache, final int player) {
@@ -129,7 +124,7 @@ public class ActiveFeaturesCache
         return null;
     }
     
-    private class CachedData
+    private static class CachedData
     {
         public final int[] activeFeatureIndices;
         public final ChunkSet emptyStateCells;

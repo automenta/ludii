@@ -6,7 +6,7 @@ package view.container.aspects.designs.board;
 
 import game.equipment.other.Regions;
 import game.functions.region.RegionFunction;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import topology.Cell;
 import topology.Edge;
 import util.Context;
@@ -72,15 +72,15 @@ public class ConnectiveGoalDesign extends BoardDesign
                         final Point2D vb = edge.vB().centroid();
                         final Point ptA = this.screenPosn(va);
                         final Point ptB = this.screenPosn(vb);
-                        paths[pid3].moveTo((float)ptA.x, (float)ptA.y);
-                        paths[pid3].lineTo((float)ptB.x, (float)ptB.y);
+                        paths[pid3].moveTo(ptA.x, ptA.y);
+                        paths[pid3].lineTo(ptB.x, ptB.y);
                     }
                 }
             }
         }
         final int thickness = (int)(4.0f * this.strokeThick().getLineWidth());
-        final BasicStroke borderStroke = new BasicStroke((float)(thickness + 2), 1, 0);
-        final Stroke playerStroke = new BasicStroke((float)thickness, 1, 0);
+        final BasicStroke borderStroke = new BasicStroke((thickness + 2), 1, 0);
+        final Stroke playerStroke = new BasicStroke(thickness, 1, 0);
         final Shape oldClip = g2d.getClip();
         for (final Regions regionsO2 : regionsList) {
             if (regionsO2.region() != null) {
@@ -109,8 +109,8 @@ public class ConnectiveGoalDesign extends BoardDesign
                                 final Point2D vb2 = edge2.vB().centroid();
                                 final Point ptA2 = this.screenPosn(va2);
                                 final Point ptB2 = this.screenPosn(vb2);
-                                path.moveTo((float)ptA2.x, (float)ptA2.y);
-                                path.lineTo((float)ptB2.x, (float)ptB2.y);
+                                path.moveTo(ptA2.x, ptA2.y);
+                                path.lineTo(ptB2.x, ptB2.y);
                             }
                         }
                     }
@@ -123,9 +123,9 @@ public class ConnectiveGoalDesign extends BoardDesign
                         final int by = ptCentre.y + 2 * (ptSharedB.y - ptCentre.y);
                         final Point ptB3 = new Point(bx, by);
                         final GeneralPath pathClip = new GeneralPath();
-                        pathClip.moveTo((float)ptCentre.x, (float)ptCentre.y);
-                        pathClip.lineTo((float)ptA3.x, (float)ptA3.y);
-                        pathClip.lineTo((float)ptB3.x, (float)ptB3.y);
+                        pathClip.moveTo(ptCentre.x, ptCentre.y);
+                        pathClip.lineTo(ptA3.x, ptA3.y);
+                        pathClip.lineTo(ptB3.x, ptB3.y);
                         pathClip.closePath();
                         g2d.setClip(pathClip);
                     }
@@ -155,9 +155,9 @@ public class ConnectiveGoalDesign extends BoardDesign
                         final int by2 = ptCentre.y + 2 * (ptBestB.y - ptCentre.y);
                         final Point ptB2 = new Point(bx2, by2);
                         final GeneralPath pathClip2 = new GeneralPath();
-                        pathClip2.moveTo((float)ptCentre.x, (float)ptCentre.y);
-                        pathClip2.lineTo((float)ptA3.x, (float)ptA3.y);
-                        pathClip2.lineTo((float)ptB2.x, (float)ptB2.y);
+                        pathClip2.moveTo(ptCentre.x, ptCentre.y);
+                        pathClip2.lineTo(ptA3.x, ptA3.y);
+                        pathClip2.lineTo(ptB2.x, ptB2.y);
                         pathClip2.closePath();
                         g2d.setClip(pathClip2);
                     }

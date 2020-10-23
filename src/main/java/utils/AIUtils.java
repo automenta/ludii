@@ -5,8 +5,8 @@
 package utils;
 
 import game.Game;
-import main.collections.FastArrayList;
-import main.collections.StringPair;
+import collections.FastArrayList;
+import collections.StringPair;
 import org.apache.commons.rng.core.RandomProviderDefaultState;
 import util.AI;
 import util.Context;
@@ -91,8 +91,8 @@ public class AIUtils
                 boolean allOptionsMatch = true;
                 if (keySplit.length > 1) {
                     final String[] metadataOptions = keySplit[1].split(Pattern.quote(";"));
-                    for (int i = 0; i < metadataOptions.length; ++i) {
-                        if (!gameOptions.contains(metadataOptions[i])) {
+                    for (String metadataOption : metadataOptions) {
+                        if (!gameOptions.contains(metadataOption)) {
                             allOptionsMatch = false;
                             break;
                         }
@@ -116,8 +116,8 @@ public class AIUtils
                 boolean allOptionsMatch = true;
                 if (keySplit.length > 1) {
                     final String[] metadataOptions = keySplit[1].split(Pattern.quote(";"));
-                    for (int i = 0; i < metadataOptions.length; ++i) {
-                        if (!gameOptions.contains(metadataOptions[i])) {
+                    for (String metadataOption : metadataOptions) {
+                        if (!gameOptions.contains(metadataOption)) {
                             allOptionsMatch = false;
                             break;
                         }

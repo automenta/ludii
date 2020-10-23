@@ -55,9 +55,9 @@ import game.util.moves.To;
 import gnu.trove.list.array.TIntArrayList;
 import main.ReflectionUtils;
 import main.Status;
-import main.collections.FVector;
-import main.collections.FastArrayList;
-import main.grammar.Description;
+import collections.FVector;
+import collections.FastArrayList;
+import grammar.Description;
 import metadata.Metadata;
 import topology.SiteFinder;
 import topology.TopologyElement;
@@ -259,11 +259,11 @@ public class Game extends BaseLudeme implements API, Serializable
     }
     
     public boolean isAlternatingMoveGame() {
-        return this.mode.mode().equals(ModeType.Alternating);
+        return this.mode.mode() == ModeType.Alternating;
     }
     
     public boolean isSimulationMoveGame() {
-        return this.mode.mode().equals(ModeType.Simulation);
+        return this.mode.mode() == ModeType.Simulation;
     }
     
     public boolean isStochasticGame() {
@@ -520,16 +520,16 @@ public class Game extends BaseLudeme implements API, Serializable
     
     public List<? extends TopologyElement> graphPlayElements() {
         switch (this.board().defaultSite()) {
-            case Cell: {
+            case Cell -> {
                 return this.board().topology().cells();
             }
-            case Edge: {
+            case Edge -> {
                 return this.board().topology().edges();
             }
-            case Vertex: {
+            case Vertex -> {
                 return this.board().topology().vertices();
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -992,6 +992,7 @@ public class Game extends BaseLudeme implements API, Serializable
                 context.trial().previousStateWithinATurn().add(context.state().stateHash());
             }
         }
+        final int players = game.players.count();
         if (trial.moves().size() > game.numStartingAction) {
             if (context.active() && game.rules.phases() != null) {
                 final End endPhase = game.rules.phases()[state.currentPhase(state.mover())].end();
@@ -1033,7 +1034,7 @@ public class Game extends BaseLudeme implements API, Serializable
                     for (int i = 0; i < phase.nextPhase().length; ++i) {
                         final NextPhase cond = phase.nextPhase()[i];
                         final int who = cond.who().eval(context);
-                        if (who == game.players.count() + 1 || pid == who) {
+                        if (who == players + 1 || pid == who) {
                             final int nextPhase = cond.eval(context);
                             if (nextPhase != -1) {
                                 state.setPhase(pid, nextPhase);
@@ -1066,8 +1067,9 @@ public class Game extends BaseLudeme implements API, Serializable
                 context.state().reinitNumTurnSamePlayer();
             }
             int next;
-            for (next = state.mover() % game.players.count() + 1; !context.active(next); next = 1) {
-                if (++next > game.players.count()) {}
+            int remain = players - 1;
+            for (next = state.mover() % players + 1; --remain > 0 && !context.active(next); next = 1) {
+                if (++next > players) {}
             }
             state.setNext(next);
         }
@@ -1277,7 +1279,7 @@ public class Game extends BaseLudeme implements API, Serializable
                 }
                 break;
             }
-            if (constraint.staticRegion() != null && constraint.staticRegion().equals(RegionTypeStatic.Regions)) {
+            if (constraint.staticRegion() != null && constraint.staticRegion() == RegionTypeStatic.Regions) {
                 final Regions[] regions2;
                 final Regions[] regions = regions2 = context.game().equipment().regions();
                 for (final Regions region : regions2) {

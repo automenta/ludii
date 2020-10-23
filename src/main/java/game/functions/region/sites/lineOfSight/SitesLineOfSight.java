@@ -63,14 +63,14 @@ public final class SitesLineOfSight extends BaseRegionFunction
                     final int to = radial.steps()[toIdx].id();
                     final int what = cs.what(to, realType);
                     switch (this.typeLoS) {
-                        case Empty: {
+                        case Empty -> {
                             if (what == 0) {
                                 sitesLineOfSight.add(to);
                                 break;
                             }
                             break;
                         }
-                        case Farthest: {
+                        case Farthest -> {
                             if (what != 0 && prevTo != -1) {
                                 sitesLineOfSight.add(prevTo);
                             }
@@ -80,14 +80,14 @@ public final class SitesLineOfSight extends BaseRegionFunction
                             }
                             break;
                         }
-                        case Piece: {
+                        case Piece -> {
                             if (what != 0) {
                                 sitesLineOfSight.add(to);
                                 break;
                             }
                             break;
                         }
-                        default: {
+                        default -> {
                             System.out.println("** SitesLineOfSight(): Should never reach here.");
                             break;
                         }
@@ -111,16 +111,16 @@ public final class SitesLineOfSight extends BaseRegionFunction
     public long gameFlags(final Game game) {
         long flag = this.loc.gameFlags(game);
         if (this.type != null) {
-            if (this.type.equals(SiteType.Edge) || this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Edge || this.type == SiteType.Vertex) {
                 flag |= 0x800000L;
             }
-            if (this.type.equals(SiteType.Edge)) {
+            if (this.type == SiteType.Edge) {
                 flag |= 0x4000000L;
             }
-            if (this.type.equals(SiteType.Vertex)) {
+            if (this.type == SiteType.Vertex) {
                 flag |= 0x1000000L;
             }
-            if (this.type.equals(SiteType.Cell)) {
+            if (this.type == SiteType.Cell) {
                 flag |= 0x2000000L;
             }
         }

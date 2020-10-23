@@ -112,6 +112,6 @@ public class AIDetails
     }
     
     public boolean equals(final AIDetails aiDetails) {
-        return aiDetails.object.equals(this.object) && aiDetails.name.equals(this.name) && aiDetails.menuItemName.equals(this.menuItemName);
+        return aiDetails.object.equals(this.object) && aiDetails.name.equals(this.name) && aiDetails.menuItemName == this.menuItemName;
     }
 }

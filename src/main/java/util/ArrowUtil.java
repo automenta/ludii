@@ -27,7 +27,7 @@ public class ArrowUtil
         final int[] xpoints = { endX, (int)xm, (int)xn };
         final int[] ypoints = { endY, (int)ym, (int)yn };
         final Stroke oldStroke = g2d.getStroke();
-        g2d.setStroke(new BasicStroke((float)lineWidth, 1, 0));
+        g2d.setStroke(new BasicStroke(lineWidth, 1, 0));
         g2d.drawLine(startX, startY, (int)((xm + xn) / 2.0), (int)((ym + yn) / 2.0));
         g2d.setStroke(oldStroke);
         g2d.fillPolygon(xpoints, ypoints, 3);

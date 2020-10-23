@@ -27,7 +27,7 @@ public final class Player extends BaseLudeme implements Serializable
     
     public Player(@Opt final String name, @Opt final DirectionFacing dirn, @Opt final Moves generator) {
         this.enemies = new TIntArrayList();
-        this.name = ((name == null) ? null : name);
+        this.name = (name);
         this.direction = (dirn);
         this.generator = generator;
     }
@@ -81,39 +81,39 @@ public final class Player extends BaseLudeme implements Serializable
     
     public void setDefaultColour() {
         switch (this.index) {
-            case 1: {
+            case 1 -> {
                 this.colour = new Color(255, 255, 255);
                 break;
             }
-            case 2: {
+            case 2 -> {
                 this.colour = new Color(63, 63, 63);
                 break;
             }
-            case 3: {
+            case 3 -> {
                 this.colour = new Color(191, 191, 191);
                 break;
             }
-            case 4: {
+            case 4 -> {
                 this.colour = new Color(255, 0, 0);
                 break;
             }
-            case 5: {
+            case 5 -> {
                 this.colour = new Color(0, 127, 255);
                 break;
             }
-            case 6: {
+            case 6 -> {
                 this.colour = new Color(0, 200, 255);
                 break;
             }
-            case 7: {
+            case 7 -> {
                 this.colour = new Color(230, 230, 0);
                 break;
             }
-            case 8: {
+            case 8 -> {
                 this.colour = new Color(0, 230, 230);
                 break;
             }
-            default: {
+            default -> {
                 this.colour = null;
                 break;
             }

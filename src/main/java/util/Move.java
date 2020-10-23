@@ -12,7 +12,7 @@ import game.util.directions.AbsoluteDirection;
 import game.util.directions.Direction;
 import game.util.directions.DirectionFacing;
 import game.util.graph.Radial;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import org.apache.commons.rng.core.RandomProviderDefaultState;
 import topology.Topology;
 import topology.TopologyElement;
@@ -117,7 +117,7 @@ public class Move extends BaseAction
         for (final Action b : list) {
             this.actions.add(b);
         }
-        if (this.actions.size() > 0) {
+        if (!this.actions.isEmpty()) {
             this.from = this.actions.get(0).from();
             this.to = this.actions.get(0).to();
         }
@@ -136,7 +136,7 @@ public class Move extends BaseAction
             this.actions.add(a);
         }
         this.actions.add(b);
-        if (this.actions.size() > 0) {
+        if (!this.actions.isEmpty()) {
             this.from = this.actions.get(0).from();
             this.to = this.actions.get(0).to();
         }
@@ -154,7 +154,7 @@ public class Move extends BaseAction
         for (final Action a : list) {
             this.actions.add(a);
         }
-        if (this.actions.size() > 0) {
+        if (!this.actions.isEmpty()) {
             this.from = this.actions.get(0).from();
             this.to = this.actions.get(0).to();
         }
@@ -506,7 +506,7 @@ public class Move extends BaseAction
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         for (final Action a : this.actions) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append(a.toString());
@@ -518,7 +518,7 @@ public class Move extends BaseAction
         else if (this.actions.isEmpty()) {
             sb.append("[Empty Move]");
         }
-        if (this.then.size() > 0) {
+        if (!this.then.isEmpty()) {
             sb.append(this.then.toString());
         }
         return sb.toString();
@@ -528,7 +528,7 @@ public class Move extends BaseAction
     public String toTurnFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         for (final Action a : this.actions) {
-            if (sb.length() > 0) {
+            if (!sb.isEmpty()) {
                 sb.append(", ");
             }
             sb.append(a.toTurnFormat(context));
@@ -540,7 +540,7 @@ public class Move extends BaseAction
         else if (this.actions.isEmpty()) {
             sb.append("[Empty Move]");
         }
-        if (this.then.size() > 0) {
+        if (!this.then.isEmpty()) {
             sb.append(this.then.toString());
         }
         return sb.toString();
@@ -557,7 +557,7 @@ public class Move extends BaseAction
     }
     
     public int fromAfterSubsequents() {
-        if (this.actions.size() > 0) {
+        if (!this.actions.isEmpty()) {
             int i = 1;
             while (this.actions.get(this.actions.size() - i).from() == -1) {
                 ++i;
@@ -591,7 +591,7 @@ public class Move extends BaseAction
     }
     
     public int toAfterSubsequents() {
-        if (this.actions.size() > 0) {
+        if (!this.actions.isEmpty()) {
             int i = 1;
             while (this.actions.get(this.actions.size() - i).to() == -1) {
                 ++i;
@@ -897,7 +897,7 @@ public class Move extends BaseAction
     
     public Direction direction(final Context context) {
         final Topology topo = context.topology();
-        if (this.from == this.to || this.from == -1 || this.to == -1 || !this.fromType().equals(this.toType())) {
+        if (this.from == this.to || this.from == -1 || this.to == -1 || this.fromType() != this.toType()) {
             return null;
         }
         final SiteType type = this.toType();

@@ -24,7 +24,7 @@ import game.util.directions.AbsoluteDirection;
 import game.util.directions.Direction;
 import game.util.graph.Step;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import topology.Topology;
 import topology.TopologyElement;
 import util.Context;
@@ -109,15 +109,13 @@ public final class IsConnected extends BaseBooleanFunction
                     for (final Integer site : region) {
                         regionToAdd.set(site);
                     }
-                    if (regionToAdd.size() > 0) {
+                    if (!regionToAdd.isEmpty()) {
                         sitesRegions.add(regionToAdd);
                     }
                 }
             }
             else if (this.precomputedOwnedRegions != null) {
-                for (final ChunkSet preComputedRegions : this.precomputedOwnedRegions.get(playerRegion)) {
-                    sitesRegions.add(preComputedRegions);
-                }
+                sitesRegions.addAll(this.precomputedOwnedRegions.get(playerRegion));
             }
             else {
                 for (final Regions region2 : game.equipment().regions()) {
@@ -157,7 +155,7 @@ public final class IsConnected extends BaseBooleanFunction
                 return true;
             }
         }
-        if (groupSites.size() > 0) {
+        if (!groupSites.isEmpty()) {
             final boolean[] inGroupSites = new boolean[realTypeElements.size()];
             inGroupSites[from] = true;
             for (int i = 0; i < groupSites.size(); ++i) {
@@ -261,7 +259,7 @@ public final class IsConnected extends BaseBooleanFunction
                 for (final Integer site : region) {
                     regionToAdd.set(site);
                 }
-                if (regionToAdd.size() > 0) {
+                if (!regionToAdd.isEmpty()) {
                     this.precomputedSitesRegions.add(regionToAdd);
                 }
             }
@@ -337,15 +335,13 @@ public final class IsConnected extends BaseBooleanFunction
                     for (final Integer site : region) {
                         regionToAdd.set(site);
                     }
-                    if (regionToAdd.size() > 0) {
+                    if (!regionToAdd.isEmpty()) {
                         sitesRegions.add(regionToAdd);
                     }
                 }
             }
             else if (this.precomputedOwnedRegions != null) {
-                for (final ChunkSet preComputedRegions : this.precomputedOwnedRegions.get(playerRegion)) {
-                    sitesRegions.add(preComputedRegions);
-                }
+                sitesRegions.addAll(this.precomputedOwnedRegions.get(playerRegion));
             }
             else {
                 for (final Regions region2 : game.equipment().regions()) {
@@ -386,7 +382,7 @@ public final class IsConnected extends BaseBooleanFunction
                 return this.filterWinningSites(context, winningSites);
             }
         }
-        if (groupSites.size() > 0) {
+        if (!groupSites.isEmpty()) {
             final TIntArrayList sitesExplored = new TIntArrayList();
             int i = 0;
             while (sitesExplored.size() != groupSites.size()) {
@@ -446,15 +442,13 @@ public final class IsConnected extends BaseBooleanFunction
                     for (final Integer site : region) {
                         regionToAdd.set(site);
                     }
-                    if (regionToAdd.size() > 0) {
+                    if (!regionToAdd.isEmpty()) {
                         sitesRegions.add(regionToAdd);
                     }
                 }
             }
             else if (this.precomputedOwnedRegions != null) {
-                for (final ChunkSet preComputedRegions : this.precomputedOwnedRegions.get(playerRegion)) {
-                    sitesRegions.add(preComputedRegions);
-                }
+                sitesRegions.addAll(this.precomputedOwnedRegions.get(playerRegion));
             }
             else {
                 for (final Regions region2 : game.equipment().regions()) {
@@ -490,7 +484,7 @@ public final class IsConnected extends BaseBooleanFunction
             final int startGroup = groupMinusI.get(0);
             final TIntArrayList groupSites = new TIntArrayList();
             groupSites.add(startGroup);
-            if (groupSites.size() > 0) {
+            if (!groupSites.isEmpty()) {
                 final TIntArrayList sitesExplored = new TIntArrayList();
                 int k = 0;
                 while (sitesExplored.size() != groupSites.size()) {

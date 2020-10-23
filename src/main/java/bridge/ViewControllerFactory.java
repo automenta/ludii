@@ -32,118 +32,118 @@ public class ViewControllerFactory
             return new BoardStyle(container);
         }
         switch (type) {
-            case Board: {
+            case Board -> {
                 return new BoardStyle(container);
             }
-            case Hand: {
+            case Hand -> {
                 return new HandStyle(container);
             }
-            case Deck: {
+            case Deck -> {
                 return new DeckStyle(container);
             }
-            case Dice: {
+            case Dice -> {
                 return new DiceStyle(container);
             }
-            case Puzzle: {
+            case Puzzle -> {
                 return new PuzzleStyle(container, context);
             }
-            case Sudoku: {
+            case Sudoku -> {
                 return new SudokuStyle(container, context);
             }
-            case Kakuro: {
+            case Kakuro -> {
                 return new KakuroStyle(container, context);
             }
-            case Futoshiki: {
+            case Futoshiki -> {
                 return new FutoshikiStyle(container, context);
             }
-            case Hashi: {
+            case Hashi -> {
                 return new HashiStyle(container, context);
             }
-            case Graph: {
+            case Graph -> {
                 return new GraphStyle(container, context);
             }
-            case PenAndPaper: {
+            case PenAndPaper -> {
                 return new PenAndPaperStyle(container, context);
             }
-            case Agon: {
+            case Agon -> {
                 return new AgonStyle(container);
             }
-            case Backgammon: {
+            case Backgammon -> {
                 return new BackgammonStyle(container);
             }
-            case Boardless: {
+            case Boardless -> {
                 return new BoardlessStyle(container);
             }
-            case Chess: {
+            case Chess -> {
                 return new ChessStyle(container, context);
             }
-            case ChineseCheckers: {
+            case ChineseCheckers -> {
                 return new ChineseCheckersStyle(container);
             }
-            case ConnectiveGoal: {
+            case ConnectiveGoal -> {
                 return new ConnectiveGoalStyle(container);
             }
-            case Go: {
+            case Go -> {
                 return new GoStyle(container);
             }
-            case Goose: {
+            case Goose -> {
                 return new GooseStyle(container);
             }
-            case HoundsAndJackals: {
+            case HoundsAndJackals -> {
                 return new HoundsAndJackalsStyle(container);
             }
-            case Janggi: {
+            case Janggi -> {
                 return new JanggiStyle(container);
             }
-            case Lasca: {
+            case Lasca -> {
                 return new LascaStyle(container);
             }
-            case Mancala: {
+            case Mancala -> {
                 return new MancalaStyle(container);
             }
-            case Pachisi: {
+            case Pachisi -> {
                 return new PachisiStyle(container);
             }
-            case Ploy: {
+            case Ploy -> {
                 return new PloyStyle(container);
             }
-            case Scripta: {
+            case Scripta -> {
                 return new ScriptaStyle(container);
             }
-            case Shibumi: {
+            case Shibumi -> {
                 return new ShibumiStyle(container);
             }
-            case Shogi: {
+            case Shogi -> {
                 return new ShogiStyle(container);
             }
-            case SnakesAndLadders: {
+            case SnakesAndLadders -> {
                 return new SnakesAndLaddersStyle(container);
             }
-            case Tafl: {
+            case Tafl -> {
                 return new TaflStyle(container);
             }
-            case Xiangqi: {
+            case Xiangqi -> {
                 return new XiangqiStyle(container);
             }
-            case Connect4: {
+            case Connect4 -> {
                 return new Connect4Style(container);
             }
-            case Spiral: {
+            case Spiral -> {
                 return new SpiralStyle(container);
             }
-            case Surakarta: {
+            case Surakarta -> {
                 return new SurakartaStyle(container);
             }
-            case UltimateTicTacToe: {
+            case UltimateTicTacToe -> {
                 return new UltimateTicTacToeStyle(container);
             }
-            case Isometric: {
+            case Isometric -> {
                 return new IsometricStyle(container);
             }
-            case Table: {
+            case Table -> {
                 return new TableStyle(container);
             }
-            default: {
+            default -> {
                 return new BoardStyle(container);
             }
         }
@@ -154,34 +154,34 @@ public class ViewControllerFactory
             return new PieceStyle(component);
         }
         switch (type) {
-            case Piece: {
+            case Piece -> {
                 return new PieceStyle(component);
             }
-            case Card: {
+            case Card -> {
                 return new CardStyle(component);
             }
-            case Die: {
+            case Die -> {
                 return new DieStyle(component);
             }
-            case Domino: {
+            case Domino -> {
                 return new DominoStyle(component);
             }
-            case Tile: {
+            case Tile -> {
                 return new TileStyle(component);
             }
-            case LargePiece: {
+            case LargePiece -> {
                 return new LargePieceStyle(component);
             }
-            case ExtendedShogi: {
+            case ExtendedShogi -> {
                 return new ExtendedShogiStyle(component);
             }
-            case ExtendedXiangqi: {
+            case ExtendedXiangqi -> {
                 return new ExtendedXiangqiStyle(component);
             }
-            case NativeAmericanDice: {
+            case NativeAmericanDice -> {
                 return new NativeAmericanDiceStyle(component);
             }
-            default: {
+            default -> {
                 return new PieceStyle(component);
             }
         }
@@ -192,13 +192,13 @@ public class ViewControllerFactory
             return new BasicController(container);
         }
         switch (type) {
-            case BasicController: {
+            case BasicController -> {
                 return new BasicController(container);
             }
-            case PyramidalController: {
+            case PyramidalController -> {
                 return new PyramidalController(container);
             }
-            default: {
+            default -> {
                 return new BasicController(container);
             }
         }

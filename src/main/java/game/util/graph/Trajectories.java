@@ -6,9 +6,9 @@ package game.util.graph;
 
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
-import main.math.MathRoutines;
-import main.math.Point3D;
-import main.math.Vector;
+import math.MathRoutines;
+import math.Point3D;
+import math.Vector;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -609,7 +609,7 @@ public class Trajectories
         }
         
         public Radial toRadial() {
-            return new Radial(this.steps.toArray(new GraphElement[this.steps.size()]), this.direction);
+            return new Radial(this.steps.toArray(new GraphElement[0]), this.direction);
         }
     }
 }

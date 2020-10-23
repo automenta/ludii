@@ -81,9 +81,7 @@ public class Tile extends Component implements Serializable
         this.numSides = other.numSides;
         if (other.terminus != null) {
             this.terminus = new int[other.terminus.length];
-            for (int i = 0; i < other.terminus.length; ++i) {
-                this.terminus[i] = other.terminus[i];
-            }
+            System.arraycopy(other.terminus, 0, this.terminus, 0, other.terminus.length);
         }
         else {
             this.terminus = null;
@@ -91,9 +89,7 @@ public class Tile extends Component implements Serializable
         this.numTerminus = other.numTerminus;
         if (other.paths != null) {
             this.paths = new Path[other.paths.length];
-            for (int i = 0; i < other.paths.length; ++i) {
-                this.paths[i] = other.paths[i];
-            }
+            System.arraycopy(other.paths, 0, this.paths, 0, other.paths.length);
         }
         else {
             this.paths = null;

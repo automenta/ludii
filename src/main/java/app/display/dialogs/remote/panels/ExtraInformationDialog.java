@@ -49,61 +49,61 @@ public class ExtraInformationDialog extends JDialog
         textArea.putClientProperty("JEditorPane.honorDisplayProperties", true);
         final OnlineGameInfo onlineGameInfo = selectedPanel.tableStoredInformation.get(selectedRow);
         try {
-            if (!onlineGameInfo.getGameId().equals("")) {
+            if (!onlineGameInfo.getGameId().isEmpty()) {
                 doc.insertString(doc.getLength(), "Game Id: " + onlineGameInfo.getGameId() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getGameName().equals("")) {
+            if (!onlineGameInfo.getGameName().isEmpty()) {
                 doc.insertString(doc.getLength(), "Game Name: " + onlineGameInfo.getGameName() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getHostUsername().equals("")) {
+            if (!onlineGameInfo.getHostUsername().isEmpty()) {
                 doc.insertString(doc.getLength(), "Host Username: " + onlineGameInfo.getHostUsername() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getPlayerNumber().equals("")) {
+            if (!onlineGameInfo.getPlayerNumber().isEmpty()) {
                 doc.insertString(doc.getLength(), "Player Number: " + onlineGameInfo.getPlayerNumber() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getMaxPlayerNumber().equals("")) {
+            if (!onlineGameInfo.getMaxPlayerNumber().isEmpty()) {
                 doc.insertString(doc.getLength(), "Max Number of Players: " + onlineGameInfo.getMaxPlayerNumber() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getTimeRemainingForPlayer().equals("")) {
+            if (!onlineGameInfo.getTimeRemainingForPlayer().isEmpty()) {
                 doc.insertString(doc.getLength(), "Player Time Remaining: " + onlineGameInfo.getTimeRemainingForPlayer() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getTimeRemainingForRound().equals("")) {
+            if (!onlineGameInfo.getTimeRemainingForRound().isEmpty()) {
                 doc.insertString(doc.getLength(), "Round Time Remaining: " + onlineGameInfo.getTimeRemainingForRound() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getCurrentMover().equals("")) {
+            if (!onlineGameInfo.getCurrentMover().isEmpty()) {
                 doc.insertString(doc.getLength(), "Current Mover: " + onlineGameInfo.getCurrentMover() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getJoinedPlayers().equals("")) {
+            if (!onlineGameInfo.getJoinedPlayers().isEmpty()) {
                 doc.insertString(doc.getLength(), "Joined Players: " + onlineGameInfo.getJoinedPlayers() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getPrivateGame().equals("")) {
+            if (!onlineGameInfo.getPrivateGame().isEmpty()) {
                 doc.insertString(doc.getLength(), "Private Game: " + onlineGameInfo.getPrivateGame() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getOptions().equals("") && !onlineGameInfo.getOptions().equals("-")) {
+            if (!onlineGameInfo.getOptions().isEmpty() && !onlineGameInfo.getOptions().equals("-")) {
                 doc.insertString(doc.getLength(), "Game Options: " + onlineGameInfo.getOptions() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getTournamentId().equals("")) {
+            if (!onlineGameInfo.getTournamentId().isEmpty()) {
                 doc.insertString(doc.getLength(), "Tournament Id: " + onlineGameInfo.getTournamentId() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getTournamentName().equals("")) {
+            if (!onlineGameInfo.getTournamentName().isEmpty()) {
                 doc.insertString(doc.getLength(), "Tournament Name: " + onlineGameInfo.getTournamentName() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getTournamentFormat().equals("")) {
+            if (!onlineGameInfo.getTournamentFormat().isEmpty()) {
                 doc.insertString(doc.getLength(), "Tournament Format: " + onlineGameInfo.getTournamentFormat() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getRoundNumber().equals("")) {
+            if (!onlineGameInfo.getRoundNumber().isEmpty()) {
                 doc.insertString(doc.getLength(), "Round Number: " + onlineGameInfo.getRoundNumber() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getAppVersion().equals("")) {
+            if (!onlineGameInfo.getAppVersion().isEmpty()) {
                 doc.insertString(doc.getLength(), "App Version: " + onlineGameInfo.getAppVersion() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getNotes().equals("")) {
+            if (!onlineGameInfo.getNotes().isEmpty()) {
                 doc.insertString(doc.getLength(), "Notes: " + onlineGameInfo.getNotes() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getGameHash().equals("")) {
+            if (!onlineGameInfo.getGameHash().isEmpty()) {
                 doc.insertString(doc.getLength(), "Game Hash: " + onlineGameInfo.getGameHash() + "\n", textstyle);
             }
-            if (!onlineGameInfo.getPassword().equals("")) {
+            if (!onlineGameInfo.getPassword().isEmpty()) {
                 doc.insertString(doc.getLength(), "Password: " + onlineGameInfo.getPassword() + "\n", textstyle);
             }
         }

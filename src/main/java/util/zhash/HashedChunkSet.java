@@ -4,8 +4,8 @@
 
 package util.zhash;
 
-import main.collections.ChunkSet;
-import main.math.BitTwiddling;
+import collections.ChunkSet;
+import math.BitTwiddling;
 import util.state.State;
 
 import java.io.Serializable;

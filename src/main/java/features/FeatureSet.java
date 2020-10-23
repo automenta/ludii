@@ -10,9 +10,9 @@ import game.Game;
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TFloatArrayList;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.ChunkSet;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.ChunkSet;
+import collections.FVector;
+import collections.FastArrayList;
 import util.Context;
 import util.FeatureSetInterface;
 import util.Move;
@@ -60,7 +60,7 @@ public class FeatureSet extends FeatureSetInterface
         this.featureInitWeights = null;
         Feature[] tempFeatures;
         try (final Stream<String> stream = Files.lines(Paths.get(filename))) {
-            tempFeatures = stream.map(s -> Feature.fromString(s)).toArray(Feature[]::new);
+            tempFeatures = stream.map(Feature::fromString).toArray(Feature[]::new);
         }
         catch (IOException exception) {
             tempFeatures = null;
@@ -91,8 +91,7 @@ public class FeatureSet extends FeatureSetInterface
         final Map<ReactiveFeaturesKey, List<FeatureInstanceNode>> reactiveInstancesWIP = new HashMap<>();
         final Map<ProactiveFeaturesKey, List<FeatureInstanceNode>> proactiveInstancesWIP = new HashMap<>();
         final Context featureGenContext = new Context(this.game, new Trial(this.game));
-        for (int i = 0; i < supportedPlayers.length; ++i) {
-            final int player = supportedPlayers[i];
+        for (final int player : supportedPlayers) {
             for (final Feature feature : this.features) {
                 final List<FeatureInstance> newInstances = feature.instantiateFeature(this.game, featureGenContext.state().containerStates()[0], player, -1, -1);
                 for (final FeatureInstance instance : newInstances) {
@@ -102,20 +101,11 @@ public class FeatureSet extends FeatureSetInterface
                     final int to = instance.to();
                     if (lastFrom >= 0 || lastTo >= 0) {
                         final ReactiveFeaturesKey key = new ReactiveFeaturesKey(player, lastFrom, lastTo, from, to);
-                        List<FeatureInstanceNode> instanceNodes = reactiveInstancesWIP.get(key);
-                        if (instanceNodes == null) {
-                            instanceNodes = new ArrayList<>(1);
-                            reactiveInstancesWIP.put(key, instanceNodes);
-                        }
+                        List<FeatureInstanceNode> instanceNodes = reactiveInstancesWIP.computeIfAbsent(key, k -> new ArrayList<>(1));
                         insertInstanceInForest(instance, instanceNodes);
-                    }
-                    else {
+                    } else {
                         final ProactiveFeaturesKey key2 = new ProactiveFeaturesKey(player, from, to);
-                        List<FeatureInstanceNode> instanceNodes = proactiveInstancesWIP.get(key2);
-                        if (instanceNodes == null) {
-                            instanceNodes = new ArrayList<>(1);
-                            proactiveInstancesWIP.put(key2, instanceNodes);
-                        }
+                        List<FeatureInstanceNode> instanceNodes = proactiveInstancesWIP.computeIfAbsent(key2, k -> new ArrayList<>(1));
                         insertInstanceInForest(instance, instanceNodes);
                     }
                 }
@@ -182,7 +172,7 @@ public class FeatureSet extends FeatureSetInterface
     public TIntArrayList getActiveFeatureIndices(final State state, final int lastFrom, final int lastTo, final int from, final int to, final int player, final boolean thresholded) {
         final boolean[] featuresActive = new boolean[this.features.length];
         TIntArrayList activeFeatureIndices;
-        if (this.proactiveFeatures.size() > 0) {
+        if (!this.proactiveFeatures.isEmpty()) {
             int[] cachedActiveFeatureIndices;
             if (thresholded) {
                 cachedActiveFeatureIndices = this.activeProactiveFeaturesCache.getCachedActiveFeatures(this, state, from, to, player);
@@ -198,13 +188,12 @@ public class FeatureSet extends FeatureSetInterface
                 final List<FastFeaturesNode[]> featuresNodesToCheck = this.getFeaturesNodesToCheckProactive(state, from, to, thresholded);
                 for (int i = 0; i < featuresNodesToCheck.size(); ++i) {
                     final FastFeaturesNode[] nodesArray = featuresNodesToCheck.get(i);
-                    for (int j = 0; j < nodesArray.length; ++j) {
-                        final FastFeaturesNode node = nodesArray[j];
+                    for (final FastFeaturesNode node : nodesArray) {
                         final BitwiseTest test = node.test;
                         if (test.matches(state)) {
                             final int[] featureIndices = node.activeFeatureIndices;
-                            for (int idx = 0; idx < featureIndices.length; ++idx) {
-                                featuresActive[featureIndices[idx]] = true;
+                            for (int featureIndex : featureIndices) {
+                                featuresActive[featureIndex] = true;
                             }
                             featuresNodesToCheck.add(node.children);
                         }
@@ -227,13 +216,12 @@ public class FeatureSet extends FeatureSetInterface
         final List<FastFeaturesNode[]> featuresNodesToCheck2 = this.getFeaturesNodesToCheckReactive(state, lastFrom, lastTo, from, to, thresholded);
         for (int k = 0; k < featuresNodesToCheck2.size(); ++k) {
             final FastFeaturesNode[] nodesArray2 = featuresNodesToCheck2.get(k);
-            for (int l = 0; l < nodesArray2.length; ++l) {
-                final FastFeaturesNode node2 = nodesArray2[l];
+            for (final FastFeaturesNode node2 : nodesArray2) {
                 final BitwiseTest test2 = node2.test;
                 if (test2.matches(state)) {
                     final int[] featureIndices2 = node2.activeFeatureIndices;
-                    for (int idx2 = 0; idx2 < featureIndices2.length; ++idx2) {
-                        featuresActive[featureIndices2[idx2]] = true;
+                    for (int i : featureIndices2) {
+                        featuresActive[i] = true;
                     }
                     featuresNodesToCheck2.add(node2.children);
                 }
@@ -252,11 +240,11 @@ public class FeatureSet extends FeatureSetInterface
         final List<FastFeatureInstanceNode[]> instanceNodesToCheck = this.getInstanceNodesToCheck(state, lastFrom, lastTo, from, to, player);
         for (int i = 0; i < instanceNodesToCheck.size(); ++i) {
             final FastFeatureInstanceNode[] nodesArray = instanceNodesToCheck.get(i);
-            for (int j = 0; j < nodesArray.length; ++j) {
-                final FeatureInstance instance = nodesArray[j].featureInstance;
+            for (FastFeatureInstanceNode fastFeatureInstanceNode : nodesArray) {
+                final FeatureInstance instance = fastFeatureInstanceNode.featureInstance;
                 if (instance.matches(state)) {
                     activeInstances.add(instance);
-                    instanceNodesToCheck.add(nodesArray[j].children);
+                    instanceNodesToCheck.add(fastFeatureInstanceNode.children);
                 }
             }
         }
@@ -276,7 +264,7 @@ public class FeatureSet extends FeatureSetInterface
     @Override
     public float computeLogitFastReturn(final State state, final int lastFrom, final int lastTo, final int from, final int to, final float autoPlayThreshold, final FVector weightVector, final int player, final boolean thresholded) {
         float logit = 0.0f;
-        if (this.proactiveFeatures.size() > 0) {
+        if (!this.proactiveFeatures.isEmpty()) {
             int[] cachedActiveFeatureIndices;
             if (thresholded) {
                 cachedActiveFeatureIndices = this.activeProactiveFeaturesCache.getCachedActiveFeatures(this, state, from, to, player);
@@ -300,14 +288,13 @@ public class FeatureSet extends FeatureSetInterface
                 final List<FastFeaturesNode[]> featuresNodesToCheck = this.getFeaturesNodesToCheckProactive(state, from, to, thresholded);
                 for (int j = 0; j < featuresNodesToCheck.size(); ++j) {
                     final FastFeaturesNode[] nodesArray = featuresNodesToCheck.get(j);
-                    for (int k = 0; k < nodesArray.length; ++k) {
-                        final FastFeaturesNode node = nodesArray[k];
+                    for (final FastFeaturesNode node : nodesArray) {
                         final BitwiseTest test = node.test;
                         if (test.matches(state)) {
                             final int[] featureIndices = node.activeFeatureIndices;
-                            for (int idx = 0; idx < featureIndices.length; ++idx) {
-                                logit += weightVector.get(featureIndices[idx]);
-                                featuresActive[featureIndices[idx]] = true;
+                            for (int featureIndex : featureIndices) {
+                                logit += weightVector.get(featureIndex);
+                                featuresActive[featureIndex] = true;
                             }
                             if (logit >= autoPlayThreshold) {
                                 return logit;
@@ -329,13 +316,12 @@ public class FeatureSet extends FeatureSetInterface
         final List<FastFeaturesNode[]> featuresNodesToCheck2 = this.getFeaturesNodesToCheckReactive(state, lastFrom, lastTo, from, to, thresholded);
         for (int l = 0; l < featuresNodesToCheck2.size(); ++l) {
             final FastFeaturesNode[] nodesArray2 = featuresNodesToCheck2.get(l);
-            for (int m = 0; m < nodesArray2.length; ++m) {
-                final FastFeaturesNode node2 = nodesArray2[m];
+            for (final FastFeaturesNode node2 : nodesArray2) {
                 final BitwiseTest test2 = node2.test;
                 if (test2.matches(state)) {
                     final int[] featureIndices2 = node2.activeFeatureIndices;
-                    for (int idx2 = 0; idx2 < featureIndices2.length; ++idx2) {
-                        logit += weightVector.get(featureIndices2[idx2]);
+                    for (int i : featureIndices2) {
+                        logit += weightVector.get(i);
                     }
                     if (logit >= autoPlayThreshold) {
                         return logit;
@@ -354,14 +340,10 @@ public class FeatureSet extends FeatureSetInterface
         final int[] lastFroms = (lastFrom >= 0) ? new int[] { -1, lastFrom } : new int[] { -1 };
         final int[] lastTos = (lastTo >= 0) ? new int[] { -1, lastTo } : new int[] { -1 };
         if (lastFrom >= 0 || lastTo >= 0) {
-            for (int i = 0; i < lastFroms.length; ++i) {
-                final int lastFromPos = lastFroms[i];
-                for (int j = 0; j < lastTos.length; ++j) {
-                    final int lastToPos = lastTos[j];
-                    for (int k = 0; k < froms.length; ++k) {
-                        final int fromPos = froms[k];
-                        for (int l = 0; l < tos.length; ++l) {
-                            final int toPos = tos[l];
+            for (final int lastFromPos : lastFroms) {
+                for (final int lastToPos : lastTos) {
+                    for (final int fromPos : froms) {
+                        for (final int toPos : tos) {
                             if (lastToPos >= 0 || lastFromPos >= 0) {
                                 final FastFeatureInstanceNode[] nodes = this.reactiveInstances.get(new ReactiveFeaturesKey(player, lastFromPos, lastToPos, fromPos, toPos));
                                 if (nodes != null) {
@@ -373,10 +355,8 @@ public class FeatureSet extends FeatureSetInterface
                 }
             }
         }
-        for (int m = 0; m < froms.length; ++m) {
-            final int fromPos2 = froms[m];
-            for (int l2 = 0; l2 < tos.length; ++l2) {
-                final int toPos2 = tos[l2];
+        for (final int fromPos2 : froms) {
+            for (final int toPos2 : tos) {
                 if (toPos2 >= 0 || fromPos2 >= 0) {
                     final FastFeatureInstanceNode[] nodes2 = this.proactiveInstances.get(new ProactiveFeaturesKey(player, fromPos2, toPos2));
                     if (nodes2 != null) {
@@ -400,10 +380,8 @@ public class FeatureSet extends FeatureSetInterface
         else {
             featuresMap = this.proactiveFeatures;
         }
-        for (int k = 0; k < froms.length; ++k) {
-            final int fromPos = froms[k];
-            for (int l = 0; l < tos.length; ++l) {
-                final int toPos = tos[l];
+        for (final int fromPos : froms) {
+            for (final int toPos : tos) {
                 if (toPos >= 0 || fromPos >= 0) {
                     final FastFeaturesNode[] nodes = featuresMap.get(new ProactiveFeaturesKey(mover, fromPos, toPos));
                     if (nodes != null) {
@@ -496,19 +474,19 @@ public class FeatureSet extends FeatureSetInterface
         final List<FastFeatureInstanceNode[]> instanceNodes = this.getInstanceNodesToCheck(state, -1, -1, from, to, player);
         for (int i = 0; i < instanceNodes.size(); ++i) {
             final FastFeatureInstanceNode[] nodesArray = instanceNodes.get(i);
-            for (int j = 0; j < nodesArray.length; ++j) {
-                final FeatureInstance instance = nodesArray[j].featureInstance;
+            for (FastFeatureInstanceNode fastFeatureInstanceNode : nodesArray) {
+                final FeatureInstance instance = fastFeatureInstanceNode.featureInstance;
                 if (instance.mustEmpty() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell: {
+                        case Cell -> {
                             footprintEmptyCells.or(instance.mustEmpty());
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             footprintEmptyVertices.or(instance.mustEmpty());
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             footprintEmptyEdges.or(instance.mustEmpty());
                             break;
                         }
@@ -516,15 +494,15 @@ public class FeatureSet extends FeatureSetInterface
                 }
                 if (instance.mustNotEmpty() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell: {
+                        case Cell -> {
                             footprintEmptyCells.or(instance.mustNotEmpty());
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             footprintEmptyVertices.or(instance.mustNotEmpty());
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             footprintEmptyEdges.or(instance.mustNotEmpty());
                             break;
                         }
@@ -532,15 +510,15 @@ public class FeatureSet extends FeatureSetInterface
                 }
                 if (instance.mustWhoMask() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell: {
+                        case Cell -> {
                             footprintWhoCells.or(instance.mustWhoMask());
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             footprintWhoVertices.or(instance.mustWhoMask());
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             footprintWhoEdges.or(instance.mustWhoMask());
                             break;
                         }
@@ -548,15 +526,15 @@ public class FeatureSet extends FeatureSetInterface
                 }
                 if (instance.mustNotWhoMask() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell: {
+                        case Cell -> {
                             footprintWhoCells.or(instance.mustNotWhoMask());
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             footprintWhoVertices.or(instance.mustNotWhoMask());
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             footprintWhoEdges.or(instance.mustNotWhoMask());
                             break;
                         }
@@ -564,15 +542,15 @@ public class FeatureSet extends FeatureSetInterface
                 }
                 if (instance.mustWhatMask() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell: {
+                        case Cell -> {
                             footprintWhatCells.or(instance.mustWhatMask());
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             footprintWhatVertices.or(instance.mustWhatMask());
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             footprintWhatEdges.or(instance.mustWhatMask());
                             break;
                         }
@@ -580,21 +558,21 @@ public class FeatureSet extends FeatureSetInterface
                 }
                 if (instance.mustNotWhatMask() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell: {
+                        case Cell -> {
                             footprintWhatCells.or(instance.mustNotWhatMask());
                             break;
                         }
-                        case Vertex: {
+                        case Vertex -> {
                             footprintWhatVertices.or(instance.mustNotWhatMask());
                             break;
                         }
-                        case Edge: {
+                        case Edge -> {
                             footprintWhatEdges.or(instance.mustNotWhatMask());
                             break;
                         }
                     }
                 }
-                instanceNodes.add(nodesArray[j].children);
+                instanceNodes.add(fastFeatureInstanceNode.children);
             }
         }
         return new Footprint(footprintEmptyCells, footprintEmptyVertices, footprintEmptyEdges, footprintWhoCells, footprintWhoVertices, footprintWhoEdges, footprintWhatCells, footprintWhatVertices, footprintWhatEdges);
@@ -632,13 +610,7 @@ public class FeatureSet extends FeatureSetInterface
             allPairs.sort((o1, o2) -> {
                 final float score1 = Math.max(absWeights.get(o1.a.feature().featureSetIndex()), absWeights.get(o1.b.feature().featureSetIndex()));
                 final float score2 = Math.max(absWeights.get(o2.a.feature().featureSetIndex()), absWeights.get(o2.b.feature().featureSetIndex()));
-                if (score1 == score2) {
-                    return 0;
-                }
-                if (score1 < score2) {
-                    return -1;
-                }
-                return 1;
+                return Float.compare(score1, score2);
             });
         }
         else {
@@ -676,9 +648,7 @@ public class FeatureSet extends FeatureSetInterface
         }
         if (!featureAlreadyExists) {
             final List<Feature> newFeatureList = new ArrayList<>(this.features.length + 1);
-            for (final Feature feature : this.features) {
-                newFeatureList.add(feature);
-            }
+            newFeatureList.addAll(Arrays.asList(this.features));
             newFeatureList.add(combinedFeature);
             return new FeatureSet(newFeatureList);
         }
@@ -893,8 +863,7 @@ public class FeatureSet extends FeatureSetInterface
         
         public List<FeatureInstanceNode> collectDescendants() {
             final List<FeatureInstanceNode> result = new ArrayList<>();
-            final List<FeatureInstanceNode> nodesToCheck = new ArrayList<>();
-            nodesToCheck.addAll(this.children);
+            final List<FeatureInstanceNode> nodesToCheck = new ArrayList<>(this.children);
             while (!nodesToCheck.isEmpty()) {
                 final FeatureInstanceNode node = nodesToCheck.remove(nodesToCheck.size() - 1);
                 result.add(node);
@@ -979,13 +948,12 @@ public class FeatureSet extends FeatureSetInterface
                                             if (testB instanceof FeatureInstance) {
                                                 final FeatureInstance instanceB = (FeatureInstance)testB;
                                                 A.mustEmpties().or(instanceB.mustEmpty());
-                                                child.test = new OneOfMustEmpty(A.mustEmpties(), testA.graphElementType());
                                             }
                                             else {
                                                 final OneOfMustEmpty B = (OneOfMustEmpty)testB;
                                                 A.mustEmpties().or(B.mustEmpties());
-                                                child.test = new OneOfMustEmpty(A.mustEmpties(), testA.graphElementType());
                                             }
+                                            child.test = new OneOfMustEmpty(A.mustEmpties(), testA.graphElementType());
                                         }
                                         skipIndices[j] = true;
                                     }
@@ -1023,7 +991,6 @@ public class FeatureSet extends FeatureSetInterface
                                                 }
                                                 whosA.or(whoB);
                                                 whosMaskA.or(whoMaskB);
-                                                child.test = new OneOfMustWho(whosA, whosMaskA, testA.graphElementType());
                                             }
                                             else {
                                                 final OneOfMustWho B2 = (OneOfMustWho)testB;
@@ -1039,8 +1006,8 @@ public class FeatureSet extends FeatureSetInterface
                                                 }
                                                 whosA.or(whosB);
                                                 whosMaskA.or(whosMaskB);
-                                                child.test = new OneOfMustWho(whosA, whosMaskA, testA.graphElementType());
                                             }
+                                            child.test = new OneOfMustWho(whosA, whosMaskA, testA.graphElementType());
                                         }
                                         skipIndices[j] = true;
                                     }
@@ -1078,7 +1045,6 @@ public class FeatureSet extends FeatureSetInterface
                                                 }
                                                 whatsA.or(whatB);
                                                 whatsMaskA.or(whatMaskB);
-                                                child.test = new OneOfMustWhat(whatsA, whatsMaskA, testA.graphElementType());
                                             }
                                             else {
                                                 final OneOfMustWhat B3 = (OneOfMustWhat)testB;
@@ -1094,8 +1060,8 @@ public class FeatureSet extends FeatureSetInterface
                                                 }
                                                 whatsA.or(whatsB);
                                                 whatsMaskA.or(whatsMaskB);
-                                                child.test = new OneOfMustWhat(whatsA, whatsMaskA, testA.graphElementType());
                                             }
+                                            child.test = new OneOfMustWhat(whatsA, whatsMaskA, testA.graphElementType());
                                         }
                                         skipIndices[j] = true;
                                     }

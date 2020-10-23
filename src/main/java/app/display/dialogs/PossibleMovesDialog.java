@@ -9,7 +9,7 @@ import app.display.util.BufferedImageUtil;
 import app.display.util.GraphicsCache;
 import app.display.util.SVGUtil;
 import bridge.Bridge;
-import main.collections.FastArrayList;
+import collections.FastArrayList;
 import manager.Manager;
 import manager.utils.ContextSnapshot;
 import org.jfree.graphics2d.svg.SVGGraphics2D;
@@ -87,7 +87,6 @@ public class PossibleMovesDialog extends JDialog
                         this.AddButton(i, componentImage, "");
                         break;
                     }
-                    continue;
                 }
                 else {
                     if (a instanceof ActionPromote) {
@@ -125,20 +124,20 @@ public class PossibleMovesDialog extends JDialog
                         String trumpImage = "";
                         Color imageColor = Color.BLACK;
                         switch (trumpValue) {
-                            case 1: {
+                            case 1 -> {
                                 trumpImage = "card-suit-club";
                                 break;
                             }
-                            case 2: {
+                            case 2 -> {
                                 trumpImage = "card-suit-spade";
                                 break;
                             }
-                            case 3: {
+                            case 3 -> {
                                 trumpImage = "card-suit-diamond";
                                 imageColor = Color.RED;
                                 break;
                             }
-                            case 4: {
+                            case 4 -> {
                                 trumpImage = "card-suit-heart";
                                 imageColor = Color.RED;
                                 break;
@@ -170,7 +169,6 @@ public class PossibleMovesDialog extends JDialog
                         this.AddButton(i, null, "Vote: " + vote);
                         break;
                     }
-                    continue;
                 }
             }
             if (i.isPass()) {
@@ -247,7 +245,7 @@ public class PossibleMovesDialog extends JDialog
         if (image != null) {
             button.setIcon(new ImageIcon(image));
         }
-        if (text.length() > 0) {
+        if (!text.isEmpty()) {
             final String htmlText = "<html><center>" + text + "</center></html>";
             button.setText(DialogUtil.getWrappedText(button.getGraphics(), button, htmlText));
         }

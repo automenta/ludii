@@ -7,7 +7,7 @@ package language.compiler;
 import language.compiler.exceptions.CompilerException;
 import language.compiler.exceptions.UnknownArrayErrorException;
 import language.grammar.Grammar;
-import main.grammar.Report;
+import grammar.Report;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -89,8 +89,7 @@ public class ArgArray extends Arg
     public String toString() {
         String str = "";
         str += "{ ";
-        for (int a = 0; a < this.elements.size(); ++a) {
-            final Arg arg = this.elements.get(a);
+        for (final Arg arg : this.elements) {
             str = str + arg.toString() + " ";
         }
         str += "}";

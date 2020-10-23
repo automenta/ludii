@@ -6,7 +6,7 @@ package game.util.graph;
 
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
-import main.math.MathRoutines;
+import math.MathRoutines;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -152,7 +152,7 @@ public class Radials
     }
     
     public static void sort(final List<Radial> list) {
-        final List<ItemScore> rank = new ArrayList<ItemScore>();
+        final List<ItemScore> rank = new ArrayList<>();
         for (int n = 0; n < list.size(); ++n) {
             final Radial radial = list.get(n);
             final double theta = MathRoutines.angle(radial.steps()[0].pt2D(), radial.steps()[1].pt2D());
@@ -161,7 +161,7 @@ public class Radials
             rank.add(new ItemScore(n, score));
         }
         Collections.sort(rank);
-        final Radial[] orig = list.toArray(new Radial[list.size()]);
+        final Radial[] orig = list.toArray(new Radial[0]);
         for (int r = 0; r < rank.size(); ++r) {
             list.set(r, orig[rank.get(r).id()]);
         }

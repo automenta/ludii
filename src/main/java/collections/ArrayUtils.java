@@ -10,27 +10,27 @@ public class ArrayUtils {
     }
 
     public static boolean contains(double[] arr, double val) {
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i] != val) continue;
+        for (double v : arr) {
+            if (v != val) continue;
             return true;
         }
         return false;
     }
 
     public static boolean contains(int[] arr, int val) {
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i] != val) continue;
+        for (int j : arr) {
+            if (j != val) continue;
             return true;
         }
         return false;
     }
 
     public static boolean contains(Object[] arr, Object val) {
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i] == null && val == null) {
+        for (Object o : arr) {
+            if (o == null && val == null) {
                 return true;
             }
-            if (arr[i] == null || !arr[i].equals(val)) continue;
+            if (o == null || !o.equals(val)) continue;
             return true;
         }
         return false;
@@ -64,8 +64,8 @@ public class ArrayUtils {
 
     public static int numOccurrences(double[] arr, double val) {
         int num = 0;
-        for (int i = 0; i < arr.length; ++i) {
-            if (arr[i] != val) continue;
+        for (double v : arr) {
+            if (v != val) continue;
             ++num;
         }
         return num;
@@ -76,10 +76,10 @@ public class ArrayUtils {
         int maxStrLength = 0;
         float[][] arrf = matrix;
         int n = arrf.length;
-        for (int j = 0; j < n; ++j) {
+        for (float[] floats : arrf) {
             float[] arr;
-            for (float element : arr = arrf[j]) {
-                int length = String.valueOf((int)element).length();
+            for (float element : arr = floats) {
+                int length = String.valueOf((int) element).length();
                 if (length <= maxStrLength) continue;
                 maxStrLength = length;
             }
@@ -91,7 +91,7 @@ public class ArrayUtils {
         }
         for (i = 0; i < matrix.length; ++i) {
             for (int j = 0; j < matrix[i].length; ++j) {
-                sb.append(String.format(Locale.ROOT, "%" + digitsFormat + "." + numDecimals + "f", Float.valueOf(matrix[i][j])));
+                sb.append(String.format(Locale.ROOT, "%" + digitsFormat + "." + numDecimals + "f", matrix[i][j]));
                 if (j >= matrix[i].length - 1) continue;
                 sb.append(",");
             }

@@ -25,9 +25,9 @@ public class ButtonForward extends ToolButton
         g2d.setColor(this.getButtonColour());
         g2d.setStroke(new BasicStroke(3.0f, 0, 1));
         final GeneralPath path = new GeneralPath();
-        path.moveTo((float)(this.cx - 5), (float)(this.cy + 7));
-        path.lineTo((float)(this.cx + 5), (float)(this.cy + 0));
-        path.lineTo((float)(this.cx - 5), (float)(this.cy - 7));
+        path.moveTo((this.cx - 5), (this.cy + 7));
+        path.lineTo((this.cx + 5), (this.cy + 0));
+        path.lineTo((this.cx - 5), (this.cy - 7));
         g2d.draw(path);
     }
     

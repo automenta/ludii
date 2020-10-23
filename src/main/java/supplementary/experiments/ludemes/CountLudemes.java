@@ -94,7 +94,7 @@ public class CountLudemes
         return this.result = sb.toString();
     }
     
-    class Record
+    static class Record
     {
         private final String label;
         private final Class<?> category;

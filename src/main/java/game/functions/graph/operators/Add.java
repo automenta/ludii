@@ -17,9 +17,9 @@ import game.util.graph.Edge;
 import game.util.graph.Graph;
 import game.util.graph.GraphElement;
 import game.util.graph.Vertex;
-import main.math.MathRoutines;
-import main.math.Point3D;
-import main.math.Vector;
+import math.MathRoutines;
+import math.Point3D;
+import math.Vector;
 import util.Context;
 
 import java.util.ArrayList;
@@ -158,13 +158,12 @@ public final class Add extends BaseGraphFunction
         }
         final List<List<Point3D>> faces = new ArrayList<>();
         if (this.faceFns != null) {
-            for (int f = 0; f < this.faceFns.length; ++f) {
-                final FloatFunction[][] fns3 = this.faceFns[f];
+            for (final FloatFunction[][] fns3 : this.faceFns) {
                 final List<Point3D> face = new ArrayList<>();
-                for (int v2 = 0; v2 < fns3.length; ++v2) {
-                    final double x2 = fns3[v2][0].eval(context);
-                    final double y2 = fns3[v2][1].eval(context);
-                    final double z2 = (fns3[v2].length > 2) ? fns3[v2][2].eval(context) : 0.0;
+                for (FloatFunction[] floatFunctions : fns3) {
+                    final double x2 = floatFunctions[0].eval(context);
+                    final double y2 = floatFunctions[1].eval(context);
+                    final double z2 = (floatFunctions.length > 2) ? floatFunctions[2].eval(context) : 0.0;
                     face.add(new Point3D(x2, y2, z2));
                 }
                 faces.add(face);
@@ -217,38 +216,35 @@ public final class Add extends BaseGraphFunction
             graph.findOrAddFace(vertIds);
         }
         if (this.edgeIndexFns != null) {
-            for (int e2 = 0; e2 < this.edgeIndexFns.length; ++e2) {
-                if (this.edgeIndexFns[e2].length < 2) {
+            for (DimFunction[] edgeIndexFn : this.edgeIndexFns) {
+                if (edgeIndexFn.length < 2) {
                     System.out.println("** Add.eval(): Edge index pair does not have two entries.");
-                }
-                else {
-                    final int aid = this.edgeIndexFns[e2][0].eval();
-                    final int bid = this.edgeIndexFns[e2][1].eval();
+                } else {
+                    final int aid = edgeIndexFn[0].eval();
+                    final int bid = edgeIndexFn[1].eval();
                     if (aid >= graph.vertices().size() || bid >= graph.vertices().size()) {
                         System.out.println("** Add.eval(): Invalid edge vertex index in " + aid + " or " + bid + ".");
-                    }
-                    else {
+                    } else {
                         graph.findOrAddEdge(aid, bid);
                     }
                 }
             }
         }
         if (this.faceIndexFns != null) {
-            for (int f2 = 0; f2 < this.faceIndexFns.length; ++f2) {
-                if (this.faceIndexFns[f2].length < 3) {
+            for (DimFunction[] faceIndexFn : this.faceIndexFns) {
+                if (faceIndexFn.length < 3) {
                     System.out.println("** Add.eval(): Face index list must have at least three entries.");
-                }
-                else {
-                    final int[] vertIds2 = new int[this.faceIndexFns[f2].length];
+                } else {
+                    final int[] vertIds2 = new int[faceIndexFn.length];
                     int n2;
-                    for (n2 = 0; n2 < this.faceIndexFns[f2].length; ++n2) {
-                        vertIds2[n2] = this.faceIndexFns[f2][n2].eval();
+                    for (n2 = 0; n2 < faceIndexFn.length; ++n2) {
+                        vertIds2[n2] = faceIndexFn[n2].eval();
                         if (vertIds2[n2] >= graph.vertices().size()) {
                             System.out.println("** Add.eval(): Invalid face vertex index " + vertIds2[n2] + ".");
                             break;
                         }
                     }
-                    if (n2 >= this.faceIndexFns[f2].length) {
+                    if (n2 >= faceIndexFn.length) {
                         graph.findOrAddFace(vertIds2);
                     }
                 }
@@ -276,22 +272,22 @@ public final class Add extends BaseGraphFunction
     @Override
     public boolean isStatic() {
         boolean isStatic = true;
-        for (int v = 0; v < this.vertexFns.length; ++v) {
-            for (int n = 0; n < this.vertexFns[v].length; ++n) {
-                isStatic = (isStatic && this.vertexFns[v][n].isStatic());
+        for (FloatFunction[] vertexFn : this.vertexFns) {
+            for (int n = 0; n < vertexFn.length; ++n) {
+                isStatic = (isStatic && vertexFn[n].isStatic());
             }
         }
-        for (int e = 0; e < this.edgeFns.length; ++e) {
-            for (int v2 = 0; v2 < this.edgeFns[e].length; ++v2) {
-                for (int n2 = 0; n2 < this.edgeFns[e][v2].length; ++n2) {
-                    isStatic = (isStatic && this.edgeFns[e][v2][n2].isStatic());
+        for (FloatFunction[][] edgeFn : this.edgeFns) {
+            for (int v2 = 0; v2 < edgeFn.length; ++v2) {
+                for (int n2 = 0; n2 < edgeFn[v2].length; ++n2) {
+                    isStatic = (isStatic && edgeFn[v2][n2].isStatic());
                 }
             }
         }
-        for (int f = 0; f < this.faceFns.length; ++f) {
-            for (int v2 = 0; v2 < this.faceFns[f].length; ++v2) {
-                for (int n2 = 0; n2 < this.faceFns[f][v2].length; ++n2) {
-                    isStatic = (isStatic && this.faceFns[f][v2][n2].isStatic());
+        for (FloatFunction[][] faceFn : this.faceFns) {
+            for (int v2 = 0; v2 < faceFn.length; ++v2) {
+                for (int n2 = 0; n2 < faceFn[v2].length; ++n2) {
+                    isStatic = (isStatic && faceFn[v2][n2].isStatic());
                 }
             }
         }
@@ -301,22 +297,22 @@ public final class Add extends BaseGraphFunction
     @Override
     public long gameFlags(final Game game) {
         long flags = 0L;
-        for (int v = 0; v < this.vertexFns.length; ++v) {
-            for (int n = 0; n < this.vertexFns[v].length; ++n) {
-                flags |= this.vertexFns[v][n].gameFlags(game);
+        for (FloatFunction[] vertexFn : this.vertexFns) {
+            for (int n = 0; n < vertexFn.length; ++n) {
+                flags |= vertexFn[n].gameFlags(game);
             }
         }
-        for (int e = 0; e < this.edgeFns.length; ++e) {
-            for (int v2 = 0; v2 < this.edgeFns[e].length; ++v2) {
-                for (int n2 = 0; n2 < this.edgeFns[e][v2].length; ++n2) {
-                    flags |= this.edgeFns[e][v2][n2].gameFlags(game);
+        for (FloatFunction[][] edgeFn : this.edgeFns) {
+            for (int v2 = 0; v2 < edgeFn.length; ++v2) {
+                for (int n2 = 0; n2 < edgeFn[v2].length; ++n2) {
+                    flags |= edgeFn[v2][n2].gameFlags(game);
                 }
             }
         }
-        for (int f = 0; f < this.faceFns.length; ++f) {
-            for (int v2 = 0; v2 < this.faceFns[f].length; ++v2) {
-                for (int n2 = 0; n2 < this.faceFns[f][v2].length; ++n2) {
-                    flags |= this.faceFns[f][v2][n2].gameFlags(game);
+        for (FloatFunction[][] faceFn : this.faceFns) {
+            for (int v2 = 0; v2 < faceFn.length; ++v2) {
+                for (int n2 = 0; n2 < faceFn[v2].length; ++n2) {
+                    flags |= faceFn[v2][n2].gameFlags(game);
                 }
             }
         }
@@ -328,22 +324,22 @@ public final class Add extends BaseGraphFunction
     
     @Override
     public void preprocess(final Game game) {
-        for (int v = 0; v < this.vertexFns.length; ++v) {
-            for (int n = 0; n < this.vertexFns[v].length; ++n) {
-                this.vertexFns[v][n].preprocess(game);
+        for (FloatFunction[] vertexFn : this.vertexFns) {
+            for (int n = 0; n < vertexFn.length; ++n) {
+                vertexFn[n].preprocess(game);
             }
         }
-        for (int e = 0; e < this.edgeFns.length; ++e) {
-            for (int v2 = 0; v2 < this.edgeFns[e].length; ++v2) {
-                for (int n2 = 0; n2 < this.edgeFns[e][v2].length; ++n2) {
-                    this.edgeFns[e][v2][n2].preprocess(game);
+        for (FloatFunction[][] edgeFn : this.edgeFns) {
+            for (int v2 = 0; v2 < edgeFn.length; ++v2) {
+                for (int n2 = 0; n2 < edgeFn[v2].length; ++n2) {
+                    edgeFn[v2][n2].preprocess(game);
                 }
             }
         }
-        for (int f = 0; f < this.faceFns.length; ++f) {
-            for (int v2 = 0; v2 < this.faceFns[f].length; ++v2) {
-                for (int n2 = 0; n2 < this.faceFns[f][v2].length; ++n2) {
-                    this.faceFns[f][v2][n2].preprocess(game);
+        for (FloatFunction[][] faceFn : this.faceFns) {
+            for (int v2 = 0; v2 < faceFn.length; ++v2) {
+                for (int n2 = 0; n2 < faceFn[v2].length; ++n2) {
+                    faceFn[v2][n2].preprocess(game);
                 }
             }
         }

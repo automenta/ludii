@@ -184,17 +184,17 @@ public final class SitesOccupied extends BaseRegionFunction
         long flags = 0L;
         if (this.type != null) {
             switch (this.type) {
-                case Vertex: {
+                case Vertex -> {
                     flags |= 0x1000000L;
                     flags |= 0x800000L;
                     break;
                 }
-                case Edge: {
+                case Edge -> {
                     flags |= 0x4000000L;
                     flags |= 0x800000L;
                     break;
                 }
-                case Cell: {
+                case Cell -> {
                     flags |= 0x2000000L;
                     break;
                 }

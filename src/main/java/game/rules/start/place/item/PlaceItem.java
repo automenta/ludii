@@ -99,7 +99,7 @@ public final class PlaceItem extends StartRule
         }
         else {
             final Component testComponent = context.game().getComponent(this.item);
-            if (stringWitoutNumber(this.item) && this.container != null && this.container.equals("Hand") && (testComponent == null || !testComponent.role().equals(RoleType.Shared))) {
+            if (stringWitoutNumber(this.item) && this.container != null && this.container.equals("Hand") && (testComponent == null || testComponent.role() != RoleType.Shared)) {
                 for (int pid = 1; pid <= context.game().players().count(); ++pid) {
                     final String itemPlayer = this.item + pid;
                     final String handPlayer = this.container + pid;
@@ -242,8 +242,7 @@ public final class PlaceItem extends StartRule
             this.invisible = new boolean[numPlayer];
             for (int pid = 1; pid <= numPlayer; ++pid) {
                 boolean isInvisible = false;
-                for (int i = 0; i < this.invisibleTo.length; ++i) {
-                    final RoleType role = this.invisibleTo[i];
+                for (final RoleType role : this.invisibleTo) {
                     if (role.owner() == pid) {
                         isInvisible = true;
                         this.invisible[pid - 1] = isInvisible;
@@ -264,8 +263,7 @@ public final class PlaceItem extends StartRule
             this.masked = new boolean[numPlayer];
             for (int pid = 1; pid <= numPlayer; ++pid) {
                 boolean isMasked = false;
-                for (int i = 0; i < this.maskedTo.length; ++i) {
-                    final RoleType role = this.maskedTo[i];
+                for (final RoleType role : this.maskedTo) {
                     if (role.owner() == pid) {
                         isMasked = true;
                         this.masked[pid - 1] = isMasked;
@@ -393,8 +391,8 @@ public final class PlaceItem extends StartRule
         str = str + " count: " + this.count;
         str = str + " state: " + this.state;
         if (this.invisibleTo != null) {
-            for (int i = 0; i < this.invisibleTo.length; ++i) {
-                str = str + " invisible for " + this.invisibleTo[i];
+            for (RoleType roleType : this.invisibleTo) {
+                str = str + " invisible for " + roleType;
             }
         }
         str += ")";

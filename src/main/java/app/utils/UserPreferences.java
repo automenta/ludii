@@ -29,6 +29,7 @@ import java.nio.file.attribute.FileTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class UserPreferences
 {
@@ -229,8 +230,8 @@ public class UserPreferences
             for (final String gameName : SettingsManager.turnLimits.keySet()) {
                 json.put("MAXTURN" + gameName, SettingsManager.turnLimits.get(gameName));
             }
-            for (final String gameName : SettingsVC.pieceFamilies.keySet()) {
-                json.put("PIECEFAMILY" + gameName, SettingsVC.pieceFamilies.get(gameName));
+            for (final Map.Entry<String, String> entry : SettingsVC.pieceFamilies.entrySet()) {
+                json.put("PIECEFAMILY" + entry.getKey(), entry.getValue());
             }
             final FileWriter fw = new FileWriter(file);
             bw = new BufferedWriter(fw);
@@ -264,7 +265,7 @@ public class UserPreferences
     
     public static void loadPreferences() {
         DesktopApp.setPreferencesLoaded(false);
-        try (final InputStream inputStream = new FileInputStream(new File("." + File.separator + "ludii_preferences.json"))) {
+        try (final InputStream inputStream = new FileInputStream("." + File.separator + "ludii_preferences.json")) {
             final JSONObject json = new JSONObject(new JSONTokener(inputStream));
             if (!json.getString("VersionNumber").equals("1.0.8.1")) {
                 throw new Exception("Incorrect version number");
@@ -430,34 +431,33 @@ public class UserPreferences
                 final String key = (String)keysToCopyIterator.next();
                 keysList.add(key);
             }
-            final String[] keysArray = keysList.toArray(new String[keysList.size()]);
-            for (int j = 0; j < keysArray.length; ++j) {
-                if (keysArray[j].substring(0, 3).contentEquals("SPC")) {
+            final String[] keysArray = keysList.toArray(new String[0]);
+            for (String s : keysArray) {
+                if (s.substring(0, 3).contentEquals("SPC")) {
                     final Color[] playerColours = SettingsColour.originalPlayerColours();
-                    final JSONArray listPlayer = json.getJSONArray(keysArray[j]);
+                    final JSONArray listPlayer = json.getJSONArray(s);
                     for (int k = 0; k < listPlayer.length(); ++k) {
                         playerColours[k] = new Color(listPlayer.getInt(k));
                     }
-                    SettingsColour.getSavedPlayerColourPreferences().add(new SettingsColour.PlayerColourPreference(keysArray[j].substring(3), playerColours));
+                    SettingsColour.getSavedPlayerColourPreferences().add(new SettingsColour.PlayerColourPreference(s.substring(3), playerColours));
                 }
-                if (keysArray[j].substring(0, 3).contentEquals("SBC")) {
-                    final Color[] boardColour = { null, null, null, null, null, null, null };
-                    final JSONArray listBoard = json.getJSONArray(keysArray[j]);
+                if (s.substring(0, 3).contentEquals("SBC")) {
+                    final Color[] boardColour = {null, null, null, null, null, null, null};
+                    final JSONArray listBoard = json.getJSONArray(s);
                     for (int k = 0; k < listBoard.length(); ++k) {
                         if (listBoard.getInt(k) == -1) {
                             boardColour[k] = null;
-                        }
-                        else {
+                        } else {
                             boardColour[k] = new Color(listBoard.getInt(k));
                         }
                     }
-                    SettingsColour.getSavedBoardColourPreferences().add(new SettingsColour.BoardColourPreference(keysArray[j].substring(3), boardColour));
+                    SettingsColour.getSavedBoardColourPreferences().add(new SettingsColour.BoardColourPreference(s.substring(3), boardColour));
                 }
-                if (keysArray[j].length() > 7 && keysArray[j].substring(0, 7).contentEquals("MAXTURN")) {
-                    SettingsManager.setTurnLimit(keysArray[j].substring(7), json.optInt(keysArray[j]));
+                if (s.length() > 7 && s.substring(0, 7).contentEquals("MAXTURN")) {
+                    SettingsManager.setTurnLimit(s.substring(7), json.optInt(s));
                 }
-                if (keysArray[j].length() > 11 && keysArray[j].substring(0, 11).contentEquals("PIECEFAMILY")) {
-                    SettingsVC.setPieceFamily(keysArray[j].substring(11), json.optString(keysArray[j]));
+                if (s.length() > 11 && s.substring(0, 11).contentEquals("PIECEFAMILY")) {
+                    SettingsVC.setPieceFamily(s.substring(11), json.optString(s));
                 }
             }
             SettingsNetwork.backupAiPlayers();

@@ -27,8 +27,6 @@ import util.model.SimultaneousMove;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
@@ -142,7 +140,7 @@ public class PlayerViewUser extends View
         final Font oldFont = g2d.getFont();
         final Font indexFont = new Font("Arial", 1, (int)(1.0 * discR));
         g2d.setFont(indexFont);
-        final String str = "" + this.playerId;
+        final String str = String.valueOf(this.playerId);
         final Rectangle2D bounds = indexFont.getStringBounds(str, g2d.getFontRenderContext());
         final int tx = cx - (int)(0.5 * bounds.getWidth());
         final int ty = cy + (int)(0.3 * bounds.getHeight()) + 1;
@@ -208,7 +206,7 @@ public class PlayerViewUser extends View
     
     private void drawPlayerComboBox(final Graphics2D g2d, final Context context, final AIDetails associatedAI) {
         if (this.myComboBox == null) {
-            final String[] comboBoxContents = GUIUtil.getAiStrings(true).toArray(new String[GUIUtil.getAiStrings(true).size()]);
+            final String[] comboBoxContents = GUIUtil.getAiStrings(true).toArray(new String[0]);
             this.myComboBox = new JComboBox<>(comboBoxContents);
             DesktopApp.frame().setLayout(null);
             DesktopApp.frame().add(this.myComboBox);
@@ -272,7 +270,7 @@ public class PlayerViewUser extends View
             DesktopApp.frame().add(this.myComboBoxThinkTime);
             this.myComboBoxThinkTime.addActionListener(e -> {
                 final int newPlayerIndex = ContextSnapshot.getContext().state().playerToAgent(PlayerViewUser.this.playerId);
-                double thinkTime = Double.valueOf(PlayerViewUser.this.myComboBoxThinkTime.getSelectedItem().toString());
+                double thinkTime = Double.parseDouble(PlayerViewUser.this.myComboBoxThinkTime.getSelectedItem().toString());
                 if (thinkTime <= 0.0) {
                     thinkTime = 1.0;
                     PlayerViewUser.this.myComboBoxThinkTime.setSelectedIndex(0);

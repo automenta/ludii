@@ -6,14 +6,11 @@ package util.model;
 
 import game.Game;
 import main.Status;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import util.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public final class SimulationMove extends Model
 {
@@ -59,7 +56,7 @@ public final class SimulationMove extends Model
         if (!this.ready) {
             return null;
         }
-        return Arrays.asList(this.lastStepAI);
+        return Collections.singletonList(this.lastStepAI);
     }
     
     @Override
@@ -67,7 +64,7 @@ public final class SimulationMove extends Model
         if (!this.ready) {
             return null;
         }
-        return Arrays.asList(this.lastStepMove);
+        return Collections.singletonList(this.lastStepMove);
     }
     
     @Override

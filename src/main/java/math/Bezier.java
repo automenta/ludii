@@ -29,10 +29,10 @@ public final class Bezier {
     }
 
     public Bezier(Float[][] pts) {
-        this.cps[0] = new Point2D.Double(pts[0][0].floatValue(), pts[0][1].floatValue());
-        this.cps[1] = new Point2D.Double(pts[1][0].floatValue(), pts[1][1].floatValue());
-        this.cps[2] = new Point2D.Double(pts[2][0].floatValue(), pts[2][1].floatValue());
-        this.cps[3] = new Point2D.Double(pts[3][0].floatValue(), pts[3][1].floatValue());
+        this.cps[0] = new Point2D.Double(pts[0][0], pts[0][1]);
+        this.cps[1] = new Point2D.Double(pts[1][0], pts[1][1]);
+        this.cps[2] = new Point2D.Double(pts[2][0], pts[2][1]);
+        this.cps[3] = new Point2D.Double(pts[3][0], pts[3][1]);
     }
 
     public Bezier(Point2D ptA, Point2D ptAperp, Point2D ptB, Point2D ptBperp) {

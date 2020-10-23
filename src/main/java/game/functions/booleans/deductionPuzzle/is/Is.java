@@ -24,10 +24,10 @@ public class Is extends BaseBooleanFunction
     
     public static BooleanFunction construct(final IsPuzzleSimpleType isType) {
         switch (isType) {
-            case Solved: {
+            case Solved -> {
                 return new IsSolved();
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Is(): A IsPuzzleSimpleType is not implemented.");
             }
         }
@@ -35,10 +35,10 @@ public class Is extends BaseBooleanFunction
     
     public static BooleanFunction construct(final IsPuzzleGraphType isType, @Opt final SiteType elementType) {
         switch (isType) {
-            case Unique: {
+            case Unique -> {
                 return new IsUnique(elementType);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Is(): A IsPuzzleGraphType is not implemented.");
             }
         }
@@ -46,13 +46,13 @@ public class Is extends BaseBooleanFunction
     
     public static BooleanFunction construct(final IsPuzzleRegionResultType isType, @Opt final SiteType type, @Opt final RegionFunction region, @Opt @Name final IntFunction of, @Opt final String nameRegion, final IntFunction result) {
         switch (isType) {
-            case Count: {
+            case Count -> {
                 return new IsCount(type, region, of, result);
             }
-            case Sum: {
+            case Sum -> {
                 return new IsSum(type, region, nameRegion, result);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Is(): A IsPuzzleRegionResultType is not implemented.");
             }
         }

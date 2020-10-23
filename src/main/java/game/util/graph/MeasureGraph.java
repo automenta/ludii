@@ -5,9 +5,9 @@
 package game.util.graph;
 
 import game.types.board.SiteType;
-import main.math.MathRoutines;
-import main.math.RCL;
-import main.math.RCLType;
+import math.MathRoutines;
+import math.RCL;
+import math.RCLType;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -381,9 +381,7 @@ public abstract class MeasureGraph
             for (int n2 = 0; n2 < num; ++n2) {
                 temp[n2] = (4.0 * scores[n2] + scores[(n2 + 1) % num] + scores[(n2 - 1 + num) % num]) / 6.0;
             }
-            for (int n2 = 0; n2 < num; ++n2) {
-                scores[n2] = temp[n2];
-            }
+            System.arraycopy(temp, 0, scores, 0, num);
         }
         final BitSet keep = new BitSet();
         keep.set(0, num, true);
@@ -427,8 +425,7 @@ public abstract class MeasureGraph
             if (!vertex.properties().get(1024L)) {
                 continue;
             }
-            for (int side = 0; side < sides.length; ++side) {
-                final long sideCode = sides[side];
+            for (final long sideCode : sides) {
                 if (vertex.properties().get(sideCode)) {
                     for (final Edge edge : vertex.edges()) {
                         final Vertex other = edge.otherVertex(vertex);
@@ -551,9 +548,9 @@ public abstract class MeasureGraph
             distances[geA.id()] = acc;
         }
         double minDistance = 1000000.0;
-        for (int n = 0; n < distances.length; ++n) {
-            if (distances[n] < minDistance) {
-                minDistance = distances[n];
+        for (double distance : distances) {
+            if (distance < minDistance) {
+                minDistance = distance;
             }
         }
         for (int n = 0; n < distances.length; ++n) {
@@ -754,7 +751,7 @@ public abstract class MeasureGraph
             refA = new Point2D.Double(bounds.getX() - bounds.getWidth(), bounds.getY() + bounds.getHeight() / 2.0);
             refB = new Point2D.Double(refA.getX() + bounds.getWidth() * Math.cos(theta), refA.getY() + bounds.getWidth() * Math.sin(theta));
         }
-        final List<ItemScore> rank = new ArrayList<ItemScore>();
+        final List<ItemScore> rank = new ArrayList<>();
         final double margin = 0.6 * unit;
         for (int n = 0; n < elements.size(); ++n) {
             final double dist = (rclType == RCLType.Layer) ? elements.get(n).pt().z() : MathRoutines.distanceToLine(elements.get(n).pt2D(), refA, refB);
@@ -774,15 +771,15 @@ public abstract class MeasureGraph
             for (final ItemScore item2 : buckets.get(bid).items()) {
                 final RCL rcl = elements.get(item2.id()).situation().rcl();
                 switch (rclType) {
-                    case Row: {
+                    case Row -> {
                         rcl.setRow(bid);
                         continue;
                     }
-                    case Column: {
+                    case Column -> {
                         rcl.setColumn(bid);
                         continue;
                     }
-                    case Layer: {
+                    case Layer -> {
                         rcl.setLayer(bid);
                         continue;
                     }
@@ -810,11 +807,10 @@ public abstract class MeasureGraph
             }
         }
         final Map<String, GraphElement> map = new HashMap<>();
-        map.clear();
         for (final GraphElement element : elements) {
             int column;
             String label;
-            for (column = element.situation().rcl().column(), label = "" + (char)(65 + column % 26); column >= 26; column /= 26, label = (char)(65 + column % 26 - 1) + label) {}
+            for (column = element.situation().rcl().column(), label = String.valueOf((char) (65 + column % 26)); column >= 26; column /= 26, label = (char)(65 + column % 26 - 1) + label) {}
             label += element.situation().rcl().row() + 1;
             if (distinctLayers) {
                 label = label + "/" + element.situation().rcl().layer();

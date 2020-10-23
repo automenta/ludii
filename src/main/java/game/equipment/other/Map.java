@@ -98,28 +98,28 @@ public class Map extends Item
     
     private static int getSite(final Board board, final LandmarkType landmarkType) {
         switch (landmarkType) {
-            case BottomSite: {
+            case BottomSite -> {
                 return ((board.defaultSite() == SiteType.Vertex) ? board.topology().bottom(SiteType.Vertex) : board.topology().bottom(SiteType.Cell)).get(0).index();
             }
-            case CentreSite: {
+            case CentreSite -> {
                 return ((board.defaultSite() == SiteType.Vertex) ? board.topology().centre(SiteType.Vertex) : board.topology().centre(SiteType.Cell)).get(0).index();
             }
-            case LeftSite: {
+            case LeftSite -> {
                 return ((board.defaultSite() == SiteType.Vertex) ? board.topology().left(SiteType.Vertex) : board.topology().left(SiteType.Cell)).get(0).index();
             }
-            case RightSite: {
+            case RightSite -> {
                 return ((board.defaultSite() == SiteType.Vertex) ? board.topology().right(SiteType.Vertex) : board.topology().right(SiteType.Cell)).get(0).index();
             }
-            case Topsite: {
+            case Topsite -> {
                 return ((board.defaultSite() == SiteType.Vertex) ? board.topology().top(SiteType.Vertex) : board.topology().top(SiteType.Cell)).get(0).index();
             }
-            case FirstSite: {
+            case FirstSite -> {
                 return 0;
             }
-            case LastSite: {
+            case LastSite -> {
                 return (board.defaultSite() == SiteType.Vertex) ? board.topology().vertices().get(board.topology().vertices().size() - 1).index() : board.topology().cells().get(board.topology().cells().size() - 1).index();
             }
-            default: {
+            default -> {
                 return -1;
             }
         }

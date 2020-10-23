@@ -13,8 +13,8 @@ import game.types.board.SiteType;
 import game.util.graph.Edge;
 import game.util.graph.Graph;
 import game.util.graph.Vertex;
-import main.math.MathRoutines;
-import main.math.Vector;
+import math.MathRoutines;
+import math.Vector;
 import util.Context;
 
 import java.util.ArrayList;
@@ -164,7 +164,7 @@ public final class Merge extends BaseGraphFunction
         }
     }
     
-    public class PivotPair
+    public static class PivotPair
     {
         public int id;
         public int pivotId;

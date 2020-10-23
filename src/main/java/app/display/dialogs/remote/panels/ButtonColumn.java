@@ -123,7 +123,7 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
     public void actionPerformed(final ActionEvent e) {
         final int row = this.table.convertRowIndexToModel(this.table.getEditingRow());
         this.fireEditingStopped();
-        final ActionEvent event = new ActionEvent(this.table, 1001, "" + row);
+        final ActionEvent event = new ActionEvent(this.table, 1001, String.valueOf(row));
         this.action.actionPerformed(event);
     }
     

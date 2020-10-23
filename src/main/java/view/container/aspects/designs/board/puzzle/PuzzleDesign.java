@@ -199,6 +199,7 @@ public class PuzzleDesign extends BoardDesign
                     for (int j = 0; j < this.hintValues.size(); ++j) {
                         if (this.hintValues.get(i) != null && this.hintValues.get(i) > maxHintvalue) {
                             maxHintvalue = this.hintValues.get(i);
+                            break;
                         }
                     }
                     if (this.hintType == PuzzleHintType.TopLeft) {
@@ -228,9 +229,7 @@ public class PuzzleDesign extends BoardDesign
             regionLines.clear();
             for (final int r : region) {
                 outsideRegionLines.clear();
-                for (final Edge e : cells.get(r).edges()) {
-                    regionLines.add(e);
-                }
+                regionLines.addAll(cells.get(r).edges());
             }
             for (final Edge edge1 : regionLines) {
                 int numContains = 0;

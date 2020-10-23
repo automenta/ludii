@@ -127,7 +127,7 @@ public class AtomicFeatureGenerator
             walks.add(null);
             return walks;
         }
-        List<Walk> allWalks = Arrays.asList(new Walk());
+        List<Walk> allWalks = Collections.singletonList(new Walk());
         List<Walk> allWalksReplacement;
         for (int currWalkLengths = 0; currWalkLengths < walkSize; ++currWalkLengths, allWalks = allWalksReplacement) {
             allWalksReplacement = new ArrayList<>(allWalks.size() * 4);
@@ -154,8 +154,7 @@ public class AtomicFeatureGenerator
             boolean shouldAddFeature = true;
             for (int i = 0; i < rotations.size(); ++i) {
                 final float rotation = rotations.get(i);
-                for (int j = 0; j < reflections.length; ++j) {
-                    final boolean reflect = reflections[j];
+                for (final boolean reflect : reflections) {
                     Feature rotatedFeature = feature.rotatedCopy(rotation);
                     if (reflect) {
                         rotatedFeature = rotatedFeature.reflectedCopy();
@@ -194,7 +193,7 @@ public class AtomicFeatureGenerator
         return simplified;
     }
     
-    private class RotRefInvariantFeature
+    private static class RotRefInvariantFeature
     {
         protected Feature feature;
         

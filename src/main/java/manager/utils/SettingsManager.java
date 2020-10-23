@@ -7,7 +7,7 @@ package manager.utils;
 import game.equipment.component.Component;
 import game.rules.end.End;
 import gnu.trove.map.hash.TObjectIntHashMap;
-import main.options.UserSelections;
+import options.UserSelections;
 import util.Move;
 
 import javax.swing.*;

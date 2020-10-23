@@ -78,15 +78,13 @@ public final class IsBlocked extends BaseBooleanFunction
                     for (final Integer site : region) {
                         regionToAdd.add(site);
                     }
-                    if (regionToAdd.size() > 0) {
+                    if (!regionToAdd.isEmpty()) {
                         sitesRegions.add(regionToAdd);
                     }
                 }
             }
             else if (this.precomputedOwnedRegions != null) {
-                for (final TIntArrayList preComputedRegions : this.precomputedOwnedRegions.get(playerRegion)) {
-                    sitesRegions.add(preComputedRegions);
-                }
+                sitesRegions.addAll(this.precomputedOwnedRegions.get(playerRegion));
             }
             else {
                 for (final Regions region2 : game.equipment().regions()) {
@@ -124,7 +122,7 @@ public final class IsBlocked extends BaseBooleanFunction
             if (++numRegionConnected == numRegionToConnect) {
                 return false;
             }
-            if (groupSites.size() > 0) {
+            if (!groupSites.isEmpty()) {
                 final TIntArrayList sitesExplored = new TIntArrayList();
                 int j = 0;
                 while (sitesExplored.size() != groupSites.size()) {
@@ -223,7 +221,7 @@ public final class IsBlocked extends BaseBooleanFunction
                 for (final Integer site : region) {
                     regionToAdd.add(site);
                 }
-                if (regionToAdd.size() > 0) {
+                if (!regionToAdd.isEmpty()) {
                     this.precomputedSitesRegions.add(regionToAdd);
                 }
             }

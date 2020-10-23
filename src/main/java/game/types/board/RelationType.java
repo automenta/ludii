@@ -16,28 +16,28 @@ public enum RelationType
     
     public static AbsoluteDirection convert(final RelationType relation) {
         switch (relation) {
-            case Adjacent: {
+            case Adjacent -> {
                 return AbsoluteDirection.Adjacent;
             }
-            case Diagonal: {
+            case Diagonal -> {
                 return AbsoluteDirection.Diagonal;
             }
-            case All: {
+            case All -> {
                 return AbsoluteDirection.All;
             }
-            case OffDiagonal: {
+            case OffDiagonal -> {
                 return AbsoluteDirection.OffDiagonal;
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 return AbsoluteDirection.Orthogonal;
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("RelationType.convert(): a RelationType is not implemented.");
             }
         }
     }
     
     public boolean supersetOf(final RelationType rA) {
-        return this.equals(rA) || this.equals(RelationType.All) || (this.equals(RelationType.Adjacent) && rA.equals(RelationType.Orthogonal));
+        return this == rA || this == RelationType.All || (this == RelationType.Adjacent && rA == RelationType.Orthogonal);
     }
 }

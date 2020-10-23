@@ -5,8 +5,8 @@
 package search.flat;
 
 import game.Game;
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import util.AI;
 import util.Context;
 import util.Move;

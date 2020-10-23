@@ -31,9 +31,7 @@ public class Die extends Component implements Serializable
         this.numFaces = other.numFaces;
         if (other.faces != null) {
             this.faces = new int[other.faces.length];
-            for (int i = 0; i < other.faces.length; ++i) {
-                this.faces[i] = other.faces[i];
-            }
+            System.arraycopy(other.faces, 0, this.faces, 0, other.faces.length);
         }
         else {
             other.faces = null;

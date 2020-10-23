@@ -9,7 +9,7 @@ import annotations.Opt;
 import game.Game;
 import game.equipment.other.Regions;
 import main.StringRoutines;
-import main.collections.FVector;
+import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import metadata.ai.misc.Pair;
 import util.Context;
@@ -112,13 +112,13 @@ public class RegionProximity extends HeuristicTerm
         return retVal;
     }
     
-    private final void computeMaxDist(final Game game) {
+    private void computeMaxDist(final Game game) {
         final int[] distances = game.distancesToRegions()[this.region];
         if (distances != null) {
             int max = 0;
-            for (int i = 0; i < distances.length; ++i) {
-                if (distances[i] > max) {
-                    max = distances[i];
+            for (int distance : distances) {
+                if (distance > max) {
+                    max = distance;
                 }
             }
             this.maxDistance = max;
@@ -162,7 +162,7 @@ public class RegionProximity extends HeuristicTerm
             sb.append(" weight:" + this.weight);
         }
         sb.append(" region:" + this.region);
-        if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && this.pieceWeightNames[0].length() > 0)) {
+        if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && !this.pieceWeightNames[0].isEmpty())) {
             sb.append(" pieceWeights:{\n");
             for (int i = 0; i < this.pieceWeightNames.length; ++i) {
                 sb.append("        (pair " + StringRoutines.quote(this.pieceWeightNames[i]) + " " + this.gameAgnosticWeightsArray[i] + ")\n");
@@ -178,7 +178,7 @@ public class RegionProximity extends HeuristicTerm
         boolean shouldPrint = false;
         boolean haveRelevantPieces = false;
         final StringBuilder pieceWeightsSb = new StringBuilder();
-        if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && this.pieceWeightNames[0].length() > 0)) {
+        if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && !this.pieceWeightNames[0].isEmpty())) {
             for (int i = 0; i < this.pieceWeightNames.length; ++i) {
                 if (Math.abs(this.weight * this.gameAgnosticWeightsArray[i]) >= threshold) {
                     pieceWeightsSb.append("        (pair " + StringRoutines.quote(this.pieceWeightNames[i]) + " " + this.gameAgnosticWeightsArray[i] + ")\n");

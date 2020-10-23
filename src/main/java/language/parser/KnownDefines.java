@@ -5,7 +5,7 @@
 package language.parser;
 
 import main.FileHandling;
-import main.grammar.Report;
+import grammar.Report;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -40,22 +40,16 @@ public class KnownDefines
         this.knownDefines.clear();
         final String[] defs = FileHandling.getResourceListing(KnownDefines.class, "def/", ".def");
         if (defs == null) {
+            final URL url = KnownDefines.class.getResource("def/rules/play/moves/StepToEmpty.def");
             try {
-                final URL url = KnownDefines.class.getResource("def/rules/play/moves/StepToEmpty.def");
                 String path = new File(url.toURI()).getPath();
                 path = path.substring(0, path.length() - "rules/play/moves/StepToEmpty.def".length());
-                try {
-                    this.recurseKnownDefines(path, report);
-                    if (report.isError()) {
-                        return;
-                    }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
+                this.recurseKnownDefines(path, report);
+                if (report.isError()) {
                 }
             }
-            catch (URISyntaxException exception) {
-                exception.printStackTrace();
+            catch (Exception e) {
+                e.printStackTrace();
             }
         }
         else {

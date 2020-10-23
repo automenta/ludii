@@ -154,7 +154,7 @@ public abstract class BaseAction implements Action
         final Cell c2 = context.topology().cells().get(site2);
         final List<Radial> radialsC1 = topology.trajectories().radials(SiteType.Cell, c1.index(), dirn);
         final List<Radial> radialsC2 = topology.trajectories().radials(SiteType.Cell, c2.index(), dirn);
-        if (radialsC1.size() > 0 && radialsC2.size() > 0) {
+        if (!radialsC1.isEmpty() && !radialsC2.isEmpty()) {
             final Radial radialC1 = radialsC1.get(0);
             final Radial radialC2 = radialsC2.get(0);
             if (radialC1.steps().length > 2 && radialC2.steps().length > 2 && cs.isEmpty(radialC1.steps()[1].id(), SiteType.Cell) && cs.isEmpty(radialC2.steps()[1].id(), SiteType.Cell)) {
@@ -175,13 +175,13 @@ public abstract class BaseAction implements Action
                         if (leftOrientation) {
                             final List<Radial> radialsC1Left = topology.trajectories().radials(SiteType.Cell, c1.index(), absoluteLeftDirection);
                             final List<Radial> radialsC2Right = topology.trajectories().radials(SiteType.Cell, c2.index(), absoluteRightDirection);
-                            if (radialsC1Left.size() > 0 && radialsC1Left.get(0).steps().length > 1) {
+                            if (!radialsC1Left.isEmpty() && radialsC1Left.get(0).steps().length > 1) {
                                 final int leftOfTo = radialsC1Left.get(0).steps()[1].id();
                                 if (cs.isEmpty(leftOfTo, SiteType.Cell)) {
                                     cs.setPlayable(context.state(), leftOfTo, true);
                                 }
                             }
-                            if (radialsC2Right.size() > 0 && radialsC2Right.get(0).steps().length > 1) {
+                            if (!radialsC2Right.isEmpty() && radialsC2Right.get(0).steps().length > 1) {
                                 final int leftOfTo = radialsC2Right.get(0).steps()[1].id();
                                 if (cs.isEmpty(leftOfTo, SiteType.Cell)) {
                                     cs.setPlayable(context.state(), leftOfTo, true);
@@ -191,13 +191,13 @@ public abstract class BaseAction implements Action
                         else {
                             final List<Radial> radialsC1Right = topology.trajectories().radials(SiteType.Cell, c1.index(), absoluteRightDirection);
                             final List<Radial> radialsC2Left = topology.trajectories().radials(SiteType.Cell, c2.index(), absoluteLeftDirection);
-                            if (radialsC1Right.size() > 0 && radialsC1Right.get(0).steps().length > 1) {
+                            if (!radialsC1Right.isEmpty() && radialsC1Right.get(0).steps().length > 1) {
                                 final int leftOfTo = radialsC1Right.get(0).steps()[1].id();
                                 if (cs.isEmpty(leftOfTo, SiteType.Cell)) {
                                     cs.setPlayable(context.state(), leftOfTo, true);
                                 }
                             }
-                            if (radialsC2Left.size() > 0 && radialsC2Left.get(0).steps().length > 1) {
+                            if (!radialsC2Left.isEmpty() && radialsC2Left.get(0).steps().length > 1) {
                                 final int leftOfTo = radialsC2Left.get(0).steps()[1].id();
                                 if (cs.isEmpty(leftOfTo, SiteType.Cell)) {
                                     cs.setPlayable(context.state(), leftOfTo, true);
@@ -272,19 +272,19 @@ public abstract class BaseAction implements Action
                 }
                 case 3: {
                     switch (state) {
-                        case 0: {
+                        case 0 -> {
                             return AbsoluteDirection.S;
                         }
-                        case 1: {
+                        case 1 -> {
                             return AbsoluteDirection.W;
                         }
-                        case 2: {
+                        case 2 -> {
                             return AbsoluteDirection.N;
                         }
-                        case 3: {
+                        case 3 -> {
                             return AbsoluteDirection.E;
                         }
-                        default: {
+                        default -> {
                             break Label_0241;
                         }
                     }

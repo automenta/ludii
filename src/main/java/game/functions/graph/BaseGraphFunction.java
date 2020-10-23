@@ -9,7 +9,7 @@ import game.types.board.BasisType;
 import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
-import main.math.MathRoutines;
+import math.MathRoutines;
 import util.BaseLudeme;
 import util.Context;
 
@@ -53,9 +53,9 @@ public abstract class BaseGraphFunction extends BaseLudeme implements GraphFunct
     
     public int maxDim() {
         int max = 0;
-        for (int d = 0; d < this.dim.length; ++d) {
-            if (this.dim[d] > max) {
-                max = this.dim[d];
+        for (int i : this.dim) {
+            if (i > max) {
+                max = i;
             }
         }
         return max;

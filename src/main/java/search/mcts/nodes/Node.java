@@ -4,8 +4,8 @@
 
 package search.mcts.nodes;
 
-import main.collections.FVector;
-import main.collections.FastArrayList;
+import collections.FVector;
+import collections.FastArrayList;
 import search.mcts.MCTS;
 import util.Context;
 import util.Move;

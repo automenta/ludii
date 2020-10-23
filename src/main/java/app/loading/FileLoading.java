@@ -18,7 +18,7 @@ import java.io.File;
 
 public class FileLoading
 {
-    public static final String selectFile(final JFrame parent, final boolean isOpen, final String relativePath, final String description, final MainWindow view, final String... extensions) {
+    public static String selectFile(final JFrame parent, final boolean isOpen, final String relativePath, final String description, final MainWindow view, final String... extensions) {
         final String baseFolder = System.getProperty("user.dir");
         SettingsVC.selectedLocation = new FullLocation(-1);
         String folder = baseFolder + relativePath;
@@ -57,7 +57,7 @@ public class FileLoading
     
     private static JFileChooser createFileChooser(final String defaultDir, final String extension, final String description) {
         JFileChooser fileChooser;
-        if (defaultDir != null && defaultDir.length() > 0 && new File(defaultDir).exists()) {
+        if (defaultDir != null && !defaultDir.isEmpty() && new File(defaultDir).exists()) {
             fileChooser = new JFileChooser(defaultDir);
         }
         else {

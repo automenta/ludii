@@ -50,7 +50,7 @@ public class DominoStyle extends LargePieceStyle
         final int strokeWidth = imageSize / 5;
         maxCellLocationX += imageSize;
         maxCellLocationY += imageSize;
-        g2d.setStroke(new BasicStroke((float)strokeWidth, 0, 0));
+        g2d.setStroke(new BasicStroke(strokeWidth, 0, 0));
         final GeneralPath path = new GeneralPath();
         path.moveTo(minCellLocationX + strokeWidth / 2, minCellLocationY + strokeWidth / 2);
         path.lineTo(minCellLocationX + strokeWidth / 2, maxCellLocationY - strokeWidth / 2);
@@ -99,29 +99,29 @@ public class DominoStyle extends LargePieceStyle
             final int dy = (int)(positionY + imageSize * pipTranslation.getY());
             final ArrayList<Point> pipPositions = new ArrayList<>();
             switch (pipValue) {
-                case 1: {
+                case 1 -> {
                     pipPositions.add(new Point(dx, dy));
                     break;
                 }
-                case 2: {
+                case 2 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
                     break;
                 }
-                case 3: {
+                case 3 -> {
                     pipPositions.add(new Point(dx, dy));
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
                     break;
                 }
-                case 4: {
+                case 4 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
                     pipPositions.add(new Point(dx - dw, dy + dh));
                     pipPositions.add(new Point(dx + dw, dy - dw));
                     break;
                 }
-                case 5: {
+                case 5 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
                     pipPositions.add(new Point(dx - dw, dy + dh));
@@ -129,26 +129,26 @@ public class DominoStyle extends LargePieceStyle
                     pipPositions.add(new Point(dx, dy));
                     break;
                 }
-                case 6: {
-                    pipPositions.add(new Point(dx + dw, dy + dh));
-                    pipPositions.add(new Point(dx - dw, dy - dw));
-                    pipPositions.add(new Point(dx - dw, dy + dh));
-                    pipPositions.add(new Point(dx + dw, dy - dw));
-                    pipPositions.add(new Point(dx, dy + dh));
-                    pipPositions.add(new Point(dx, dy - dw));
-                    break;
-                }
-                case 7: {
+                case 6 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
                     pipPositions.add(new Point(dx - dw, dy + dh));
                     pipPositions.add(new Point(dx + dw, dy - dw));
                     pipPositions.add(new Point(dx, dy + dh));
                     pipPositions.add(new Point(dx, dy - dw));
+                    break;
+                }
+                case 7 -> {
+                    pipPositions.add(new Point(dx + dw, dy + dh));
+                    pipPositions.add(new Point(dx - dw, dy - dw));
+                    pipPositions.add(new Point(dx - dw, dy + dh));
+                    pipPositions.add(new Point(dx + dw, dy - dw));
+                    pipPositions.add(new Point(dx, dy + dh));
+                    pipPositions.add(new Point(dx, dy - dw));
                     pipPositions.add(new Point(dx, dy));
                     break;
                 }
-                case 8: {
+                case 8 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
                     pipPositions.add(new Point(dx - dw, dy + dh));
@@ -159,7 +159,7 @@ public class DominoStyle extends LargePieceStyle
                     pipPositions.add(new Point(dx - dw, dy));
                     break;
                 }
-                case 9: {
+                case 9 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
                     pipPositions.add(new Point(dx - dw, dy + dh));
@@ -172,11 +172,11 @@ public class DominoStyle extends LargePieceStyle
                     break;
                 }
             }
-            for (int numPips = 0; numPips < pipPositions.size(); ++numPips) {
-                final int pipX = pipPositions.get(numPips).x;
-                final int pipY = pipPositions.get(numPips).y;
+            for (Point pipPosition : pipPositions) {
+                final int pipX = pipPosition.x;
+                final int pipY = pipPosition.y;
                 g2d.setColor(Color.BLACK);
-                g2d.fillOval(pipX - (int)pipSize / 2, pipY - (int)pipSize / 2, (int)pipSize, (int)pipSize);
+                g2d.fillOval(pipX - (int) pipSize / 2, pipY - (int) pipSize / 2, (int) pipSize, (int) pipSize);
             }
         }
         else {

@@ -246,8 +246,8 @@ public final class IsLoopAux
     public static TIntArrayList elementsToIndices(final List<? extends TopologyElement> elementsList) {
         final int verticesListSz = elementsList.size();
         final TIntArrayList indicesList = new TIntArrayList(verticesListSz);
-        for (int i = 0; i < verticesListSz; ++i) {
-            indicesList.add(elementsList.get(i).index());
+        for (TopologyElement topologyElement : elementsList) {
+            indicesList.add(topologyElement.index());
         }
         return indicesList;
     }

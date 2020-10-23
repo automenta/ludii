@@ -7,7 +7,7 @@ package app.display.views.tabs.pages;
 import app.display.views.tabs.TabPage;
 import app.display.views.tabs.TabView;
 import game.Game;
-import main.options.Option;
+import options.Option;
 import manager.utils.ContextSnapshot;
 import manager.utils.SettingsManager;
 import metadata.Metadata;
@@ -33,14 +33,14 @@ public class RulesPage extends TabPage
         try {
             final Metadata metadata = game.metadata();
             if (metadata != null) {
-                if (metadata.info().getRules().size() > 0) {
+                if (!metadata.info().getRules().isEmpty()) {
                     this.addText("Rules:\n");
                     for (final String s : metadata.info().getRules()) {
                         this.addText(s);
                         this.addText("\n\n");
                     }
                 }
-                if (metadata.info().getSource().size() > 0) {
+                if (!metadata.info().getSource().isEmpty()) {
                     this.addText("Source:\n");
                     for (final String s : metadata.info().getSource()) {
                         this.addText(s);
@@ -50,7 +50,7 @@ public class RulesPage extends TabPage
                 }
                 if (SettingsManager.userSelections.ruleset() == -1) {
                     final List<Option> activeOptions = game.description().gameOptions().activeOptionObjects(SettingsManager.userSelections.selectedOptionStrings());
-                    if (activeOptions.size() > 0) {
+                    if (!activeOptions.isEmpty()) {
                         this.addText("Options:\n");
                         for (final Option option : activeOptions) {
                             this.addText(option.description() + "\n");

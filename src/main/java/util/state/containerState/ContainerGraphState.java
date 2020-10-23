@@ -8,7 +8,7 @@ import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
 import game.util.equipment.Region;
-import main.collections.ChunkSet;
+import collections.ChunkSet;
 import util.state.State;
 import util.zhash.HashedChunkSet;
 import util.zhash.ZobristHashGenerator;
@@ -314,10 +314,10 @@ public class ContainerGraphState extends ContainerFlatState
     }
     
     public boolean isOccupied(final int site, final SiteType type) {
-        if (type.equals(SiteType.Cell)) {
+        if (type == SiteType.Cell) {
             return this.countCell(site) != 0;
         }
-        if (type.equals(SiteType.Edge)) {
+        if (type == SiteType.Edge) {
             return this.countEdge(site) != 0;
         }
         return this.countVertex(site) != 0;
@@ -325,10 +325,10 @@ public class ContainerGraphState extends ContainerFlatState
     
     @Override
     public void addToEmpty(final int site, final SiteType type) {
-        if (type.equals(SiteType.Cell)) {
+        if (type == SiteType.Cell) {
             this.empty.add(site - this.offset);
         }
-        else if (type.equals(SiteType.Edge)) {
+        else if (type == SiteType.Edge) {
             this.emptyEdge.add(site);
         }
         else {
@@ -338,10 +338,10 @@ public class ContainerGraphState extends ContainerFlatState
     
     @Override
     public void removeFromEmpty(final int site, final SiteType type) {
-        if (type.equals(SiteType.Cell)) {
+        if (type == SiteType.Cell) {
             this.empty.remove(site - this.offset);
         }
-        else if (type.equals(SiteType.Edge)) {
+        else if (type == SiteType.Edge) {
             this.emptyEdge.remove(site);
         }
         else {
@@ -351,10 +351,10 @@ public class ContainerGraphState extends ContainerFlatState
     
     @Override
     public void setSite(final State trialState, final int site, final int whoVal, final int whatVal, final int countVal, final int stateVal, final int rotationVal, final int valueVal, final SiteType type) {
-        if (type.equals(SiteType.Cell) || this.container().index() != 0) {
+        if (type == SiteType.Cell || this.container().index() != 0) {
             super.setSite(trialState, site, whoVal, whatVal, countVal, stateVal, rotationVal, valueVal, type);
         }
-        else if (type.equals(SiteType.Edge)) {
+        else if (type == SiteType.Edge) {
             final boolean wasEmpty = !this.isOccupied(site, type);
             if (whoVal != -1) {
                 this.whoEdge.setChunk(trialState, site, whoVal);
@@ -364,7 +364,7 @@ public class ContainerGraphState extends ContainerFlatState
             }
             if (countVal != -1) {
                 if (this.countEdge != null) {
-                    this.countEdge.setChunk(trialState, site, (countVal < 0) ? 0 : countVal);
+                    this.countEdge.setChunk(trialState, site, Math.max(countVal, 0));
                 }
                 else if (this.countEdge == null && countVal > 1) {
                     throw new UnsupportedOperationException("This game does not support counts, but a count > 1 has been set. countVal=" + countVal);
@@ -397,7 +397,7 @@ public class ContainerGraphState extends ContainerFlatState
                 this.removeFromEmpty(site, type);
             }
         }
-        else if (type.equals(SiteType.Vertex)) {
+        else if (type == SiteType.Vertex) {
             final boolean wasEmpty = !this.isOccupied(site, type);
             if (whoVal != -1) {
                 this.whoVertex.setChunk(trialState, site, whoVal);
@@ -407,7 +407,7 @@ public class ContainerGraphState extends ContainerFlatState
             }
             if (countVal != -1) {
                 if (this.countVertex != null) {
-                    this.countVertex.setChunk(trialState, site, (countVal < 0) ? 0 : countVal);
+                    this.countVertex.setChunk(trialState, site, Math.max(countVal, 0));
                 }
                 else if (this.countVertex == null && countVal > 1) {
                     throw new UnsupportedOperationException("This game does not support counts, but a count > 1 has been set. countVal=" + countVal);
@@ -444,10 +444,10 @@ public class ContainerGraphState extends ContainerFlatState
     
     @Override
     public Region emptyRegion(final SiteType type) {
-        if (type.equals(SiteType.Cell)) {
+        if (type == SiteType.Cell) {
             return this.empty;
         }
-        if (type.equals(SiteType.Edge)) {
+        if (type == SiteType.Edge) {
             return this.emptyEdge;
         }
         return this.emptyVertex;

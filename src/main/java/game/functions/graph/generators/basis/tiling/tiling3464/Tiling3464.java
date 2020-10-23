@@ -28,32 +28,32 @@ public class Tiling3464 extends Basis
     public static GraphFunction construct(@Opt final Tiling3464ShapeType shape, final DimFunction dimA, @Opt final DimFunction dimB) {
         final Tiling3464ShapeType st = (shape == null) ? Tiling3464ShapeType.Hexagon : shape;
         switch (st) {
-            case Hexagon: {
+            case Hexagon -> {
                 return new HexagonOn3464(dimA);
             }
-            case Triangle: {
+            case Triangle -> {
                 return new TriangleOn3464(dimA);
             }
-            case Diamond: {
+            case Diamond -> {
                 return new DiamondOn3464(dimA, null);
             }
-            case Prism: {
+            case Prism -> {
                 return new DiamondOn3464(dimA, (dimB != null) ? dimB : dimA);
             }
-            case Star: {
+            case Star -> {
                 return new StarOn3464(dimA);
             }
-            case Limping: {
+            case Limping -> {
                 final DimFunction dimAplus1 = new Add(dimA, new DimConstant(1));
-                return new CustomOn3464(new DimFunction[] { dimA, dimAplus1 });
+                return new CustomOn3464(new DimFunction[]{dimA, dimAplus1});
             }
-            case Square: {
+            case Square -> {
                 return new RectangleOn3464(dimA, dimA);
             }
-            case Rectangle: {
+            case Rectangle -> {
                 return new RectangleOn3464(dimA, (dimB != null) ? dimB : dimA);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Shape " + st + " not supported for tiling3464.");
             }
         }

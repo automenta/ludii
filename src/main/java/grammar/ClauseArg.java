@@ -13,7 +13,7 @@ public class ClauseArg {
 
     public ClauseArg(Symbol symbol, String label, boolean optional, int orGroup, int andGroup) {
         this.symbol = symbol;
-        this.label = label == null ? null : label;
+        this.label = label;
         this.optional = optional;
         this.orGroup = orGroup;
         this.andGroup = andGroup;
@@ -66,20 +66,19 @@ public class ClauseArg {
             return "NULL";
         }
         switch (this.symbol.type()) {
-            case Primitive: {
+            case Primitive -> {
                 str = this.symbol.keyword();
                 break;
             }
-            case Constant: {
+            case Constant -> {
                 str = this.symbol.keyword();
                 break;
             }
-            case Predefined: 
-            case Class: {
+            case Predefined, Class -> {
                 str = "<" + this.symbol.grammarLabel() + ">";
                 break;
             }
-            default: {
+            default -> {
                 str = str + "[UNKNOWN]";
             }
         }

@@ -20,8 +20,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.*;
 
@@ -186,7 +184,7 @@ public class DeveloperDialog extends JDialog
                 Manager.app.repaint();
             }));
         }
-        if (topology.sides(SiteType.Cell).size() > 0) {
+        if (!topology.sides(SiteType.Cell).isEmpty()) {
             final Vector<JCheckBox> v = new Vector<>();
             for (final DirectionFacing d : topology.sides(SiteType.Cell).keySet()) {
                 SettingsVC.drawSideCells.put(d.uniqueName().toString(), false);
@@ -304,7 +302,7 @@ public class DeveloperDialog extends JDialog
                 Manager.app.repaint();
             }));
         }
-        if (topology.sides(SiteType.Vertex).size() > 0) {
+        if (!topology.sides(SiteType.Vertex).isEmpty()) {
             final Vector<JCheckBox> v = new Vector<>();
             for (final DirectionFacing d : topology.sides(SiteType.Vertex).keySet()) {
                 SettingsVC.drawSideVertices.put(d.uniqueName().toString(), false);
@@ -434,7 +432,7 @@ public class DeveloperDialog extends JDialog
             SettingsVC.drawSloshEdges = checkBox_Slosh.isSelected();
             Manager.app.repaint();
         });
-        if (topology.sides(SiteType.Edge).size() > 0) {
+        if (!topology.sides(SiteType.Edge).isEmpty()) {
             final Vector<JCheckBox> v = new Vector<>();
             for (final DirectionFacing d : topology.sides(SiteType.Edge).keySet()) {
                 SettingsVC.drawSideEdges.put(d.uniqueName().toString(), false);
@@ -459,7 +457,7 @@ public class DeveloperDialog extends JDialog
         textFieldMaximumNumberOfTurns.setColumns(10);
         textFieldMaximumNumberOfTurns.setBounds(970, 495, 86, 20);
         contentPanel.add(textFieldMaximumNumberOfTurns);
-        textFieldMaximumNumberOfTurns.setText("" + ContextSnapshot.getContext().game().getMaxMoveLimit());
+        textFieldMaximumNumberOfTurns.setText(String.valueOf(ContextSnapshot.getContext().game().getMaxMoveLimit()));
         final JLabel lblNewLabel_1 = new JLabel("Maximum number of moves");
         lblNewLabel_1.setBounds(719, 498, 241, 14);
         contentPanel.add(lblNewLabel_1);
@@ -567,7 +565,7 @@ public class DeveloperDialog extends JDialog
     
     public JComboCheckBox comboCheckBox(final JPanel contentPanel, final int x, final int init_y, final String namePregen, final ArrayList<Boolean> settingSelected, final List<List<TopologyElement>> graphElements) {
         JComboCheckBox comboCheckBox = null;
-        if (graphElements.size() > 0) {
+        if (!graphElements.isEmpty()) {
             final Vector<JCheckBox> v = new Vector<>();
             for (int i = 0; i < graphElements.size(); ++i) {
                 if (settingSelected.size() <= i) {

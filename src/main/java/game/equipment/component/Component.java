@@ -84,9 +84,7 @@ public class Component extends Item implements Cloneable
         this.value = other.value;
         if (other.bias != null) {
             this.bias = new int[other.bias.length];
-            for (int i = 0; i < other.bias.length; ++i) {
-                this.bias[i] = other.bias[i];
-            }
+            System.arraycopy(other.bias, 0, this.bias, 0, other.bias.length);
         }
         else {
             this.bias = null;
@@ -109,9 +107,7 @@ public class Component extends Item implements Cloneable
             this.walk = new StepType[other.walk.length][];
             for (int i = 0; i < other.walk.length; ++i) {
                 this.walk[i] = new StepType[other.walk[i].length];
-                for (int j = 0; j < other.walk[i].length; ++j) {
-                    this.walk[i][j] = other.walk[i][j];
-                }
+                System.arraycopy(other.walk[i], 0, this.walk[i], 0, other.walk[i].length);
             }
         }
         else {
@@ -157,7 +153,7 @@ public class Component extends Item implements Cloneable
             return new TIntArrayList();
         }
         final TIntArrayList sitesAfterWalk = new TIntArrayList();
-        final int realState = (state >= 0) ? state : 0;
+        final int realState = Math.max(state, 0);
         final List<DirectionFacing> orthogonalSupported = topology.supportedOrthogonalDirections(SiteType.Cell);
         final DirectionFacing startDirection = orthogonalSupported.get(realState % orthogonalSupported.size());
         sitesAfterWalk.add(from);

@@ -52,30 +52,23 @@ public class LudiiTokeniser
                     }
                     whitespaceLast = isWhitespace;
                     switch (ch) {
-                        case '(':
-                        case ')':
-                        case '<':
-                        case '>':
-                        case '[':
-                        case ']':
-                        case '{':
-                        case '}': {
+                        case '(', ')', '<', '>', '[', ']', '{', '}' -> {
                             this.startNewToken();
                             this.addCompleteToken(ch);
                             break;
                         }
-                        case '\"': {
+                        case '\"' -> {
                             this.startNewToken();
                             inString = true;
                             this.token.append(ch);
                             break;
                         }
-                        case ':': {
+                        case ':' -> {
                             this.token.append(ch);
                             this.startNewToken();
                             break;
                         }
-                        default: {
+                        default -> {
                             if (isNumber(ch)) {
                                 this.startNewToken();
                                 inNumber = true;
@@ -100,7 +93,7 @@ public class LudiiTokeniser
     }
     
     private void startNewToken() {
-        if (this.token.length() != 0) {
+        if (!this.token.isEmpty()) {
             this.tokens.add(this.token.toString());
             this.token.setLength(0);
         }
@@ -111,33 +104,33 @@ public class LudiiTokeniser
     }
     
     public static EditorTokenType typeForToken(final String token, final boolean inAngle, final EditorTokenType lastToken) {
-        if (token == null || token.length() == 0) {
+        if (token == null || token.isEmpty()) {
             return EditorTokenType.OTHER;
         }
         if (token.length() == 1) {
             switch (token.charAt(0)) {
-                case '(': {
+                case '(' -> {
                     return EditorTokenType.OPEN_ROUND;
                 }
-                case '{': {
+                case '{' -> {
                     return EditorTokenType.OPEN_CURLY;
                 }
-                case '[': {
+                case '[' -> {
                     return EditorTokenType.OPEN_SQUARE;
                 }
-                case '<': {
+                case '<' -> {
                     return EditorTokenType.OPEN_ANGLE;
                 }
-                case ')': {
+                case ')' -> {
                     return EditorTokenType.CLOSE_ROUND;
                 }
-                case '}': {
+                case '}' -> {
                     return EditorTokenType.CLOSE_CURLY;
                 }
-                case ']': {
+                case ']' -> {
                     return EditorTokenType.CLOSE_SQUARE;
                 }
-                case '>': {
+                case '>' -> {
                     return EditorTokenType.CLOSE_ANGLE;
                 }
             }
@@ -160,7 +153,7 @@ public class LudiiTokeniser
         if (inAngle) {
             return EditorTokenType.RULE;
         }
-        if (lastToken != null && lastToken == EditorTokenType.OPEN_ROUND && Character.isLowerCase(token.charAt(0))) {
+        if (lastToken == EditorTokenType.OPEN_ROUND && Character.isLowerCase(token.charAt(0))) {
             return EditorTokenType.CLASS;
         }
         if (Character.isUpperCase(token.charAt(0))) {

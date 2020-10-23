@@ -46,16 +46,16 @@ public final class SitesPath extends BaseRegionFunction
     @Override
     public Region eval(final Context context) {
         switch (this.ofType) {
-            case Vertex: {
+            case Vertex -> {
                 return this.evalVertex(context);
             }
-            case Edge: {
+            case Edge -> {
                 return this.evalEdge(context);
             }
-            case Cell: {
+            case Cell -> {
                 return null;
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -82,8 +82,7 @@ public final class SitesPath extends BaseRegionFunction
             if ((whoSiteId == numPlayers + 1 && state.what(k, SiteType.Vertex) != 0) || (whoSiteId < numPlayers + 1 && state.who(k, SiteType.Vertex) == whoSiteId)) {
                 final Vertex kVertex = graph.vertices().get(k);
                 final List<Vertex> nebVertices = kVertex.adjacent();
-                for (int j = 0; j < nebVertices.size(); ++j) {
-                    final Vertex nb = nebVertices.get(j);
+                for (final topology.Vertex nb : nebVertices) {
                     if (state.who(nb.index(), SiteType.Vertex) == whoSiteId || state.who(nb.index(), SiteType.Vertex) == numPlayers + 1) {
                         adjacencyGraph[k].set(nb.index());
                         adjacencyGraph[nb.index()].set(k);
@@ -127,16 +126,16 @@ public final class SitesPath extends BaseRegionFunction
         }
         resultVertices.add(j);
         switch (this.resultType) {
-            case Vertex: {
+            case Vertex -> {
                 return new Region(resultVertices.toArray());
             }
-            case Edge: {
+            case Edge -> {
                 return new Region(resultEdges.toArray());
             }
-            case Cell: {
+            case Cell -> {
                 return null;
             }
-            default: {
+            default -> {
                 return null;
             }
         }
@@ -204,16 +203,16 @@ public final class SitesPath extends BaseRegionFunction
         }
         resultVertices.add(j);
         switch (this.resultType) {
-            case Vertex: {
+            case Vertex -> {
                 return new Region(resultVertices.toArray());
             }
-            case Edge: {
+            case Edge -> {
                 return new Region(resultEdges.toArray());
             }
-            case Cell: {
+            case Cell -> {
                 return null;
             }
-            default: {
+            default -> {
                 return null;
             }
         }

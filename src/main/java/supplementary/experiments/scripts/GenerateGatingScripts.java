@@ -9,8 +9,8 @@ import main.CommandLineArgParse;
 import main.FileHandling;
 import main.StringRoutines;
 import main.UnixPrintWriter;
-import main.collections.ListUtils;
-import main.options.Option;
+import collections.ListUtils;
+import options.Option;
 import search.mcts.MCTS;
 import search.minimax.AlphaBetaSearch;
 import util.GameLoader;
@@ -37,7 +37,7 @@ public class GenerateGatingScripts
         final String[] allGameNames = FileHandling.listGames();
         String scriptsDirPath = argParse.getValueString("--scripts-dir");
         scriptsDirPath = scriptsDirPath.replaceAll(Pattern.quote("\\"), "/");
-        if (!scriptsDirPath.endsWith("/")) {
+        if (!(!scriptsDirPath.isEmpty() && scriptsDirPath.charAt(scriptsDirPath.length() - 1) == '/')) {
             scriptsDirPath += "/";
         }
         final File scriptsDir = new File(scriptsDirPath);
@@ -46,13 +46,13 @@ public class GenerateGatingScripts
         }
         String trainingOutDirPath = argParse.getValueString("--training-out-dir");
         trainingOutDirPath = trainingOutDirPath.replaceAll(Pattern.quote("\\"), "/");
-        if (!trainingOutDirPath.endsWith("/")) {
+        if (!(!trainingOutDirPath.isEmpty() && trainingOutDirPath.charAt(trainingOutDirPath.length() - 1) == '/')) {
             trainingOutDirPath += "/";
         }
         final File trainingOutDir = new File(trainingOutDirPath);
         String bestAgentsDataDirPath = argParse.getValueString("--best-agents-data-dir");
         bestAgentsDataDirPath = bestAgentsDataDirPath.replaceAll(Pattern.quote("\\"), "/");
-        if (!bestAgentsDataDirPath.endsWith("/")) {
+        if (!(!bestAgentsDataDirPath.isEmpty() && bestAgentsDataDirPath.charAt(bestAgentsDataDirPath.length() - 1) == '/')) {
             bestAgentsDataDirPath += "/";
         }
         final File bestAgentsDataDir = new File(bestAgentsDataDirPath);
@@ -84,7 +84,7 @@ public class GenerateGatingScripts
         }
         final List<List<String>> jobScriptsLists = new ArrayList<>();
         List<String> remainingJobScriptNames = jobScriptNames;
-        while (remainingJobScriptNames.size() > 0) {
+        while (!remainingJobScriptNames.isEmpty()) {
             if (remainingJobScriptNames.size() > 800) {
                 final List<String> subList = new ArrayList<>();
                 for (int i = 0; i < 800; ++i) {
@@ -120,29 +120,28 @@ public class GenerateGatingScripts
                 break;
             }
         }
-        if (gameName.equals("")) {
+        if (gameName.isEmpty()) {
             System.err.println("Can't recognise game: " + gameDirName);
             return;
         }
         List<String> optionsToCompile = new ArrayList<>();
         Game game;
         if (optionsStr == null) {
-            game = GameLoader.loadGameFromName(gameName, new ArrayList<String>());
+            game = GameLoader.loadGameFromName(gameName, new ArrayList<>());
         }
         else {
-            final Game gameNoOptions = GameLoader.loadGameFromName(gameName, new ArrayList<String>());
+            final Game gameNoOptions = GameLoader.loadGameFromName(gameName, new ArrayList<>());
             final List<List<String>> optionCategories = new ArrayList<>();
             for (int o = 0; o < gameNoOptions.description().gameOptions().numCategories(); ++o) {
                 final List<Option> options = gameNoOptions.description().gameOptions().categories().get(o).options();
                 final List<String> optionCategory = new ArrayList<>();
-                for (int i = 0; i < options.size(); ++i) {
-                    final Option option = options.get(i);
+                for (final Option option : options) {
                     final String categoryStr = StringRoutines.join("/", option.menuHeadings().toArray(new String[0]));
                     if (!categoryStr.contains("Board Size/") && !categoryStr.contains("Rows/") && !categoryStr.contains("Columns/")) {
                         optionCategory.add(categoryStr);
                     }
                 }
-                if (optionCategory.size() > 0) {
+                if (!optionCategory.isEmpty()) {
                     optionCategories.add(optionCategory);
                 }
             }
@@ -261,11 +260,11 @@ public class GenerateGatingScripts
             final String heuristicFilepath = evalHeuristicsFilepaths.get(evalAgentIdx);
             final List<String> gateAgents3 = gateAgentTypes.get(evalAgentIdx);
             for (final String gateAgent : gateAgents3) {
-                String javaCall = StringRoutines.join(" ", "java", "-Xms4096M", "-Xmx4096M", "-XX:+HeapDumpOnOutOfMemoryError", "-da", "-dsa", "-XX:+UseStringDeduplication", "-jar", StringRoutines.quote("/home/" + userName + "/Gating/Ludii.jar"), "--eval-gate", "--game", StringRoutines.quote(gameName), "--eval-agent", StringRoutines.quote(agentToEval), "-n 30", "--game-length-cap 800", "--thinking-time 1", "--best-agents-data-dir", StringRoutines.quote(bestAgentsDataDirForGame.getAbsolutePath()), "--gate-agent-type", gateAgent, "--max-wall-time", "" + Math.max(1000, 4000 / numMatchups));
-                if (quotedOptionStrings.size() > 0) {
+                String javaCall = StringRoutines.join(" ", "java", "-Xms4096M", "-Xmx4096M", "-XX:+HeapDumpOnOutOfMemoryError", "-da", "-dsa", "-XX:+UseStringDeduplication", "-jar", StringRoutines.quote("/home/" + userName + "/Gating/Ludii.jar"), "--eval-gate", "--game", StringRoutines.quote(gameName), "--eval-agent", StringRoutines.quote(agentToEval), "-n 30", "--game-length-cap 800", "--thinking-time 1", "--best-agents-data-dir", StringRoutines.quote(bestAgentsDataDirForGame.getAbsolutePath()), "--gate-agent-type", gateAgent, "--max-wall-time", String.valueOf(Math.max(1000, 4000 / numMatchups)));
+                if (!quotedOptionStrings.isEmpty()) {
                     javaCall = javaCall + " --game-options " + StringRoutines.join(" ", quotedOptionStrings);
                 }
-                if (featureWeightFilepaths.size() > 0) {
+                if (!featureWeightFilepaths.isEmpty()) {
                     javaCall = javaCall + " --eval-feature-weights-filepaths " + StringRoutines.join(" ", featureWeightFilepaths);
                 }
                 if (heuristicFilepath != null) {

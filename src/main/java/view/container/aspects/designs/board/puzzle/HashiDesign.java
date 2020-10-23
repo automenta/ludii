@@ -21,7 +21,7 @@ public class HashiDesign extends PuzzleDesign
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.003f;
-        final float swThin = (float)Math.max(1, (int)(0.003f * this.boardStyle.placement().width + 0.5));
+        final float swThin = Math.max(1, (int)(0.003f * this.boardStyle.placement().width + 0.5));
         final float swThick = 2.0f * swThin;
         this.setStrokesAndColours(context, new Color(0, 0, 0), null, null, null, null, null, new Color(0, 0, 0), swThin, swThick);
         final double cellDistance = this.boardStyle.cellRadius();

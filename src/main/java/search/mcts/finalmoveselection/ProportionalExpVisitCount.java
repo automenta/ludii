@@ -4,7 +4,7 @@
 
 package search.mcts.finalmoveselection;
 
-import main.collections.FVector;
+import collections.FVector;
 import search.mcts.nodes.BaseNode;
 import util.Move;
 

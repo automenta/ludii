@@ -9,6 +9,7 @@ import util.BaseLudeme;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Games extends BaseLudeme implements Serializable
@@ -35,9 +36,7 @@ public class Games extends BaseLudeme implements Serializable
                 throw new IllegalArgumentException("A match needs at least one game.");
             }
             this.games = new ArrayList<>();
-            for (final Subgame subGame : games) {
-                this.games.add(subGame);
-            }
+            this.games.addAll(Arrays.asList(games));
         }
     }
     

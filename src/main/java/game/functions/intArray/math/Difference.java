@@ -88,13 +88,11 @@ public final class Difference extends BaseIntArrayFunction
     @Override
     public long gameFlags(final Game game) {
         long flag = 0L;
-        for (int i = 0; i < this.source.length; ++i) {
-            final IntFunction sourceFunction = this.source[i];
+        for (final IntFunction sourceFunction : this.source) {
             flag |= sourceFunction.gameFlags(game);
         }
         if (this.subtraction != null) {
-            for (int i = 0; i < this.subtraction.length; ++i) {
-                final IntFunction subFunction = this.subtraction[i];
+            for (final IntFunction subFunction : this.subtraction) {
                 flag |= subFunction.gameFlags(game);
             }
         }
@@ -106,13 +104,11 @@ public final class Difference extends BaseIntArrayFunction
     
     @Override
     public void preprocess(final Game game) {
-        for (int i = 0; i < this.source.length; ++i) {
-            final IntFunction sourceFunction = this.source[i];
+        for (final IntFunction sourceFunction : this.source) {
             sourceFunction.preprocess(game);
         }
         if (this.subtraction != null) {
-            for (int i = 0; i < this.subtraction.length; ++i) {
-                final IntFunction subFunction = this.subtraction[i];
+            for (final IntFunction subFunction : this.subtraction) {
                 subFunction.preprocess(game);
             }
         }

@@ -31,8 +31,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -69,7 +67,8 @@ public class SettingsDialog extends JDialog
                 public void windowClosed(final WindowEvent e) {
                     for (int i = 0; i < SettingsColour.getSavedPlayerColourPreferences().size(); ++i) {
                         final SettingsColour.PlayerColourPreference g = SettingsColour.getSavedPlayerColourPreferences().get(i);
-                        if (g.gameName().equals(Manager.savedLudName())) {
+                        final String gg = g.gameName();
+                        if (gg!=null && gg.equals(Manager.savedLudName())) {
                             SettingsColour.getSavedPlayerColourPreferences().remove(i);
                             break;
                         }
@@ -555,7 +554,7 @@ public class SettingsDialog extends JDialog
         for (final String s : pieceDesigns) {
             comboBox.addItem(s);
         }
-        if (!SettingsVC.getPieceFamily(context.game().name()).equals("")) {
+        if (!SettingsVC.getPieceFamily(context.game().name()).isEmpty()) {
             comboBox.setSelectedItem(SettingsVC.getPieceFamily(context.game().name()));
         }
         comboBox.addActionListener(e -> {
@@ -823,7 +822,7 @@ public class SettingsDialog extends JDialog
                 }
             }
             try {
-                double allSearchTimeValue = Double.valueOf(SettingsDialog.this.textFieldThinkingTimeAll.getText());
+                double allSearchTimeValue = Double.parseDouble(SettingsDialog.this.textFieldThinkingTimeAll.getText());
                 if (allSearchTimeValue <= 0.0) {
                     allSearchTimeValue = 1.0;
                 }
@@ -1043,7 +1042,7 @@ public class SettingsDialog extends JDialog
         lblTabFontSize.setToolTipText("<html>The font size for the text displayed in the tabs.<br>");
         (this.textFieldTabFontSize = new JTextField()).setBounds(321, 578, 86, 20);
         this.textFieldTabFontSize.setColumns(10);
-        this.textFieldTabFontSize.setText("" + SettingsDesktop.tabFontSize);
+        this.textFieldTabFontSize.setText(String.valueOf(SettingsDesktop.tabFontSize));
         this.textFieldTabFontSize.getDocument().addDocumentListener(documentListenerTabFontSize);
         final JLabel lblEditorFontSize = new JLabel("Editor Font Size");
         lblEditorFontSize.setBounds(30, 620, 281, 19);
@@ -1051,7 +1050,7 @@ public class SettingsDialog extends JDialog
         lblEditorFontSize.setToolTipText("<html>The font size for the text displayed in the editor.<br>");
         (this.textFieldEditorFontSize = new JTextField()).setBounds(321, 618, 86, 20);
         this.textFieldEditorFontSize.setColumns(10);
-        this.textFieldEditorFontSize.setText("" + SettingsDesktop.editorFontSize);
+        this.textFieldEditorFontSize.setText(String.valueOf(SettingsDesktop.editorFontSize));
         this.textFieldEditorFontSize.getDocument().addDocumentListener(documentListenerEditorFontSize);
         final JCheckBox checkBoxCoordOutline = new JCheckBox("yes");
         checkBoxCoordOutline.setSelected(false);
@@ -1089,8 +1088,8 @@ public class SettingsDialog extends JDialog
         this.textFieldTickLength.setColumns(10);
         this.textFieldTickLength.setBounds(321, 76, 86, 20);
         SettingsDialog.otherPanel.add(this.textFieldTickLength);
-        this.textFieldMaximumNumberOfTurns.setText("" + context.game().getMaxTurnLimit());
-        this.textFieldTickLength.setText("" + SettingsManager.tickLength);
+        this.textFieldMaximumNumberOfTurns.setText(String.valueOf(context.game().getMaxTurnLimit()));
+        this.textFieldTickLength.setText(String.valueOf(SettingsManager.tickLength));
         SettingsDialog.otherPanel.setLayout(null);
         SettingsDialog.otherPanel.add(lblShowMovementAnimation);
         SettingsDialog.otherPanel.add(radioButtonMovementAnimation);

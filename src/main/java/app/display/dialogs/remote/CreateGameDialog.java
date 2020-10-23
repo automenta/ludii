@@ -13,7 +13,7 @@ import app.loading.GameLoading;
 import app.menu.MainMenu;
 import game.Game;
 import main.FileHandling;
-import main.options.Option;
+import options.Option;
 import manager.Manager;
 import manager.ai.AIDetails;
 import manager.ai.AIMenuName;
@@ -25,8 +25,6 @@ import manager.utils.SettingsManager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.BufferedReader;
@@ -81,9 +79,9 @@ public class CreateGameDialog extends JDialog
         final String[] allPlayersPre = DatabaseFunctions.GetAllPlayers().split("_next_");
         final String[] allPlayers = new String[allPlayersPre.length - 1];
         int allPlayersIndex = 0;
-        for (int i = 0; i < allPlayersPre.length; ++i) {
-            if (Integer.parseInt(allPlayersPre[i].split("NEXT_COL")[0]) != SettingsNetwork.getLoginId()) {
-                allPlayers[allPlayersIndex] = allPlayersPre[i];
+        for (String s : allPlayersPre) {
+            if (Integer.parseInt(s.split("NEXT_COL")[0]) != SettingsNetwork.getLoginId()) {
+                allPlayers[allPlayersIndex] = s;
                 ++allPlayersIndex;
             }
         }
@@ -92,8 +90,8 @@ public class CreateGameDialog extends JDialog
             comboOptions[j] = allPlayers[j].split("NEXT_COL")[0] + ": " + allPlayers[j].split("NEXT_COL")[1];
         }
         final Vector<JCheckBox> v = new Vector<>();
-        for (int k = 0; k < comboOptions.length; ++k) {
-            final JCheckBox tempCheckBox = new JCheckBox(comboOptions[k], false);
+        for (String comboOption : comboOptions) {
+            final JCheckBox tempCheckBox = new JCheckBox(comboOption, false);
             v.add(tempCheckBox);
         }
         final JComboCheckBox comboBox = new JComboCheckBox(v);
@@ -143,7 +141,7 @@ public class CreateGameDialog extends JDialog
                 final Game game = ContextSnapshot.getContext().game();
                 final Pattern p = Pattern.compile("[^a-z0-9 ]", 2);
                 int timeLimitPlayer = 0;
-                if (txtTimeLimitPlayer.getText().length() > 0) {
+                if (!txtTimeLimitPlayer.getText().isEmpty()) {
                     timeLimitPlayer = Integer.parseInt(txtTimeLimitPlayer.getText());
                 }
                 if (lblSelectedGame.getText() == "No game selected.") {
@@ -163,7 +161,7 @@ public class CreateGameDialog extends JDialog
                         String allowedPlayerId = "";
                         for (int i = 0; i < comboBox.getItemCount(); ++i) {
                             if (comboBox.getItemAt(i).isSelected()) {
-                                allowedPlayerId = allowedPlayerId + comboBox.getItemAt(i).getText().toString().split(":")[0] + ",";
+                                allowedPlayerId = allowedPlayerId + comboBox.getItemAt(i).getText().split(":")[0] + ",";
                             }
                         }
                         int playerNumber = comboBox_1.getSelectedIndex() + 1;
@@ -174,7 +172,7 @@ public class CreateGameDialog extends JDialog
                         final int[] activeOptions = game.description().gameOptions().computeOptionSelections(SettingsManager.userSelections.selectedOptionStrings());
                         for (int j = 0; j < game.description().gameOptions().numCategories(); ++j) {
                             final List<Option> options = game.description().gameOptions().categories().get(j).options();
-                            if (options.size() > 0) {
+                            if (!options.isEmpty()) {
                                 optionString = optionString + options.get(activeOptions[j]).menuHeadings().get(0).replaceAll("\\s+", "_") + "|" + options.get(activeOptions[j]).menuHeadings().get(1).replaceAll("\\s+", "_") + "_NEXT_";
                             }
                         }
@@ -208,7 +206,6 @@ public class CreateGameDialog extends JDialog
                                 }
                                 catch (Exception ex) {}
                             }
-                            in.close();
                         }
                     }
                     catch (Exception E) {

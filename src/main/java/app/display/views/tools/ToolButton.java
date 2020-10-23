@@ -104,7 +104,7 @@ public abstract class ToolButton
                 }
             }
         }
-        if (allOtherMoveDescriptions.size() > 0) {
+        if (!allOtherMoveDescriptions.isEmpty()) {
             String tempMessageString = "You can ";
             for (final String s : allOtherMoveDescriptions) {
                 tempMessageString = tempMessageString + s + " or ";

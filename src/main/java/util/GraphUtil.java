@@ -246,11 +246,11 @@ public class GraphUtil
     
     public static List<TopologyElement> reorderGraphElementsTopDown(final List<TopologyElement> allGraphElements, final Context context) {
         if (context.game().isStacking()) {
-            Collections.sort(allGraphElements, Comparator.comparingDouble(o -> o.centroid().getY()));
+            allGraphElements.sort(Comparator.comparingDouble(o -> o.centroid().getY()));
             Collections.reverse(allGraphElements);
         }
         else if (context.board().topology().layers(SiteType.Vertex).size() > 1) {
-            Collections.sort(allGraphElements, Comparator.comparingInt(TopologyElement::layer));
+            allGraphElements.sort(Comparator.comparingInt(TopologyElement::layer));
         }
         return allGraphElements;
     }

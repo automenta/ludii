@@ -11,9 +11,9 @@ import language.compiler.exceptions.BadSyntaxException;
 import language.compiler.exceptions.ListNotSupportedException;
 import language.grammar.Grammar;
 import main.StringRoutines;
-import main.grammar.Instance;
-import main.grammar.Report;
-import main.grammar.Symbol;
+import grammar.Instance;
+import grammar.Report;
+import grammar.Symbol;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
@@ -28,9 +28,9 @@ public class ArgClass extends Arg
         this.argsIn = new ArrayList<>();
     }
     
-    public List<Arg> argsIn() {
-        return Collections.unmodifiableList(this.argsIn);
-    }
+//    public List<Arg> argsIn() {
+//        return Collections.unmodifiableList(this.argsIn);
+//    }
     
     public void add(final Arg arg) {
         this.argsIn.add(arg);
@@ -53,14 +53,13 @@ public class ArgClass extends Arg
         final List<Symbol> symbols = new ArrayList<>(existing);
         this.instances.clear();
         for (final Symbol symbol : symbols) {
-            if (symbol == null) {
+            if (symbol == null)
                 throw new BadSymbolException(this.symbolName);
-            }
+
             final Class<?> cls = loadClass(symbol);
-            if (cls == null) {
-                continue;
-            }
-            this.instances.add(new Instance(symbol, null));
+            if (cls != null)
+                this.instances.add(new Instance(symbol, null));
+
         }
         return true;
     }
@@ -129,10 +128,9 @@ public class ArgClass extends Arg
                             executables.addAll(Arrays.asList(cls.getDeclaredConstructors()));
                         }
                         else {
-                            final Method[] declaredMethods;
-                            final Method[] methods = declaredMethods = cls.getDeclaredMethods();
+                            final Method[] declaredMethods = cls.getDeclaredMethods();
                             for (final Method method : declaredMethods) {
-                                if (method.getName().equals("construct") && Modifier.isStatic(method.getModifiers())) {
+                                if (Modifier.isStatic(method.getModifiers()) && method.getName().equals("construct")) {
                                     executables.add(method);
                                 }
                             }
@@ -226,14 +224,12 @@ public class ArgClass extends Arg
                                     else {
                                         final Object[] argObjects = new Object[numSlots];
                                         final List<List<Arg>> combos = argCombos(this.argsIn, numSlots);
-                                        for (int cmb = 0; cmb < combos.size(); ++cmb) {
-                                            final List<Arg> combo = combos.get(cmb);
+                                        for (final List<Arg> combo : combos) {
                                             if (depth != -1) {
                                                 System.out.print(pre);
                                                 int count = 0;
-                                                for (int n2 = 0; n2 < combo.size(); ++n2) {
-                                                    final Arg arg = combo.get(n2);
-                                                    System.out.print(((arg == null) ? "-" : Character.valueOf((char)(65 + count))) + " ");
+                                                for (final Arg arg : combo) {
+                                                    System.out.print(((arg == null) ? "-" : Character.valueOf((char) (65 + count))) + " ");
                                                     if (arg != null) {
                                                         ++count;
                                                     }
@@ -241,7 +237,8 @@ public class ArgClass extends Arg
                                                 System.out.println();
                                             }
                                             int slot;
-                                            for (slot = 0; slot < numSlots && (combo.get(slot) != null || isOptional.get(slot)); ++slot) {}
+                                            for (slot = 0; slot < numSlots && (combo.get(slot) != null || isOptional.get(slot)); ++slot) {
+                                            }
                                             if (slot >= numSlots) {
                                                 for (slot = 0; slot < numSlots; ++slot) {
                                                     argObjects[slot] = null;
@@ -257,22 +254,19 @@ public class ArgClass extends Arg
                                                         if (!isOptional.get(slot)) {
                                                             break;
                                                         }
-                                                    }
-                                                    else if (name[slot] != null && (argIn.parameterName() == null || !argIn.parameterName().equals(name[slot]))) {
+                                                    } else if (name[slot] != null && (argIn.parameterName() == null || !argIn.parameterName().equals(name[slot]))) {
                                                         if (depth != -1) {
                                                             System.out.println(pre + "- Named arg '" + name[slot] + "' in constructor does not match argIn parameterName '" + argIn.parameterName() + "'.");
                                                             break;
                                                         }
                                                         break;
-                                                    }
-                                                    else if (argIn.parameterName() != null && (name[slot] == null || !argIn.parameterName().equals(name[slot]))) {
+                                                    } else if (argIn.parameterName() != null && (name[slot] == null || !argIn.parameterName().equals(name[slot]))) {
                                                         if (depth != -1) {
                                                             System.out.println(pre + "- Named argIn '" + argIn.parameterName() + "' does not match parameter constructor arg label '" + name[slot] + "'.");
                                                             break;
                                                         }
                                                         break;
-                                                    }
-                                                    else {
+                                                    } else {
                                                         final Object match = argIn.compile(types[slot], (depth == -1) ? -1 : (depth + 1));
                                                         if (match == null) {
                                                             if (depth != -1) {
@@ -280,8 +274,7 @@ public class ArgClass extends Arg
                                                                 break;
                                                             }
                                                             break;
-                                                        }
-                                                        else {
+                                                        } else {
                                                             argObjects[slot] = match;
                                                             if (depth != -1) {
                                                                 System.out.println(pre + "arg " + slot + " corresponds to " + argIn + ",");
@@ -302,13 +295,11 @@ public class ArgClass extends Arg
                                                     }
                                                     try {
                                                         if (tryConstructors) {
-                                                            object = ((Constructor)exec).newInstance(argObjects);
+                                                            object = ((Constructor) exec).newInstance(argObjects);
+                                                        } else {
+                                                            object = ((Method) exec).invoke(null, argObjects);
                                                         }
-                                                        else {
-                                                            object = ((Method)exec).invoke(null, argObjects);
-                                                        }
-                                                    }
-                                                    catch (Exception e3) {
+                                                    } catch (Exception e3) {
                                                         System.out.println("***************************");
                                                         e3.printStackTrace();
                                                         if (depth != -1) {
@@ -387,9 +378,7 @@ public class ArgClass extends Arg
             return;
         }
         final List<Arg> combo = new ArrayList<>();
-        for (int n = 0; n < numSlots; ++n) {
-            combo.add(current[n]);
-        }
+        combo.addAll(Arrays.asList(current).subList(0, numSlots));
         combos.add(combo);
     }
     
@@ -400,7 +389,7 @@ public class ArgClass extends Arg
             strT = strT + this.parameterName + ":";
         }
         strT = strT + "(" + this.symbolName;
-        if (this.argsIn.size() > 0) {
+        if (!this.argsIn.isEmpty()) {
             for (final Arg arg : this.argsIn) {
                 strT = strT + " " + arg.toString();
             }

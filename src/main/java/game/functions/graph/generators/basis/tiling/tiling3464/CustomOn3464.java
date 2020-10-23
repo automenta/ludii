@@ -14,8 +14,8 @@ import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
 import gnu.trove.list.array.TIntArrayList;
-import main.math.MathRoutines;
-import main.math.Polygon;
+import math.MathRoutines;
+import math.Polygon;
 import util.Context;
 
 import java.awt.geom.Point2D;
@@ -58,8 +58,8 @@ public class CustomOn3464 extends Basis
         }
         this.basis = BasisType.T3464;
         this.shape = ((sides.length == 2 && sides[0].eval() == sides[1].eval() - 1) ? ShapeType.Limping : ShapeType.Custom);
-        for (int n2 = 0; n2 < sides.length; ++n2) {
-            this.sides.add(sides[n2].eval());
+        for (DimFunction side : sides) {
+            this.sides.add(side.eval());
         }
     }
     

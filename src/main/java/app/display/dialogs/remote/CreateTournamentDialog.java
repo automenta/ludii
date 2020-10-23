@@ -12,7 +12,7 @@ import app.loading.GameLoading;
 import app.menu.MainMenu;
 import game.Game;
 import main.FileHandling;
-import main.options.Option;
+import options.Option;
 import manager.Manager;
 import manager.network.DatabaseFunctions;
 import manager.network.SettingsNetwork;
@@ -22,8 +22,6 @@ import manager.utils.SettingsManager;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -76,8 +74,8 @@ public class CreateTournamentDialog extends JDialog
         final String[] allPlayersPre = DatabaseFunctions.GetAllPlayers().split("_next_");
         final String[] allPlayers = new String[allPlayersPre.length];
         int allPlayersIndex = 0;
-        for (int i = 0; i < allPlayersPre.length; ++i) {
-            allPlayers[allPlayersIndex] = allPlayersPre[i];
+        for (String s : allPlayersPre) {
+            allPlayers[allPlayersIndex] = s;
             ++allPlayersIndex;
         }
         final String[] comboOptions = new String[allPlayers.length];
@@ -85,8 +83,8 @@ public class CreateTournamentDialog extends JDialog
             comboOptions[j] = allPlayers[j].split("NEXT_COL")[0] + ": " + allPlayers[j].split("NEXT_COL")[1];
         }
         final Vector<JCheckBox> v = new Vector<>();
-        for (int k = 0; k < comboOptions.length; ++k) {
-            final JCheckBox tempCheckBox = new JCheckBox(comboOptions[k], false);
+        for (String comboOption : comboOptions) {
+            final JCheckBox tempCheckBox = new JCheckBox(comboOption, false);
             v.add(tempCheckBox);
         }
         final JComboBox<JCheckBox> comboBox = new JComboCheckBox(v);
@@ -163,15 +161,15 @@ public class CreateTournamentDialog extends JDialog
             CreateTournamentDialog.okButtonPressed = true;
             try {
                 int timeLimitPlayer = 0;
-                if (txtTimeLimitPlayer.getText().length() > 0) {
+                if (!txtTimeLimitPlayer.getText().isEmpty()) {
                     timeLimitPlayer = Integer.parseInt(txtTimeLimitPlayer.getText());
                 }
                 int timeLimitRound = 0;
-                if (txtTimeLimitRound.getText().length() > 0) {
+                if (!txtTimeLimitRound.getText().isEmpty()) {
                     timeLimitRound = Integer.parseInt(txtTimeLimitRound.getText());
                 }
                 long numberRounds = 1L;
-                if (txtNumberRounds.getText().length() > 0 && txtNumberRounds.isVisible()) {
+                if (!txtNumberRounds.getText().isEmpty() && txtNumberRounds.isVisible()) {
                     numberRounds = Integer.parseInt(txtNumberRounds.getText());
                 }
                 if (lblSelectedGame.getText() == "No game selected") {
@@ -183,7 +181,7 @@ public class CreateTournamentDialog extends JDialog
                         String allowedPlayerIds = "";
                         for (int i = 0; i < comboBox.getItemCount(); ++i) {
                             if (comboBox.getItemAt(i).isSelected()) {
-                                allowedPlayerIds = allowedPlayerIds + comboBox.getItemAt(i).getText().toString().split(":")[0] + ",";
+                                allowedPlayerIds = allowedPlayerIds + comboBox.getItemAt(i).getText().split(":")[0] + ",";
                             }
                         }
                         final Game game = ContextSnapshot.getContext().game();
@@ -214,7 +212,7 @@ public class CreateTournamentDialog extends JDialog
                             final int[] activeOptions = game.description().gameOptions().computeOptionSelections(SettingsManager.userSelections.selectedOptionStrings());
                             for (int j = 0; j < game.description().gameOptions().numCategories(); ++j) {
                                 final List<Option> options = game.description().gameOptions().categories().get(j).options();
-                                if (options.size() > 0) {
+                                if (!options.isEmpty()) {
                                     optionString = optionString + options.get(activeOptions[j]).menuHeadings().get(0).replaceAll("\\s+", "_") + "|" + options.get(activeOptions[j]).menuHeadings().get(1).replaceAll("\\s+", "_") + "_NEXT_";
                                 }
                             }
@@ -234,7 +232,6 @@ public class CreateTournamentDialog extends JDialog
                                     }
                                     catch (Exception ex) {}
                                 }
-                                in.close();
                             }
                             if (tournamentId == -1) {
                                 Manager.app.addTextToStatusPanel("Could not start the tournament.\n");

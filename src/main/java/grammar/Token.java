@@ -3,7 +3,7 @@
  */
 package grammar;
 
-import root.StringRoutines;
+import main.StringRoutines;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -111,23 +111,23 @@ public class Token {
             return;
         }
         if (ch == '(') {
-            this.open = (char)40;
+            this.open = 40;
             int cb = StringRoutines.matchingBracketAt(str, 0);
             if (cb == -1) {
                 report.addError("No closing bracket ')' for clause '" + Report.clippedString(str, 20) + "'.");
                 return;
             }
-            this.close = (char)41;
+            this.close = 41;
             str = str.substring(1, cb);
             argsString = this.consumeToken(str);
         } else if (ch == '{') {
-            this.open = (char)123;
+            this.open = 123;
             int cb = StringRoutines.matchingBracketAt(str, 0);
             if (cb == -1) {
                 report.addError("No closing bracket '}' for clause '" + Report.clippedString(str, 20) + "'.");
                 return;
             }
-            this.close = (char)125;
+            this.close = 125;
             str = str.substring(1, cb);
             argsString = str;
         } else if (ch != ' ') {
@@ -337,9 +337,7 @@ public class Token {
 
     static String indent(int depth) {
         StringBuilder sb = new StringBuilder();
-        for (int d = 0; d < depth; ++d) {
-            sb.append(TAB);
-        }
+        sb.append(TAB.repeat(Math.max(0, depth)));
         return sb.toString();
     }
 
@@ -519,7 +517,7 @@ public class Token {
     }
 
     public String dump(String indent) {
-        String label = "" + this.type().name().charAt(0) + this.type().name().charAt(1) + ": ";
+        String label = String.valueOf(this.type().name().charAt(0)) + this.type().name().charAt(1) + ": ";
         StringBuilder sb = new StringBuilder();
         sb.append(label + indent);
         if (this.parameterLabel != null) {
@@ -531,7 +529,7 @@ public class Token {
         if (this.name != null) {
             sb.append(this.name);
         }
-        if (this.arguments.size() > 0) {
+        if (!this.arguments.isEmpty()) {
             sb.append("\n");
             for (Token arg : this.arguments) {
                 sb.append(arg.dump(indent + TAB));

@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Instance {
-    private final Symbol symbol;
+    public final Symbol symbol;
     private List<Clause> clauses = null;
     private Object object = null;
 

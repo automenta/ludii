@@ -26,14 +26,14 @@ public class ButtonStart extends ToolButton
         g2d.setColor(this.getButtonColour());
         g2d.setStroke(new BasicStroke(3.0f, 0, 1));
         GeneralPath path = new GeneralPath();
-        path.moveTo((float)(this.cx + 10), (float)(this.cy + 7));
-        path.lineTo((float)(this.cx + 0), (float)(this.cy + 0));
-        path.lineTo((float)(this.cx + 10), (float)(this.cy - 7));
+        path.moveTo((this.cx + 10), (this.cy + 7));
+        path.lineTo((this.cx + 0), (this.cy + 0));
+        path.lineTo((this.cx + 10), (this.cy - 7));
         g2d.draw(path);
         g2d.setStroke(new BasicStroke(2.0f, 0, 1));
         path = new GeneralPath();
-        path.moveTo((float)(this.cx - 4), (float)(this.cy + 9));
-        path.lineTo((float)(this.cx - 4), (float)(this.cy - 9));
+        path.moveTo((this.cx - 4), (this.cy + 9));
+        path.lineTo((this.cx - 4), (this.cy - 9));
         g2d.draw(path);
     }
     

@@ -37,10 +37,10 @@ public final class Sizes extends BaseIntArrayFunction
             throw new IllegalArgumentException("Sizes(): With SizesGroupType zero or one 'role' or 'of' or 'If' parameters must be non-null.");
         }
         switch (sizesType) {
-            case Group: {
+            case Group -> {
                 return new SizesGroup(type, directions, role, of, If, min);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sizes(): A SizeGroupType is not implemented.");
             }
         }

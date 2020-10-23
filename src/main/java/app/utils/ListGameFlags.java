@@ -29,9 +29,7 @@ public class ListGameFlags
             }
             final String[] headers = new String[flags.length + 1];
             headers[0] = "Game Name";
-            for (int j = 0; j < flags.length; ++j) {
-                headers[j + 1] = flags[j];
-            }
+            System.arraycopy(flags, 0, headers, 1, flags.length);
             writer.println(StringRoutines.join(";", headers));
             final String[] listGames;
             final String[] gameNames = listGames = FileHandling.listGames();

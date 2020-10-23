@@ -53,13 +53,13 @@ public class IsShape extends BaseBooleanFunction
     @Override
     public boolean eval(final Context context) {
         int numColumns = context.topology().columns(SiteType.Cell).size();
-        if (this.type.equals(SiteType.Vertex)) {
+        if (this.type == SiteType.Vertex) {
             --numColumns;
         }
         if (this.region != null) {
             final int[] sites = this.region.eval(context).sites();
             Arrays.sort(sites);
-            if (this.shape.equals(ShapeType.Rectangle) || this.shape.equals(ShapeType.Square)) {
+            if (this.shape == ShapeType.Rectangle || this.shape == ShapeType.Square) {
                 int startingRow = -1;
                 int numRowSites = 0;
                 int firstIndexOfRow = -1;
@@ -108,7 +108,7 @@ public class IsShape extends BaseBooleanFunction
                         final Integer[][] regionsList = convertStaticRegionOnLocs = reg.convertStaticRegionOnLocs(area, context);
                         for (final Integer[] locs : convertStaticRegionOnLocs) {
                             Arrays.sort(locs);
-                            if (this.shape.equals(ShapeType.Rectangle) || this.shape.equals(ShapeType.Square)) {
+                            if (this.shape == ShapeType.Rectangle || this.shape == ShapeType.Square) {
                                 int startingRow2 = -1;
                                 int numRowSites2 = 0;
                                 int firstIndexOfRow2 = -1;

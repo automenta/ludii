@@ -14,8 +14,8 @@ import game.players.Players;
 import game.rules.end.End;
 import game.rules.play.moves.BaseMoves;
 import game.rules.play.moves.Moves;
-import main.collections.FVector;
-import main.grammar.Description;
+import collections.FVector;
+import grammar.Description;
 import util.*;
 import util.action.others.ActionNextInstance;
 

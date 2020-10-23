@@ -18,7 +18,6 @@ public final class SeedFactory
         final long t = System.currentTimeMillis();
         final int h = System.identityHashCode(Runtime.getRuntime());
         final SplitMix64 rng = new SplitMix64(t ^ NumberFactory.makeLong(h, ~h));
-        final int blockCount = 1391;
         SEED_GENERATOR = new Well44497b(createIntArray(1391, rng));
     }
     
@@ -26,7 +25,10 @@ public final class SeedFactory
     }
     
     public static long createLong() {
-        return createLong(SeedFactory.SEED_GENERATOR, System.identityHashCode(new Object()));
+        final int number = System.identityHashCode(new Object());
+        synchronized (SeedFactory.SEED_GENERATOR) {
+            return NumberFactory.makeLong(SeedFactory.SEED_GENERATOR.next() ^ number, SeedFactory.SEED_GENERATOR.next() ^ number);
+        }
     }
     
     static int[] createIntArray(final int n, final RandomLongSource source) {
@@ -37,7 +39,11 @@ public final class SeedFactory
         final int[] array = new int[n];
         final int hash = System.identityHashCode(h);
         for (int i = 0; i < n; i += 2) {
-            final long v = createLong(source, hash);
+            long result;
+            synchronized (source) {
+                result = source.next() ^ NumberFactory.makeLong(hash, hash);
+            }
+            final long v = result;
             array[i] = NumberFactory.extractHi(v);
             if (i + 1 < n) {
                 array[i + 1] = NumberFactory.extractLo(v);
@@ -45,16 +51,5 @@ public final class SeedFactory
         }
         return array;
     }
-    
-    private static long createLong(final RandomLongSource source, final int number) {
-        synchronized (source) {
-            return source.next() ^ NumberFactory.makeLong(number, number);
-        }
-    }
-    
-    private static long createLong(final RandomIntSource source, final int number) {
-        synchronized (source) {
-            return NumberFactory.makeLong(source.next() ^ number, source.next() ^ number);
-        }
-    }
+
 }

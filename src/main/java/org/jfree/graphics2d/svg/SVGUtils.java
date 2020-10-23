@@ -23,15 +23,15 @@ public class SVGUtils
         for (int i = 0; i < source.length(); ++i) {
             final char c = source.charAt(i);
             switch (c) {
-                case '<': {
+                case '<' -> {
                     sb.append("&lt;");
                     break;
                 }
-                case '>': {
+                case '>' -> {
                     sb.append("&gt;");
                     break;
                 }
-                case '&': {
+                case '&' -> {
                     final String next = source.substring(i, Math.min(i + 6, source.length()));
                     if (next.startsWith("&lt;") || next.startsWith("&gt;") || next.startsWith("&amp;") || next.startsWith("&apos;") || next.startsWith("&quot;")) {
                         sb.append(c);
@@ -40,15 +40,15 @@ public class SVGUtils
                     sb.append("&amp;");
                     break;
                 }
-                case '\'': {
+                case '\'' -> {
                     sb.append("&apos;");
                     break;
                 }
-                case '\"': {
+                case '\"' -> {
                     sb.append("&quot;");
                     break;
                 }
-                default: {
+                default -> {
                     sb.append(c);
                     break;
                 }

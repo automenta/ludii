@@ -22,8 +22,8 @@ import game.types.board.RegionTypeDynamic;
 import game.types.play.RoleType;
 import game.util.equipment.Region;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.ArrayUtils;
-import main.math.BitTwiddling;
+import collections.ArrayUtils;
+import math.BitTwiddling;
 import metadata.Metadata;
 import org.apache.commons.rng.core.source64.SplitMix64;
 import topology.Topology;
@@ -737,7 +737,7 @@ public class Context
     
     public int fromStartOfTurn() {
         final List<Move> moves = this.trial.moves();
-        if (moves.size() == 0) {
+        if (moves.isEmpty()) {
             return -1;
         }
         final int mover = this.state.mover();

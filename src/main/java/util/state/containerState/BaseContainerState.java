@@ -144,10 +144,10 @@ public abstract class BaseContainerState implements ContainerState
     
     @Override
     public boolean isEmpty(final int site, final SiteType type) {
-        if (type == null || type.equals(SiteType.Cell) || this.container().index() != 0) {
+        if (type == null || type == SiteType.Cell || this.container().index() != 0) {
             return this.isEmptyCell(site);
         }
-        if (type.equals(SiteType.Edge)) {
+        if (type == SiteType.Edge) {
             return this.isEmptyEdge(site);
         }
         return this.isEmptyVertex(site);
@@ -216,13 +216,13 @@ public abstract class BaseContainerState implements ContainerState
     @Override
     public UnionInfoD[] unionInfo(final AbsoluteDirection dir) {
         switch (dir) {
-            case Adjacent: {
+            case Adjacent -> {
                 return this.unionInfoAdjacent;
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 return this.unionInfoOrthogonal;
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("BaseContainerState::unionInfo() only supports Adjacent or Orthogonal!");
             }
         }
@@ -231,13 +231,13 @@ public abstract class BaseContainerState implements ContainerState
     @Override
     public UnionInfoD[] unionInfoBlocking(final AbsoluteDirection dir) {
         switch (dir) {
-            case Adjacent: {
+            case Adjacent -> {
                 return this.unionInfoBlockingAdjacent;
             }
-            case Orthogonal: {
+            case Orthogonal -> {
                 return this.unionInfoBlockingOrthogonal;
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("BaseContainerState::unionInfoBlocking() only supports Adjacent or Orthogonal!");
             }
         }

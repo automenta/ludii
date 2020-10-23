@@ -13,16 +13,16 @@ public enum PuzzleElementType
     
     public static SiteType convert(final PuzzleElementType puzzleElement) {
         switch (puzzleElement) {
-            case Cell: {
+            case Cell -> {
                 return SiteType.Cell;
             }
-            case Edge: {
+            case Edge -> {
                 return SiteType.Edge;
             }
-            case Vertex: {
+            case Vertex -> {
                 return SiteType.Vertex;
             }
-            default: {
+            default -> {
                 return null;
             }
         }

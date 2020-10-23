@@ -25,10 +25,10 @@ public final class Take extends Effect
     
     public static Moves construct(final TakeSimpleType takeType, @Opt final Then then) {
         switch (takeType) {
-            case Domino: {
+            case Domino -> {
                 return new TakeDomino(then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Take(): A TakeSimpleType is not implemented.");
             }
         }
@@ -36,10 +36,10 @@ public final class Take extends Effect
     
     public static Moves construct(final TakeControlType takeType, @Or @Name final RoleType of, @Or @Name final IntFunction OF, @Or2 @Name final RoleType by, @Or2 @Name final IntFunction BY, @Opt final SiteType type, @Opt final Then then) {
         switch (takeType) {
-            case Control: {
+            case Control -> {
                 return new TakeControl(of, OF, by, BY, type, then);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Take(): A TakeControlType is not implemented.");
             }
         }

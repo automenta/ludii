@@ -22,10 +22,10 @@ public final class Card extends BaseIntFunction
     
     public static IntFunction construct(final CardSimpleType cardType) {
         switch (cardType) {
-            case TrumpSuit: {
+            case TrumpSuit -> {
                 return new CardTrumpSuit();
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Card(): A CardSimpleType is not implemented.");
             }
         }
@@ -33,19 +33,19 @@ public final class Card extends BaseIntFunction
     
     public static IntFunction construct(final CardSiteType cardType, @Name final IntFunction at, @Name @Opt final IntFunction level) {
         switch (cardType) {
-            case Rank: {
+            case Rank -> {
                 return new CardRank(at, level);
             }
-            case Suit: {
+            case Suit -> {
                 return new CardSuit(at, level);
             }
-            case TrumpRank: {
+            case TrumpRank -> {
                 return new CardTrumpRank(at, level);
             }
-            case TrumpValue: {
+            case TrumpValue -> {
                 return new CardTrumpValue(at, level);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Card(): A CardSiteType is not implemented.");
             }
         }

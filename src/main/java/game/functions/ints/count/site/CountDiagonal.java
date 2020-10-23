@@ -39,19 +39,19 @@ public final class CountDiagonal extends BaseIntFunction
         final SiteType realSiteType = (this.type != null) ? this.type : context.board().defaultSite();
         final int[] sites = this.region.eval(context).sites();
         switch (realSiteType) {
-            case Cell: {
+            case Cell -> {
                 if (sites[0] < context.topology().cells().size()) {
                     return context.topology().cells().get(sites[0]).diagonal().size();
                 }
                 break;
             }
-            case Edge: {
+            case Edge -> {
                 if (sites[0] < context.topology().edges().size()) {
                     return 0;
                 }
                 break;
             }
-            case Vertex: {
+            case Vertex -> {
                 if (sites[0] < context.topology().vertices().size()) {
                     return context.topology().vertices().get(sites[0]).diagonal().size();
                 }

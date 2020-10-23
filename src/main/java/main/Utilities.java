@@ -9,8 +9,8 @@ public final class Utilities
     public static void stackTrace() {
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         System.out.println("======================");
-        for (int n = 0; n < ste.length; ++n) {
-            System.out.println(ste[n]);
+        for (StackTraceElement stackTraceElement : ste) {
+            System.out.println(stackTraceElement);
         }
         System.out.println("======================");
     }

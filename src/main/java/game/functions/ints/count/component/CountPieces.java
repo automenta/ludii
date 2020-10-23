@@ -51,16 +51,15 @@ public final class CountPieces extends BaseIntFunction
             final List<Location> locsOwned = new ArrayList<>();
             for (int pid = 1; pid <= context.game().players().count(); ++pid) {
                 final List<? extends Location>[] owned = context.state().owned().positions(pid);
-                for (int i = 0; i < owned.length; ++i) {
-                    final List<? extends Location> locations = owned[i];
-                    for (int j = 0; j < locations.size(); ++j) {
-                        locsOwned.add(locations.get(j));
+                for (final List<? extends Location> locations : owned) {
+                    for (Location location : locations) {
+                        locsOwned.add(location);
                     }
                 }
             }
-            for (int k = 0; k < locsOwned.size(); ++k) {
-                final int site = locsOwned.get(k).site();
-                final SiteType typeSite = locsOwned.get(k).siteType();
+            for (Location location : locsOwned) {
+                final int site = location.site();
+                final SiteType typeSite = location.siteType();
                 final ContainerState cs = context.containerState(context.containerId()[site]);
                 count += cs.count(site, typeSite);
             }

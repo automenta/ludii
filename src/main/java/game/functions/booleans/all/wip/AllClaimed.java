@@ -40,7 +40,7 @@ public final class AllClaimed extends BaseBooleanFunction
         final int whoSiteId = state.who(siteId, this.indexType);
         final Region sites = this.regionFn.eval(context);
         switch (this.indexType) {
-            case Edge: {
+            case Edge -> {
                 for (int site = sites.bitSet().nextSetBit(0); site >= 0; site = sites.bitSet().nextSetBit(site + 1)) {
                     int count = 0;
                     final Vertex vertex = graph.vertices().get(site);
@@ -55,7 +55,7 @@ public final class AllClaimed extends BaseBooleanFunction
                 }
                 break;
             }
-            case Vertex: {
+            case Vertex -> {
                 for (int site = sites.bitSet().nextSetBit(0); site >= 0; site = sites.bitSet().nextSetBit(site + 1)) {
                     final Edge edge2 = graph.edges().get(site);
                     if (state.who(edge2.vA().index(), this.indexType) == whoSiteId && state.who(edge2.vB().index(), this.indexType) == whoSiteId) {
@@ -64,7 +64,7 @@ public final class AllClaimed extends BaseBooleanFunction
                 }
                 break;
             }
-            case Cell: {
+            case Cell -> {
                 for (int site = sites.bitSet().nextSetBit(0); site >= 0; site = sites.bitSet().nextSetBit(site + 1)) {
                     final Edge edge2 = graph.edges().get(site);
                     if (state.who(edge2.vA().index(), this.indexType) == whoSiteId && state.who(edge2.vB().index(), this.indexType) == whoSiteId) {

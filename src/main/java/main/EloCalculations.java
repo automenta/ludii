@@ -46,7 +46,7 @@ public class EloCalculations
                         if (rankings[playerNumberA] > rankings[playerNumberB]) {
                             player1Won = true;
                         }
-                        sum += EloRating((float)playerAELORanking, (float)player2ELORanking, 30, player1Won)[0] - playerAELORanking;
+                        sum += EloRating(playerAELORanking, player2ELORanking, 30, player1Won)[0] - playerAELORanking;
                     }
                 }
             }

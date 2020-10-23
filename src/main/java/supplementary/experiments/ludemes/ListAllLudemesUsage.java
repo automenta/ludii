@@ -58,7 +58,7 @@ public class ListAllLudemesUsage
             }
         }
         System.out.println();
-        final String[] ludemeNames = ludemesToUsingGames.keySet().toArray(new String[ludemesToUsingGames.keySet().size()]);
+        final String[] ludemeNames = ludemesToUsingGames.keySet().toArray(new String[0]);
         Arrays.sort(ludemeNames);
         System.out.println("Usage of all ludemes:");
         for (final String ludemeName : ludemeNames) {
@@ -69,8 +69,8 @@ public class ListAllLudemesUsage
                 sb.append(" ");
             }
             sb.append(games.size() + " games");
-            if (games.size() > 0) {
-                final String[] sortedGames = games.toArray(new String[games.size()]);
+            if (!games.isEmpty()) {
+                final String[] sortedGames = games.toArray(new String[0]);
                 Arrays.sort(sortedGames);
                 sb.append("(");
                 for (int i = 0; i < sortedGames.length; ++i) {

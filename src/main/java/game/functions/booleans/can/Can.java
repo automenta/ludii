@@ -16,10 +16,10 @@ public class Can extends BaseBooleanFunction
     
     public static BooleanFunction construct(final CanType canType, final Moves moves) {
         switch (canType) {
-            case Move: {
+            case Move -> {
                 return new CanMove(moves);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Can(): A CanType is not implemented.");
             }
         }

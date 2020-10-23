@@ -10,7 +10,7 @@ import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.effect.state.MoveAgain;
 import game.types.board.SiteType;
 import gnu.trove.list.array.TIntArrayList;
-import main.collections.FVector;
+import collections.FVector;
 import util.*;
 import util.action.Action;
 import util.action.move.ActionAdd;

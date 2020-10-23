@@ -4,7 +4,7 @@
 
 package util.playout;
 
-import main.collections.FVector;
+import collections.FVector;
 import util.AI;
 import util.Context;
 import util.FeatureSetInterface;

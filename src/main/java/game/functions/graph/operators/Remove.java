@@ -14,7 +14,7 @@ import game.functions.graph.BaseGraphFunction;
 import game.functions.graph.GraphFunction;
 import game.types.board.SiteType;
 import game.util.graph.*;
-import main.math.Polygon;
+import math.Polygon;
 import util.Context;
 
 import java.util.ArrayList;

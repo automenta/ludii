@@ -7,12 +7,10 @@ package metadata.info;
 import annotations.Or;
 import metadata.MetadataItem;
 import metadata.info.database.*;
+import metadata.info.database.Date;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Info implements MetadataItem, Serializable
 {
@@ -32,9 +30,7 @@ public class Info implements MetadataItem, Serializable
             throw new IllegalArgumentException("Only one of @Or should be different to null");
         }
         if (items != null) {
-            for (final InfoItem i : items) {
-                this.items.add(i);
-            }
+            this.items.addAll(Arrays.asList(items));
         }
         else {
             this.items.add(item);

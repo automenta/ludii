@@ -14,7 +14,7 @@ import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
 import game.util.graph.Vertex;
-import main.math.Vector;
+import math.Vector;
 import util.Context;
 
 public class Spiral extends Basis

@@ -49,10 +49,10 @@ public final class SitesEmpty extends BaseRegionFunction
         if (this.type == null) {
             return "Null type in Empty.";
         }
-        if (this.type.equals(SiteType.Cell)) {
+        if (this.type == SiteType.Cell) {
             return "Empty(" + this.containerFunction + ")";
         }
-        if (this.type.equals(SiteType.Edge)) {
+        if (this.type == SiteType.Edge) {
             return "EmptyEdge(" + this.containerFunction + ")";
         }
         return "EmptyVertex(" + this.containerFunction + ")";

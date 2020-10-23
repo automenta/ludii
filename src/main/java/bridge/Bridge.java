@@ -10,20 +10,13 @@ import view.container.ContainerStyle;
 
 import java.util.ArrayList;
 
-public class Bridge
-{
+public enum Bridge
+{ ;
     private static PlatformGraphics graphicsRenderer;
     private static ArrayList<ContainerStyle> containerStyles;
     private static ArrayList<ComponentStyle> componentStyles;
     private static ArrayList<Controller> containerControllers;
-    
-    Bridge() {
-    }
-    
-    public static Bridge getBridge() {
-        return BridgeProvider.BRIDGE;
-    }
-    
+
     public static void setGraphicsRenderer(final PlatformGraphics g) {
         Bridge.graphicsRenderer = g;
     }
@@ -91,12 +84,12 @@ public class Bridge
         Bridge.containerControllers = new ArrayList<>();
     }
     
-    private static class BridgeProvider
-    {
-        public static final Bridge BRIDGE;
-        
-        static {
-            BRIDGE = new Bridge();
-        }
-    }
+//    private static class BridgeProvider
+//    {
+//        public static final Bridge BRIDGE;
+//
+//        static {
+//            BRIDGE = new Bridge();
+//        }
+//    }
 }

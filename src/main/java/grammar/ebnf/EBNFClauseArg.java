@@ -35,7 +35,7 @@ extends EBNFClause {
     @Override
     void decompose(String input) {
         String str = input.trim();
-        int colonAt = str.indexOf(":");
+        int colonAt = str.indexOf(':');
         if (colonAt >= 0) {
             this.parameterName = str.substring(0, colonAt).trim();
             str = str.substring(colonAt + 1).trim();

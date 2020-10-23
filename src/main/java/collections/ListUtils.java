@@ -15,7 +15,7 @@ public class ListUtils {
     }
 
     public static List<TIntArrayList> generatePermutations(TIntArrayList list) {
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             ArrayList<TIntArrayList> perms = new ArrayList<>(1);
             perms.add(new TIntArrayList(0, list.getNoEntryValue()));
             return perms;
@@ -33,27 +33,27 @@ public class ListUtils {
         return perms;
     }
 
-//    public static <E> List<List<E>> generateTuples(List<List<E>> optionsLists) {
-//        ArrayList allTuples = new ArrayList();
-//        if (optionsLists.size() > 0) {
-//            List<E> firstEntryOptions = optionsLists.get(0);
-//            ArrayList<List<List<E>>> remainingOptionsLists = new ArrayList<>();
-//            for (int i = 1; i < optionsLists.size(); ++i) {
-//                remainingOptionsLists.add(optionsLists.get(i));
-//            }
-//            List<List<E>> nMinOneTuples = ListUtils.generateTuples(remainingOptionsLists);
-//            for (int i = 0; i < firstEntryOptions.size(); ++i) {
-//                for (List<E> nMinOneTuple : nMinOneTuples) {
-//                    ArrayList<E> newTuple = new ArrayList<>(nMinOneTuple);
-//                    newTuple.add(0, firstEntryOptions.get(i));
-//                    allTuples.add(newTuple);
-//                }
-//            }
-//        } else {
-//            allTuples.add(new ArrayList(0));
-//        }
-//        return allTuples;
-//    }
+    public static <E> List<List<E>> generateTuples(List<List<E>> optionsLists) {
+        ArrayList allTuples = new ArrayList();
+        if (optionsLists.size() > 0) {
+            List<E> firstEntryOptions = optionsLists.get(0);
+            ArrayList<List<E>> remainingOptionsLists = new ArrayList<>();
+            for (int i = 1; i < optionsLists.size(); ++i) {
+                remainingOptionsLists.add(optionsLists.get(i));
+            }
+            List<List<E>> nMinOneTuples = ListUtils.generateTuples(remainingOptionsLists);
+            for (int i = 0; i < firstEntryOptions.size(); ++i) {
+                for (List<E> nMinOneTuple : nMinOneTuples) {
+                    ArrayList<E> newTuple = new ArrayList<>(nMinOneTuple);
+                    newTuple.add(0, firstEntryOptions.get(i));
+                    allTuples.add(newTuple);
+                }
+            }
+        } else {
+            allTuples.add(new ArrayList(0));
+        }
+        return allTuples;
+    }
 
     public static int argMax(TFloatArrayList list) {
         int argMax = 0;

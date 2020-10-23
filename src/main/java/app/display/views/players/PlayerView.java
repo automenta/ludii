@@ -21,11 +21,10 @@ import java.util.List;
 
 public class PlayerView extends View
 {
-    public List<PlayerViewUser> playerSections;
+    public final List<PlayerViewUser> playerSections = new ArrayList<>();
     public static final Font playerNameFont;
     
     public PlayerView() {
-        (this.playerSections = new ArrayList<>()).clear();
         final MainWindow mainWindow = DesktopApp.view();
         final Game game = ContextSnapshot.getContext().game();
         final int boardSize = DesktopApp.view().boardSize();

@@ -63,10 +63,10 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesBetweenType regionType, @Opt final Direction directions, @Opt final SiteType type, @Name final IntFunction from, @Opt @Name final BooleanFunction fromIncluded, @Name final IntFunction to, @Opt @Name final BooleanFunction toIncluded, @Opt @Name final BooleanFunction cond) {
         switch (regionType) {
-            case Between: {
+            case Between -> {
                 return new SitesBetween(directions, type, from, fromIncluded, to, toIncluded, cond);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesBetweenType is not implemented.");
             }
         }
@@ -74,10 +74,10 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesLargePieceType regionType, @Opt final SiteType type, @Name final IntFunction at) {
         switch (regionType) {
-            case LargePiece: {
+            case LargePiece -> {
                 return new SitesLargePiece(type, at);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesLargePiece is not implemented.");
             }
         }
@@ -85,10 +85,10 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesRandomType regionType, @Opt final RegionFunction region, @Opt @Name final IntFunction num) {
         switch (regionType) {
-            case Random: {
+            case Random -> {
                 return new SitesRandom(region, num);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesRandomType is not implemented.");
             }
         }
@@ -106,10 +106,10 @@ public final class Sites extends BaseRegionFunction
             throw new IllegalArgumentException("Sites(): With SitesCrossingType only one who or role parameter must be non-null.");
         }
         switch (regionType) {
-            case Crossing: {
+            case Crossing -> {
                 return new SitesCrossing(at, who, role);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesCrossingType is not implemented.");
             }
         }
@@ -117,10 +117,10 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesGroupType regionType, @Opt final SiteType type, @Name final IntFunction at, @Opt final Direction directions, @Opt @Name final BooleanFunction If) {
         switch (regionType) {
-            case Group: {
+            case Group -> {
                 return new SitesGroup(type, at, directions, If);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesGroupType is not implemented.");
             }
         }
@@ -128,25 +128,25 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesEdgeType regionType) {
         switch (regionType) {
-            case Axial: {
+            case Axial -> {
                 return new SitesAxial();
             }
-            case Horizontal: {
+            case Horizontal -> {
                 return new SitesHorizontal();
             }
-            case Vertical: {
+            case Vertical -> {
                 return new SitesVertical();
             }
-            case Angled: {
+            case Angled -> {
                 return new SitesAngled();
             }
-            case Slash: {
+            case Slash -> {
                 return new SitesSlash();
             }
-            case Slosh: {
+            case Slosh -> {
                 return new SitesSlosh();
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesEdgeType is not implemented.");
             }
         }
@@ -154,70 +154,70 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesSimpleType regionType, @Opt final SiteType elementType) {
         switch (regionType) {
-            case Board: {
+            case Board -> {
                 return new SitesBoard(elementType);
             }
-            case Bottom: {
+            case Bottom -> {
                 return new SitesBottom(elementType);
             }
-            case Corners: {
+            case Corners -> {
                 return new SitesCorners(elementType);
             }
-            case ConcaveCorners: {
+            case ConcaveCorners -> {
                 return new SitesConcaveCorners(elementType);
             }
-            case ConvexCorners: {
+            case ConvexCorners -> {
                 return new SitesConvexCorners(elementType);
             }
-            case Hint: {
+            case Hint -> {
                 return new SitesHint();
             }
-            case Inner: {
+            case Inner -> {
                 return new SitesInner(elementType);
             }
-            case Left: {
+            case Left -> {
                 return new SitesLeft(elementType);
             }
-            case LineOfPlay: {
+            case LineOfPlay -> {
                 return new SitesLineOfPlay();
             }
-            case Major: {
+            case Major -> {
                 return new SitesMajor(elementType);
             }
-            case Minor: {
+            case Minor -> {
                 return new SitesMinor(elementType);
             }
-            case Outer: {
+            case Outer -> {
                 return new SitesOuter(elementType);
             }
-            case Right: {
+            case Right -> {
                 return new SitesRight(elementType);
             }
-            case ToClear: {
+            case ToClear -> {
                 return new SitesToClear();
             }
-            case Top: {
+            case Top -> {
                 return new SitesTop(elementType);
             }
-            case Pending: {
+            case Pending -> {
                 return new SitesPending();
             }
-            case Playable: {
+            case Playable -> {
                 return new SitesPlayable();
             }
-            case LastTo: {
+            case LastTo -> {
                 return new SitesLastTo();
             }
-            case LastFrom: {
+            case LastFrom -> {
                 return new SitesLastFrom();
             }
-            case Centre: {
+            case Centre -> {
                 return new SitesCentre(elementType);
             }
-            case Perimeter: {
+            case Perimeter -> {
                 return new SitesPerimeter(elementType);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesSimpleType is not implemented.");
             }
         }
@@ -229,13 +229,13 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesMoveType moveType, final Moves moves) {
         switch (moveType) {
-            case From: {
+            case From -> {
                 return new SitesFrom(moves);
             }
-            case To: {
+            case To -> {
                 return new SitesTo(moves);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesMoveType is not implemented.");
             }
         }
@@ -251,28 +251,28 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesIndexType regionType, @Opt final SiteType elementType, @Opt final IntFunction index) {
         switch (regionType) {
-            case Cell: {
+            case Cell -> {
                 return new SitesCell(elementType, index);
             }
-            case Column: {
+            case Column -> {
                 return new SitesColumn(elementType, index);
             }
-            case Edge: {
+            case Edge -> {
                 return new SitesEdge(elementType, index);
             }
-            case Phase: {
+            case Phase -> {
                 return new SitesPhase(elementType, index);
             }
-            case Row: {
+            case Row -> {
                 return new SitesRow(elementType, index);
             }
-            case State: {
+            case State -> {
                 return new SitesState(elementType, index);
             }
-            case Empty: {
+            case Empty -> {
                 return SitesEmpty.construct(elementType, index);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesIndexType is not implemented.");
             }
         }
@@ -293,10 +293,10 @@ public final class Sites extends BaseRegionFunction
             throw new IllegalArgumentException("Sites(): A SitesDirectionType only one of index, role, direction can be non-null.");
         }
         switch (regionType) {
-            case Side: {
+            case Side -> {
                 return new SitesSide(elementType, player, role, direction);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
             }
         }
@@ -304,10 +304,10 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesDistanceType regionType, @Opt final SiteType elementType, @Opt final RelationType relation, @Name final IntFunction from, final IntFunction distance) {
         switch (regionType) {
-            case Distance: {
+            case Distance -> {
                 return new SitesDistance(elementType, relation, from, distance);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesDistanceType is not implemented.");
             }
         }
@@ -354,25 +354,25 @@ public final class Sites extends BaseRegionFunction
             throw new IllegalArgumentException("Sites(): A SitesPlayerType only one of pid, role can be non-null.");
         }
         switch (regionType) {
-            case Hand: {
+            case Hand -> {
                 return new SitesHand(pid, role);
             }
-            case Track: {
+            case Track -> {
                 return new SitesTrack(pid, role, name);
             }
-            case Winning: {
+            case Winning -> {
                 return new SitesWinning(pid, role, moves);
             }
-            case Invisible: {
+            case Invisible -> {
                 return new SitesInvisible(pid, role, elementType);
             }
-            case Masked: {
+            case Masked -> {
                 return new SitesMasked(pid, role, elementType);
             }
-            case Visible: {
+            case Visible -> {
                 return new SitesVisible(pid, role, elementType);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
             }
         }
@@ -380,10 +380,10 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesPieceType regionType, final Piece pid) {
         switch (regionType) {
-            case Start: {
+            case Start -> {
                 return new SitesStart(pid);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
             }
         }
@@ -424,10 +424,10 @@ public final class Sites extends BaseRegionFunction
             throw new IllegalArgumentException("Sites(): With SitesOccupiedType zero or one Component or component or components parameter must be non-null.");
         }
         switch (regionType) {
-            case Occupied: {
+            case Occupied -> {
                 return new SitesOccupied(by, By, container, Container, component, Component, components, top, type);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesOccupiedType is not implemented.");
             }
         }
@@ -445,10 +445,10 @@ public final class Sites extends BaseRegionFunction
             throw new IllegalArgumentException("Sites(): With SitesIncidentType Zero or one owner or roleOwner parameter can be non-null.");
         }
         switch (regionType) {
-            case Incident: {
+            case Incident -> {
                 return new SitesIncident(resultType, of, at, owner, roleOwner);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesIncidentType is not implemented.");
             }
         }
@@ -466,10 +466,10 @@ public final class Sites extends BaseRegionFunction
             throw new IllegalArgumentException("Sites(): With SitesAroundType one where or regionWhere parameter must be non-null.");
         }
         switch (regionType) {
-            case Around: {
+            case Around -> {
                 return new SitesAround(typeLoc, where, regionWhere, type, distance, directions, If, includeSelf);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesAroundType is not implemented.");
             }
         }
@@ -487,10 +487,10 @@ public final class Sites extends BaseRegionFunction
             throw new IllegalArgumentException("Sites(): With SitesDirectionType one from or From parameter must be non-null.");
         }
         switch (regionType) {
-            case Direction: {
+            case Direction -> {
                 return new SitesDirection(from, From, directions, included, stop, stopIncluded, distance, type);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesDirectionType is not implemented.");
             }
         }
@@ -498,10 +498,10 @@ public final class Sites extends BaseRegionFunction
     
     public static RegionFunction construct(final SitesLineOfSightType regionType, @Opt final LineOfSightType typeLoS, @Opt final SiteType typeLoc, @Opt @Name final IntFunction at, @Opt final Direction directions) {
         switch (regionType) {
-            case LineOfSight: {
+            case LineOfSight -> {
                 return new SitesLineOfSight(typeLoS, typeLoc, at, directions);
             }
-            default: {
+            default -> {
                 throw new IllegalArgumentException("Sites(): A SitesAroundType is not implemented.");
             }
         }

@@ -4,7 +4,7 @@
 
 package util.zhash;
 
-import main.collections.ChunkStack;
+import collections.ChunkStack;
 import util.state.State;
 
 import java.io.Serializable;

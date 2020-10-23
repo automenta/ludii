@@ -75,7 +75,7 @@ public class Referee
                 return;
             }
             for (int i = 1; i <= this.context.game().players().count(); ++i) {
-                if (Manager.aiSelected()[i].name().trim().equals("")) {
+                if (Manager.aiSelected()[i].name().trim().isEmpty()) {
                     Manager.app.setVolatileMessage("Not all players have joined yet.");
                     return;
                 }
@@ -126,11 +126,9 @@ public class Referee
                         playerIdsWaitingFor.add(j);
                     }
                 }
-                if (playerIdsWaitingFor.size() > 0) {
+                if (!playerIdsWaitingFor.isEmpty()) {
                     tempMessage = "Waiting for moves from";
-                    Iterator<Integer> iterator = playerIdsWaitingFor.iterator();
-                    while (iterator.hasNext()) {
-                        int index = iterator.next();
+                    for (int index : playerIdsWaitingFor) {
                         tempMessage = tempMessage + " P" + index + " and";
                     }
                     tempMessage2 = tempMessage.substring(0, tempMessage.length() - 4);
@@ -142,7 +140,6 @@ public class Referee
                 this.postMoveApplication(appliedMove, true);
             }
             this.waitingForAnim = false;
-            return;
         };
         if (timeUntilMoveMade > 0L) {
             final Timer t = new Timer();
@@ -351,7 +348,7 @@ public class Referee
         try {
             if (!this.context().trial().over()) {
                 final Model model = this.context.model();
-                if (this.context.game().mode().mode().equals(ModeType.Simulation)) {
+                if (this.context.game().mode().mode() == ModeType.Simulation) {
                     final List<AI> list = new ArrayList<>();
                     list.add(new RandomAI());
                     model.unpauseAgents(this.context, list, new double[] { SettingsManager.tickLength }, -1, -1, 0.0, null, null);
@@ -438,12 +435,13 @@ public class Referee
                         if (!SettingsManager.agentsPaused) {
                             EventQueue.invokeLater(() -> {
                                 List<AI> ais = model.getLastStepAIs();
-                                for (int i = 0; i < ais.size(); ++i) {
-                                    AI ai = ais.get(i);
-                                    if (ai != null) {
-                                        String analysisReport = ai.generateAnalysisReport();
-                                        if (analysisReport != null) {
-                                            Manager.app.addTextToAnalysisPanel(analysisReport + "\n");
+                                if (ais!=null) {
+                                    for (AI ai : ais) {
+                                        if (ai != null) {
+                                            String analysisReport = ai.generateAnalysisReport();
+                                            if (analysisReport != null) {
+                                                Manager.app.addTextToAnalysisPanel(analysisReport + "\n");
+                                            }
                                         }
                                     }
                                 }
@@ -518,7 +516,6 @@ public class Referee
                     Manager.app.playSound("Pling-KevanGC-1485374730");
                 }
                 this.checkInstantPass();
-                return;
             });
         }
         EventQueue.invokeLater(() -> Manager.app.repaint());

@@ -23,15 +23,15 @@ public enum SiteType
         long stateFlag = 0L;
         if (type != null) {
             switch (type) {
-                case Vertex: {
+                case Vertex -> {
                     stateFlag |= 0x1800000L;
                     break;
                 }
-                case Edge: {
+                case Edge -> {
                     stateFlag |= 0x4800000L;
                     break;
                 }
-                case Cell: {
+                case Cell -> {
                     stateFlag |= 0x2000000L;
                     break;
                 }

@@ -13,6 +13,7 @@ import topology.TopologyElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -38,7 +39,7 @@ public class Walk
     
     public Walk(final String string) {
         final String walkString = string.substring("{".length(), string.length() - "}".length());
-        if (walkString.length() > 0) {
+        if (!walkString.isEmpty()) {
             final String[] stepStrings = walkString.split(",");
             this.steps = new TFloatArrayList(stepStrings.length);
             for (final String stepString : stepStrings) {
@@ -67,7 +68,7 @@ public class Walk
     }
     
     public void applyRotation(final float rotation) {
-        if (this.steps.size() > 0) {
+        if (!this.steps.isEmpty()) {
             this.steps.setQuick(0, this.steps.getQuick(0) + rotation);
         }
     }
@@ -85,10 +86,10 @@ public class Walk
     }
     
     public void prependWalkWithCorrection(final Walk walk, final Path path, final float rotToRevert, final int refToRevert) {
-        if (walk.steps.size() == 0) {
+        if (walk.steps.isEmpty()) {
             return;
         }
-        if (this.steps.size() > 0) {
+        if (!this.steps.isEmpty()) {
             final TopologyElement endSite = path.destination();
             final TopologyElement penultimateSite = path.sites().get(path.sites().size() - 2);
             final TIntArrayList contDirs = new TIntArrayList(2);
@@ -103,12 +104,7 @@ public class Walk
             if (fromDir == -1) {
                 System.err.println("Warning! Walk.prependWalkWithCorrection() could not find fromDir!");
             }
-            if (sortedOrthos.length % 2 == 0) {
-                contDirs.add(fromDir + sortedOrthos.length / 2);
-            }
-            else {
-                contDirs.add(fromDir + sortedOrthos.length / 2);
-            }
+            contDirs.add(fromDir + sortedOrthos.length / 2);
             final float toSubtract = contDirs.getQuick(0) / (float)sortedOrthos.length - rotToRevert * refToRevert;
             this.steps.setQuick(0, this.steps.getQuick(0) - toSubtract);
         }
@@ -121,7 +117,7 @@ public class Walk
     
     public TIntArrayList resolveWalk(final Game game, final TopologyElement startSite, final float rotModifier, final int reflectionMult) {
         final TIntArrayList results = new TIntArrayList(1);
-        if (this.steps.size() > 0) {
+        if (!this.steps.isEmpty()) {
             final TopologyElement[] sortedOrthos = startSite.sortedOrthos();
             final TIntArrayList connectionIndices = new TIntArrayList(2);
             float connectionIdxFloat = (this.steps.get(0) + rotModifier) * reflectionMult * sortedOrthos.length;
@@ -138,8 +134,8 @@ public class Walk
                 int connectionIdx = connectionIndices.getQuick(c);
                 connectionIdx = (connectionIdx % sortedOrthos.length + sortedOrthos.length) % sortedOrthos.length;
                 TopologyElement nextSite = sortedOrthos[connectionIdx];
-                List<TopologyElement> nextSites = Arrays.asList(nextSite);
-                List<TopologyElement> prevSites = Arrays.asList(prevSite);
+                List<TopologyElement> nextSites = Collections.singletonList(nextSite);
+                List<TopologyElement> prevSites = Collections.singletonList(prevSite);
                 for (int step = 1; step < this.steps.size(); ++step) {
                     final List<TopologyElement> newNextSites = new ArrayList<>(nextSites.size());
                     final List<TopologyElement> newPrevSites = new ArrayList<>(nextSites.size());
@@ -162,12 +158,7 @@ public class Walk
                             if (fromDir == -1) {
                                 System.err.println("Warning! Walk.resolveWalk() could not find fromDir!");
                             }
-                            if (nextSortedOrthos.length % 2 == 0) {
-                                contDirs.add(fromDir + nextSortedOrthos.length / 2);
-                            }
-                            else {
-                                contDirs.add(fromDir + nextSortedOrthos.length / 2);
-                            }
+                            contDirs.add(fromDir + nextSortedOrthos.length / 2);
                             for (int contDirIdx = 0; contDirIdx < contDirs.size(); ++contDirIdx) {
                                 final int contDir = contDirs.getQuick(contDirIdx);
                                 final TIntArrayList nextConnectionIndices = new TIntArrayList(2);

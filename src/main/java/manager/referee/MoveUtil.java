@@ -81,14 +81,14 @@ public class MoveUtil
         final Moves legal = context.game().moves(context);
         final ArrayList<Move> validMovesfound = new ArrayList<>();
         for (final Move m : legal.moves()) {
-            if (direction.equals(m.direction(context))) {
+            if (direction == m.direction(context)) {
                 validMovesfound.add(m);
             }
         }
         if (validMovesfound.size() == 1) {
             Manager.ref().applyHumanMoveToGame(validMovesfound.get(0));
         }
-        else if (validMovesfound.size() == 0) {
+        else if (validMovesfound.isEmpty()) {
             Manager.app.setVolatileMessage("No valid moves found for Direction " + direction.name());
             EventQueue.invokeLater(() -> Manager.app.repaint());
         }

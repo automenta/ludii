@@ -608,23 +608,23 @@ public final class SVGGraphics2D extends Graphics2D
             }
             first = false;
             switch (type) {
-                case 0: {
+                case 0 -> {
                     b.append("M ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1]));
                     break;
                 }
-                case 1: {
+                case 1 -> {
                     b.append("L ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1]));
                     break;
                 }
-                case 2: {
+                case 2 -> {
                     b.append("Q ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1])).append(" ").append(this.geomDP(coords[2])).append(" ").append(this.geomDP(coords[3]));
                     break;
                 }
-                case 3: {
+                case 3 -> {
                     b.append("C ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1])).append(" ").append(this.geomDP(coords[2])).append(" ").append(this.geomDP(coords[3])).append(" ").append(this.geomDP(coords[4])).append(" ").append(this.geomDP(coords[5]));
                     break;
                 }
-                case 4: {
+                case 4 -> {
                     b.append("Z ");
                     break;
                 }
@@ -679,21 +679,21 @@ public final class SVGGraphics2D extends Graphics2D
             final BasicStroke bs = (BasicStroke)this.stroke;
             strokeWidth = ((bs.getLineWidth() > 0.0) ? bs.getLineWidth() : this.zeroStrokeWidth);
             switch (bs.getEndCap()) {
-                case 1: {
+                case 1 -> {
                     strokeCap = "round";
                     break;
                 }
-                case 2: {
+                case 2 -> {
                     strokeCap = "square";
                     break;
                 }
             }
             switch (bs.getLineJoin()) {
-                case 2: {
+                case 2 -> {
                     strokeJoin = "bevel";
                     break;
                 }
-                case 1: {
+                case 1 -> {
                     strokeJoin = "round";
                     break;
                 }
@@ -814,7 +814,7 @@ public final class SVGGraphics2D extends Graphics2D
     
     @Override
     public void drawString(final String str, final int x, final int y) {
-        this.drawString(str, (float)x, (float)y);
+        this.drawString(str, (float)x, y);
     }
     
     @Override
@@ -852,7 +852,7 @@ public final class SVGGraphics2D extends Graphics2D
     
     @Override
     public void drawString(final AttributedCharacterIterator iterator, final int x, final int y) {
-        this.drawString(iterator, (float)x, (float)y);
+        this.drawString(iterator, (float)x, y);
     }
     
     @Override
@@ -1297,7 +1297,7 @@ public final class SVGGraphics2D extends Graphics2D
         if (op != null) {
             imageToDraw = op.filter(img, null);
         }
-        this.drawImage(imageToDraw, new AffineTransform(1.0f, 0.0f, 0.0f, 1.0f, (float)x, (float)y), null);
+        this.drawImage(imageToDraw, new AffineTransform(1.0f, 0.0f, 0.0f, 1.0f, x, y), null);
     }
     
     @Override
@@ -1338,16 +1338,16 @@ public final class SVGGraphics2D extends Graphics2D
         }
         svg.append("text-rendering=\"").append(this.textRendering).append("\" shape-rendering=\"").append(this.shapeRendering).append("\">\n");
         final StringBuilder defs = new StringBuilder("<defs>");
-        for (final GradientPaintKey key : this.gradientPaints.keySet()) {
-            defs.append(this.getLinearGradientElement(this.gradientPaints.get(key), key.getPaint()));
+        for (final Map.Entry<GradientPaintKey, String> entry : this.gradientPaints.entrySet()) {
+            defs.append(this.getLinearGradientElement(entry.getValue(), entry.getKey().getPaint()));
             defs.append("\n");
         }
-        for (final LinearGradientPaintKey key2 : this.linearGradientPaints.keySet()) {
-            defs.append(this.getLinearGradientElement(this.linearGradientPaints.get(key2), key2.getPaint()));
+        for (final Map.Entry<LinearGradientPaintKey, String> entry : this.linearGradientPaints.entrySet()) {
+            defs.append(this.getLinearGradientElement(entry.getValue(), entry.getKey().getPaint()));
             defs.append("\n");
         }
-        for (final RadialGradientPaintKey key3 : this.radialGradientPaints.keySet()) {
-            defs.append(this.getRadialGradientElement(this.radialGradientPaints.get(key3), key3.getPaint()));
+        for (final Map.Entry<RadialGradientPaintKey, String> entry : this.radialGradientPaints.entrySet()) {
+            defs.append(this.getRadialGradientElement(entry.getValue(), entry.getKey().getPaint()));
             defs.append("\n");
         }
         for (int i = 0; i < this.clipPaths.size(); ++i) {
@@ -1414,8 +1414,8 @@ public final class SVGGraphics2D extends Graphics2D
         b.append("y1=\"").append(this.geomDP(p1.getY())).append("\" ");
         b.append("x2=\"").append(this.geomDP(p2.getX())).append("\" ");
         b.append("y2=\"").append(this.geomDP(p2.getY())).append("\" ");
-        if (!paint.getCycleMethod().equals(MultipleGradientPaint.CycleMethod.NO_CYCLE)) {
-            final String sm = paint.getCycleMethod().equals(MultipleGradientPaint.CycleMethod.REFLECT) ? "reflect" : "repeat";
+        if (paint.getCycleMethod() != MultipleGradientPaint.CycleMethod.NO_CYCLE) {
+            final String sm = paint.getCycleMethod() == MultipleGradientPaint.CycleMethod.REFLECT ? "reflect" : "repeat";
             b.append("spreadMethod=\"").append(sm).append("\" ");
         }
         b.append("gradientUnits=\"userSpaceOnUse\">");

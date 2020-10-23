@@ -44,9 +44,9 @@ public class GameJoinedPanel extends BaseGamePanel
         model.addColumn("Time");
         model.addColumn("Players");
         model.addColumn("Details");
-        for (int i = 0; i < joinableGames.length; ++i) {
+        for (String joinableGame : joinableGames) {
             try {
-                final String gameDetails = joinableGames[i];
+                final String gameDetails = joinableGame;
                 final String[] splitDetails = gameDetails.split("NEXT_COL");
                 String tournamentId = splitDetails[10];
                 if (tournamentId.equals("0")) {
@@ -55,8 +55,7 @@ public class GameJoinedPanel extends BaseGamePanel
                 String playerTimeString = "";
                 if (Integer.parseInt(splitDetails[6]) % 60 == 0) {
                     playerTimeString = Integer.parseInt(splitDetails[6]) / 60 + ":00";
-                }
-                else {
+                } else {
                     playerTimeString = Integer.parseInt(splitDetails[6]) / 60 + ":" + Integer.parseInt(splitDetails[6]) % 60;
                 }
                 if (playerTimeString.equals("0:00")) {
@@ -76,9 +75,9 @@ public class GameJoinedPanel extends BaseGamePanel
                 info.setNotes(splitDetails[12]);
                 info.setGameHash(splitDetails[13]);
                 this.tableStoredInformation.add(info);
-                model.addRow(new Object[] { info.getGameId(), info.getGameName().substring(0, info.getGameName().length() - 4), info.getTimeRemainingForPlayer(), info.getJoinedPlayers(), "Details" });
+                model.addRow(new Object[]{info.getGameId(), info.getGameName().substring(0, info.getGameName().length() - 4), info.getTimeRemainingForPlayer(), info.getJoinedPlayers(), "Details"});
+            } catch (Exception ex) {
             }
-            catch (Exception ex) {}
         }
         return model;
     }
@@ -97,7 +96,7 @@ public class GameJoinedPanel extends BaseGamePanel
             public Component prepareRenderer(final TableCellRenderer renderer, final int row, final int column) {
                 final Object value = this.getValueAt(row, column);
                 final Component c = super.prepareRenderer(renderer, row, column);
-                if (Integer.valueOf(GameJoinedPanel.this.tableStoredInformation.get(row).getMaxPlayerNumber()) == GameJoinedPanel.this.tableStoredInformation.get(row).getJoinedPlayers().split(",").length && GameJoinedPanel.this.tableStoredInformation.get(row).getCurrentMover().equals(SettingsNetwork.getLoginUsername())) {
+                if (Integer.parseInt(GameJoinedPanel.this.tableStoredInformation.get(row).getMaxPlayerNumber()) == GameJoinedPanel.this.tableStoredInformation.get(row).getJoinedPlayers().split(",").length && GameJoinedPanel.this.tableStoredInformation.get(row).getCurrentMover().equals(SettingsNetwork.getLoginUsername())) {
                     c.setBackground(new Color(255, 235, 235));
                 }
                 else {
@@ -138,14 +137,13 @@ public class GameJoinedPanel extends BaseGamePanel
                 final URLConnection yc = phpLudii.openConnection();
                 try (final BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()))) {
                     SettingsNetwork.setActiveGameId(Integer.parseInt(selectedGameID));
-                    if (!this.tableStoredInformation.get(table.getSelectedRow()).getTournamentId().equals("")) {
+                    if (!this.tableStoredInformation.get(table.getSelectedRow()).getTournamentId().isEmpty()) {
                         SettingsNetwork.setTournamentId(Integer.parseInt(this.tableStoredInformation.get(table.getSelectedRow()).getTournamentId()));
                     }
                     String inputLine;
                     while ((inputLine = in.readLine()) != null) {
                         GameSetupDesktop.setupNetworkGame(gameName, gameOptions, inputLine);
                     }
-                    in.close();
                 }
             }
             catch (Exception E) {

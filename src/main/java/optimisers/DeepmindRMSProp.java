@@ -4,7 +4,7 @@
 
 package optimisers;
 
-import main.collections.FVector;
+import collections.FVector;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -116,7 +116,6 @@ public class DeepmindRMSProp extends Optimiser
         try (final ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filepath)))) {
             out.writeObject(this);
             out.flush();
-            out.close();
         }
         catch (IOException e) {
             e.printStackTrace();

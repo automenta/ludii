@@ -7,7 +7,7 @@ package util.model;
 import game.Game;
 import game.match.Subgame;
 import game.rules.play.moves.Moves;
-import main.collections.FVector;
+import collections.FVector;
 import util.*;
 
 import java.util.List;
@@ -96,8 +96,9 @@ public class MatchModel extends Model
     public Trial playout(final Context context, final List<AI> ais, final double thinkingTime, final FeatureSetInterface[] featureSets, final FVector[] weights, final int maxNumBiasedActions, final int maxNumPlayoutActions, final float autoPlayThreshold, final Random random) {
         final Game match = context.game();
         final Trial matchTrial = context.trial();
-        int numStartMoves;
-        Trial instanceEndTrial;
+        int numStartMoves = 0;
+
+        Trial instanceEndTrial = null;
         for (int numActionsApplied = 0; !matchTrial.over() && (maxNumPlayoutActions < 0 || maxNumPlayoutActions > numActionsApplied); numActionsApplied += instanceEndTrial.numMoves() - numStartMoves) {
             final Subgame instance = match.instances()[context.currentSubgameIdx()];
             final Game instanceGame = instance.getGame();

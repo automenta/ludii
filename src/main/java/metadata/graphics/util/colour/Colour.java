@@ -60,43 +60,43 @@ public class Colour implements GraphicsItem
             final double q = value * (1.0 - saturation * f);
             final double t = value * (1.0 - saturation * (1.0 - f));
             switch (i) {
-                case 0: {
+                case 0 -> {
                     r = value;
                     g = t;
                     b = p;
                     break;
                 }
-                case 1: {
+                case 1 -> {
                     r = q;
                     g = value;
                     b = p;
                     break;
                 }
-                case 2: {
+                case 2 -> {
                     r = p;
                     g = value;
                     b = t;
                     break;
                 }
-                case 3: {
+                case 3 -> {
                     r = p;
                     g = q;
                     b = value;
                     break;
                 }
-                case 4: {
+                case 4 -> {
                     r = t;
                     g = p;
                     b = value;
                     break;
                 }
-                case 5: {
+                case 5 -> {
                     r = value;
                     g = p;
                     b = q;
                     break;
                 }
-                default: {
+                default -> {
                     System.out.println("** Colour.HSVtoColor(): Invalid HSV case, i=" + i + ".");
                     return Color.black;
                 }

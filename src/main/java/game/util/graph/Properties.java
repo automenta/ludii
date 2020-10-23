@@ -114,19 +114,19 @@ public class Properties
         this.properties &= 0xFFFFFFFFFFBFFFFFL;
         this.properties &= 0xFFFFFFFFFF7FFFFFL;
         switch (phase) {
-            case 0: {
+            case 0 -> {
                 this.properties |= 0x100000L;
                 break;
             }
-            case 1: {
+            case 1 -> {
                 this.properties |= 0x200000L;
                 break;
             }
-            case 2: {
+            case 2 -> {
                 this.properties |= 0x400000L;
                 break;
             }
-            case 3: {
+            case 3 -> {
                 this.properties |= 0x800000L;
                 break;
             }

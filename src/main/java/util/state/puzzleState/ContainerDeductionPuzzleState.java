@@ -7,8 +7,8 @@ package util.state.puzzleState;
 import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import main.collections.ChunkSet;
-import main.math.BitTwiddling;
+import collections.ChunkSet;
+import math.BitTwiddling;
 import util.state.State;
 import util.state.containerState.ContainerState;
 import util.symmetry.SymmetryValidator;
@@ -144,19 +144,19 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
     @Override
     public void resetVariable(final SiteType type, final int var, final int numValues) {
         switch (type) {
-            case Vertex: {
+            case Vertex -> {
                 this.verts.setNBits(var, numValues, true);
                 break;
             }
-            case Edge: {
+            case Edge -> {
                 this.edges.setNBits(var, numValues, true);
                 break;
             }
-            case Cell: {
+            case Cell -> {
                 this.cells.setNBits(var, numValues, true);
                 break;
             }
-            default: {
+            default -> {
                 this.verts.setNBits(var, numValues, true);
                 break;
             }
@@ -167,7 +167,7 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
     public BitSet values(final SiteType type, final int var) {
         final BitSet bs = new BitSet();
         switch (type) {
-            case Vertex: {
+            case Vertex -> {
                 final int values = this.verts.getChunk(var);
                 for (int n = 0; n < this.nbValuesVert; ++n) {
                     if ((values & 1 << n) != 0x0) {
@@ -176,7 +176,7 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
                 }
                 break;
             }
-            case Edge: {
+            case Edge -> {
                 final int values = this.edges.getChunk(var);
                 for (int n = 0; n < this.nbValuesEdge; ++n) {
                     if ((values & 1 << n) != 0x0) {
@@ -185,7 +185,7 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
                 }
                 break;
             }
-            case Cell: {
+            case Cell -> {
                 final int values = this.cells.getChunk(var);
                 for (int n = 0; n < this.nbValuesCell; ++n) {
                     if ((values & 1 << n) != 0x0) {
@@ -194,7 +194,7 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
                 }
                 break;
             }
-            default: {
+            default -> {
                 final int values = this.cells.getChunk(var);
                 for (int n = 0; n < this.nbValuesCell; ++n) {
                     if ((values & 1 << n) != 0x0) {

@@ -14,7 +14,7 @@ import game.types.board.ShapeType;
 import game.types.board.SiteType;
 import game.util.graph.Graph;
 import gnu.trove.list.array.TIntArrayList;
-import main.math.Polygon;
+import math.Polygon;
 import util.Context;
 
 import java.awt.geom.Point2D;
@@ -42,8 +42,8 @@ public class CustomOnTri extends Basis
         this.sides = new TIntArrayList();
         this.basis = BasisType.Triangular;
         this.shape = ((sides.length == 2 && sides[0].eval() == sides[1].eval() - 1) ? ShapeType.Limping : ShapeType.Custom);
-        for (int n = 0; n < sides.length; ++n) {
-            this.sides.add(sides[n].eval());
+        for (DimFunction side : sides) {
+            this.sides.add(side.eval());
         }
     }
     

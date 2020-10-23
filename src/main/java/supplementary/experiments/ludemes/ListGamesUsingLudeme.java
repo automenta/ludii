@@ -46,7 +46,7 @@ public class ListGamesUsingLudeme
             }
             System.err.println();
         }
-        final String[] gameNames = gameCounts.keySet().toArray(new String[gameCounts.keySet().size()]);
+        final String[] gameNames = gameCounts.keySet().toArray(new String[0]);
         Arrays.sort(gameNames);
         System.out.println("Games using ludeme: " + this.ludemeName);
         for (final String gameName2 : gameNames) {

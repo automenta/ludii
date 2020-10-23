@@ -26,7 +26,7 @@ public class LascaDesign extends BoardDesign
     public String createSVGImage(final Context context) {
         final SVGGraphics2D g2d = this.boardStyle.setSVGRenderingValues();
         final float swRatio = 0.005f;
-        final float swThin = (float)Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
+        final float swThin = Math.max(1, (int)(0.005f * this.boardStyle.placement().width + 0.5));
         final float swThick = 2.0f * swThin;
         this.setStrokesAndColours(context, null, null, new Color(200, 200, 200), null, null, new Color(255, 255, 255), null, swThin, swThick);
         final double vertexRadius = this.boardStyle.cellRadiusPixels() * 0.95;

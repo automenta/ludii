@@ -13,6 +13,7 @@ import utils.LudiiStateWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
@@ -107,8 +108,8 @@ public final class TimeTensorsRandomPlayouts
     
     public static void main(final String[] args) {
         final CommandLineArgParse argParse = new CommandLineArgParse(true, "Measure playouts per second for one or more games.");
-        argParse.addOption(new CommandLineArgParse.ArgOption().withNames("--games").help("Names of the games to play. Each should end with \".lud\". Use \"all\" to run all games we can find. Runs all games by default.").withDefault(Arrays.asList("all")).withNumVals("+").withType(CommandLineArgParse.OptionTypes.String));
-        argParse.addOption(new CommandLineArgParse.ArgOption().withNames("--exclude-dirs").help("List of game directories to exclude from experiment.").withDefault(Arrays.asList("puzzle")).withNumVals("*").withType(CommandLineArgParse.OptionTypes.String));
+        argParse.addOption(new CommandLineArgParse.ArgOption().withNames("--games").help("Names of the games to play. Each should end with \".lud\". Use \"all\" to run all games we can find. Runs all games by default.").withDefault(Collections.singletonList("all")).withNumVals("+").withType(CommandLineArgParse.OptionTypes.String));
+        argParse.addOption(new CommandLineArgParse.ArgOption().withNames("--exclude-dirs").help("List of game directories to exclude from experiment.").withDefault(Collections.singletonList("puzzle")).withNumVals("*").withType(CommandLineArgParse.OptionTypes.String));
         argParse.addOption(new CommandLineArgParse.ArgOption().withNames("--game-options").help("Game Options to load.").withDefault(new ArrayList(0)).withNumVals("*").withType(CommandLineArgParse.OptionTypes.String));
         argParse.addOption(new CommandLineArgParse.ArgOption().withNames("--warming-up-secs", "--warming-up").help("Number of seconds of warming up (per game).").withDefault(10).withNumVals(1).withType(CommandLineArgParse.OptionTypes.Int));
         argParse.addOption(new CommandLineArgParse.ArgOption().withNames("--measure-secs").help("Number of seconds over which we measure playouts (per game).").withDefault(30).withNumVals(1).withType(CommandLineArgParse.OptionTypes.Int));
