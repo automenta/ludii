@@ -89,7 +89,6 @@ public final class Ahead extends BaseIntFunction
                             break;
                         }
                     }
-                    break;
                 }
                 case SameDirection -> {
                     final int from = context.from();
@@ -110,7 +109,6 @@ public final class Ahead extends BaseIntFunction
                             break;
                         }
                     }
-                    break;
                 }
             }
         }

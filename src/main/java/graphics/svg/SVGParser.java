@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collections;
 
 public class SVGParser
 {
@@ -143,7 +142,7 @@ public class SVGParser
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.fileName + " has ");
+        sb.append(this.fileName).append(" has ");
         sb.append(this.svg);
         return sb.toString();
     }

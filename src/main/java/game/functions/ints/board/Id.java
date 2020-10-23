@@ -37,31 +37,31 @@ public final class Id extends BaseIntFunction
                 case Neutral -> {
                     return 0;
                 }
-                case P1 -> {
+                case P1, Team1 -> {
                     return 1;
                 }
-                case P2 -> {
+                case P2, Team2 -> {
                     return 2;
                 }
-                case P3 -> {
+                case P3, Team3 -> {
                     return 3;
                 }
-                case P4 -> {
+                case P4, Team4 -> {
                     return 4;
                 }
-                case P5 -> {
+                case P5, Team5 -> {
                     return 5;
                 }
-                case P6 -> {
+                case P6, Team6 -> {
                     return 6;
                 }
-                case P7 -> {
+                case P7, Team7 -> {
                     return 7;
                 }
-                case P8 -> {
+                case P8, Team8 -> {
                     return 8;
                 }
-                case P9 -> {
+                case P9, Team9 -> {
                     return 9;
                 }
                 case P10 -> {
@@ -85,33 +85,6 @@ public final class Id extends BaseIntFunction
                 case P16 -> {
                     return 16;
                 }
-                case Team1 -> {
-                    return 1;
-                }
-                case Team2 -> {
-                    return 2;
-                }
-                case Team3 -> {
-                    return 3;
-                }
-                case Team4 -> {
-                    return 4;
-                }
-                case Team5 -> {
-                    return 5;
-                }
-                case Team6 -> {
-                    return 6;
-                }
-                case Team7 -> {
-                    return 7;
-                }
-                case Team8 -> {
-                    return 8;
-                }
-                case Team9 -> {
-                    return 9;
-                }
                 case Team10 -> {
                     return 10;
                 }
@@ -133,13 +106,7 @@ public final class Id extends BaseIntFunction
                 case Team16 -> {
                     return 16;
                 }
-                case Shared -> {
-                    return context.game().players().count() + 1;
-                }
-                case All -> {
-                    return context.game().players().count() + 1;
-                }
-                case Any -> {
+                case Shared, Any, All -> {
                     return context.game().players().count() + 1;
                 }
                 case Mover -> {
@@ -160,58 +127,19 @@ public final class Id extends BaseIntFunction
             if (this.who != null) {
                 int playerId = 0;
                 switch (this.who) {
-                    case Neutral -> {
-                        playerId = 0;
-                        break;
-                    }
-                    case P1 -> {
-                        playerId = 1;
-                        break;
-                    }
-                    case P2 -> {
-                        playerId = 2;
-                        break;
-                    }
-                    case P3 -> {
-                        playerId = 3;
-                        break;
-                    }
-                    case P4 -> {
-                        playerId = 4;
-                        break;
-                    }
-                    case P5 -> {
-                        playerId = 5;
-                        break;
-                    }
-                    case P6 -> {
-                        playerId = 6;
-                        break;
-                    }
-                    case P7 -> {
-                        playerId = 7;
-                        break;
-                    }
-                    case P8 -> {
-                        playerId = 8;
-                        break;
-                    }
-                    case Shared -> {
-                        playerId = context.game().players().count() + 1;
-                        break;
-                    }
-                    case Mover -> {
-                        playerId = context.state().mover();
-                        break;
-                    }
-                    case Next -> {
-                        playerId = context.state().next();
-                        break;
-                    }
-                    case Prev -> {
-                        playerId = context.state().prev();
-                        break;
-                    }
+                    case Neutral -> playerId = 0;
+                    case P1 -> playerId = 1;
+                    case P2 -> playerId = 2;
+                    case P3 -> playerId = 3;
+                    case P4 -> playerId = 4;
+                    case P5 -> playerId = 5;
+                    case P6 -> playerId = 6;
+                    case P7 -> playerId = 7;
+                    case P8 -> playerId = 8;
+                    case Shared -> playerId = context.game().players().count() + 1;
+                    case Mover -> playerId = context.state().mover();
+                    case Next -> playerId = context.state().next();
+                    case Prev -> playerId = context.state().prev();
                     default -> {
                         return -1;
                     }

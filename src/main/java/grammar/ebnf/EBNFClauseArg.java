@@ -56,7 +56,7 @@ extends EBNFClause {
         int n;
         StringBuilder sb = new StringBuilder();
         if (this.parameterName != null) {
-            sb.append(this.parameterName + ":");
+            sb.append(this.parameterName).append(":");
         }
         for (n = 0; n < this.nesting; ++n) {
             sb.append("{");

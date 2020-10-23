@@ -40,9 +40,7 @@ public final class Sizes extends BaseIntArrayFunction
             case Group -> {
                 return new SizesGroup(type, directions, role, of, If, min);
             }
-            default -> {
-                throw new IllegalArgumentException("Sizes(): A SizeGroupType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sizes(): A SizeGroupType is not implemented.");
         }
     }
     

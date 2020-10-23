@@ -52,6 +52,7 @@ public class ImageProcessing
                             for (Point point : pointsToCheck) {
                                 if (pointToAdd.x == point.x && pointToAdd.y == point.y) {
                                     inPointsToCheck = true;
+                                    break;
                                 }
                             }
                             if (!inPointsToCheck) {

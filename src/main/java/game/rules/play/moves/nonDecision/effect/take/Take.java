@@ -28,9 +28,7 @@ public final class Take extends Effect
             case Domino -> {
                 return new TakeDomino(then);
             }
-            default -> {
-                throw new IllegalArgumentException("Take(): A TakeSimpleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Take(): A TakeSimpleType is not implemented.");
         }
     }
     
@@ -39,9 +37,7 @@ public final class Take extends Effect
             case Control -> {
                 return new TakeControl(of, OF, by, BY, type, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Take(): A TakeControlType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Take(): A TakeControlType is not implemented.");
         }
     }
     

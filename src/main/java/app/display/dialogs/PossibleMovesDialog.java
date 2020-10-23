@@ -124,23 +124,15 @@ public class PossibleMovesDialog extends JDialog
                         String trumpImage = "";
                         Color imageColor = Color.BLACK;
                         switch (trumpValue) {
-                            case 1 -> {
-                                trumpImage = "card-suit-club";
-                                break;
-                            }
-                            case 2 -> {
-                                trumpImage = "card-suit-spade";
-                                break;
-                            }
+                            case 1 -> trumpImage = "card-suit-club";
+                            case 2 -> trumpImage = "card-suit-spade";
                             case 3 -> {
                                 trumpImage = "card-suit-diamond";
                                 imageColor = Color.RED;
-                                break;
                             }
                             case 4 -> {
                                 trumpImage = "card-suit-heart";
                                 imageColor = Color.RED;
-                                break;
                             }
                         }
                         BufferedImage componentImage3 = BufferedImageUtil.getImageFromSVGName(trumpImage, (int)(imageSize * 0.8));

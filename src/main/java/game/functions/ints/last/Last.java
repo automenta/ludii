@@ -24,9 +24,7 @@ public final class Last extends BaseIntFunction
             case To -> {
                 return new LastTo(afterConsequence);
             }
-            default -> {
-                throw new IllegalArgumentException("Last(): A LastType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Last(): A LastType is not implemented.");
         }
     }
     

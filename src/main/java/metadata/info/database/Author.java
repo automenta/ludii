@@ -17,7 +17,7 @@ public class Author implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (author \"" + this.author + "\")\n");
+        sb.append("    (author \"").append(this.author).append("\")\n");
         return sb.toString();
     }
     

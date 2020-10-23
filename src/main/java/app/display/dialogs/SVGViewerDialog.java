@@ -372,9 +372,8 @@ public class SVGViewerDialog
                 return super.getChildAt(index);
             }
             int visibleIdx = -1;
-            Iterator<TreeNode> iterator = this.children.iterator();
-            while (iterator.hasNext()) {
-                final svgLoaderNode node = (svgLoaderNode) iterator.next();
+            for (TreeNode child : this.children) {
+                final svgLoaderNode node = (svgLoaderNode) child;
                 if (node.isVisible) {
                     ++visibleIdx;
                 }
@@ -390,9 +389,8 @@ public class SVGViewerDialog
                 return super.getChildCount();
             }
             int count = 0;
-            Iterator<TreeNode> iterator = this.children.iterator();
-            while (iterator.hasNext()) {
-                final svgLoaderNode node = (svgLoaderNode) iterator.next();
+            for (TreeNode child : this.children) {
+                final svgLoaderNode node = (svgLoaderNode) child;
                 if (node.isVisible) {
                     ++count;
                 }
@@ -406,9 +404,8 @@ public class SVGViewerDialog
             }
             else {
                 this.isVisible = false;
-                Iterator<TreeNode> iterator = this.children.iterator();
-                while (iterator.hasNext()) {
-                    final svgLoaderNode child = (svgLoaderNode) iterator.next();
+                for (TreeNode treeNode : this.children) {
+                    final svgLoaderNode child = (svgLoaderNode) treeNode;
                     child.updateVisibility(filterText);
                     if (child.isVisible) {
                         this.isVisible = true;

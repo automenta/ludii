@@ -109,7 +109,7 @@ public final class Bezier {
         StringBuilder sb = new StringBuilder();
         sb.append("Bezier:");
         for (Point2D pt : this.cps) {
-            sb.append(" (" + pt.getX() + "," + pt.getY() + ")");
+            sb.append(" (").append(pt.getX()).append(",").append(pt.getY()).append(")");
         }
         return sb.toString();
     }

@@ -5,10 +5,10 @@
 package game.rules.play.moves;
 
 import annotations.Opt;
+import collections.FastArrayList;
 import game.Game;
 import game.rules.play.moves.nonDecision.effect.Then;
 import game.types.state.GameType;
-import collections.FastArrayList;
 import util.BaseLudeme;
 import util.Context;
 import util.Move;

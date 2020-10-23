@@ -16,9 +16,7 @@ public class Player implements GraphicsItem
             case Colour -> {
                 return new PlayerColour(roleType, colour);
             }
-            default -> {
-                throw new IllegalArgumentException("Player(): A PlayerColourType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Player(): A PlayerColourType is not implemented.");
         }
     }
     

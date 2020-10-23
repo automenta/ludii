@@ -37,9 +37,9 @@ public class ActionSetTrumpSuit extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetTrumpSuit:");
-        sb.append("trumpSuit=" + this.trumpSuit);
+        sb.append("trumpSuit=").append(this.trumpSuit);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -69,7 +69,7 @@ public class ActionSetTrumpSuit extends BaseAction
     @Override
     public String toTurnFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
-        sb.append("TrumpSuit = " + SuitType.values()[this.trumpSuit]);
+        sb.append("TrumpSuit = ").append(SuitType.values()[this.trumpSuit]);
         return sb.toString();
     }
     
@@ -81,7 +81,7 @@ public class ActionSetTrumpSuit extends BaseAction
     @Override
     public String toMoveFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
-        sb.append("(TrumpSuit = " + SuitType.values()[this.trumpSuit] + ")");
+        sb.append("(TrumpSuit = ").append(SuitType.values()[this.trumpSuit]).append(")");
         return sb.toString();
     }
     

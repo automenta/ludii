@@ -51,9 +51,7 @@ public class Tri extends Basis
                 final DimFunction dimAplus1 = new Add(dimA, new DimConstant(1));
                 return new CustomOnTri(new DimFunction[]{dimA, dimAplus1});
             }
-            default -> {
-                throw new IllegalArgumentException("Shape " + st + " not supported for hex tiling.");
-            }
+            default -> throw new IllegalArgumentException("Shape " + st + " not supported for hex tiling.");
         }
     }
     

@@ -82,10 +82,10 @@ public final class ActionUpdateDice extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetStateAndUpdateDice:");
-        sb.append("site=" + this.site);
-        sb.append(",state=" + this.newState);
+        sb.append("site=").append(this.site);
+        sb.append(",state=").append(this.newState);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

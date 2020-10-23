@@ -47,9 +47,9 @@ public final class ActionSetDiceAllEqual extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetDiceAllEqual:");
-        sb.append("value=" + this.value);
+        sb.append("value=").append(this.value);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

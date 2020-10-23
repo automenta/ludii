@@ -17,7 +17,7 @@ public class Description implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (description \"" + this.description + "\")\n");
+        sb.append("    (description \"").append(this.description).append("\")\n");
         return sb.toString();
     }
     

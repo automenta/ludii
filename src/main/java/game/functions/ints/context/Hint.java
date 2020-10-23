@@ -35,17 +35,14 @@ public final class Hint extends BaseIntFunction
             case Edge -> {
                 regions = context.game().equipment().edgesWithHints();
                 hints = context.game().equipment().edgeHints();
-                break;
             }
             case Vertex -> {
                 regions = context.game().equipment().verticesWithHints();
                 hints = context.game().equipment().vertexHints();
-                break;
             }
             case Cell -> {
                 regions = context.game().equipment().cellsWithHints();
                 hints = context.game().equipment().cellHints();
-                break;
             }
         }
         if (regions == null || hints == null) {

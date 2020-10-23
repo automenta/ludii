@@ -24,9 +24,7 @@ public class All extends BaseBooleanFunction
             case DiceEqual -> {
                 return new AllDiceEqual();
             }
-            default -> {
-                throw new IllegalArgumentException("All(): A AllType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("All(): A AllType is not implemented.");
         }
     }
     

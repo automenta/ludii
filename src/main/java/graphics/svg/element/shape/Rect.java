@@ -116,8 +116,8 @@ public class Rect extends Shape
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.label() + ": fill=" + this.style.fill() + ", stroke=" + this.style.stroke() + ", strokeWidth=" + this.style.strokeWidth());
-        sb.append(" : x=" + this.x + ", y=" + this.y + ", rx=" + this.rx + ", ry=" + this.ry + ", width=" + this.width + ", height=" + this.height);
+        sb.append(this.label()).append(": fill=").append(this.style.fill()).append(", stroke=").append(this.style.stroke()).append(", strokeWidth=").append(this.style.strokeWidth());
+        sb.append(" : x=").append(this.x).append(", y=").append(this.y).append(", rx=").append(this.rx).append(", ry=").append(this.ry).append(", width=").append(this.width).append(", height=").append(this.height);
         return sb.toString();
     }
     

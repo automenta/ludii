@@ -4,11 +4,11 @@
 
 package util.state.containerState;
 
+import collections.ChunkSet;
 import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
 import game.util.equipment.Region;
-import collections.ChunkSet;
 import util.state.State;
 import util.zhash.HashedChunkSet;
 import util.zhash.ZobristHashGenerator;
@@ -644,52 +644,52 @@ public class ContainerGraphState extends ContainerFlatState
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("ContainerState type = " + this.getClass() + "\n");
+        sb.append("ContainerState type = ").append(this.getClass()).append("\n");
         if (this.empty != null) {
-            sb.append("emptyVertex = " + this.empty.bitSet().toChunkString() + "\n");
+            sb.append("emptyVertex = ").append(this.empty.bitSet().toChunkString()).append("\n");
         }
         if (this.emptyEdge != null) {
-            sb.append("emptyEdge = " + this.emptyEdge.bitSet().toChunkString() + "\n");
+            sb.append("emptyEdge = ").append(this.emptyEdge.bitSet().toChunkString()).append("\n");
         }
         if (this.emptyVertex != null) {
-            sb.append("emptyVertex = " + this.emptyVertex.bitSet().toChunkString() + "\n");
+            sb.append("emptyVertex = ").append(this.emptyVertex.bitSet().toChunkString()).append("\n");
         }
         if (this.who != null) {
-            sb.append("Who = " + this.who.internalStateCopy().toChunkString() + "\n");
+            sb.append("Who = ").append(this.who.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.whoEdge != null) {
-            sb.append("whoEdge = " + this.whoEdge.internalStateCopy().toChunkString() + "\n");
+            sb.append("whoEdge = ").append(this.whoEdge.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.whoVertex != null) {
-            sb.append("whoVertex = " + this.whoVertex.internalStateCopy().toChunkString() + "\n");
+            sb.append("whoVertex = ").append(this.whoVertex.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.what != null) {
-            sb.append("What" + this.what.internalStateCopy().toChunkString() + "\n");
+            sb.append("What").append(this.what.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.whatEdge != null) {
-            sb.append("whatEdge = " + this.whatEdge.internalStateCopy().toChunkString() + "\n");
+            sb.append("whatEdge = ").append(this.whatEdge.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.whatVertex != null) {
-            sb.append("whatVertex = " + this.whatVertex.internalStateCopy().toChunkString() + "\n");
+            sb.append("whatVertex = ").append(this.whatVertex.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.state != null) {
-            sb.append("State = " + this.state.internalStateCopy().toChunkString() + "\n");
+            sb.append("State = ").append(this.state.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.rotation != null) {
-            sb.append("Rotation = " + this.rotation.internalStateCopy().toChunkString() + "\n");
+            sb.append("Rotation = ").append(this.rotation.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.value != null) {
-            sb.append("value = " + this.value.internalStateCopy().toChunkString() + "\n");
+            sb.append("value = ").append(this.value.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.count != null) {
-            sb.append("Count = " + this.count.internalStateCopy().toChunkString() + "\n");
+            sb.append("Count = ").append(this.count.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.playable != null) {
-            sb.append("Playable = " + this.playable.internalStateCopy().toString() + "\n");
+            sb.append("Playable = ").append(this.playable.internalStateCopy().toString()).append("\n");
         }
         if (this.hidden != null) {
             for (int i = 1; i < this.hidden.length; ++i) {
-                sb.append("Hidden for  player " + i + " = " + this.hidden[i].internalStateCopy().toChunkString() + "\n");
+                sb.append("Hidden for  player ").append(i).append(" = ").append(this.hidden[i].internalStateCopy().toChunkString()).append("\n");
             }
         }
         return sb.toString();

@@ -237,34 +237,26 @@ public class EvaluationDialog extends JDialog
             String AIName = null;
             final String string = comboBoxAIAgents.getSelectedItem().toString();
             switch (string) {
-                case "Random" -> {
-                    AIName = "Random";
-                    break;
-                }
+                case "Random" -> AIName = "Random";
                 case "Very weak AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 0.1;
-                    break;
                 }
                 case "Weak AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 0.5;
-                    break;
                 }
                 case "Strong AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 2.0;
-                    break;
                 }
                 case "very strong AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 5.0;
-                    break;
                 }
                 case "Custom" -> {
                     AIName = comboBoxAlgorithm.getSelectedItem().toString();
-                    thinkTime = Double.valueOf(EvaluationDialog.this.textFieldThinkTime.getText());
-                    break;
+                    thinkTime = Double.parseDouble(EvaluationDialog.this.textFieldThinkTime.getText());
                 }
             }
             for (final Metric m : metrics) {

@@ -159,7 +159,7 @@ public class GameOptions {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (OptionCategory category : this.categories) {
-            sb.append(category.toString() + "\n");
+            sb.append(category.toString()).append("\n");
         }
         return sb.toString();
     }

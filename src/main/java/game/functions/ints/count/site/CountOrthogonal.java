@@ -43,19 +43,16 @@ public final class CountOrthogonal extends BaseIntFunction
                 if (sites[0] < context.topology().cells().size()) {
                     return context.topology().cells().get(sites[0]).orthogonal().size();
                 }
-                break;
             }
             case Edge -> {
                 if (sites[0] < context.topology().edges().size()) {
                     return context.topology().edges().get(sites[0]).vA().edges().size() + context.topology().edges().get(sites[0]).vB().edges().size();
                 }
-                break;
             }
             case Vertex -> {
                 if (sites[0] < context.topology().vertices().size()) {
                     return context.topology().vertices().get(sites[0]).orthogonal().size();
                 }
-                break;
             }
         }
         return -1;

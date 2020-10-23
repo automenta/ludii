@@ -3,8 +3,8 @@
  */
 package collections;
 
-import math.BitTwiddling;
 import main.Utilities;
+import math.BitTwiddling;
 
 import java.io.*;
 import java.lang.reflect.Field;
@@ -771,7 +771,7 @@ Serializable {
             if (b.toString().length() > 1) {
                 b.append(", ");
             }
-            b.append("chunk " + i + " = " + value);
+            b.append("chunk ").append(i).append(" = ").append(value);
         }
         b.append('}');
         return b.toString();

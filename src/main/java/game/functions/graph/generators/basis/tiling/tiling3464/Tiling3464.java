@@ -53,9 +53,7 @@ public class Tiling3464 extends Basis
             case Rectangle -> {
                 return new RectangleOn3464(dimA, (dimB != null) ? dimB : dimA);
             }
-            default -> {
-                throw new IllegalArgumentException("Shape " + st + " not supported for tiling3464.");
-            }
+            default -> throw new IllegalArgumentException("Shape " + st + " not supported for tiling3464.");
         }
     }
     

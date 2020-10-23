@@ -211,86 +211,69 @@ public abstract class BaseAction implements Action
     }
     
     protected AbsoluteDirection getDirnDomino(final int side, final int state) {
-        Label_0241: {
-            switch (side) {
-                case 0: {
-                    switch (state) {
-                        case 0 -> {
-                            return AbsoluteDirection.W;
-                        }
-                        case 1 -> {
-                            return AbsoluteDirection.N;
-                        }
-                        case 2 -> {
-                            return AbsoluteDirection.E;
-                        }
-                        case 3 -> {
-                            return AbsoluteDirection.S;
-                        }
-                        default -> {
-                            break Label_0241;
-                        }
+        switch (side) {
+            case 0 -> {
+                switch (state) {
+                    case 0 -> {
+                        return AbsoluteDirection.W;
+                    }
+                    case 1 -> {
+                        return AbsoluteDirection.N;
+                    }
+                    case 2 -> {
+                        return AbsoluteDirection.E;
+                    }
+                    case 3 -> {
+                        return AbsoluteDirection.S;
                     }
                 }
-                case 1: {
-                    switch (state) {
-                        case 0 -> {
-                            return AbsoluteDirection.N;
-                        }
-                        case 1 -> {
-                            return AbsoluteDirection.E;
-                        }
-                        case 2 -> {
-                            return AbsoluteDirection.S;
-                        }
-                        case 3 -> {
-                            return AbsoluteDirection.W;
-                        }
-                        default -> {
-                            break Label_0241;
-                        }
+            }
+            case 1 -> {
+                switch (state) {
+                    case 0 -> {
+                        return AbsoluteDirection.N;
+                    }
+                    case 1 -> {
+                        return AbsoluteDirection.E;
+                    }
+                    case 2 -> {
+                        return AbsoluteDirection.S;
+                    }
+                    case 3 -> {
+                        return AbsoluteDirection.W;
                     }
                 }
-                case 2: {
-                    switch (state) {
-                        case 0 -> {
-                            return AbsoluteDirection.E;
-                        }
-                        case 1 -> {
-                            return AbsoluteDirection.S;
-                        }
-                        case 2 -> {
-                            return AbsoluteDirection.W;
-                        }
-                        case 3 -> {
-                            return AbsoluteDirection.N;
-                        }
-                        default -> {
-                            break Label_0241;
-                        }
+            }
+            case 2 -> {
+                switch (state) {
+                    case 0 -> {
+                        return AbsoluteDirection.E;
+                    }
+                    case 1 -> {
+                        return AbsoluteDirection.S;
+                    }
+                    case 2 -> {
+                        return AbsoluteDirection.W;
+                    }
+                    case 3 -> {
+                        return AbsoluteDirection.N;
                     }
                 }
-                case 3: {
-                    switch (state) {
-                        case 0 -> {
-                            return AbsoluteDirection.S;
-                        }
-                        case 1 -> {
-                            return AbsoluteDirection.W;
-                        }
-                        case 2 -> {
-                            return AbsoluteDirection.N;
-                        }
-                        case 3 -> {
-                            return AbsoluteDirection.E;
-                        }
-                        default -> {
-                            break Label_0241;
-                        }
+            }
+            case 3 -> {
+                switch (state) {
+                    case 0 -> {
+                        return AbsoluteDirection.S;
                     }
-                }
-                default: {
-                    return null;
+                    case 1 -> {
+                        return AbsoluteDirection.W;
+                    }
+                    case 2 -> {
+                        return AbsoluteDirection.N;
+                    }
+                    case 3 -> {
+                        return AbsoluteDirection.E;
+                    }
                 }
             }
         }

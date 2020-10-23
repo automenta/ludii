@@ -89,14 +89,14 @@ public class ResultsSummary
         for (Stats[] stats : this.agentPointsPerPlayer) {
             totGamesPlayed += stats[1].numSamples();
         }
-        sb.append("Completed " + totGamesPlayed + " games.\n");
+        sb.append("Completed ").append(totGamesPlayed).append(" games.\n");
         sb.append("\n");
         for (int i = 0; i < this.agents.size(); ++i) {
             this.agentPoints[i].measure();
-            sb.append(this.agentPoints[i] + "\n");
+            sb.append(this.agentPoints[i]).append("\n");
             for (int p = 1; p < this.agentPointsPerPlayer[i].length; ++p) {
                 this.agentPointsPerPlayer[i][p].measure();
-                sb.append(this.agentPointsPerPlayer[i][p] + "\n");
+                sb.append(this.agentPointsPerPlayer[i][p]).append("\n");
             }
             if (i < this.agents.size() - 1) {
                 sb.append("\n");

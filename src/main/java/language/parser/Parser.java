@@ -5,6 +5,7 @@
 package language.parser;
 
 import game.functions.booleans.math.And;
+import grammar.*;
 import language.compiler.Arg;
 import language.compiler.ArgClass;
 import language.compiler.ArgTerminal;
@@ -12,7 +13,6 @@ import language.compiler.exceptions.CompilerException;
 import language.grammar.Grammar;
 import main.Constants;
 import main.StringRoutines;
-import grammar.*;
 import options.UserSelections;
 
 import java.util.ArrayList;
@@ -213,9 +213,7 @@ public class Parser
                     }
                     report.addError(error);
                 }
-                case Class -> {
-                    report.addError("Couldn't find ludeme class for token '" + item.token.name() + "'.");
-                }
+                case Class -> report.addError("Couldn't find ludeme class for token '" + item.token.name() + "'.");
             }
         }
         for (final ParseItem arg : item.arguments()) {

@@ -15,7 +15,7 @@ public class StrokeUtil
             case Hidden -> {
                 return new BasicStroke(0.0f);
             }
-            case Thick -> {
+            case Thick, Thin -> {
                 return strokeThick;
             }
             case ThickDashed -> {
@@ -23,9 +23,6 @@ public class StrokeUtil
             }
             case ThickDotted -> {
                 return getDottedStroke(strokeThick.getLineWidth());
-            }
-            case Thin -> {
-                return strokeThick;
             }
             case ThinDashed -> {
                 return getDashedStroke(strokeThin.getLineWidth());

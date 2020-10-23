@@ -4,9 +4,9 @@
 
 package utils;
 
+import collections.FastArrayList;
 import game.equipment.container.Container;
 import gnu.trove.list.array.TIntArrayList;
-import collections.FastArrayList;
 import util.Context;
 import util.Move;
 import util.Trial;
@@ -60,7 +60,7 @@ public final class LudiiStateWrapper
             return moves.get(0).toTrialFormat(this.context);
         }
         final StringBuilder sb = new StringBuilder();
-        sb.append("[Multiple Ludii moves for ID=" + actionID + ": ");
+        sb.append("[Multiple Ludii moves for ID=").append(actionID).append(": ");
         sb.append(moves);
         sb.append("]");
         return sb.toString();
@@ -354,27 +354,27 @@ public final class LudiiStateWrapper
         final StringBuilder sb = new StringBuilder();
         final State state = this.context.state();
         sb.append("BEGIN LUDII STATE\n");
-        sb.append("Mover colour = " + state.mover() + "\n");
-        sb.append("Mover player/agent = " + state.playerToAgent(state.mover()) + "\n");
-        sb.append("Next = " + state.next() + "\n");
-        sb.append("Previous = " + state.prev() + "\n");
+        sb.append("Mover colour = ").append(state.mover()).append("\n");
+        sb.append("Mover player/agent = ").append(state.playerToAgent(state.mover())).append("\n");
+        sb.append("Next = ").append(state.next()).append("\n");
+        sb.append("Previous = ").append(state.prev()).append("\n");
         for (int p = 1; p <= state.numPlayers(); ++p) {
-            sb.append("Player " + p + " active = " + this.context.active(p) + "\n");
+            sb.append("Player ").append(p).append(" active = ").append(this.context.active(p)).append("\n");
         }
-        sb.append("State hash = " + state.stateHash() + "\n");
+        sb.append("State hash = ").append(state.stateHash()).append("\n");
         if (this.game.game.requiresScore()) {
             for (int p = 1; p <= state.numPlayers(); ++p) {
-                sb.append("Player " + p + " score = " + this.context.score(p) + "\n");
+                sb.append("Player ").append(p).append(" score = ").append(this.context.score(p)).append("\n");
             }
         }
         for (int p = 1; p <= state.numPlayers(); ++p) {
-            sb.append("Player " + p + " ranking = " + this.context.trial().ranking()[p] + "\n");
+            sb.append("Player ").append(p).append(" ranking = ").append(this.context.trial().ranking()[p]).append("\n");
         }
         for (int i = 0; i < state.containerStates().length; ++i) {
             final ContainerState cs = state.containerStates()[i];
-            sb.append("BEGIN CONTAINER STATE " + i + "\n");
-            sb.append(cs.toString() + "\n");
-            sb.append("END CONTAINER STATE " + i + "\n");
+            sb.append("BEGIN CONTAINER STATE ").append(i).append("\n");
+            sb.append(cs.toString()).append("\n");
+            sb.append("END CONTAINER STATE ").append(i).append("\n");
         }
         sb.append("END LUDII GAME STATE\n");
         return sb.toString();

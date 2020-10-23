@@ -23,9 +23,9 @@ public class OptionArgument {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (this.name != null) {
-            sb.append(this.name + ":");
+            sb.append(this.name).append(":");
         }
-        sb.append("<" + this.expression + ">");
+        sb.append("<").append(this.expression).append(">");
         return sb.toString();
     }
 }

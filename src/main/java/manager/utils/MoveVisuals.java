@@ -5,13 +5,13 @@
 package manager.utils;
 
 import bridge.Bridge;
+import collections.FVector;
+import collections.FastArrayList;
 import game.rules.end.EndRule;
 import game.rules.end.If;
 import game.rules.end.Result;
 import game.types.board.SiteType;
 import game.types.play.ResultType;
-import collections.FVector;
-import collections.FastArrayList;
 import manager.Manager;
 import util.*;
 import util.locations.Location;

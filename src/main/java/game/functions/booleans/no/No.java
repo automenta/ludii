@@ -19,9 +19,7 @@ public class No extends BaseBooleanFunction
             case Moves -> {
                 return new NoMoves(playerFn);
             }
-            default -> {
-                throw new IllegalArgumentException("No(): A NoType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("No(): A NoType is not implemented.");
         }
     }
     

@@ -57,10 +57,10 @@ public final class ActionSetPending extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetPending:");
         if (this.value != -1) {
-            sb.append("value=" + this.value);
+            sb.append("value=").append(this.value);
         }
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

@@ -143,9 +143,9 @@ public class Steps
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Steps from " + this.siteType + " " + this.id + ":\n");
+        sb.append("Steps from ").append(this.siteType).append(" ").append(this.id).append(":\n");
         for (final Step step : this.steps) {
-            sb.append("- " + step.toString() + "\n");
+            sb.append("- ").append(step.toString()).append("\n");
         }
         return sb.toString();
     }

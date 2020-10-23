@@ -63,16 +63,16 @@ public class ActionSetCount extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetCount:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
-        sb.append(",what=" + this.what);
-        sb.append(",count=" + this.count);
+        sb.append(",what=").append(this.what);
+        sb.append(",count=").append(this.count);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -118,7 +118,7 @@ public class ActionSetCount extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
@@ -127,7 +127,7 @@ public class ActionSetCount extends BaseAction
         if (this.what > 0 && this.what < context.components().length) {
             sb.append(context.components()[this.what].name());
             if (this.count > 1) {
-                sb.append("x" + this.count);
+                sb.append("x").append(this.count);
             }
         }
         return sb.toString();
@@ -140,7 +140,7 @@ public class ActionSetCount extends BaseAction
         if (this.what > 0 && this.what < context.components().length) {
             sb.append(context.components()[this.what].name());
             if (this.count > 1) {
-                sb.append("x" + this.count);
+                sb.append("x").append(this.count);
             }
         }
         String newTo = String.valueOf(this.to);
@@ -152,10 +152,10 @@ public class ActionSetCount extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(" to " + this.type + " " + newTo);
+            sb.append(" to ").append(this.type).append(" ").append(newTo);
         }
         else {
-            sb.append(" to " + newTo);
+            sb.append(" to ").append(newTo);
         }
         sb.append(')');
         return sb.toString();

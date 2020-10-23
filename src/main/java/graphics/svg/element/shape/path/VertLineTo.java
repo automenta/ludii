@@ -70,7 +70,7 @@ public class VertLineTo extends PathOp
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.label + ": (x)=" + this.x + ", y=" + this.y);
+        sb.append(this.label).append(": (x)=").append(this.x).append(", y=").append(this.y);
         return sb.toString();
     }
     

@@ -21,9 +21,7 @@ public class Region implements GraphicsItem
             case Colour -> {
                 return new RegionColour(region, roleType, graphElementType, sites, site, regionFunction, boardGraphicsType, colour);
             }
-            default -> {
-                throw new IllegalArgumentException("Region(): A RegionColourType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Region(): A RegionColourType is not implemented.");
         }
     }
     

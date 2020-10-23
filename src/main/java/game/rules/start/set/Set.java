@@ -57,9 +57,7 @@ public final class Set extends StartRule
             case Phase -> {
                 return new SetPhase(value, type, at, to);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetStartSitesType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetStartSitesType is not implemented.");
         }
     }
     
@@ -71,9 +69,7 @@ public final class Set extends StartRule
             case Score -> {
                 return new SetScore(role, value);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetStartPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetStartPlayerType is not implemented.");
         }
     }
     
@@ -82,9 +78,7 @@ public final class Set extends StartRule
             case Team -> {
                 return new SetTeam(value, roles);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetStartPlayersType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetStartPlayersType is not implemented.");
         }
     }
     
@@ -93,9 +87,7 @@ public final class Set extends StartRule
             case AllInvisible -> {
                 return new SetAllInvisible(type);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetStartGraphType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetStartGraphType is not implemented.");
         }
     }
     

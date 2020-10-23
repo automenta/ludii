@@ -39,7 +39,7 @@ public class AboutDialog
             if (component != null && component.credit() != null) {
                 final Integer key = component.getNameWithoutNumber().hashCode();
                 if (creditMap.get(key) == null) {
-                    sbCredits.append(component.credit() + "\n");
+                    sbCredits.append(component.credit()).append("\n");
                     creditMap.put(key, "Found");
                 }
             }
@@ -48,7 +48,7 @@ public class AboutDialog
             if (container != null && container.credit() != null) {
                 final Integer key = container.name().hashCode();
                 if (creditMap.get(key) == null) {
-                    sbCredits.append(container.credit() + "\n");
+                    sbCredits.append(container.credit()).append("\n");
                     creditMap.put(key, "Found");
                 }
             }

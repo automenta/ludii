@@ -6,8 +6,8 @@ package app.display.views.tools.buttons;
 
 import app.display.dialogs.PossibleMovesDialog;
 import app.display.views.tools.ToolButton;
-import game.rules.play.moves.Moves;
 import collections.FastArrayList;
+import game.rules.play.moves.Moves;
 import manager.utils.ContextSnapshot;
 import util.Context;
 import util.Move;

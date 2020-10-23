@@ -87,19 +87,19 @@ public final class ActionStackMove extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[StackMove:");
         if (this.typeFrom != null || (context != null && this.typeFrom != context.board().defaultSite())) {
-            sb.append("typeFrom=" + this.typeFrom);
-            sb.append(",from=" + this.from);
+            sb.append("typeFrom=").append(this.typeFrom);
+            sb.append(",from=").append(this.from);
         }
         else {
-            sb.append("from=" + this.from);
+            sb.append("from=").append(this.from);
         }
         if (this.typeTo != null || (context != null && this.typeTo != context.board().defaultSite())) {
-            sb.append(",typeTo=" + this.typeTo);
+            sb.append(",typeTo=").append(this.typeTo);
         }
-        sb.append(",to=" + this.to);
-        sb.append(",numLevel=" + this.numLevel);
+        sb.append(",to=").append(this.to);
+        sb.append(",numLevel=").append(this.numLevel);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -147,13 +147,13 @@ public final class ActionStackMove extends BaseAction
             }
         }
         if (this.typeFrom != null && this.typeFrom != context.board().defaultSite()) {
-            sb.append(this.typeFrom + " " + newFrom);
+            sb.append(this.typeFrom).append(" ").append(newFrom);
         }
         else {
             sb.append(newFrom);
         }
         if (this.levelFrom != -1) {
-            sb.append(":" + this.levelFrom);
+            sb.append(":").append(this.levelFrom);
         }
         String newTo = String.valueOf(this.to);
         if (SettingsGeneral.isMoveCoord()) {
@@ -164,15 +164,15 @@ public final class ActionStackMove extends BaseAction
             }
         }
         if (this.typeTo != null && this.typeTo != context.board().defaultSite()) {
-            sb.append("-" + this.typeTo + " " + newTo);
+            sb.append("-").append(this.typeTo).append(" ").append(newTo);
         }
         else {
-            sb.append("-" + newTo);
+            sb.append("-").append(newTo);
         }
         if (this.levelTo != -1) {
-            sb.append(":" + this.levelTo);
+            sb.append(":").append(this.levelTo);
         }
-        sb.append("^" + this.numLevel);
+        sb.append("^").append(this.numLevel);
         return sb.toString();
     }
     
@@ -189,13 +189,13 @@ public final class ActionStackMove extends BaseAction
             }
         }
         if (this.typeFrom != null && this.typeTo != null && (this.typeFrom != context.board().defaultSite() || this.typeFrom != this.typeTo)) {
-            sb.append(this.typeFrom + " " + newFrom);
+            sb.append(this.typeFrom).append(" ").append(newFrom);
         }
         else {
             sb.append(newFrom);
         }
         if (this.levelFrom != -1) {
-            sb.append("/" + this.levelFrom);
+            sb.append("/").append(this.levelFrom);
         }
         String newTo = String.valueOf(this.to);
         if (SettingsGeneral.isMoveCoord()) {
@@ -206,15 +206,15 @@ public final class ActionStackMove extends BaseAction
             }
         }
         if (this.typeFrom != null && this.typeTo != null && (this.typeTo != context.board().defaultSite() || this.typeFrom != this.typeTo)) {
-            sb.append(" - " + this.typeTo + " " + newTo);
+            sb.append(" - ").append(this.typeTo).append(" ").append(newTo);
         }
         else {
-            sb.append("-" + newTo);
+            sb.append("-").append(newTo);
         }
         if (this.levelTo != -1) {
-            sb.append("/" + this.levelTo);
+            sb.append("/").append(this.levelTo);
         }
-        sb.append(" numLevel=" + this.numLevel);
+        sb.append(" numLevel=").append(this.numLevel);
         sb.append(')');
         return sb.toString();
     }

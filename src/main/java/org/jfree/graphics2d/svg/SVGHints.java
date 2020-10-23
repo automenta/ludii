@@ -176,13 +176,7 @@ public final class SVGHints
                 case 1 -> {
                     return "auto".equals(val) || "inherit".equals(val) || "optimizeLegibility".equals(val) || "geometricPrecision".equals(val) || "optimizeSpeed".equals(val);
                 }
-                case 2 -> {
-                    return val == null || val instanceof String;
-                }
-                case 3 -> {
-                    return val == null || val instanceof String;
-                }
-                case 4 -> {
+                case 2, 4, 3 -> {
                     return val == null || val instanceof String;
                 }
                 case 5 -> {
@@ -194,9 +188,7 @@ public final class SVGHints
                 case 7 -> {
                     return val == null || SVGHints.VALUE_DRAW_STRING_TYPE_STANDARD.equals(val) || SVGHints.VALUE_DRAW_STRING_TYPE_VECTOR.equals(val);
                 }
-                default -> {
-                    throw new RuntimeException("Not possible!");
-                }
+                default -> throw new RuntimeException("Not possible!");
             }
         }
     }

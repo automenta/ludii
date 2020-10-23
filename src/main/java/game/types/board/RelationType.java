@@ -31,9 +31,7 @@ public enum RelationType
             case Orthogonal -> {
                 return AbsoluteDirection.Orthogonal;
             }
-            default -> {
-                throw new IllegalArgumentException("RelationType.convert(): a RelationType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("RelationType.convert(): a RelationType is not implemented.");
         }
     }
     

@@ -94,8 +94,8 @@ public class Line extends Shape
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.label() + ": fill=" + this.style.fill() + ", stroke=" + this.style.stroke() + ", strokeWidth=" + this.style.strokeWidth());
-        sb.append(" : x1=" + this.x1 + ", y1=" + this.y1 + ", x2=" + this.x2 + ", y2=" + this.y2);
+        sb.append(this.label()).append(": fill=").append(this.style.fill()).append(", stroke=").append(this.style.stroke()).append(", strokeWidth=").append(this.style.strokeWidth());
+        sb.append(" : x1=").append(this.x1).append(", y1=").append(this.y1).append(", x2=").append(this.x2).append(", y2=").append(this.y2);
         return sb.toString();
     }
     

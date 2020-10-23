@@ -13,8 +13,8 @@ import distance.DistanceMetric;
 import distance.Levenshtein;
 import distance.ZhangShasha;
 import game.Game;
-import main.FileHandling;
 import grammar.Description;
+import main.FileHandling;
 import manager.Manager;
 
 import javax.swing.*;
@@ -176,34 +176,26 @@ public class DistanceDialog extends JDialog
             String AIName = null;
             final String string = comboBoxAIAgents.getSelectedItem().toString();
             switch (string) {
-                case "Random" -> {
-                    AIName = "Random";
-                    break;
-                }
+                case "Random" -> AIName = "Random";
                 case "Very weak AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 0.1;
-                    break;
                 }
                 case "Weak AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 0.5;
-                    break;
                 }
                 case "Strong AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 2.0;
-                    break;
                 }
                 case "very strong AI" -> {
                     AIName = "Ludii AI";
                     thinkTime = 5.0;
-                    break;
                 }
                 case "Custom" -> {
                     AIName = comboBoxAlgorithm.getSelectedItem().toString();
-                    thinkTime = Double.valueOf(DistanceDialog.this.textFieldThinkTime.getText());
-                    break;
+                    thinkTime = Double.parseDouble(DistanceDialog.this.textFieldThinkTime.getText());
                 }
             }
             final List<Game> allGameB = DistanceDialog.getAllGamesFromCategories(lblSelectedGame.getText().split(";"));

@@ -158,11 +158,11 @@ public class OptionCategory {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<" + this.tag + "> \"" + this.heading + "\"");
+        sb.append("<").append(this.tag).append("> \"").append(this.heading).append("\"");
         if (this.argTags != null) {
             sb.append(" [ ");
             for (String arg : this.argTags) {
-                sb.append(arg + " ");
+                sb.append(arg).append(" ");
             }
             sb.append("]");
         }

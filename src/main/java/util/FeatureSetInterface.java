@@ -4,9 +4,9 @@
 
 package util;
 
-import gnu.trove.list.array.TIntArrayList;
 import collections.FVector;
 import collections.FastArrayList;
+import gnu.trove.list.array.TIntArrayList;
 import util.state.State;
 
 import java.util.List;

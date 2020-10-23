@@ -240,7 +240,7 @@ public final class Polygon {
         StringBuilder sb = new StringBuilder();
         sb.append("Polygon:");
         for (Point2D pt : this.points) {
-            sb.append(" (" + pt.getX() + "," + pt.getY() + ")");
+            sb.append(" (").append(pt.getX()).append(",").append(pt.getY()).append(")");
         }
         return sb.toString();
     }

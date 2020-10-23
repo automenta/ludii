@@ -28,10 +28,7 @@ public final class IsRepeat extends BaseBooleanFunction
             case InTurn -> {
                 return context.trial().previousStateWithinATurn().contains(hashState);
             }
-            case InGame -> {
-                return context.trial().previousState().contains(hashState);
-            }
-            case Situational -> {
+            case InGame, Situational -> {
                 return context.trial().previousState().contains(hashState);
             }
             default -> {

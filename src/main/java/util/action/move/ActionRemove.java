@@ -112,17 +112,17 @@ public final class ActionRemove extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[Remove:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
         if (!this.applied) {
-            sb.append(",applied=" + this.applied);
+            sb.append(",applied=").append(this.applied);
         }
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -145,7 +145,7 @@ public final class ActionRemove extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
@@ -170,7 +170,7 @@ public final class ActionRemove extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);

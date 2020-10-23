@@ -44,11 +44,11 @@ public class ActionUseDie extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[UseDie:");
-        sb.append("indexHandDice=" + this.indexHandDice);
-        sb.append(",indexDie=" + this.indexDie);
-        sb.append(",site=" + this.site);
+        sb.append("indexHandDice=").append(this.indexHandDice);
+        sb.append(",indexDie=").append(this.indexDie);
+        sb.append(",site=").append(this.site);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

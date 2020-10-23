@@ -15,9 +15,6 @@ public class SubstitutionsOnly implements SymmetryValidator
             case ROTATIONS -> {
                 return symmetryIndex == 0;
             }
-            case SUBSTITUTIONS -> {
-                return true;
-            }
             default -> {
                 return true;
             }

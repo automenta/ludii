@@ -171,31 +171,16 @@ public class ContainerDeductionPuzzleStateLarge extends ContainerDeductionPuzzle
     @Override
     public void resetVariable(final SiteType type, final int var, final int numValues) {
         switch (type) {
-            case Vertex -> {
-                this.verticeList.get(var - this.offset).set(0, this.nbValuesVert, true);
-                break;
-            }
-            case Edge -> {
-                this.edgesList.get(var).set(0, this.nbValuesEdge, true);
-                break;
-            }
-            case Cell -> {
-                this.cellsList.get(var).set(0, this.nbValuesCell, true);
-                break;
-            }
-            default -> {
-                this.verticeList.get(var - this.offset).set(0, this.nbValuesVert, true);
-                break;
-            }
+            case Vertex -> this.verticeList.get(var - this.offset).set(0, this.nbValuesVert, true);
+            case Edge -> this.edgesList.get(var).set(0, this.nbValuesEdge, true);
+            case Cell -> this.cellsList.get(var).set(0, this.nbValuesCell, true);
+            default -> this.verticeList.get(var - this.offset).set(0, this.nbValuesVert, true);
         }
     }
     
     @Override
     public BitSet values(final SiteType type, final int var) {
         switch (type) {
-            case Vertex -> {
-                return this.verticeList.get(var - this.offset);
-            }
             case Edge -> {
                 return this.edgesList.get(var);
             }

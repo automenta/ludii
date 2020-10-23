@@ -17,7 +17,7 @@ public class Rules implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (rules \"" + this.rules + "\")\n");
+        sb.append("    (rules \"").append(this.rules).append("\")\n");
         return sb.toString();
     }
     

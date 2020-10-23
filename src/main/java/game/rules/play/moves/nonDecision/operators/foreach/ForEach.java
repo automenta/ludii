@@ -40,9 +40,7 @@ public final class ForEach extends Effect
             case Group -> {
                 return new ForEachGroup(type, directions, If, moves, then);
             }
-            default -> {
-                throw new IllegalArgumentException("ForEach(): A ForEachGroupType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("ForEach(): A ForEachGroupType is not implemented.");
         }
     }
     
@@ -51,9 +49,7 @@ public final class ForEach extends Effect
             case Die -> {
                 return new ForEachDie(handDiceIndex, combined, replayDouble, If, moves, then);
             }
-            default -> {
-                throw new IllegalArgumentException("ForEach(): A ForEachDieType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("ForEach(): A ForEachDieType is not implemented.");
         }
     }
     
@@ -72,9 +68,7 @@ public final class ForEach extends Effect
             case Direction -> {
                 return new ForEachDirection(from, directions, between, to, moves, then);
             }
-            default -> {
-                throw new IllegalArgumentException("ForEach(): A ForEachDirectionType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("ForEach(): A ForEachDirectionType is not implemented.");
         }
     }
     
@@ -83,9 +77,7 @@ public final class ForEach extends Effect
             case Site -> {
                 return new ForEachSite(regionFn, generator, noMoveYet, then);
             }
-            default -> {
-                throw new IllegalArgumentException("ForEach(): A ForEachSiteType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("ForEach(): A ForEachSiteType is not implemented.");
         }
     }
     
@@ -94,9 +86,7 @@ public final class ForEach extends Effect
             case Value -> {
                 return new ForEachValue(min, max, generator, then);
             }
-            default -> {
-                throw new IllegalArgumentException("ForEach(): A ForEachValueType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("ForEach(): A ForEachValueType is not implemented.");
         }
     }
     
@@ -135,9 +125,7 @@ public final class ForEach extends Effect
             case Piece -> {
                 return new ForEachPiece(item, items, container, containerName, specificMoves, player, role, top, type, then);
             }
-            default -> {
-                throw new IllegalArgumentException("ForEach(): A ForEachPieceType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("ForEach(): A ForEachPieceType is not implemented.");
         }
     }
     
@@ -166,9 +154,7 @@ public final class ForEach extends Effect
             case Player -> {
                 return new ForEachPlayer(container, containerName, specificMoves, role, player, top, type, then);
             }
-            default -> {
-                throw new IllegalArgumentException("ForEach(): A ForEachPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("ForEach(): A ForEachPlayerType is not implemented.");
         }
     }
     

@@ -104,7 +104,7 @@ public class Arc extends PathOp
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.label + ": rx=" + this.rx + ", ry=" + this.ry + ", xAxis=" + this.xAxis + ", largeArc=" + this.largeArc + ", sweep=" + this.sweep + " +, x=" + this.x + ", y=" + this.y);
+        sb.append(this.label).append(": rx=").append(this.rx).append(", ry=").append(this.ry).append(", xAxis=").append(this.xAxis).append(", largeArc=").append(this.largeArc).append(", sweep=").append(this.sweep).append(" +, x=").append(this.x).append(", y=").append(this.y);
         return sb.toString();
     }
     

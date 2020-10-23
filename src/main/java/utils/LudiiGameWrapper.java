@@ -214,9 +214,7 @@ public final class LudiiGameWrapper
         this.yCoords = new int[this.game.equipment().totalDefaultSites()];
         final int numBoardSites = graphElements.size();
         final List<? extends TopologyElement> sortedGraphElements = new ArrayList<TopologyElement>(graphElements);
-        sortedGraphElements.sort((Comparator<TopologyElement>) (o1, o2) -> {
-            return Double.compare(o1.centroid().getX(), o2.centroid().getX());
-        });
+        sortedGraphElements.sort(Comparator.comparingDouble(o -> o.centroid().getX()));
         int currIdx = 0;
         double currXPos = sortedGraphElements.get(0).centroid().getX();
         for (final TopologyElement e : sortedGraphElements) {
@@ -228,9 +226,7 @@ public final class LudiiGameWrapper
             this.xCoords[e.index()] = currIdx;
         }
         final int maxBoardIndexX = currIdx;
-        sortedGraphElements.sort((Comparator<TopologyElement>) (o1, o2) -> {
-            return Double.compare(o1.centroid().getY(), o2.centroid().getY());
-        });
+        sortedGraphElements.sort(Comparator.comparingDouble(o -> o.centroid().getY()));
         currIdx = 0;
         double currYPos = sortedGraphElements.get(0).centroid().getY();
         for (final TopologyElement e2 : sortedGraphElements) {

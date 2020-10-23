@@ -225,7 +225,7 @@ public class Vertex extends GraphElement
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Vertex[" + this.id + "]: (");
+        sb.append("Vertex[").append(this.id).append("]: (");
         if (this.pt.x() == (int)this.pt.x() && this.pt.y() == (int)this.pt.y()) {
             sb.append(String.format("%d,%d", (int)this.pt.x(), (int)this.pt.y()));
         }
@@ -240,7 +240,7 @@ public class Vertex extends GraphElement
         }
         sb.append(")");
         if (this.pivot != null) {
-            sb.append(" pivot=" + this.pivot.id());
+            sb.append(" pivot=").append(this.pivot.id());
         }
         sb.append(" [");
         for (int e = 0; e < this.edges.size(); ++e) {
@@ -250,8 +250,8 @@ public class Vertex extends GraphElement
             sb.append(this.edges.get(e).id());
         }
         sb.append("]");
-        sb.append(" " + this.properties);
-        sb.append(" \"" + situation.label() + "\"");
+        sb.append(" ").append(this.properties);
+        sb.append(" \"").append(situation.label()).append("\"");
         return sb.toString();
     }
 }

@@ -81,42 +81,15 @@ public final class Player extends BaseLudeme implements Serializable
     
     public void setDefaultColour() {
         switch (this.index) {
-            case 1 -> {
-                this.colour = new Color(255, 255, 255);
-                break;
-            }
-            case 2 -> {
-                this.colour = new Color(63, 63, 63);
-                break;
-            }
-            case 3 -> {
-                this.colour = new Color(191, 191, 191);
-                break;
-            }
-            case 4 -> {
-                this.colour = new Color(255, 0, 0);
-                break;
-            }
-            case 5 -> {
-                this.colour = new Color(0, 127, 255);
-                break;
-            }
-            case 6 -> {
-                this.colour = new Color(0, 200, 255);
-                break;
-            }
-            case 7 -> {
-                this.colour = new Color(230, 230, 0);
-                break;
-            }
-            case 8 -> {
-                this.colour = new Color(0, 230, 230);
-                break;
-            }
-            default -> {
-                this.colour = null;
-                break;
-            }
+            case 1 -> this.colour = new Color(255, 255, 255);
+            case 2 -> this.colour = new Color(63, 63, 63);
+            case 3 -> this.colour = new Color(191, 191, 191);
+            case 4 -> this.colour = new Color(255, 0, 0);
+            case 5 -> this.colour = new Color(0, 127, 255);
+            case 6 -> this.colour = new Color(0, 200, 255);
+            case 7 -> this.colour = new Color(230, 230, 0);
+            case 8 -> this.colour = new Color(0, 230, 230);
+            default -> this.colour = null;
         }
     }
     

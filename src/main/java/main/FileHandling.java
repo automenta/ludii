@@ -107,7 +107,7 @@ public class FileHandling {
         try (final InputStreamReader isr = new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8);
              final BufferedReader bufferedReader = new BufferedReader(isr)) {
             while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line).append("\n");
             }
         }
         return sb.toString();
@@ -390,7 +390,7 @@ public class FileHandling {
         try (final BufferedReader rdr = new BufferedReader(new InputStreamReader(in))) {
             String line;
             while ((line = rdr.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line).append("\n");
             }
         } catch (IOException e) {
             e.printStackTrace();

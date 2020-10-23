@@ -4,7 +4,6 @@
 
 package org.w3c.css.sac;
 
-import java.io.IOException;
 import java.util.Locale;
 
 public interface Parser

@@ -17,7 +17,7 @@ public class Date implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (date \"" + this.date + "\")\n");
+        sb.append("    (date \"").append(this.date).append("\")\n");
         return sb.toString();
     }
     

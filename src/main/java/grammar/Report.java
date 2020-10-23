@@ -73,10 +73,10 @@ public class Report {
             sb.append(error);
         }
         for (String warning : this.warnings) {
-            sb.append("Warning: " + warning);
+            sb.append("Warning: ").append(warning);
         }
         for (String note : this.notes) {
-            sb.append("Note: " + note);
+            sb.append("Note: ").append(note);
         }
         return sb.toString();
     }

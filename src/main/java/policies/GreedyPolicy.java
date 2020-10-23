@@ -4,14 +4,14 @@
 
 package policies;
 
+import collections.FVector;
+import collections.FastArrayList;
 import features.FeatureSet;
 import function_approx.BoostedLinearFunction;
 import function_approx.LinearFunction;
 import game.Game;
 import game.rules.play.moves.Moves;
 import gnu.trove.list.array.TIntArrayList;
-import collections.FVector;
-import collections.FastArrayList;
 import util.Context;
 import util.Move;
 import util.Trial;

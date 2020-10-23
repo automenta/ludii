@@ -34,7 +34,7 @@ public final class ActionNoop extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[Noop:");
         if (this.decision) {
-            sb.append("decision=" + this.decision);
+            sb.append("decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

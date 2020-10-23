@@ -67,9 +67,7 @@ public class Is extends BaseBooleanFunction
             case Repeat -> {
                 return new IsRepeat(repetitionType);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): An IsRepeatType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): An IsRepeatType is not implemented.");
         }
     }
     
@@ -88,9 +86,7 @@ public class Is extends BaseBooleanFunction
             case Pattern -> {
                 return new IsPattern(walk, type, from, what, whats);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): An IsPatternType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): An IsPatternType is not implemented.");
         }
     }
     
@@ -108,9 +104,7 @@ public class Is extends BaseBooleanFunction
             case TreeCentre -> {
                 return new IsTreeCentre(who, role);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsTreeType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsTreeType is not implemented.");
         }
     }
     
@@ -142,9 +136,7 @@ public class Is extends BaseBooleanFunction
             case RegularGraph -> {
                 return new IsRegularGraph(who, role, k, odd, even);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsRegularGraphType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsRegularGraphType is not implemented.");
         }
     }
     
@@ -178,9 +170,7 @@ public class Is extends BaseBooleanFunction
             case Active -> {
                 return new IsActive(index, role);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsPlayerType is not implemented.");
         }
     }
     
@@ -199,9 +189,7 @@ public class Is extends BaseBooleanFunction
             case Triggered -> {
                 return new IsTriggered(event, index, role);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsTriggeredType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsTriggeredType is not implemented.");
         }
     }
     
@@ -216,9 +204,7 @@ public class Is extends BaseBooleanFunction
             case Full -> {
                 return new IsFull();
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsSimpleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsSimpleType is not implemented.");
         }
     }
     
@@ -227,9 +213,7 @@ public class Is extends BaseBooleanFunction
             case Crossing -> {
                 return new IsCrossing(edge1, edge2);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsEdgeType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsEdgeType is not implemented.");
         }
     }
     
@@ -241,9 +225,7 @@ public class Is extends BaseBooleanFunction
             case Proposed -> {
                 return new IsProposed(string);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsStringType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsStringType is not implemented.");
         }
     }
     
@@ -255,9 +237,7 @@ public class Is extends BaseBooleanFunction
             case LastTo -> {
                 return new IsLastTo(type);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsGraphType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsGraphType is not implemented.");
         }
     }
     
@@ -272,9 +252,7 @@ public class Is extends BaseBooleanFunction
             case Visible -> {
                 return new IsVisible(type, locn, indexPlayer, role);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsIndexPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsIndexPlayerType is not implemented.");
         }
     }
     
@@ -301,9 +279,7 @@ public class Is extends BaseBooleanFunction
             case AnyDie -> {
                 return new IsAnyDie(value);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsValueType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsValueType is not implemented.");
         }
     }
     
@@ -325,9 +301,7 @@ public class Is extends BaseBooleanFunction
             case Within -> {
                 return new IsWithin(what, type, at, in);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsComponentType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsComponentType is not implemented.");
         }
     }
     
@@ -346,9 +320,7 @@ public class Is extends BaseBooleanFunction
             case Related -> {
                 return new IsRelated(relationType, type, siteA, siteB, region);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsRelationType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsRelationType is not implemented.");
         }
     }
     
@@ -377,9 +349,7 @@ public class Is extends BaseBooleanFunction
             case Target -> {
                 return new IsTarget(containerIdFn, containerName, configuration, specificSite, specificSites);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsTargetType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsTargetType is not implemented.");
         }
     }
     
@@ -404,9 +374,7 @@ public class Is extends BaseBooleanFunction
             case Connected -> {
                 return new IsConnected(number, type, at, directions, regions, role, regionType);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsConnectType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsConnectType is not implemented.");
         }
     }
     
@@ -438,9 +406,7 @@ public class Is extends BaseBooleanFunction
             case Line -> {
                 return new IsLine(type, length, dirn, through, throughAny, who, what, whats, exact, If, byLevel);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsLineType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsLineType is not implemented.");
         }
     }
     
@@ -469,9 +435,7 @@ public class Is extends BaseBooleanFunction
             case Loop -> {
                 return new IsLoop(type, surround, surroundList, directions, colour, start, regionStart, path);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsLoopType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsLoopType is not implemented.");
         }
     }
     
@@ -500,9 +464,7 @@ public class Is extends BaseBooleanFunction
             case Path -> {
                 return new IsPath(type, who, role, length, maxLimit, closed);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsPathType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsPathType is not implemented.");
         }
     }
     
@@ -514,9 +476,7 @@ public class Is extends BaseBooleanFunction
             case Occupied -> {
                 return new IsOccupied(type, at);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsSiteType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsSiteType is not implemented.");
         }
     }
     
@@ -535,9 +495,7 @@ public class Is extends BaseBooleanFunction
             case In -> {
                 return IsIn.construct(site, sites, region);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsInType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsInType is not implemented.");
         }
     }
     

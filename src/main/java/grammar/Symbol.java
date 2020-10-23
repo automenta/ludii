@@ -312,7 +312,7 @@ public class Symbol {
 
     public String info() {
         StringBuilder sb = new StringBuilder();
-        sb.append((this.usedInGrammar() ? "g" : "~") + (this.usedInMetadata() ? "m" : "~") + (this.isAbstract() ? "*" : "~") + " " + this.toString() + " (" + this.path() + ") => " + this.returnType() + "\n    pack=" + this.notionalLocation() + ", label=" + this.grammarLabel() + ", cls=" + (this.cls() == null ? "null" : this.cls().getName()) + ", keyword=" + this.keyword);
+        sb.append(this.usedInGrammar() ? "g" : "~").append(this.usedInMetadata() ? "m" : "~").append(this.isAbstract() ? "*" : "~").append(" ").append(this.toString()).append(" (").append(this.path()).append(") => ").append(this.returnType()).append("\n    pack=").append(this.notionalLocation()).append(", label=").append(this.grammarLabel()).append(", cls=").append(this.cls() == null ? "null" : this.cls().getName()).append(", keyword=").append(this.keyword);
         return sb.toString();
     }
 

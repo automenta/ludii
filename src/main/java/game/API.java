@@ -4,8 +4,8 @@
 
 package game;
 
-import game.rules.play.moves.Moves;
 import collections.FVector;
+import game.rules.play.moves.Moves;
 import util.*;
 
 import java.util.List;

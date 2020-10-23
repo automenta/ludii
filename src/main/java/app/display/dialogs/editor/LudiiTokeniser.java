@@ -55,18 +55,15 @@ public class LudiiTokeniser
                         case '(', ')', '<', '>', '[', ']', '{', '}' -> {
                             this.startNewToken();
                             this.addCompleteToken(ch);
-                            break;
                         }
                         case '\"' -> {
                             this.startNewToken();
                             inString = true;
                             this.token.append(ch);
-                            break;
                         }
                         case ':' -> {
                             this.token.append(ch);
                             this.startNewToken();
-                            break;
                         }
                         default -> {
                             if (isNumber(ch)) {
@@ -74,7 +71,6 @@ public class LudiiTokeniser
                                 inNumber = true;
                             }
                             this.token.append(ch);
-                            break;
                         }
                     }
                 }

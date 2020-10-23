@@ -42,9 +42,7 @@ public final class Size extends BaseIntFunction
             case Stack -> {
                 return new SizeStack(type, in, at);
             }
-            default -> {
-                throw new IllegalArgumentException("Size(): A SizeSiteType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Size(): A SizeSiteType is not implemented.");
         }
     }
     
@@ -63,9 +61,7 @@ public final class Size extends BaseIntFunction
             case LargePiece -> {
                 return new SizeLargePiece(type, in, at);
             }
-            default -> {
-                throw new IllegalArgumentException("Size(): A SizeLargePiece is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Size(): A SizeLargePiece is not implemented.");
         }
     }
     
@@ -74,9 +70,7 @@ public final class Size extends BaseIntFunction
             case Group -> {
                 return new SizeGroup(type, at, directions, If);
             }
-            default -> {
-                throw new IllegalArgumentException("Size(): A SizeGroupType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Size(): A SizeGroupType is not implemented.");
         }
     }
     
@@ -95,9 +89,7 @@ public final class Size extends BaseIntFunction
             case Territory -> {
                 return new SizeTerritory(type, role, player, direction);
             }
-            default -> {
-                throw new IllegalArgumentException("Size(): A SizeTerritoryType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Size(): A SizeTerritoryType is not implemented.");
         }
     }
     

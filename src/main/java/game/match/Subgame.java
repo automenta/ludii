@@ -73,9 +73,9 @@ public final class Subgame extends BaseLudeme implements Serializable
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("[Subgame: " + this.gameName);
+        sb.append("[Subgame: ").append(this.gameName);
         if (this.optionName != null) {
-            sb.append(" (" + this.optionName + ")");
+            sb.append(" (").append(this.optionName).append(")");
         }
         sb.append("]");
         return sb.toString();

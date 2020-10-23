@@ -44,9 +44,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                 if (localState == 1) {
                     g2d.drawLine(rect.x + rect.width / 2, rect.y, rect.x, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width, rect.y, rect.x + rect.width / 2, rect.y + rect.height);
-                    break;
                 }
-                break;
             }
             case Patol2 -> {
                 if (localState == 0) {
@@ -56,9 +54,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                     g2d.drawLine(rect.x, rect.y, rect.width, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width / 2, rect.y, rect.x, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width, rect.y, rect.x + rect.width / 2, rect.y + rect.height);
-                    break;
                 }
-                break;
             }
             case Notched -> {
                 if (localState == 0) {
@@ -70,9 +66,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                     g2d.drawLine(rect.x + rect.width / 5 * 3, rect.y, rect.x + rect.width / 5 * 3, rect.y + rect.height / 5);
                     g2d.drawLine(rect.x + rect.width / 5 * 3, rect.y + rect.height, rect.x + rect.width / 5 * 3, rect.y + rect.height - rect.height / 5);
                     g2d.drawLine(rect.x + rect.width / 5 * 4, rect.y + rect.height, rect.x + rect.width / 5 * 4, rect.y + rect.height - rect.height / 5);
-                    break;
                 }
-                break;
             }
             case SetDilth -> {
                 if (localState == 0) {
@@ -81,9 +75,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                 if (localState == 1) {
                     g2d.drawLine(rect.x + rect.width / 2, rect.y, rect.x + rect.width / 3, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width / 2 + rect.width / 6, rect.y, rect.x + rect.width / 2, rect.y + rect.height);
-                    break;
                 }
-                break;
             }
             case Nebakuthana1 -> {
                 if (localState == 0) {
@@ -94,9 +86,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                     g2d.drawPolygon(new int[]{rect.x + rect.width - rect.width / 10, rect.x + rect.width - rect.width / 5 - rect.width / 10, rect.x + rect.width - rect.width / 5}, new int[]{rect.y, rect.y, rect.y + rect.height / 5}, 3);
                     g2d.drawPolygon(new int[]{rect.x + rect.width / 10, rect.x + rect.width / 5 + rect.width / 10, rect.x + rect.width / 5}, new int[]{rect.y + rect.height, rect.y + rect.height, rect.y + rect.height - rect.height / 5}, 3);
                     g2d.drawPolygon(new int[]{rect.x + rect.width - rect.width / 10, rect.x + rect.width - rect.width / 5 - rect.width / 10, rect.x + rect.width - rect.width / 5}, new int[]{rect.y + rect.height, rect.y + rect.height, rect.y + rect.height - rect.height / 5}, 3);
-                    break;
                 }
-                break;
             }
             case Nebakuthana2 -> {
                 if (localState == 0) {
@@ -106,9 +96,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                     g2d.drawLine(rect.x, rect.y + rect.height / 2, rect.x + rect.width, rect.y + rect.height / 2);
                     g2d.drawLine(rect.x + rect.width / 3, rect.y, rect.x + rect.width / 3 * 2, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width / 3, rect.y + rect.height, rect.x + rect.width / 3 * 2, rect.y);
-                    break;
                 }
-                break;
             }
             case Nebakuthana3 -> {
                 if (localState == 0) {
@@ -117,9 +105,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                 if (localState == 1) {
                     g2d.drawLine(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.x + rect.width / 2, rect.y + rect.height / 2);
                     g2d.drawPolygon(new int[]{rect.x + rect.width / 2, rect.x + rect.width / 3, rect.x + rect.width / 2, rect.x + rect.width / 3 * 2}, new int[]{rect.y + rect.height / 10, rect.y + rect.height / 2, rect.y + rect.height - rect.height / 10, rect.y + rect.height / 2}, 4);
-                    break;
                 }
-                break;
             }
             case Nebakuthana4 -> {
                 if (localState == 0) {
@@ -147,9 +133,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                     g2d.drawLine(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.x + rect.width / 2 + rect.width / 4, rect.y);
                     g2d.drawLine(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.x + rect.width / 2 + rect.width / 4, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width / 2, rect.y + rect.height / 2, rect.x + rect.width / 4, rect.y + rect.height);
-                    break;
                 }
-                break;
             }
             case Kints1 -> {
                 if (localState == 0) {
@@ -162,9 +146,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                     g2d.drawLine(rect.x + rect.width / 3 * 2, rect.y, rect.x + rect.width / 2, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width / 3 * 2, rect.y, rect.x + rect.width / 6 * 5, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width, rect.y, rect.x + rect.width / 6 * 5, rect.y + rect.height);
-                    break;
                 }
-                break;
             }
             case Kints2 -> {
                 if (localState == 0) {
@@ -175,9 +157,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                     g2d.drawLine(rect.x + rect.width / 2 - rect.width / 3, rect.y, rect.x + rect.width / 2 - rect.width / 3, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width / 2 + rect.width / 6, rect.y, rect.x + rect.width / 2 + rect.width / 6, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width / 2 + rect.width / 3, rect.y, rect.x + rect.width / 2 + rect.width / 3, rect.y + rect.height);
-                    break;
                 }
-                break;
             }
             case Kints3 -> {
                 if (localState == 0) {
@@ -188,9 +168,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                     g2d.drawLine(rect.x + rect.width / 3, rect.y + rect.height, rect.x + rect.width / 6, rect.y);
                     g2d.drawLine(rect.x + rect.width, rect.y, rect.x + rect.width - rect.width / 6, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width - rect.width / 3, rect.y, rect.x + rect.width - rect.width / 6, rect.y + rect.height);
-                    break;
                 }
-                break;
             }
             case Kints4 -> {
                 if (localState == 0) {
@@ -199,9 +177,7 @@ public class NativeAmericanDiceStyle extends BaseComponentStyle
                 if (localState == 1) {
                     g2d.drawLine(rect.x + rect.width / 3, rect.y, rect.x + rect.width / 3 * 2, rect.y + rect.height);
                     g2d.drawLine(rect.x + rect.width / 3, rect.y + rect.height, rect.x + rect.width / 3 * 2, rect.y);
-                    break;
                 }
-                break;
             }
         }
     }

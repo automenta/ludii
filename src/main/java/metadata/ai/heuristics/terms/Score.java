@@ -6,8 +6,8 @@ package metadata.ai.heuristics.terms;
 
 import annotations.Name;
 import annotations.Opt;
-import game.Game;
 import collections.FVector;
+import game.Game;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import util.Context;
 
@@ -43,10 +43,10 @@ public class Score extends HeuristicTerm
         final StringBuilder sb = new StringBuilder();
         sb.append("(score");
         if (this.transformation != null) {
-            sb.append(" transformation:" + this.transformation.toString());
+            sb.append(" transformation:").append(this.transformation.toString());
         }
         if (this.weight != 1.0f) {
-            sb.append(" weight:" + this.weight);
+            sb.append(" weight:").append(this.weight);
         }
         sb.append(")");
         return sb.toString();
@@ -62,10 +62,10 @@ public class Score extends HeuristicTerm
             final StringBuilder sb = new StringBuilder();
             sb.append("(score");
             if (this.transformation != null) {
-                sb.append(" transformation:" + this.transformation.toString());
+                sb.append(" transformation:").append(this.transformation.toString());
             }
             if (this.weight != 1.0f) {
-                sb.append(" weight:" + this.weight);
+                sb.append(" weight:").append(this.weight);
             }
             sb.append(")");
             return sb.toString();

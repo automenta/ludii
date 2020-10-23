@@ -4,10 +4,10 @@
 
 package util.model;
 
+import collections.FVector;
 import game.Game;
 import game.match.Subgame;
 import game.rules.play.moves.Moves;
-import collections.FVector;
 import util.*;
 
 import java.util.List;

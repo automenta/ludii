@@ -27,9 +27,7 @@ public final class Max extends Effect
             case Moves -> {
                 return new MaxMoves(moves, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Max(): A MaxMovesType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Max(): A MaxMovesType is not implemented.");
         }
     }
     
@@ -38,9 +36,7 @@ public final class Max extends Effect
             case Distance -> {
                 return new MaxDistance(trackName, owner, moves, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Max(): A MaxDistanceType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Max(): A MaxDistanceType is not implemented.");
         }
     }
     

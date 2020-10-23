@@ -64,37 +64,31 @@ public class Colour implements GraphicsItem
                     r = value;
                     g = t;
                     b = p;
-                    break;
                 }
                 case 1 -> {
                     r = q;
                     g = value;
                     b = p;
-                    break;
                 }
                 case 2 -> {
                     r = p;
                     g = value;
                     b = t;
-                    break;
                 }
                 case 3 -> {
                     r = p;
                     g = q;
                     b = value;
-                    break;
                 }
                 case 4 -> {
                     r = t;
                     g = p;
                     b = value;
-                    break;
                 }
                 case 5 -> {
                     r = value;
                     g = p;
                     b = q;
-                    break;
                 }
                 default -> {
                     System.out.println("** Colour.HSVtoColor(): Invalid HSV case, i=" + i + ".");

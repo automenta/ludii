@@ -222,9 +222,7 @@ public abstract class BaseContainerState implements ContainerState
             case Orthogonal -> {
                 return this.unionInfoOrthogonal;
             }
-            default -> {
-                throw new IllegalArgumentException("BaseContainerState::unionInfo() only supports Adjacent or Orthogonal!");
-            }
+            default -> throw new IllegalArgumentException("BaseContainerState::unionInfo() only supports Adjacent or Orthogonal!");
         }
     }
     
@@ -237,9 +235,7 @@ public abstract class BaseContainerState implements ContainerState
             case Orthogonal -> {
                 return this.unionInfoBlockingOrthogonal;
             }
-            default -> {
-                throw new IllegalArgumentException("BaseContainerState::unionInfoBlocking() only supports Adjacent or Orthogonal!");
-            }
+            default -> throw new IllegalArgumentException("BaseContainerState::unionInfoBlocking() only supports Adjacent or Orthogonal!");
         }
     }
     

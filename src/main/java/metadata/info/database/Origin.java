@@ -17,7 +17,7 @@ public class Origin implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (origin \"" + this.origin + "\")\n");
+        sb.append("    (origin \"").append(this.origin).append("\")\n");
         return sb.toString();
     }
     

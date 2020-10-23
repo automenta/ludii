@@ -54,40 +54,18 @@ public class FormatReader extends BufferedReader
         if (f == 37) {
             final char t = (char)fmt.next();
             switch (t) {
-                case 'S', 's' -> {
-                    data.add(this.getString(c, fmt));
-                    break;
-                }
-                case 'd' -> {
-                    data.add(this.getInteger(c, fmt, 10));
-                    break;
-                }
-                case 'o' -> {
-                    data.add(this.getInteger(c, fmt, 8));
-                    break;
-                }
-                case 'X', 'x' -> {
-                    data.add(this.getInteger(c, fmt, 16));
-                    break;
-                }
-                case 'f' -> {
-                    data.add(this.getDouble(c, fmt));
-                    break;
-                }
+                case 'S', 's' -> data.add(this.getString(c, fmt));
+                case 'd' -> data.add(this.getInteger(c, fmt, 10));
+                case 'o' -> data.add(this.getInteger(c, fmt, 8));
+                case 'X', 'x' -> data.add(this.getInteger(c, fmt, 16));
+                case 'f' -> data.add(this.getDouble(c, fmt));
                 case 'c' -> {
                     if (c != -1) {
                         data.add((char) c);
-                        break;
                     }
-                    break;
                 }
-                case '%' -> {
-                    test(c, 37, fmt.head());
-                    break;
-                }
-                default -> {
-                    throw new ParseException("Invalid format specifier: " + t, fmt.head());
-                }
+                case '%' -> test(c, 37, fmt.head());
+                default -> throw new ParseException("Invalid format specifier: " + t, fmt.head());
             }
             return;
         }

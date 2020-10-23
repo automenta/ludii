@@ -5,6 +5,7 @@
 package util.state;
 
 import annotations.Hide;
+import collections.FastTIntArrayList;
 import game.Game;
 import game.equipment.container.Container;
 import game.equipment.container.other.Dice;
@@ -19,7 +20,6 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntIntHashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
-import collections.FastTIntArrayList;
 import util.state.containerState.ContainerState;
 import util.state.containerState.ContainerStateFactory;
 import util.state.onTrack.OnTrackIndices;
@@ -838,8 +838,8 @@ public class State implements Serializable
     }
     
     public void reinitCurrentDice() {
-        for (int i = 0; i < this.currentDice.length; ++i) {
-            Arrays.fill(this.currentDice[i], 0);
+        for (int[] ints : this.currentDice) {
+            Arrays.fill(ints, 0);
         }
     }
     

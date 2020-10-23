@@ -86,10 +86,10 @@ public class CountLudemes
         final StringBuilder sb = new StringBuilder();
         sb.append("\n");
         for (final Record record3 : this.records) {
-            sb.append(record3.label() + ": " + record3.count() + "\n");
+            sb.append(record3.label()).append(": ").append(record3.count()).append("\n");
         }
-        sb.append("Enum classes: " + numEnums + "\n");
-        sb.append("Enum constants: " + numEnumConstants + "\n");
+        sb.append("Enum classes: ").append(numEnums).append("\n");
+        sb.append("Enum constants: ").append(numEnumConstants).append("\n");
         sb.append("\n");
         return this.result = sb.toString();
     }

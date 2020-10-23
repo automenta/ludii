@@ -32,7 +32,7 @@ public class ActionStoreStateInContext extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[StoreStateInContext:");
         if (this.decision) {
-            sb.append("decision=" + this.decision);
+            sb.append("decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

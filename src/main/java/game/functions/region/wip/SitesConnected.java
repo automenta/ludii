@@ -52,14 +52,8 @@ public final class SitesConnected extends BaseRegionFunction
         }
         System.out.println("here");
         switch (this.ofType) {
-            case Vertex -> {
-                return null;
-            }
             case Edge -> {
                 return this.evalEdge(context, siteId);
-            }
-            case Cell -> {
-                return null;
             }
             default -> {
                 return null;
@@ -166,9 +160,6 @@ public final class SitesConnected extends BaseRegionFunction
                     System.out.println("destination:" + destination);
                 }
                 return new Region(resultOwner.toArray());
-            }
-            case Cell -> {
-                return null;
             }
             default -> {
                 return null;

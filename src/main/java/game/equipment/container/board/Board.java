@@ -64,18 +64,9 @@ public class Board extends Container
             final Values[] valuesLocal = array = ((valuesArray != null) ? valuesArray : new Values[] { values });
             for (final Values valuesGraphElement : array) {
                 switch (valuesGraphElement.type()) {
-                    case Cell -> {
-                        this.cellRange = valuesGraphElement.range();
-                        break;
-                    }
-                    case Edge -> {
-                        this.edgeRange = valuesGraphElement.range();
-                        break;
-                    }
-                    case Vertex -> {
-                        this.vertexRange = valuesGraphElement.range();
-                        break;
-                    }
+                    case Cell -> this.cellRange = valuesGraphElement.range();
+                    case Edge -> this.edgeRange = valuesGraphElement.range();
+                    case Vertex -> this.vertexRange = valuesGraphElement.range();
                 }
             }
             if (this.vertexRange == null) {

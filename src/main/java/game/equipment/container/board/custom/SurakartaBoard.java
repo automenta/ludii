@@ -43,33 +43,15 @@ public class SurakartaBoard extends Board
         }
         else {
             switch (this.topology().graph().basis()) {
-                case Square -> {
-                    totalLoops = (Math.min(dim0, dim2) - 1) / 2;
-                    break;
-                }
-                case Triangular -> {
-                    totalLoops = dim0 / 2;
-                    break;
-                }
-                default -> {
-                    System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
-                    break;
-                }
+                case Square -> totalLoops = (Math.min(dim0, dim2) - 1) / 2;
+                case Triangular -> totalLoops = dim0 / 2;
+                default -> System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
             }
         }
         switch (this.topology().graph().basis()) {
-            case Square -> {
-                this.createTracksSquare(dim0, dim2, totalLoops);
-                break;
-            }
-            case Triangular -> {
-                this.createTracksTriangular(dim0, totalLoops);
-                break;
-            }
-            default -> {
-                System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
-                break;
-            }
+            case Square -> this.createTracksSquare(dim0, dim2, totalLoops);
+            case Triangular -> this.createTracksTriangular(dim0, totalLoops);
+            default -> System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
         }
         this.numSites = this.topology.vertices().size();
         this.style = ContainerStyleType.Graph;

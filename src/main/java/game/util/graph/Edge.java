@@ -257,21 +257,21 @@ public class Edge extends GraphElement
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Edge[" + this.id + "]: " + this.vertexA.id() + " => " + this.vertexB.id());
+        sb.append("Edge[").append(this.id).append("]: ").append(this.vertexA.id()).append(" => ").append(this.vertexB.id());
         if (this.left != null) {
-            sb.append(" L=" + this.left.id());
+            sb.append(" L=").append(this.left.id());
         }
         if (this.right != null) {
-            sb.append(" R=" + this.right.id());
+            sb.append(" R=").append(this.right.id());
         }
-        sb.append(" " + this.properties);
+        sb.append(" ").append(this.properties);
         if (this.tangentA != null) {
-            sb.append(" " + this.tangentA);
+            sb.append(" ").append(this.tangentA);
         }
         if (this.tangentB != null) {
-            sb.append(" " + this.tangentB);
+            sb.append(" ").append(this.tangentB);
         }
-        sb.append(" \"" + this.situation.label() + "\"");
+        sb.append(" \"").append(this.situation.label()).append("\"");
         return sb.toString();
     }
 }

@@ -52,9 +52,6 @@ public final class SitesPath extends BaseRegionFunction
             case Edge -> {
                 return this.evalEdge(context);
             }
-            case Cell -> {
-                return null;
-            }
             default -> {
                 return null;
             }
@@ -132,9 +129,6 @@ public final class SitesPath extends BaseRegionFunction
             case Edge -> {
                 return new Region(resultEdges.toArray());
             }
-            case Cell -> {
-                return null;
-            }
             default -> {
                 return null;
             }
@@ -208,9 +202,6 @@ public final class SitesPath extends BaseRegionFunction
             }
             case Edge -> {
                 return new Region(resultEdges.toArray());
-            }
-            case Cell -> {
-                return null;
             }
             default -> {
                 return null;

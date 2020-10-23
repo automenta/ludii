@@ -345,9 +345,6 @@ public class Topology implements Serializable
             case Diagonal -> {
                 return this.supportedDiagonalDirections.get(type);
             }
-            case All -> {
-                return this.supportedDirections.get(type);
-            }
             case OffDiagonal -> {
                 return this.supportedOffDirections.get(type);
             }
@@ -541,31 +538,26 @@ public class Topology implements Serializable
                     for (final TopologyElement elem : element.adjacent()) {
                         currList.add(elem.index());
                     }
-                    break;
                 }
                 case All -> {
                     for (final TopologyElement elem : element.neighbours()) {
                         currList.add(elem.index());
                     }
-                    break;
                 }
                 case Diagonal -> {
                     for (final TopologyElement elem : element.diagonal()) {
                         currList.add(elem.index());
                     }
-                    break;
                 }
                 case OffDiagonal -> {
                     for (final TopologyElement elem : element.off()) {
                         currList.add(elem.index());
                     }
-                    break;
                 }
                 case Orthogonal -> {
                     for (final TopologyElement elem : element.orthogonal()) {
                         currList.add(elem.index());
                     }
-                    break;
                 }
             }
             final TIntArrayList nextList = new TIntArrayList();
@@ -583,7 +575,6 @@ public class Topology implements Serializable
                                             nextList.add(elem2.index());
                                         }
                                     }
-                                    break;
                                 }
                                 case All -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).neighbours()) {
@@ -591,7 +582,6 @@ public class Topology implements Serializable
                                             nextList.add(elem2.index());
                                         }
                                     }
-                                    break;
                                 }
                                 case Diagonal -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).diagonal()) {
@@ -599,7 +589,6 @@ public class Topology implements Serializable
                                             nextList.add(elem2.index());
                                         }
                                     }
-                                    break;
                                 }
                                 case OffDiagonal -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).off()) {
@@ -607,7 +596,6 @@ public class Topology implements Serializable
                                             nextList.add(elem2.index());
                                         }
                                     }
-                                    break;
                                 }
                                 case Orthogonal -> {
                                     for (final TopologyElement elem2 : elements.get(idNeighbour).orthogonal()) {
@@ -615,7 +603,6 @@ public class Topology implements Serializable
                                             nextList.add(elem2.index());
                                         }
                                     }
-                                    break;
                                 }
                             }
                         }

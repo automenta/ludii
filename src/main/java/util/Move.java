@@ -5,6 +5,7 @@
 package util;
 
 import annotations.Hide;
+import collections.FastArrayList;
 import game.rules.play.moves.Moves;
 import game.types.board.RelationType;
 import game.types.board.SiteType;
@@ -12,7 +13,6 @@ import game.util.directions.AbsoluteDirection;
 import game.util.directions.Direction;
 import game.util.directions.DirectionFacing;
 import game.util.graph.Radial;
-import collections.FastArrayList;
 import org.apache.commons.rng.core.RandomProviderDefaultState;
 import topology.Topology;
 import topology.TopologyElement;
@@ -815,25 +815,25 @@ public class Move extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[Move:");
-        sb.append("mover=" + this.mover);
+        sb.append("mover=").append(this.mover);
         if (this.from != -1) {
-            sb.append(",from=" + this.from);
+            sb.append(",from=").append(this.from);
         }
         if (this.to != -1) {
-            sb.append(",to=" + this.to);
+            sb.append(",to=").append(this.to);
         }
         if (this.state != -1) {
-            sb.append(",state=" + this.state);
+            sb.append(",state=").append(this.state);
         }
         if (!this.oriented) {
-            sb.append(",oriented=" + this.oriented);
+            sb.append(",oriented=").append(this.oriented);
         }
         if (this.edge != -1) {
-            sb.append(",edge=" + this.edge);
+            sb.append(",edge=").append(this.edge);
         }
         if (this.levelMin != 0 && this.levelMax != 0) {
-            sb.append(",levelMin=" + this.levelMin);
-            sb.append(",levelMax=" + this.levelMax);
+            sb.append(",levelMin=").append(this.levelMin);
+            sb.append(",levelMax=").append(this.levelMax);
         }
         final List<Action> allActions = (context == null) ? this.actions : this.getAllActions(context);
         sb.append(",actions=");

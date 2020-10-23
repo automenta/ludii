@@ -4,18 +4,21 @@
 
 package supplementary.experiments.scripts;
 
+import collections.ListUtils;
 import game.Game;
 import main.CommandLineArgParse;
 import main.FileHandling;
 import main.StringRoutines;
 import main.UnixPrintWriter;
-import collections.ListUtils;
 import options.Option;
 import search.mcts.MCTS;
 import search.minimax.AlphaBetaSearch;
 import util.GameLoader;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;

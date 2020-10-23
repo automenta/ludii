@@ -49,10 +49,7 @@ public class EBNFClause {
         int c;
         String str = input.trim();
         switch (str.charAt(0)) {
-            case '(' -> {
-                this.isConstructor = true;
-                break;
-            }
+            case '(' -> this.isConstructor = true;
             case '<' -> {
                 this.isRule = true;
                 this.token = str;

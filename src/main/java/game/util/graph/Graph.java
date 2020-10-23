@@ -209,16 +209,16 @@ public class Graph extends BaseGraphFunction
     
     public void clear(final SiteType siteType) {
         switch (siteType) {
-            case Vertex: {
+            case Vertex -> {
                 this.vertices.clear();
             }
-            case Edge: {
+            case Edge -> {
                 edges.clear();
                 for (final Vertex vertex : this.vertices()) {
                     vertex.clearEdges();
                 }
             }
-            case Cell: {
+            case Cell -> {
                 this.faces.clear();
                 for (final Edge edge : edges()) {
                     edge.setLeft(null);
@@ -227,7 +227,6 @@ public class Graph extends BaseGraphFunction
                 for (final Vertex vertex : this.vertices()) {
                     vertex.clearFaces();
                 }
-                break;
             }
         }
     }
@@ -734,18 +733,9 @@ public class Graph extends BaseGraphFunction
     
     public void remove(final GraphElement element, final boolean removeOrphans) {
         switch (element.siteType()) {
-            case Vertex -> {
-                this.removeVertex(element.id());
-                break;
-            }
-            case Edge -> {
-                this.removeEdge(element.id());
-                break;
-            }
-            case Cell -> {
-                this.removeFace(element.id(), removeOrphans);
-                break;
-            }
+            case Vertex -> this.removeVertex(element.id());
+            case Edge -> this.removeEdge(element.id());
+            case Cell -> this.removeFace(element.id(), removeOrphans);
         }
     }
     
@@ -948,21 +938,12 @@ public class Graph extends BaseGraphFunction
             final GraphElement ge = elements.get(rank.get(es).id());
             ge.setId(es);
             switch (type) {
-                case Vertex -> {
-                    this.vertices.add((Vertex) ge);
-                    break;
-                }
-                case Edge -> {
-                    edges.add((Edge) ge);
-                    break;
-                }
-                case Cell -> {
-                    this.faces.add((Face) ge);
-                    break;
-                }
+                case Vertex -> this.vertices.add((Vertex) ge);
+                case Edge -> edges.add((Edge) ge);
+                case Cell -> this.faces.add((Face) ge);
             }
         }
-        if (rank.size() > 0) {
+        if (!rank.isEmpty()) {
             elements.subList(0, rank.size()).clear();
         }
         for (int n = 0; n < elements.size(); ++n) {
@@ -1244,12 +1225,12 @@ public class Graph extends BaseGraphFunction
         if (this.vertices.isEmpty()) {
             return "Graph has no vertices.";
         }
-        sb.append("Graph basis: " + this.basis + "\n");
-        sb.append("Graph shape: " + this.shape + "\n");
-        sb.append("Graph is " + (this.isRegular() ? "" : "not ") + "regular.\n");
+        sb.append("Graph basis: ").append(this.basis).append("\n");
+        sb.append("Graph shape: ").append(this.shape).append("\n");
+        sb.append("Graph is ").append(this.isRegular() ? "" : "not ").append("regular.\n");
         sb.append("Vertices:\n");
         for (final Vertex vertex : this.vertices) {
-            sb.append("- V: " + vertex.toString() + "\n");
+            sb.append("- V: ").append(vertex.toString()).append("\n");
         }
         if (edges.isEmpty()) {
             sb.append("No edges.");
@@ -1257,7 +1238,7 @@ public class Graph extends BaseGraphFunction
         else {
             sb.append("Edges:\n");
             for (final Edge edge : edges) {
-                sb.append("- E: " + edge.toString() + "\n");
+                sb.append("- E: ").append(edge.toString()).append("\n");
             }
         }
         if (this.faces.isEmpty()) {
@@ -1266,7 +1247,7 @@ public class Graph extends BaseGraphFunction
         else {
             sb.append("Faces:\n");
             for (final Face face : this.faces) {
-                sb.append("- F: " + face.toString() + "\n");
+                sb.append("- F: ").append(face.toString()).append("\n");
             }
         }
         return sb.toString();

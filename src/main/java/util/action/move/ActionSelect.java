@@ -82,26 +82,26 @@ public final class ActionSelect extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[Select:");
         if (this.typeFrom != null || (context != null && this.typeFrom != context.board().defaultSite())) {
-            sb.append("typeFrom=" + this.typeFrom);
-            sb.append(",from=" + this.from);
+            sb.append("typeFrom=").append(this.typeFrom);
+            sb.append(",from=").append(this.from);
         }
         else {
-            sb.append("from=" + this.from);
+            sb.append("from=").append(this.from);
         }
         if (this.levelFrom != -1) {
-            sb.append(",levelFrom=" + this.levelFrom);
+            sb.append(",levelFrom=").append(this.levelFrom);
         }
         if (this.to != -1) {
             if (this.typeTo != null) {
-                sb.append(",typeTo=" + this.typeTo);
+                sb.append(",typeTo=").append(this.typeTo);
             }
-            sb.append(",to=" + this.to);
+            sb.append(",to=").append(this.to);
             if (this.levelTo != -1) {
-                sb.append(",levelTo=" + this.levelTo);
+                sb.append(",levelTo=").append(this.levelTo);
             }
         }
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -125,13 +125,13 @@ public final class ActionSelect extends BaseAction
             }
         }
         if (this.typeFrom != null && this.typeFrom != context.board().defaultSite()) {
-            sb.append(this.typeFrom + " " + newFrom);
+            sb.append(this.typeFrom).append(" ").append(newFrom);
         }
         else {
             sb.append(newFrom);
         }
         if (this.levelFrom != -1) {
-            sb.append("/" + this.levelFrom);
+            sb.append("/").append(this.levelFrom);
         }
         if (this.to != -1) {
             String newTo = String.valueOf(this.to);
@@ -143,13 +143,13 @@ public final class ActionSelect extends BaseAction
                 }
             }
             if (this.typeTo != null && this.typeTo != context.board().defaultSite()) {
-                sb.append("-" + this.typeTo + " " + newTo);
+                sb.append("-").append(this.typeTo).append(" ").append(newTo);
             }
             else {
-                sb.append("-" + newTo);
+                sb.append("-").append(newTo);
             }
             if (this.levelTo != -1) {
-                sb.append("/" + this.levelTo);
+                sb.append("/").append(this.levelTo);
             }
         }
         return sb.toString();
@@ -168,13 +168,13 @@ public final class ActionSelect extends BaseAction
             }
         }
         if (this.typeFrom != null && this.typeTo != null && (this.typeFrom != context.board().defaultSite() || this.typeFrom != this.typeTo)) {
-            sb.append(this.typeFrom + " " + newFrom);
+            sb.append(this.typeFrom).append(" ").append(newFrom);
         }
         else {
             sb.append(newFrom);
         }
         if (this.levelFrom != -1) {
-            sb.append("/" + this.levelFrom);
+            sb.append("/").append(this.levelFrom);
         }
         if (this.to != -1) {
             String newTo = String.valueOf(this.to);
@@ -186,13 +186,13 @@ public final class ActionSelect extends BaseAction
                 }
             }
             if (this.typeFrom != null && this.typeTo != null && (this.typeTo != context.board().defaultSite() || this.typeFrom != this.typeTo)) {
-                sb.append(" - " + this.typeTo + " " + newTo);
+                sb.append(" - ").append(this.typeTo).append(" ").append(newTo);
             }
             else {
-                sb.append("-" + newTo);
+                sb.append("-").append(newTo);
             }
             if (this.levelTo != -1) {
-                sb.append("/" + this.levelTo);
+                sb.append("/").append(this.levelTo);
             }
         }
         sb.append(')');

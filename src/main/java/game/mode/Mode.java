@@ -44,22 +44,10 @@ public final class Mode extends BaseLudeme implements Serializable
     public Model createModel() {
         Model model = null;
         switch (this.mode) {
-            case Alternating -> {
-                model = new AlternatingMove();
-                break;
-            }
-            case Simultaneous -> {
-                model = new SimultaneousMove();
-                break;
-            }
-            case Simulation -> {
-                model = new SimulationMove();
-                break;
-            }
-            default -> {
-                model = null;
-                break;
-            }
+            case Alternating -> model = new AlternatingMove();
+            case Simultaneous -> model = new SimultaneousMove();
+            case Simulation -> model = new SimulationMove();
+            default -> model = null;
         }
         return model;
     }

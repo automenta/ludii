@@ -122,19 +122,19 @@ public final class ActionInsert extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[Insert:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
-        sb.append(",level=" + this.level);
-        sb.append(",what=" + this.what);
+        sb.append(",level=").append(this.level);
+        sb.append(",what=").append(this.what);
         if (this.state != -1) {
-            sb.append(",state=" + this.state);
+            sb.append(",state=").append(this.state);
         }
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -157,20 +157,20 @@ public final class ActionInsert extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
         if (this.level != -1) {
-            sb.append("/" + this.level);
+            sb.append("/").append(this.level);
         }
         sb.append("^");
         if (this.what > 0 && this.what < context.components().length) {
             sb.append(context.components()[this.what].name());
         }
         if (this.state != -1) {
-            sb.append("=" + this.state);
+            sb.append("=").append(this.state);
         }
         return sb.toString();
     }
@@ -191,14 +191,14 @@ public final class ActionInsert extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(" to " + this.type + " " + newTo);
+            sb.append(" to ").append(this.type).append(" ").append(newTo);
         }
         else {
-            sb.append(" to " + newTo);
+            sb.append(" to ").append(newTo);
         }
-        sb.append("/" + this.level);
+        sb.append("/").append(this.level);
         if (this.state != -1) {
-            sb.append(" state=" + this.state);
+            sb.append(" state=").append(this.state);
         }
         sb.append(')');
         return sb.toString();

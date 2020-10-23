@@ -79,19 +79,16 @@ public final class SitesIncident extends BaseRegionFunction
                         }
                     }
                 }
-                break;
             }
             case Edge -> {
                 for (final Edge edge : cell.edges()) {
                     result.add(edge.index());
                 }
-                break;
             }
             case Vertex -> {
                 for (final Vertex vertex : cell.vertices()) {
                     result.add(vertex.index());
                 }
-                break;
             }
         }
         if (this.ownerFn == null) {
@@ -121,7 +118,6 @@ public final class SitesIncident extends BaseRegionFunction
             case Vertex -> {
                 result.add(edge.vA().index());
                 result.add(edge.vB().index());
-                break;
             }
             case Edge -> {
                 for (final Edge edge2 : edge.vA().edges()) {
@@ -134,13 +130,11 @@ public final class SitesIncident extends BaseRegionFunction
                         result.add(edge2.index());
                     }
                 }
-                break;
             }
             case Cell -> {
                 for (final Cell face : edge.cells()) {
                     result.add(face.index());
                 }
-                break;
             }
         }
         if (this.ownerFn == null) {
@@ -171,13 +165,11 @@ public final class SitesIncident extends BaseRegionFunction
                 for (final Cell cell : vertex.cells()) {
                     result.add(cell.index());
                 }
-                break;
             }
             case Edge -> {
                 for (final Edge edge : vertex.edges()) {
                     result.add(edge.index());
                 }
-                break;
             }
             case Vertex -> {
                 for (final Edge edge : vertex.edges()) {
@@ -187,7 +179,6 @@ public final class SitesIncident extends BaseRegionFunction
                         }
                     }
                 }
-                break;
             }
         }
         if (this.ownerFn == null) {

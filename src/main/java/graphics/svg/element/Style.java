@@ -150,9 +150,9 @@ public class Style
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("<");
-        sb.append("fill=(" + this.fill + ")");
-        sb.append(" stroke=(" + this.stroke + ")");
-        sb.append(" strokeWidth=(" + this.strokeWidth + ")");
+        sb.append("fill=(").append(this.fill).append(")");
+        sb.append(" stroke=(").append(this.stroke).append(")");
+        sb.append(" strokeWidth=(").append(this.strokeWidth).append(")");
         sb.append(">");
         return sb.toString();
     }

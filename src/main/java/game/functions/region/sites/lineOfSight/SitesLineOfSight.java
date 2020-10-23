@@ -66,9 +66,7 @@ public final class SitesLineOfSight extends BaseRegionFunction
                         case Empty -> {
                             if (what == 0) {
                                 sitesLineOfSight.add(to);
-                                break;
                             }
-                            break;
                         }
                         case Farthest -> {
                             if (what != 0 && prevTo != -1) {
@@ -76,21 +74,14 @@ public final class SitesLineOfSight extends BaseRegionFunction
                             }
                             if (toIdx == radial.steps().length - 1) {
                                 sitesLineOfSight.add(to);
-                                break;
                             }
-                            break;
                         }
                         case Piece -> {
                             if (what != 0) {
                                 sitesLineOfSight.add(to);
-                                break;
                             }
-                            break;
                         }
-                        default -> {
-                            System.out.println("** SitesLineOfSight(): Should never reach here.");
-                            break;
-                        }
+                        default -> System.out.println("** SitesLineOfSight(): Should never reach here.");
                     }
                     if (what != 0) {
                         break;

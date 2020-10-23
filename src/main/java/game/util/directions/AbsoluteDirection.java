@@ -317,39 +317,6 @@ public enum AbsoluteDirection implements Direction
     
     public static DirectionFacing convert(final AbsoluteDirection absoluteDirection) {
         switch (absoluteDirection) {
-            case Adjacent -> {
-                return null;
-            }
-            case All -> {
-                return null;
-            }
-            case Axial -> {
-                return null;
-            }
-            case Angled -> {
-                return null;
-            }
-            case Diagonal -> {
-                return null;
-            }
-            case OffDiagonal -> {
-                return null;
-            }
-            case Orthogonal -> {
-                return null;
-            }
-            case Downward -> {
-                return null;
-            }
-            case SameLayer -> {
-                return null;
-            }
-            case Upward -> {
-                return null;
-            }
-            case Rotational -> {
-                return null;
-            }
             case E -> {
                 return CompassDirection.E;
             }

@@ -5,19 +5,22 @@
 package language.compiler;
 
 import annotations.Hide;
+import grammar.Instance;
+import grammar.Report;
+import grammar.Symbol;
 import language.compiler.exceptions.BadKeywordException;
 import language.compiler.exceptions.BadSymbolException;
 import language.compiler.exceptions.BadSyntaxException;
 import language.compiler.exceptions.ListNotSupportedException;
 import language.grammar.Grammar;
 import main.StringRoutines;
-import grammar.Instance;
-import grammar.Report;
-import grammar.Symbol;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.BitSet;
+import java.util.List;
 
 public class ArgClass extends Arg
 {
@@ -354,9 +357,6 @@ public class ArgClass extends Arg
     private static List<List<Arg>> argCombos(final List<Arg> args, final int numSlots) {
         final List<List<Arg>> combos = new ArrayList<>();
         final Arg[] current = new Arg[numSlots];
-        for (int i = 0; i < current.length; ++i) {
-            current[i] = null;
-        }
         argCombos(args, numSlots, 0, 0, current, combos);
         return combos;
     }
@@ -377,8 +377,7 @@ public class ArgClass extends Arg
         if (numUsed < args.size()) {
             return;
         }
-        final List<Arg> combo = new ArrayList<>();
-        combo.addAll(Arrays.asList(current).subList(0, numSlots));
+        final List<Arg> combo = new ArrayList<>(Arrays.asList(current).subList(0, numSlots));
         combos.add(combo);
     }
     

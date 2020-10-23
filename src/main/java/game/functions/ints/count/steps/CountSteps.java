@@ -100,26 +100,11 @@ public final class CountSteps extends BaseIntFunction
         long gameFlags = this.site1Fn.gameFlags(game) | this.site2Fn.gameFlags(game);
         if (this.stepMove == null) {
             switch (this.relation) {
-                case Adjacent -> {
-                    gameFlags |= 0x400000000L;
-                    break;
-                }
-                case All -> {
-                    gameFlags |= 0x4000000000L;
-                    break;
-                }
-                case Diagonal -> {
-                    gameFlags |= 0x1000000000L;
-                    break;
-                }
-                case OffDiagonal -> {
-                    gameFlags |= 0x2000000000L;
-                    break;
-                }
-                case Orthogonal -> {
-                    gameFlags |= 0x800000000L;
-                    break;
-                }
+                case Adjacent -> gameFlags |= 0x400000000L;
+                case All -> gameFlags |= 0x4000000000L;
+                case Diagonal -> gameFlags |= 0x1000000000L;
+                case OffDiagonal -> gameFlags |= 0x2000000000L;
+                case Orthogonal -> gameFlags |= 0x800000000L;
             }
         }
         else {

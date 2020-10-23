@@ -4,9 +4,9 @@
 
 package supplementary;
 
+import grammar.Symbol;
 import language.grammar.Grammar;
 import main.StringRoutines;
-import grammar.Symbol;
 
 import java.util.ArrayList;
 import java.util.List;

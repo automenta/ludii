@@ -4,16 +4,19 @@
 
 package util.model;
 
+import collections.FVector;
+import collections.FastArrayList;
 import game.Game;
 import game.rules.play.moves.Moves;
 import gnu.trove.list.array.TIntArrayList;
-import collections.FVector;
-import collections.FastArrayList;
 import util.*;
 import util.action.Action;
 import util.action.others.ActionPass;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class SimultaneousMove extends Model

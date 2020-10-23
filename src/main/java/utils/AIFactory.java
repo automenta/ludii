@@ -65,19 +65,13 @@ public class AIFactory
             return MCTS.createBiasedMCTS(false);
         }
         final URL aiURL = AIFactory.class.getResource(string);
-        File aiFile = null;
-        if (aiURL != null) {
-            aiFile = new File(aiURL.getFile());
-        }
-        else {
-            aiFile = new File(string);
-        }
+        File aiFile = aiURL != null ? new File(aiURL.getFile()) : new File(string);
         String[] lines = new String[0];
         if (aiFile.exists()) {
             try (final BufferedReader reader = new BufferedReader(new FileReader(aiFile))) {
                 final List<String> linesList = new ArrayList<>();
-                final String line = reader.readLine();
-                while (line != null) {
+                String line;
+                while ((line = reader.readLine()) != null) {
                     linesList.add(line);
                 }
                 lines = linesList.toArray(lines);

@@ -4,13 +4,13 @@
 
 package util.playout;
 
+import collections.FVector;
 import game.Game;
 import game.rules.phase.Phase;
 import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.effect.state.MoveAgain;
 import game.types.board.SiteType;
 import gnu.trove.list.array.TIntArrayList;
-import collections.FVector;
 import util.*;
 import util.action.Action;
 import util.action.move.ActionAdd;

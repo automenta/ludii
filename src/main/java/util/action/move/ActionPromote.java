@@ -116,18 +116,18 @@ public final class ActionPromote extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[Promote:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
         if (this.level != -1) {
-            sb.append(",level=" + this.level);
+            sb.append(",level=").append(this.level);
         }
-        sb.append(",what=" + this.newWhat);
+        sb.append(",what=").append(this.newWhat);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -174,16 +174,16 @@ public final class ActionPromote extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
         if (this.level != -1) {
-            sb.append("/" + this.level);
+            sb.append("/").append(this.level);
         }
         if (this.newWhat > 0 && this.newWhat < context.components().length) {
-            sb.append(" => " + context.components()[this.newWhat].name());
+            sb.append(" => ").append(context.components()[this.newWhat].name());
         }
         return sb.toString();
     }
@@ -201,16 +201,16 @@ public final class ActionPromote extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
         if (this.level != -1) {
-            sb.append("/" + this.level);
+            sb.append("/").append(this.level);
         }
         if (this.newWhat > 0 && this.newWhat < context.components().length) {
-            sb.append(" to " + context.components()[this.newWhat].name());
+            sb.append(" to ").append(context.components()[this.newWhat].name());
         }
         sb.append(')');
         return sb.toString();

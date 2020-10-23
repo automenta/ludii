@@ -292,7 +292,7 @@ public class Token {
         Token.mergeArrayLines(lines);
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
-            sb.append(line + "\n");
+            sb.append(line).append("\n");
         }
         return sb.toString();
     }
@@ -421,7 +421,7 @@ public class Token {
     public String formatSingleLine() {
         StringBuilder sb = new StringBuilder();
         if (this.parameterLabel != null) {
-            sb.append(this.parameterLabel + ":");
+            sb.append(this.parameterLabel).append(":");
         }
         if (this.isTerminal()) {
             sb.append(this.name);
@@ -432,7 +432,7 @@ public class Token {
             sb.append(this.name);
         }
         for (Token sub : this.arguments) {
-            sb.append(" " + sub.formatSingleLine());
+            sb.append(" ").append(sub.formatSingleLine());
         }
         if (this.isArray()) {
             sb.append(" ");
@@ -519,9 +519,9 @@ public class Token {
     public String dump(String indent) {
         String label = String.valueOf(this.type().name().charAt(0)) + this.type().name().charAt(1) + ": ";
         StringBuilder sb = new StringBuilder();
-        sb.append(label + indent);
+        sb.append(label).append(indent);
         if (this.parameterLabel != null) {
-            sb.append(this.parameterLabel + ":");
+            sb.append(this.parameterLabel).append(":");
         }
         if (this.open != '\u0000') {
             sb.append(this.open);
@@ -535,7 +535,7 @@ public class Token {
                 sb.append(arg.dump(indent + TAB));
             }
             if (this.close != '\u0000') {
-                sb.append(label + indent + this.close);
+                sb.append(label).append(indent).append(this.close);
             }
         } else if (this.close != '\u0000') {
             sb.append(this.close);

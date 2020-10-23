@@ -5,6 +5,9 @@
 package language.compiler;
 
 import game.Game;
+import grammar.Description;
+import grammar.Report;
+import grammar.Token;
 import language.compiler.exceptions.CantDecomposeException;
 import language.compiler.exceptions.CompilerErrorWithMessageException;
 import language.compiler.exceptions.CompilerException;
@@ -12,10 +15,6 @@ import language.compiler.exceptions.NullGameException;
 import language.grammar.Grammar;
 import language.parser.Parser;
 import main.StringRoutines;
-import grammar.Description;
-import grammar.Report;
-import grammar.Token;
-import options.UserSelections;
 import metadata.Metadata;
 import options.UserSelections;
 
@@ -63,13 +62,13 @@ public class Compiler
             }
             final StringBuilder sb = new StringBuilder();
             for (final String error2 : report.errors()) {
-                sb.append(error2 + "\n");
+                sb.append(error2).append("\n");
             }
             for (final String warning : report.warnings()) {
-                sb.append("Warning: " + warning + "\n");
+                sb.append("Warning: ").append(warning).append("\n");
             }
             for (final String note : report.notes()) {
-                sb.append("Note: " + note + "\n");
+                sb.append("Note: ").append(note).append("\n");
             }
             throw new CompilerErrorWithMessageException(sb.toString());
         }

@@ -8,7 +8,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 public final class DefToTex
@@ -83,7 +82,7 @@ public final class DefToTex
             sb.append("\\phantom{}\n");
         }
         else {
-            sb.append("\n" + comments + "\n");
+            sb.append("\n").append(comments).append("\n");
         }
         final List<String> examples = examplesFromLines(lines);
         if (!examples.isEmpty()) {
@@ -107,7 +106,7 @@ public final class DefToTex
             if (commentLinesAdded > 0) {
                 sb.append(" \\\\ ");
             }
-            sb.append(line.substring(c + 2).trim() + " ");
+            sb.append(line.substring(c + 2).trim()).append(" ");
             ++commentLinesAdded;
         }
         final String comments = sb.toString().replace("#", "\\#");
@@ -135,7 +134,7 @@ public final class DefToTex
                 defineFound = true;
             }
             if (defineFound) {
-                sb.append(line + "\n");
+                sb.append(line).append("\n");
             }
         }
         return sb.toString();
@@ -161,7 +160,7 @@ public final class DefToTex
         final StringBuilder sb = new StringBuilder();
         sb.append("\n%==========================================================\n");
         sb.append(texThickLine());
-        sb.append("\n\\section{" + title + "}\n");
+        sb.append("\n\\section{").append(title).append("}\n");
         return sb.toString();
     }
     
@@ -169,8 +168,8 @@ public final class DefToTex
         final StringBuilder sb = new StringBuilder();
         sb.append("\n%-----------------------------------------\n");
         sb.append(texThinLine());
-        sb.append("\n\\subsection{``" + name + "''}");
-        sb.append("  \\label{known:" + name + "}\n");
+        sb.append("\n\\subsection{``").append(name).append("''}");
+        sb.append("  \\label{known:").append(name).append("}\n");
         return sb.toString();
     }
     
@@ -188,7 +187,7 @@ public final class DefToTex
         sb.append("\n\\begin{formatbox}\n");
         sb.append("\\begin{verbatim}\n");
         for (final String example : examples) {
-            sb.append(example + "\n");
+            sb.append(example).append("\n");
         }
         sb.append("\\end{verbatim}\n");
         sb.append("\\vspace{-1mm}\n");
@@ -202,7 +201,7 @@ public final class DefToTex
         sb.append("\n% Define\n");
         sb.append("{\\tt\n");
         sb.append("\\begin{verbatim}\n");
-        sb.append(define + "\n");
+        sb.append(define).append("\n");
         sb.append("\\end{verbatim}\n");
         sb.append("}\n");
         sb.append("\\vspace{-4mm}\n");

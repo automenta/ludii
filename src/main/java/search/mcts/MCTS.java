@@ -4,11 +4,11 @@
 
 package search.mcts;
 
+import collections.FVector;
+import collections.FastArrayList;
 import expert_iteration.ExItExperience;
 import expert_iteration.ExpertPolicy;
 import game.Game;
-import collections.FVector;
-import collections.FastArrayList;
 import metadata.ai.features.Features;
 import org.json.JSONObject;
 import policies.softmax.SoftmaxFromMetadata;

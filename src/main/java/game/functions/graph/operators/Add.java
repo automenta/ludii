@@ -273,21 +273,21 @@ public final class Add extends BaseGraphFunction
     public boolean isStatic() {
         boolean isStatic = true;
         for (FloatFunction[] vertexFn : this.vertexFns) {
-            for (int n = 0; n < vertexFn.length; ++n) {
-                isStatic = (isStatic && vertexFn[n].isStatic());
+            for (FloatFunction floatFunction : vertexFn) {
+                isStatic = (isStatic && floatFunction.isStatic());
             }
         }
         for (FloatFunction[][] edgeFn : this.edgeFns) {
-            for (int v2 = 0; v2 < edgeFn.length; ++v2) {
-                for (int n2 = 0; n2 < edgeFn[v2].length; ++n2) {
-                    isStatic = (isStatic && edgeFn[v2][n2].isStatic());
+            for (FloatFunction[] floatFunctions : edgeFn) {
+                for (FloatFunction floatFunction : floatFunctions) {
+                    isStatic = (isStatic && floatFunction.isStatic());
                 }
             }
         }
         for (FloatFunction[][] faceFn : this.faceFns) {
-            for (int v2 = 0; v2 < faceFn.length; ++v2) {
-                for (int n2 = 0; n2 < faceFn[v2].length; ++n2) {
-                    isStatic = (isStatic && faceFn[v2][n2].isStatic());
+            for (FloatFunction[] floatFunctions : faceFn) {
+                for (FloatFunction floatFunction : floatFunctions) {
+                    isStatic = (isStatic && floatFunction.isStatic());
                 }
             }
         }
@@ -298,21 +298,21 @@ public final class Add extends BaseGraphFunction
     public long gameFlags(final Game game) {
         long flags = 0L;
         for (FloatFunction[] vertexFn : this.vertexFns) {
-            for (int n = 0; n < vertexFn.length; ++n) {
-                flags |= vertexFn[n].gameFlags(game);
+            for (FloatFunction floatFunction : vertexFn) {
+                flags |= floatFunction.gameFlags(game);
             }
         }
         for (FloatFunction[][] edgeFn : this.edgeFns) {
-            for (int v2 = 0; v2 < edgeFn.length; ++v2) {
-                for (int n2 = 0; n2 < edgeFn[v2].length; ++n2) {
-                    flags |= edgeFn[v2][n2].gameFlags(game);
+            for (FloatFunction[] floatFunctions : edgeFn) {
+                for (FloatFunction floatFunction : floatFunctions) {
+                    flags |= floatFunction.gameFlags(game);
                 }
             }
         }
         for (FloatFunction[][] faceFn : this.faceFns) {
-            for (int v2 = 0; v2 < faceFn.length; ++v2) {
-                for (int n2 = 0; n2 < faceFn[v2].length; ++n2) {
-                    flags |= faceFn[v2][n2].gameFlags(game);
+            for (FloatFunction[] floatFunctions : faceFn) {
+                for (FloatFunction floatFunction : floatFunctions) {
+                    flags |= floatFunction.gameFlags(game);
                 }
             }
         }
@@ -325,21 +325,21 @@ public final class Add extends BaseGraphFunction
     @Override
     public void preprocess(final Game game) {
         for (FloatFunction[] vertexFn : this.vertexFns) {
-            for (int n = 0; n < vertexFn.length; ++n) {
-                vertexFn[n].preprocess(game);
+            for (FloatFunction floatFunction : vertexFn) {
+                floatFunction.preprocess(game);
             }
         }
         for (FloatFunction[][] edgeFn : this.edgeFns) {
-            for (int v2 = 0; v2 < edgeFn.length; ++v2) {
-                for (int n2 = 0; n2 < edgeFn[v2].length; ++n2) {
-                    edgeFn[v2][n2].preprocess(game);
+            for (FloatFunction[] floatFunctions : edgeFn) {
+                for (FloatFunction floatFunction : floatFunctions) {
+                    floatFunction.preprocess(game);
                 }
             }
         }
         for (FloatFunction[][] faceFn : this.faceFns) {
-            for (int v2 = 0; v2 < faceFn.length; ++v2) {
-                for (int n2 = 0; n2 < faceFn[v2].length; ++n2) {
-                    faceFn[v2][n2].preprocess(game);
+            for (FloatFunction[] floatFunctions : faceFn) {
+                for (FloatFunction floatFunction : floatFunctions) {
+                    floatFunction.preprocess(game);
                 }
             }
         }

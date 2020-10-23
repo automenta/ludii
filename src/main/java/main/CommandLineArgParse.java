@@ -293,7 +293,7 @@ public final class CommandLineArgParse
                 sb.append("}");
             }
             else {
-                sb.append(" " + option.type.toString().toUpperCase());
+                sb.append(" ").append(option.type.toString().toUpperCase());
             }
         }
         else {
@@ -310,21 +310,21 @@ public final class CommandLineArgParse
             if (option.numValsStr == null) {
                 if (option.numVals > 0) {
                     if (option.numVals == 1) {
-                        sb.append(" " + metaVar);
+                        sb.append(" ").append(metaVar);
                     }
                     else {
                         for (int j = 1; j <= option.numVals; ++j) {
-                            sb.append(" " + metaVar + "_" + j);
+                            sb.append(" ").append(metaVar).append("_").append(j);
                         }
                     }
                 }
             }
             else if (option.numValsStr.equals("+")) {
-                sb.append(" " + metaVar + "_1");
-                sb.append(" [ " + metaVar + "_* ... ]");
+                sb.append(" ").append(metaVar).append("_1");
+                sb.append(" [ ").append(metaVar).append("_* ... ]");
             }
             else if (option.numValsStr.equals("*")) {
-                sb.append(" [ " + metaVar + "_* ... ]");
+                sb.append(" [ ").append(metaVar).append("_* ... ]");
             }
         }
         if (sb.length() >= 65) {
@@ -507,24 +507,24 @@ public final class CommandLineArgParse
                     }
                 }
             }
-            sb.append(" type=" + this.type);
+            sb.append(" type=").append(this.type);
             if (this.numValsStr != null) {
-                sb.append(" numVals=" + this.numValsStr);
+                sb.append(" numVals=").append(this.numValsStr);
             }
             else {
-                sb.append(" numVals=" + this.numVals);
+                sb.append(" numVals=").append(this.numVals);
             }
             if (this.defaultVal != null) {
-                sb.append(" default=" + this.defaultVal);
+                sb.append(" default=").append(this.defaultVal);
             }
             if (this.required) {
                 sb.append(" required");
             }
             if (this.legalVals != null) {
-                sb.append(" legalVals=" + Arrays.toString(this.legalVals));
+                sb.append(" legalVals=").append(Arrays.toString(this.legalVals));
             }
             if (!this.help.isEmpty()) {
-                sb.append("\t\t" + this.help);
+                sb.append("\t\t").append(this.help);
             }
             sb.append("]");
             return sb.toString();

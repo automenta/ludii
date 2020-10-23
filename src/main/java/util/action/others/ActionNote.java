@@ -40,10 +40,10 @@ public final class ActionNote extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[Note:");
-        sb.append("message=" + this.message);
-        sb.append(",to=" + this.player);
+        sb.append("message=").append(this.message);
+        sb.append(",to=").append(this.player);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

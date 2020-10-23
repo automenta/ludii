@@ -4,13 +4,16 @@
 
 package util.model;
 
-import game.Game;
-import main.Status;
 import collections.FVector;
 import collections.FastArrayList;
+import game.Game;
+import main.Status;
 import util.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public final class SimulationMove extends Model
 {

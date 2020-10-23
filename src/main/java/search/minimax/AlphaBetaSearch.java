@@ -4,14 +4,14 @@
 
 package search.minimax;
 
+import collections.FVector;
+import collections.FastArrayList;
 import expert_iteration.ExItExperience;
 import expert_iteration.ExpertPolicy;
 import game.Game;
+import grammar.Report;
 import language.compiler.Compiler;
 import main.FileHandling;
-import collections.FVector;
-import collections.FastArrayList;
-import grammar.Report;
 import metadata.ai.Ai;
 import metadata.ai.heuristics.Heuristics;
 import metadata.ai.heuristics.terms.HeuristicTerm;

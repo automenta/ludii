@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 
-<svg version="1.0" 
-	id="glyph_4" 
-	xmlns="http://www.w3.org/2000/svg" 
-	xmlns:xlink="http://www.w3.org/1999/xlink"
-	x="0px"
-	y="0px"
-	width="81px" 
-	height="86px">
+<svg version="1.0"
+     id="glyph_4"
+     xmlns="http://www.w3.org/2000/svg"
+     x="0px"
+     y="0px"
+     width="81px"
+     height="86px">
 <g id="4">
 <path style="fill:#000000;stroke-width:0px" d="M36.5 8.7 Q39 5 43.5 5 Q48 5 50.5 8.7 Q53 5 57.5 5 Q61 5 63.5 7.5 Q66 10 66 13.5 C66 31 66 52.875 66 66 Q66 73.9 60.45 79.45 Q54.9 85 47 85 
 

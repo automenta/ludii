@@ -52,9 +52,7 @@ public final class CountPieces extends BaseIntFunction
             for (int pid = 1; pid <= context.game().players().count(); ++pid) {
                 final List<? extends Location>[] owned = context.state().owned().positions(pid);
                 for (final List<? extends Location> locations : owned) {
-                    for (Location location : locations) {
-                        locsOwned.add(location);
-                    }
+                    locsOwned.addAll(locations);
                 }
             }
             for (Location location : locsOwned) {

@@ -6,13 +6,13 @@ package game.rules.play.moves.nonDecision.effect.requirement;
 
 import annotations.Name;
 import annotations.Opt;
+import collections.FastArrayList;
 import game.Game;
 import game.functions.booleans.BooleanFunction;
 import game.rules.play.moves.BaseMoves;
 import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.effect.Effect;
 import game.rules.play.moves.nonDecision.effect.Then;
-import collections.FastArrayList;
 import util.Context;
 import util.Move;
 import util.TempContext;

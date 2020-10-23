@@ -23,14 +23,8 @@ public class SVGUtils
         for (int i = 0; i < source.length(); ++i) {
             final char c = source.charAt(i);
             switch (c) {
-                case '<' -> {
-                    sb.append("&lt;");
-                    break;
-                }
-                case '>' -> {
-                    sb.append("&gt;");
-                    break;
-                }
+                case '<' -> sb.append("&lt;");
+                case '>' -> sb.append("&gt;");
                 case '&' -> {
                     final String next = source.substring(i, Math.min(i + 6, source.length()));
                     if (next.startsWith("&lt;") || next.startsWith("&gt;") || next.startsWith("&amp;") || next.startsWith("&apos;") || next.startsWith("&quot;")) {
@@ -38,20 +32,10 @@ public class SVGUtils
                         break;
                     }
                     sb.append("&amp;");
-                    break;
                 }
-                case '\'' -> {
-                    sb.append("&apos;");
-                    break;
-                }
-                case '\"' -> {
-                    sb.append("&quot;");
-                    break;
-                }
-                default -> {
-                    sb.append(c);
-                    break;
-                }
+                case '\'' -> sb.append("&apos;");
+                case '\"' -> sb.append("&quot;");
+                default -> sb.append(c);
             }
         }
         return sb.toString();

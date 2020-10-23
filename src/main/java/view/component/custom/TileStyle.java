@@ -96,44 +96,36 @@ public class TileStyle extends BaseComponentStyle
                     case 0 -> {
                         ax = terminusSpacing * (tilePath.terminus1() + 1);
                         ay = 0;
-                        break;
                     }
                     case 1 -> {
                         ax = imageSize;
                         ay = terminusSpacing * (tilePath.terminus1() + 1);
-                        break;
                     }
                     case 2 -> {
                         ax = terminusSpacing * (tilePath.terminus1() + 1);
                         ay = imageSize;
-                        break;
                     }
                     case 3 -> {
                         ax = 0;
                         ay = terminusSpacing * (tilePath.terminus1() + 1);
-                        break;
                     }
                 }
                 switch (tilePath.side2()) {
                     case 0 -> {
                         bx = terminusSpacing * (tilePath.terminus2() + 1);
                         by = 0;
-                        break;
                     }
                     case 1 -> {
                         bx = imageSize;
                         by = terminusSpacing * (tilePath.terminus2() + 1);
-                        break;
                     }
                     case 2 -> {
                         bx = terminusSpacing * (tilePath.terminus2() + 1);
                         by = imageSize;
-                        break;
                     }
                     case 3 -> {
                         bx = 0;
                         by = terminusSpacing * (tilePath.terminus2() + 1);
-                        break;
                     }
                 }
                 final double off = 0.666;

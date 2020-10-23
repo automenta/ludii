@@ -39,10 +39,10 @@ public final class ActionSwap extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[Swap:");
-        sb.append("player1=" + this.player1);
-        sb.append(",player2=" + this.player2);
+        sb.append("player1=").append(this.player1);
+        sb.append(",player2=").append(this.player2);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

@@ -35,9 +35,9 @@ public final class ActionSetTemp extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetTemp:");
-        sb.append("temp=" + this.temp);
+        sb.append("temp=").append(this.temp);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

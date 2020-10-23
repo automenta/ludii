@@ -59,18 +59,18 @@ public final class ActionSetInvisible extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetInvisible:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
         if (this.level != -1) {
-            sb.append(",level=" + this.level);
+            sb.append(",level=").append(this.level);
         }
-        sb.append(",who=" + this.who);
+        sb.append(",who=").append(this.who);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -115,15 +115,15 @@ public final class ActionSetInvisible extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
         if (this.level != -1) {
-            sb.append("/" + this.level);
+            sb.append("/").append(this.level);
         }
-        sb.append(" invis:P" + this.who);
+        sb.append(" invis:P").append(this.who);
         return sb.toString();
     }
     
@@ -140,15 +140,15 @@ public final class ActionSetInvisible extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
         if (this.level != -1) {
-            sb.append("/" + this.level);
+            sb.append("/").append(this.level);
         }
-        sb.append(" for P" + this.who + ")");
+        sb.append(" for P").append(this.who).append(")");
         return sb.toString();
     }
     

@@ -6,9 +6,9 @@ package metadata.ai.heuristics.terms;
 
 import annotations.Name;
 import annotations.Opt;
+import collections.FVector;
 import game.Game;
 import game.equipment.other.Map;
-import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import util.Context;
 
@@ -71,10 +71,10 @@ public class PlayerSiteMapCount extends HeuristicTerm
         final StringBuilder sb = new StringBuilder();
         sb.append("(playerSiteMapCount");
         if (this.transformation != null) {
-            sb.append(" transformation:" + this.transformation.toString());
+            sb.append(" transformation:").append(this.transformation.toString());
         }
         if (this.weight != 1.0f) {
-            sb.append(" weight:" + this.weight);
+            sb.append(" weight:").append(this.weight);
         }
         sb.append(")");
         return sb.toString();
@@ -90,10 +90,10 @@ public class PlayerSiteMapCount extends HeuristicTerm
             final StringBuilder sb = new StringBuilder();
             sb.append("(playerSiteMapCount");
             if (this.transformation != null) {
-                sb.append(" transformation:" + this.transformation.toString());
+                sb.append(" transformation:").append(this.transformation.toString());
             }
             if (this.weight != 1.0f) {
-                sb.append(" weight:" + this.weight);
+                sb.append(" weight:").append(this.weight);
             }
             sb.append(")");
             return sb.toString();

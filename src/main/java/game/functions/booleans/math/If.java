@@ -75,9 +75,9 @@ public final class If extends BaseBooleanFunction
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("[If ");
-        sb.append("cond=" + this.cond);
-        sb.append(", ok=" + this.ok);
-        sb.append(", notOk" + this.notOk);
+        sb.append("cond=").append(this.cond);
+        sb.append(", ok=").append(this.ok);
+        sb.append(", notOk").append(this.notOk);
         sb.append("]");
         return sb.toString();
     }

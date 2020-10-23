@@ -6,8 +6,8 @@ package metadata.info;
 
 import annotations.Or;
 import metadata.MetadataItem;
-import metadata.info.database.*;
 import metadata.info.database.Date;
+import metadata.info.database.*;
 
 import java.io.Serializable;
 import java.util.*;
@@ -161,13 +161,13 @@ public class Info implements MetadataItem, Serializable
         final StringBuilder sb = new StringBuilder();
         final String open = (this.items.size() <= 1) ? "" : "{";
         final String close = (this.items.size() <= 1) ? "" : "}";
-        sb.append("    (info " + open + "\n");
+        sb.append("    (info ").append(open).append("\n");
         for (final InfoItem item : this.items) {
             if (item != null) {
-                sb.append("        " + item.toString());
+                sb.append("        ").append(item.toString());
             }
         }
-        sb.append("    " + close + ")\n");
+        sb.append("    ").append(close).append(")\n");
         return sb.toString();
     }
 }

@@ -4,9 +4,9 @@
 
 package manager.referee;
 
+import collections.FastArrayList;
 import game.rules.play.moves.Moves;
 import game.types.board.SiteType;
-import collections.FastArrayList;
 import manager.Manager;
 import manager.utils.ContextSnapshot;
 import manager.utils.PuzzleSelectionType;

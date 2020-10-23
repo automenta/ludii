@@ -30,9 +30,7 @@ public class No implements GraphicsItem
             case MaskedColour -> {
                 return new NoMaskedColour(value);
             }
-            default -> {
-                throw new IllegalArgumentException("No(): A NoBooleanType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("No(): A NoBooleanType is not implemented.");
         }
     }
     

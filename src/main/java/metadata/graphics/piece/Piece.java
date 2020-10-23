@@ -30,9 +30,7 @@ public class Piece implements GraphicsItem
             case Style -> {
                 return new PieceStyle(roleType, pieceName, componentStyleType);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceStyleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceStyleType is not implemented.");
         }
     }
     
@@ -47,9 +45,7 @@ public class Piece implements GraphicsItem
             case AddStateToName -> {
                 return new PieceAddStateToName(roleType, piece, state);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceNameType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceNameType is not implemented.");
         }
     }
     
@@ -58,9 +54,7 @@ public class Piece implements GraphicsItem
             case Families -> {
                 return new PieceFamilies(pieceFamilies);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceFamiliesType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceFamiliesType is not implemented.");
         }
     }
     
@@ -72,9 +66,7 @@ public class Piece implements GraphicsItem
             case Foreground -> {
                 return new PieceForeground(roleType, pieceName, state, image, fillColour, edgeColour, scale);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceGroundType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceGroundType is not implemented.");
         }
     }
     
@@ -83,9 +75,7 @@ public class Piece implements GraphicsItem
             case Colour -> {
                 return new PieceColour(roleType, pieceName, state, fillColour, strokeColour, secondaryColour);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceColourType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceColourType is not implemented.");
         }
     }
     
@@ -94,9 +84,7 @@ public class Piece implements GraphicsItem
             case Reflect -> {
                 return new PieceReflect(roleType, pieceName, vertical, horizontal);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceReflectType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceReflectType is not implemented.");
         }
     }
     
@@ -105,9 +93,7 @@ public class Piece implements GraphicsItem
             case Rotate -> {
                 return new PieceRotate(roleType, pieceName, degrees);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceRotateType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceRotateType is not implemented.");
         }
     }
     
@@ -116,28 +102,15 @@ public class Piece implements GraphicsItem
             case Scale -> {
                 return new PieceScale(roleType, pieceName, scale);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceScaleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceScaleType is not implemented.");
         }
     }
     
     public static GraphicsItem construct(final PieceScaleType pieceType, final PieceScaleByType scaleByType, @Opt final Boolean value) {
-        switch (pieceType) {
-            case Scale: {
-                switch (scaleByType) {
-                    case ByValue -> {
-                        return new PieceScaleByValue(value);
-                    }
-                    default -> {
-                        throw new IllegalArgumentException("Piece(): A PieceScaleByType is not implemented.");
-                    }
-                }
-            }
-            default: {
-                throw new IllegalArgumentException("Piece(): A PieceScaleType is not implemented.");
-            }
+        if (pieceType == PieceScaleType.Scale && scaleByType == PieceScaleByType.ByValue) {
+            return new PieceScaleByValue(value);
         }
+        throw new IllegalArgumentException("Piece(): A PieceScaleType is not implemented.");
     }
     
     private Piece() {

@@ -4,13 +4,13 @@
 
 package util;
 
+import collections.FastTLongArrayList;
 import game.Game;
 import game.rules.play.moves.BaseMoves;
 import game.rules.play.moves.Moves;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
 import main.Status;
-import collections.FastTLongArrayList;
 import org.apache.commons.rng.core.RandomProviderDefaultState;
 import util.state.State;
 
@@ -283,10 +283,10 @@ public final class Trial implements Serializable
     
     public String convertTrialToString(final String gameName, final List<String> gameOptions, final RandomProviderDefaultState gameStartRngState) {
         final StringBuilder sb = new StringBuilder();
-        sb.append("game=" + gameName + "\n");
+        sb.append("game=").append(gameName).append("\n");
         sb.append("START GAME OPTIONS\n");
         for (final String option : gameOptions) {
-            sb.append(option + "\n");
+            sb.append(option).append("\n");
         }
         sb.append("END GAME OPTIONS\n");
         sb.append("RNG internal state=");
@@ -299,26 +299,26 @@ public final class Trial implements Serializable
         }
         sb.append("\n");
         for (Move value : this.moves) {
-            sb.append("Move=" + value.toTrialFormat(null) + "\n");
+            sb.append("Move=").append(value.toTrialFormat(null)).append("\n");
         }
         if (this.auxilTrialData != null) {
             if (this.auxilTrialData.storeLegalMovesHistorySizes) {
                 for (int i = 0; i < this.auxilTrialData.legalMovesHistorySizes.size(); ++i) {
-                    sb.append("LEGAL MOVES LIST SIZE = " + this.auxilTrialData.legalMovesHistorySizes.getQuick(i) + "\n");
+                    sb.append("LEGAL MOVES LIST SIZE = ").append(this.auxilTrialData.legalMovesHistorySizes.getQuick(i)).append("\n");
                 }
             }
             if (this.auxilTrialData.storeLegalMovesHistory) {
                 for (final List<Move> legal : this.auxilTrialData.legalMovesHistory) {
                     sb.append("NEW LEGAL MOVES LIST\n");
                     for (Move move : legal) {
-                        sb.append(move.toTrialFormat(null) + "\n");
+                        sb.append(move.toTrialFormat(null)).append("\n");
                     }
                     sb.append("END LEGAL MOVES LIST\n");
                 }
             }
         }
         if (this.status != null) {
-            sb.append("winner=" + this.status.winner() + "\n");
+            sb.append("winner=").append(this.status.winner()).append("\n");
         }
         if (this.ranking != null) {
             sb.append("rankings=");

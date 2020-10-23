@@ -4,14 +4,14 @@
 
 package supplementary.experiments.eval;
 
+import collections.ListUtils;
 import game.Game;
 import gnu.trove.list.array.TIntArrayList;
+import grammar.Report;
 import language.compiler.Compiler;
 import main.CommandLineArgParse;
 import main.FileHandling;
 import main.StringRoutines;
-import collections.ListUtils;
-import grammar.Report;
 import metadata.ai.features.Features;
 import metadata.ai.heuristics.Heuristics;
 import metadata.ai.misc.BestAgent;
@@ -67,7 +67,7 @@ public class EvalGate
             final StringBuilder playoutSb = new StringBuilder();
             playoutSb.append("playout=softmax");
             for (int p = 1; p <= this.evalFeatureWeightsFilepaths.size(); ++p) {
-                playoutSb.append(",policyweights" + p + "=" + this.evalFeatureWeightsFilepaths.get(p - 1));
+                playoutSb.append(",policyweights").append(p).append("=").append(this.evalFeatureWeightsFilepaths.get(p - 1));
             }
             final String agentStr = StringRoutines.join(";", "algorithm=MCTS", "selection=ag0selection", playoutSb.toString(), "final_move=robustchild", "tree_reuse=true", "learned_selection_policy=playout", "friendly_name=BiasedMCTS");
             return AIFactory.createAI(agentStr);
@@ -76,7 +76,7 @@ public class EvalGate
             final StringBuilder policySb = new StringBuilder();
             policySb.append("learned_selection_policy=softmax");
             for (int p = 1; p <= this.evalFeatureWeightsFilepaths.size(); ++p) {
-                policySb.append(",policyweights" + p + "=" + this.evalFeatureWeightsFilepaths.get(p - 1));
+                policySb.append(",policyweights").append(p).append("=").append(this.evalFeatureWeightsFilepaths.get(p - 1));
             }
             final String agentStr = StringRoutines.join(";", "algorithm=MCTS", "selection=ag0selection", "playout=random", "final_move=robustchild", "tree_reuse=true", policySb.toString(), "friendly_name=BiasedMCTSUniformPlayouts");
             return AIFactory.createAI(agentStr);
@@ -278,7 +278,7 @@ public class EvalGate
                         final StringBuilder playoutSb = new StringBuilder();
                         playoutSb.append("playout=softmax");
                         for (int p2 = 1; p2 <= EvalGate.this.evalFeatureWeightsFilepaths.size(); ++p2) {
-                            playoutSb.append(",policyweights" + p2 + "=" + EvalGate.this.evalFeatureWeightsFilepaths.get(p2 - 1));
+                            playoutSb.append(",policyweights").append(p2).append("=").append(EvalGate.this.evalFeatureWeightsFilepaths.get(p2 - 1));
                         }
                         final String agentStr = StringRoutines.join(";", "algorithm=MCTS", "selection=ag0selection", playoutSb.toString(), "final_move=robustchild", "tree_reuse=true", "learned_selection_policy=playout", "friendly_name=BiasedMCTS");
                         final MCTS mcts = (MCTS)AIFactory.createAI(agentStr);

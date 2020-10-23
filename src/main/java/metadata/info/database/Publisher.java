@@ -17,7 +17,7 @@ public class Publisher implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (publisher \"" + this.publisher + "\")\n");
+        sb.append("    (publisher \"").append(this.publisher).append("\")\n");
         return sb.toString();
     }
     

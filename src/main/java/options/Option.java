@@ -117,7 +117,7 @@ public class Option {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[" + this.tag + ", \"");
+        sb.append("[").append(this.tag).append(", \"");
         for (int n = 0; n < this.headings.size(); ++n) {
             if (n > 0) {
                 sb.append("/");
@@ -128,11 +128,11 @@ public class Option {
         for (OptionArgument arg : this.arguments) {
             sb.append(" ");
             if (arg.name() != null) {
-                sb.append(arg.name() + ":");
+                sb.append(arg.name()).append(":");
             }
-            sb.append("<" + arg.expression() + ">");
+            sb.append("<").append(arg.expression()).append(">");
         }
-        sb.append(", priority " + this.priority + "]");
+        sb.append(", priority ").append(this.priority).append("]");
         return sb.toString();
     }
 }

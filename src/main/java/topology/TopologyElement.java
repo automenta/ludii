@@ -153,9 +153,6 @@ public abstract class TopologyElement
             case Diagonal -> {
                 return this.supportedDiagonalDirections;
             }
-            case All -> {
-                return this.supportedDirections;
-            }
             case OffDiagonal -> {
                 return this.supportedOffDirections;
             }

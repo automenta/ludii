@@ -27,9 +27,7 @@ public class Board implements GraphicsItem
             case Style -> {
                 return new BoardStyle(containerStyleType, false);
             }
-            default -> {
-                throw new IllegalArgumentException("Board(): A BoardStyleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Board(): A BoardStyleType is not implemented.");
         }
     }
     
@@ -38,9 +36,7 @@ public class Board implements GraphicsItem
             case Style -> {
                 return new BoardStyle(ContainerStyleType.PenAndPaper, onlyEdges);
             }
-            default -> {
-                throw new IllegalArgumentException("Board(): A BoardStyleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Board(): A BoardStyleType is not implemented.");
         }
     }
     
@@ -49,9 +45,7 @@ public class Board implements GraphicsItem
             case StyleThickness -> {
                 return new BoardStyleThickness(boardGraphicsType, thickness);
             }
-            default -> {
-                throw new IllegalArgumentException("Board(): A BoardStyleThicknessType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Board(): A BoardStyleThicknessType is not implemented.");
         }
     }
     
@@ -60,9 +54,7 @@ public class Board implements GraphicsItem
             case Checkered -> {
                 return new BoardCheckered(value);
             }
-            default -> {
-                throw new IllegalArgumentException("Board(): A BoardBooleanType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Board(): A BoardBooleanType is not implemented.");
         }
     }
     
@@ -74,9 +66,7 @@ public class Board implements GraphicsItem
             case Foreground -> {
                 return new BoardForeground(image, fillColour, edgeColour, scale, rotation, offsetX, offsetY);
             }
-            default -> {
-                throw new IllegalArgumentException("Piece(): A PieceGroundType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Piece(): A PieceGroundType is not implemented.");
         }
     }
     
@@ -85,9 +75,7 @@ public class Board implements GraphicsItem
             case Colour -> {
                 return new BoardColour(boardGraphicsType, colour);
             }
-            default -> {
-                throw new IllegalArgumentException("Board(): A BoardColourType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Board(): A BoardColourType is not implemented.");
         }
     }
     
@@ -96,9 +84,7 @@ public class Board implements GraphicsItem
             case Shape -> {
                 return new BoardShape(shape);
             }
-            default -> {
-                throw new IllegalArgumentException("Board(): A BoardShapeType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Board(): A BoardShapeType is not implemented.");
         }
     }
     

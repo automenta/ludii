@@ -70,7 +70,6 @@ public final class IsRelated extends BaseBooleanFunction
                             return true;
                         }
                     }
-                    break;
                 }
                 case Diagonal -> {
                     for (final int st : sites) {
@@ -79,7 +78,6 @@ public final class IsRelated extends BaseBooleanFunction
                             return true;
                         }
                     }
-                    break;
                 }
                 case All -> {
                     for (final int st : sites) {
@@ -88,7 +86,6 @@ public final class IsRelated extends BaseBooleanFunction
                             return true;
                         }
                     }
-                    break;
                 }
                 case OffDiagonal -> {
                     for (final int st : sites) {
@@ -97,7 +94,6 @@ public final class IsRelated extends BaseBooleanFunction
                             return true;
                         }
                     }
-                    break;
                 }
                 case Orthogonal -> {
                     for (final int st : sites) {
@@ -106,7 +102,6 @@ public final class IsRelated extends BaseBooleanFunction
                             return true;
                         }
                     }
-                    break;
                 }
             }
         }
@@ -121,7 +116,6 @@ public final class IsRelated extends BaseBooleanFunction
                             }
                         }
                     }
-                    break;
                 }
                 case Diagonal -> {
                     for (final int st : sites) {
@@ -131,7 +125,6 @@ public final class IsRelated extends BaseBooleanFunction
                             }
                         }
                     }
-                    break;
                 }
                 case All -> {
                     for (final int st : sites) {
@@ -141,7 +134,6 @@ public final class IsRelated extends BaseBooleanFunction
                             }
                         }
                     }
-                    break;
                 }
                 case OffDiagonal -> {
                     for (final int st : sites) {
@@ -151,7 +143,6 @@ public final class IsRelated extends BaseBooleanFunction
                             }
                         }
                     }
-                    break;
                 }
                 case Orthogonal -> {
                     for (final int st : sites) {
@@ -161,14 +152,13 @@ public final class IsRelated extends BaseBooleanFunction
                             }
                         }
                     }
-                    break;
                 }
             }
         }
         else {
             final Edge edgeA = graph.edges().get(location);
             switch (this.relationType) {
-                case Adjacent -> {
+                case Adjacent, Orthogonal, All -> {
                     for (final int st : sites) {
                         for (final Edge edgeB : edgeA.vA().edges()) {
                             if (edgeB.index() == st) {
@@ -181,43 +171,9 @@ public final class IsRelated extends BaseBooleanFunction
                             }
                         }
                     }
-                    break;
                 }
-                case Diagonal -> {
+                case Diagonal, OffDiagonal -> {
                     return false;
-                }
-                case All -> {
-                    for (final int st : sites) {
-                        for (final Edge edgeB : edgeA.vA().edges()) {
-                            if (edgeB.index() == st) {
-                                return true;
-                            }
-                        }
-                        for (final Edge edgeB : edgeA.vB().edges()) {
-                            if (edgeB.index() == st) {
-                                return true;
-                            }
-                        }
-                    }
-                    break;
-                }
-                case OffDiagonal -> {
-                    return false;
-                }
-                case Orthogonal -> {
-                    for (final int st : sites) {
-                        for (final Edge edgeB : edgeA.vA().edges()) {
-                            if (edgeB.index() == st) {
-                                return true;
-                            }
-                        }
-                        for (final Edge edgeB : edgeA.vB().edges()) {
-                            if (edgeB.index() == st) {
-                                return true;
-                            }
-                        }
-                    }
-                    break;
                 }
             }
         }

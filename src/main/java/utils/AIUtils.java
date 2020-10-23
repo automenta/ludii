@@ -4,9 +4,9 @@
 
 package utils;
 
-import game.Game;
 import collections.FastArrayList;
 import collections.StringPair;
+import game.Game;
 import org.apache.commons.rng.core.RandomProviderDefaultState;
 import util.AI;
 import util.Context;

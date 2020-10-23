@@ -65,57 +65,23 @@ public abstract class BaseContainerStyle implements ContainerStyle
     public void draw(final Graphics2D g2d, final PlaneType plane, final Context context) {
         try {
             switch (plane) {
-                case BOARD -> {
-                    Bridge.graphicsRenderer().drawBoard(g2d, this.containerPlacement.unscaledPlacement());
-                    break;
-                }
-                case TRACK -> {
-                    this.containerTrack.drawBoardTrack(g2d, context, this);
-                    break;
-                }
-                case AXES -> {
-                    this.containerAxis.drawAxes(g2d);
-                    break;
-                }
-                case GRAPH -> {
-                    Bridge.graphicsRenderer().drawGraph(g2d, this.containerPlacement.unscaledPlacement());
-                    break;
-                }
-                case CONNECTIONS -> {
-                    Bridge.graphicsRenderer().drawConnections(g2d, this.containerPlacement.unscaledPlacement());
-                    break;
-                }
+                case BOARD -> Bridge.graphicsRenderer().drawBoard(g2d, this.containerPlacement.unscaledPlacement());
+                case TRACK -> this.containerTrack.drawBoardTrack(g2d, context, this);
+                case AXES -> this.containerAxis.drawAxes(g2d);
+                case GRAPH -> Bridge.graphicsRenderer().drawGraph(g2d, this.containerPlacement.unscaledPlacement());
+                case CONNECTIONS -> Bridge.graphicsRenderer().drawConnections(g2d, this.containerPlacement.unscaledPlacement());
                 case HINTS -> {
                     if (context.game().metadata().graphics().hintType() == PuzzleHintType.None) {
                         break;
                     }
                     this.containerDesign.drawPuzzleHints(g2d, context);
-                    break;
                 }
-                case CANDIDATES -> {
-                    this.containerDesign.drawPuzzleCandidates(g2d, context);
-                    break;
-                }
-                case COMPONENTS -> {
-                    this.containerComponents.drawComponents(g2d, context);
-                    break;
-                }
-                case PREGENERATION -> {
-                    DeveloperGUI.drawPregeneration(g2d, context, this);
-                    break;
-                }
-                case INDICES -> {
-                    this.drawIndices(g2d, context);
-                    break;
-                }
-                case POSSIBLEMOVES -> {
-                    this.drawPossibleMoves(g2d, context);
-                    break;
-                }
-                case COSTS -> {
-                    this.drawElementCost(g2d, context);
-                    break;
-                }
+                case CANDIDATES -> this.containerDesign.drawPuzzleCandidates(g2d, context);
+                case COMPONENTS -> this.containerComponents.drawComponents(g2d, context);
+                case PREGENERATION -> DeveloperGUI.drawPregeneration(g2d, context, this);
+                case INDICES -> this.drawIndices(g2d, context);
+                case POSSIBLEMOVES -> this.drawPossibleMoves(g2d, context);
+                case COSTS -> this.drawElementCost(g2d, context);
             }
         }
         catch (Exception e) {

@@ -4,8 +4,8 @@
 
 package features;
 
-import features.instances.Footprint;
 import collections.ChunkSet;
+import features.instances.Footprint;
 import util.state.State;
 import util.state.containerState.ContainerState;
 
@@ -17,7 +17,7 @@ public class ActiveFeaturesCache
     protected final ThreadLocal<Map<FeatureSet.ProactiveFeaturesKey, CachedDataFootprint>> threadLocalCache;
     
     public ActiveFeaturesCache() {
-        this.threadLocalCache = ThreadLocal.withInitial(() -> new HashMap<>());
+        this.threadLocalCache = ThreadLocal.withInitial(HashMap::new);
     }
     
     public void cache(final State state, final int from, final int to, final int[] activeFeaturesToCache, final int player) {
@@ -151,7 +151,7 @@ public class ActiveFeaturesCache
         }
     }
     
-    private class CachedDataFootprint
+    private static class CachedDataFootprint
     {
         public final CachedData data;
         public final Footprint footprint;

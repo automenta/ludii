@@ -60,15 +60,15 @@ public class ActionReset extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[Reset:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",var=" + this.var);
+            sb.append("type=").append(this.type);
+            sb.append(",var=").append(this.var);
         }
         else {
-            sb.append("var=" + this.var);
+            sb.append("var=").append(this.var);
         }
-        sb.append(",max=" + this.max);
+        sb.append(",max=").append(this.max);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -114,7 +114,7 @@ public class ActionReset extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
@@ -135,7 +135,7 @@ public class ActionReset extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);

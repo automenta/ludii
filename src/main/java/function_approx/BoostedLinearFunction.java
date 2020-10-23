@@ -4,8 +4,8 @@
 
 package function_approx;
 
-import gnu.trove.list.array.TFloatArrayList;
 import collections.FVector;
+import gnu.trove.list.array.TFloatArrayList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

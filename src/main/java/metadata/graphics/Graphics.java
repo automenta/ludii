@@ -742,13 +742,13 @@ public class Graphics implements Serializable
         final StringBuilder sb = new StringBuilder();
         final String open = (this.items.size() <= 1) ? "" : "{";
         final String close = (this.items.size() <= 1) ? "" : "}";
-        sb.append("    (graphics " + open + "\n");
+        sb.append("    (graphics ").append(open).append("\n");
         for (final GraphicsItem item : this.items) {
             if (item != null) {
-                sb.append("        " + item.toString());
+                sb.append("        ").append(item.toString());
             }
         }
-        sb.append("    " + close + ")\n");
+        sb.append("    ").append(close).append(")\n");
         return sb.toString();
     }
     

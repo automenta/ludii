@@ -48,13 +48,13 @@ public final class ActionSetScore extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetScore:");
-        sb.append("player=" + this.player);
-        sb.append(",score=" + this.score);
+        sb.append("player=").append(this.player);
+        sb.append(",score=").append(this.score);
         if (this.add) {
-            sb.append(",add=" + this.add);
+            sb.append(",add=").append(this.add);
         }
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

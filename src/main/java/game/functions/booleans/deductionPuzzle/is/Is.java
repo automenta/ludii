@@ -27,9 +27,7 @@ public class Is extends BaseBooleanFunction
             case Solved -> {
                 return new IsSolved();
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsPuzzleSimpleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsPuzzleSimpleType is not implemented.");
         }
     }
     
@@ -38,9 +36,7 @@ public class Is extends BaseBooleanFunction
             case Unique -> {
                 return new IsUnique(elementType);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsPuzzleGraphType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsPuzzleGraphType is not implemented.");
         }
     }
     
@@ -52,9 +48,7 @@ public class Is extends BaseBooleanFunction
             case Sum -> {
                 return new IsSum(type, region, nameRegion, result);
             }
-            default -> {
-                throw new IllegalArgumentException("Is(): A IsPuzzleRegionResultType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Is(): A IsPuzzleRegionResultType is not implemented.");
         }
     }
     

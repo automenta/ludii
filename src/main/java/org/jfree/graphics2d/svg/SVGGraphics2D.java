@@ -608,26 +608,11 @@ public final class SVGGraphics2D extends Graphics2D
             }
             first = false;
             switch (type) {
-                case 0 -> {
-                    b.append("M ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1]));
-                    break;
-                }
-                case 1 -> {
-                    b.append("L ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1]));
-                    break;
-                }
-                case 2 -> {
-                    b.append("Q ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1])).append(" ").append(this.geomDP(coords[2])).append(" ").append(this.geomDP(coords[3]));
-                    break;
-                }
-                case 3 -> {
-                    b.append("C ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1])).append(" ").append(this.geomDP(coords[2])).append(" ").append(this.geomDP(coords[3])).append(" ").append(this.geomDP(coords[4])).append(" ").append(this.geomDP(coords[5]));
-                    break;
-                }
-                case 4 -> {
-                    b.append("Z ");
-                    break;
-                }
+                case 0 -> b.append("M ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1]));
+                case 1 -> b.append("L ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1]));
+                case 2 -> b.append("Q ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1])).append(" ").append(this.geomDP(coords[2])).append(" ").append(this.geomDP(coords[3]));
+                case 3 -> b.append("C ").append(this.geomDP(coords[0])).append(" ").append(this.geomDP(coords[1])).append(" ").append(this.geomDP(coords[2])).append(" ").append(this.geomDP(coords[3])).append(" ").append(this.geomDP(coords[4])).append(" ").append(this.geomDP(coords[5]));
+                case 4 -> b.append("Z ");
             }
             iterator.next();
         }
@@ -679,24 +664,12 @@ public final class SVGGraphics2D extends Graphics2D
             final BasicStroke bs = (BasicStroke)this.stroke;
             strokeWidth = ((bs.getLineWidth() > 0.0) ? bs.getLineWidth() : this.zeroStrokeWidth);
             switch (bs.getEndCap()) {
-                case 1 -> {
-                    strokeCap = "round";
-                    break;
-                }
-                case 2 -> {
-                    strokeCap = "square";
-                    break;
-                }
+                case 1 -> strokeCap = "round";
+                case 2 -> strokeCap = "square";
             }
             switch (bs.getLineJoin()) {
-                case 2 -> {
-                    strokeJoin = "bevel";
-                    break;
-                }
-                case 1 -> {
-                    strokeJoin = "round";
-                    break;
-                }
+                case 2 -> strokeJoin = "bevel";
+                case 1 -> strokeJoin = "round";
             }
             miterLimit = bs.getMiterLimit();
             dashArray = bs.getDashArray();

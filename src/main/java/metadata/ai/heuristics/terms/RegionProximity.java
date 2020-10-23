@@ -6,10 +6,10 @@ package metadata.ai.heuristics.terms;
 
 import annotations.Name;
 import annotations.Opt;
+import collections.FVector;
 import game.Game;
 import game.equipment.other.Regions;
 import main.StringRoutines;
-import collections.FVector;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import metadata.ai.misc.Pair;
 import util.Context;
@@ -156,16 +156,16 @@ public class RegionProximity extends HeuristicTerm
         final StringBuilder sb = new StringBuilder();
         sb.append("(regionProximity");
         if (this.transformation != null) {
-            sb.append(" transformation:" + this.transformation.toString());
+            sb.append(" transformation:").append(this.transformation.toString());
         }
         if (this.weight != 1.0f) {
-            sb.append(" weight:" + this.weight);
+            sb.append(" weight:").append(this.weight);
         }
-        sb.append(" region:" + this.region);
+        sb.append(" region:").append(this.region);
         if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && !this.pieceWeightNames[0].isEmpty())) {
             sb.append(" pieceWeights:{\n");
             for (int i = 0; i < this.pieceWeightNames.length; ++i) {
-                sb.append("        (pair " + StringRoutines.quote(this.pieceWeightNames[i]) + " " + this.gameAgnosticWeightsArray[i] + ")\n");
+                sb.append("        (pair ").append(StringRoutines.quote(this.pieceWeightNames[i])).append(" ").append(this.gameAgnosticWeightsArray[i]).append(")\n");
             }
             sb.append("    }");
         }
@@ -181,7 +181,7 @@ public class RegionProximity extends HeuristicTerm
         if (this.pieceWeightNames.length > 1 || (this.pieceWeightNames.length == 1 && !this.pieceWeightNames[0].isEmpty())) {
             for (int i = 0; i < this.pieceWeightNames.length; ++i) {
                 if (Math.abs(this.weight * this.gameAgnosticWeightsArray[i]) >= threshold) {
-                    pieceWeightsSb.append("        (pair " + StringRoutines.quote(this.pieceWeightNames[i]) + " " + this.gameAgnosticWeightsArray[i] + ")\n");
+                    pieceWeightsSb.append("        (pair ").append(StringRoutines.quote(this.pieceWeightNames[i])).append(" ").append(this.gameAgnosticWeightsArray[i]).append(")\n");
                     haveRelevantPieces = true;
                     shouldPrint = true;
                 }
@@ -194,12 +194,12 @@ public class RegionProximity extends HeuristicTerm
             final StringBuilder sb = new StringBuilder();
             sb.append("(regionProximity");
             if (this.transformation != null) {
-                sb.append(" transformation:" + this.transformation.toString());
+                sb.append(" transformation:").append(this.transformation.toString());
             }
             if (this.weight != 1.0f) {
-                sb.append(" weight:" + this.weight);
+                sb.append(" weight:").append(this.weight);
             }
-            sb.append(" region:" + this.region);
+            sb.append(" region:").append(this.region);
             if (haveRelevantPieces) {
                 sb.append(" pieceWeights:{\n");
                 sb.append(pieceWeightsSb);

@@ -17,7 +17,7 @@ public class Aliases implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (aliases \"" + this.aliases + "\")\n");
+        sb.append("    (aliases \"").append(this.aliases).append("\")\n");
         return sb.toString();
     }
     

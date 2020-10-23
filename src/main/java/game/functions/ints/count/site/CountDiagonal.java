@@ -43,19 +43,16 @@ public final class CountDiagonal extends BaseIntFunction
                 if (sites[0] < context.topology().cells().size()) {
                     return context.topology().cells().get(sites[0]).diagonal().size();
                 }
-                break;
             }
             case Edge -> {
                 if (sites[0] < context.topology().edges().size()) {
                     return 0;
                 }
-                break;
             }
             case Vertex -> {
                 if (sites[0] < context.topology().vertices().size()) {
                     return context.topology().vertices().get(sites[0]).diagonal().size();
                 }
-                break;
             }
         }
         return -1;

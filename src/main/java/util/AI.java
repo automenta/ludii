@@ -4,9 +4,9 @@
 
 package util;
 
-import game.Game;
 import collections.FVector;
 import collections.FastArrayList;
+import game.Game;
 
 import java.lang.ref.WeakReference;
 

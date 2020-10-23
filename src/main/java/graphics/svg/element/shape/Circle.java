@@ -81,8 +81,8 @@ public class Circle extends Shape
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.label() + ": fill=" + this.style.fill() + ", stroke=" + this.style.stroke() + ", strokeWidth=" + this.style.strokeWidth());
-        sb.append(" : cx=" + this.cx + ", cy=" + this.cy + ", r=" + this.r);
+        sb.append(this.label()).append(": fill=").append(this.style.fill()).append(", stroke=").append(this.style.stroke()).append(", strokeWidth=").append(this.style.strokeWidth());
+        sb.append(" : cx=").append(this.cx).append(", cy=").append(this.cy).append(", r=").append(this.r);
         return sb.toString();
     }
     

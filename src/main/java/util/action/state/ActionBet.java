@@ -62,10 +62,10 @@ public final class ActionBet extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[Bet:");
-        sb.append("player=" + this.player);
-        sb.append(",bet=" + this.bet);
+        sb.append("player=").append(this.player);
+        sb.append(",bet=").append(this.bet);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

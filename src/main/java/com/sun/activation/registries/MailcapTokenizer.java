@@ -42,34 +42,13 @@ public class MailcapTokenizer
     public static String nameForToken(final int token) {
         String name = "really unknown";
         switch (token) {
-            case 0 -> {
-                name = "unknown";
-                break;
-            }
-            case 1 -> {
-                name = "start";
-                break;
-            }
-            case 2 -> {
-                name = "string";
-                break;
-            }
-            case 5 -> {
-                name = "EOI";
-                break;
-            }
-            case 47 -> {
-                name = "'/'";
-                break;
-            }
-            case 59 -> {
-                name = "';'";
-                break;
-            }
-            case 61 -> {
-                name = "'='";
-                break;
-            }
+            case 0 -> name = "unknown";
+            case 1 -> name = "start";
+            case 2 -> name = "string";
+            case 5 -> name = "EOI";
+            case 47 -> name = "'/'";
+            case 59 -> name = "';'";
+            case 61 -> name = "'='";
         }
         return name;
     }
@@ -149,10 +128,7 @@ public class MailcapTokenizer
     private static boolean isSpecialChar(final char c) {
         boolean lAnswer = false;
         switch (c) {
-            case '\"', '(', ')', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']' -> {
-                lAnswer = true;
-                break;
-            }
+            case '\"', '(', ')', ',', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']' -> lAnswer = true;
         }
         return lAnswer;
     }

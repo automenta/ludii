@@ -57,9 +57,9 @@ public final class ActionSetPot extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetPot:");
-        sb.append("pot=" + this.pot);
+        sb.append("pot=").append(this.pot);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

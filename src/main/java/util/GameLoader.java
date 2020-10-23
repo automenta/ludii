@@ -6,10 +6,10 @@ package util;
 
 import game.Game;
 import game.match.Subgame;
-import language.compiler.Compiler;
-import main.FileHandling;
 import grammar.Description;
 import grammar.Report;
+import language.compiler.Compiler;
+import main.FileHandling;
 import options.GameOptions;
 import options.Option;
 import options.UserSelections;
@@ -56,7 +56,7 @@ public final class GameLoader
         try (final BufferedReader rdr = new BufferedReader(new InputStreamReader(in))) {
             String line;
             while ((line = rdr.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line).append("\n");
             }
         }
         catch (IOException e) {
@@ -91,7 +91,7 @@ public final class GameLoader
             try (final BufferedReader rdr = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
                 String line;
                 while ((line = rdr.readLine()) != null) {
-                    sb.append(line + "\n");
+                    sb.append(line).append("\n");
                 }
             }
             catch (IOException e) {

@@ -49,7 +49,7 @@ public class Step
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.from.label() + " => " + this.to.label());
+        sb.append(this.from.label()).append(" => ").append(this.to.label());
         if (!this.directions.isEmpty()) {
             sb.append(" (");
             for (int d = this.directions.nextSetBit(0); d >= 0; d = this.directions.nextSetBit(d + 1)) {

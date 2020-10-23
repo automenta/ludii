@@ -4,6 +4,8 @@
 
 package policies.softmax;
 
+import collections.FVector;
+import collections.FastArrayList;
 import features.FeatureSet;
 import features.features.Feature;
 import function_approx.BoostedLinearFunction;
@@ -13,8 +15,6 @@ import game.rules.play.moves.Moves;
 import game.types.play.RoleType;
 import gnu.trove.list.array.TFloatArrayList;
 import gnu.trove.list.array.TIntArrayList;
-import collections.FVector;
-import collections.FastArrayList;
 import metadata.ai.features.Features;
 import metadata.ai.misc.Pair;
 import policies.Policy;

@@ -64,11 +64,11 @@ public class ListAllLudemesUsage
         for (final String ludemeName : ludemeNames) {
             final Set<String> games = ludemesToUsingGames.get(ludemeName);
             final StringBuilder sb = new StringBuilder();
-            sb.append(ludemeName + ": ");
+            sb.append(ludemeName).append(": ");
             while (sb.length() < 62) {
                 sb.append(" ");
             }
-            sb.append(games.size() + " games");
+            sb.append(games.size()).append(" games");
             if (!games.isEmpty()) {
                 final String[] sortedGames = games.toArray(new String[0]);
                 Arrays.sort(sortedGames);

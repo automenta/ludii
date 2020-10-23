@@ -256,7 +256,6 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ArcTo, ch == 'A', new String[]{tokens.get(s), tokens.get(s + 1), tokens.get(s + 5), tokens.get(s + 6), tokens.get(s + 2), tokens.get(s + 3), tokens.get(s + 4)});
                         path.add(op);
                         s += 7;
-                        continue;
                     }
                     case 'M', 'm' -> {
                         if (s >= tokens.size() - 2) {
@@ -265,7 +264,6 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.MoveTo, ch == 'M', new String[]{tokens.get(s), tokens.get(s + 1)});
                         path.add(op);
                         s += 2;
-                        continue;
                     }
                     case 'L', 'l' -> {
                         if (s >= tokens.size() - 2) {
@@ -274,7 +272,6 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.LineTo, ch == 'L', new String[]{tokens.get(s), tokens.get(s + 1)});
                         path.add(op);
                         s += 2;
-                        continue;
                     }
                     case 'H', 'h' -> {
                         if (s >= tokens.size() - 1) {
@@ -283,7 +280,6 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.HLineTo, ch == 'H', new String[]{tokens.get(s), "0"});
                         path.add(op);
                         ++s;
-                        continue;
                     }
                     case 'V', 'v' -> {
                         if (s >= tokens.size() - 1) {
@@ -292,7 +288,6 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.VLineTo, ch == 'V', new String[]{"0", tokens.get(s)});
                         path.add(op);
                         ++s;
-                        continue;
                     }
                     case 'Q', 'q' -> {
                         if (s >= tokens.size() - 4) {
@@ -301,7 +296,6 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.QuadraticTo, ch == 'Q', new String[]{tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3)});
                         path.add(op);
                         s += 4;
-                        continue;
                     }
                     case 'C', 'c' -> {
                         if (s >= tokens.size() - 6) {
@@ -310,7 +304,6 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.CurveTo, ch == 'C', new String[]{tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3), tokens.get(s + 4), tokens.get(s + 5)});
                         path.add(op);
                         s += 6;
-                        continue;
                     }
                     case 'S', 's' -> {
                         if (s >= tokens.size() - 4) {
@@ -319,7 +312,6 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ShortCurveTo, ch == 'S', new String[]{tokens.get(s), tokens.get(s + 1), tokens.get(s + 2), tokens.get(s + 3)});
                         path.add(op);
                         s += 4;
-                        continue;
                     }
                     case 'T', 't' -> {
                         if (s >= tokens.size() - 2) {
@@ -328,12 +320,10 @@ public class SVGtoImage
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ShortQuadraticTo, ch == 'T', new String[]{tokens.get(s), tokens.get(s + 1)});
                         path.add(op);
                         s += 2;
-                        continue;
                     }
                     case 'Z', 'z' -> {
                         final SVGPathOp op = new SVGPathOp(SVGPathOp.PathOpType.ClosePath, ch == 'Z', null);
                         path.add(op);
-                        continue;
                     }
                     default -> {
                         return false;
@@ -413,40 +403,23 @@ public class SVGtoImage
                         }
                         if (y3 > maxY) {
                             maxY = y3;
-                            break;
                         }
-                        break;
                     }
-                    case MoveTo -> {
+                    case MoveTo, ShortQuadraticTo, LineTo -> {
                         x = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
                         y = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
                         lastX = x;
                         lastY = y;
-                        break;
                     }
-                    case LineTo -> {
-                        x = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
-                        y = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
-                        lastX = x;
-                        lastY = y;
-                        break;
-                    }
-                    case HLineTo -> {
-                        x = (lastX = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX));
-                        break;
-                    }
-                    case VLineTo -> {
-                        y = (lastY = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY));
-                        break;
-                    }
-                    case QuadraticTo -> {
+                    case HLineTo -> x = (lastX = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX));
+                    case VLineTo -> y = (lastY = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY));
+                    case QuadraticTo, ShortCurveTo -> {
                         x = op.pts().get(1).x + (op.absolute() ? 0.0 : lastX);
                         y = op.pts().get(1).y + (op.absolute() ? 0.0 : lastY);
                         lastX = x;
                         lastY = y;
                         x2 = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
                         y2 = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
-                        break;
                     }
                     case CurveTo -> {
                         x = op.pts().get(2).x + (op.absolute() ? 0.0 : lastX);
@@ -457,28 +430,10 @@ public class SVGtoImage
                         y2 = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
                         x3 = op.pts().get(1).x + (op.absolute() ? 0.0 : lastX);
                         y3 = op.pts().get(1).y + (op.absolute() ? 0.0 : lastY);
-                        break;
-                    }
-                    case ShortQuadraticTo -> {
-                        x = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
-                        y = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
-                        lastX = x;
-                        lastY = y;
-                        break;
-                    }
-                    case ShortCurveTo -> {
-                        x = op.pts().get(1).x + (op.absolute() ? 0.0 : lastX);
-                        y = op.pts().get(1).y + (op.absolute() ? 0.0 : lastY);
-                        lastX = x;
-                        lastY = y;
-                        x2 = op.pts().get(0).x + (op.absolute() ? 0.0 : lastX);
-                        y2 = op.pts().get(0).y + (op.absolute() ? 0.0 : lastY);
-                        break;
                     }
                     case ClosePath -> {
                         x = lastX;
                         y = lastY;
-                        break;
                     }
                 }
                 if (x < minX) {
@@ -573,7 +528,6 @@ public class SVGtoImage
                         lastY = y3 / scale + y0;
                         prev = new Point2D.Double(x3, y3);
                         pts.add(op.pts().get(1));
-                        continue;
                     }
                     case MoveTo -> {
                         if (fillColour != null && !pts.isEmpty()) {
@@ -594,7 +548,6 @@ public class SVGtoImage
                         path.moveTo(x, y);
                         prev = new Point2D.Double(x, y);
                         pts.add(op.pts().get(0));
-                        continue;
                     }
                     case LineTo -> {
                         x = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -604,7 +557,6 @@ public class SVGtoImage
                         path.lineTo(x, y);
                         prev = new Point2D.Double(current.getX(), current.getY());
                         pts.add(op.pts().get(0));
-                        continue;
                     }
                     case HLineTo -> {
                         x = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -613,7 +565,6 @@ public class SVGtoImage
                         path.lineTo(x, y);
                         prev = new Point2D.Double(current.getX(), current.getY());
                         pts.add(op.pts().get(0));
-                        continue;
                     }
                     case VLineTo -> {
                         x = current.getX();
@@ -622,7 +573,6 @@ public class SVGtoImage
                         path.lineTo(x, y);
                         prev = new Point2D.Double(current.getX(), current.getY());
                         pts.add(op.pts().get(0));
-                        continue;
                     }
                     case QuadraticTo -> {
                         final double x2 = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -634,7 +584,6 @@ public class SVGtoImage
                         path.quadTo(x2, y2, x, y);
                         prev = new Point2D.Double(x2, y2);
                         pts.add(op.pts().get(1));
-                        continue;
                     }
                     case CurveTo -> {
                         final double x2 = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -648,7 +597,6 @@ public class SVGtoImage
                         path.curveTo(x2, y2, x3, y3, x, y);
                         prev = new Point2D.Double(x3, y3);
                         pts.add(op.pts().get(2));
-                        continue;
                     }
                     case ShortQuadraticTo -> {
                         x = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -664,7 +612,6 @@ public class SVGtoImage
                         path.quadTo(x2, y2, x, y);
                         prev = new Point2D.Double(x2, y2);
                         pts.add(op.pts().get(1));
-                        continue;
                     }
                     case ShortCurveTo -> {
                         final double x3 = (op.pts().get(0).x + (op.absolute() ? 0.0 : lastX) - x0) * scale;
@@ -682,7 +629,6 @@ public class SVGtoImage
                         path.quadTo(x2, y2, x, y);
                         prev = new Point2D.Double(x2, y2);
                         pts.add(op.pts().get(1));
-                        continue;
                     }
                     case ClosePath -> {
                         path.closePath();
@@ -695,7 +641,6 @@ public class SVGtoImage
                         }
                         lastX = startX;
                         lastY = startY;
-                        continue;
                     }
                 }
             }

@@ -72,27 +72,21 @@ public class DieStyle extends BaseComponentStyle
             final int dy = (int)(positionY + imageSize * pipTranslation.getY());
             final ArrayList<Point> pipPositions = new ArrayList<>();
             switch (pipValue) {
-                case 1 -> {
-                    pipPositions.add(new Point(dx, dy));
-                    break;
-                }
+                case 1 -> pipPositions.add(new Point(dx, dy));
                 case 2 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
-                    break;
                 }
                 case 3 -> {
                     pipPositions.add(new Point(dx, dy));
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
-                    break;
                 }
                 case 4 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
                     pipPositions.add(new Point(dx - dw, dy - dw));
                     pipPositions.add(new Point(dx - dw, dy + dh));
                     pipPositions.add(new Point(dx + dw, dy - dw));
-                    break;
                 }
                 case 5 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
@@ -100,7 +94,6 @@ public class DieStyle extends BaseComponentStyle
                     pipPositions.add(new Point(dx - dw, dy + dh));
                     pipPositions.add(new Point(dx + dw, dy - dw));
                     pipPositions.add(new Point(dx, dy));
-                    break;
                 }
                 case 6 -> {
                     pipPositions.add(new Point(dx + dw, dy + dh));
@@ -109,7 +102,6 @@ public class DieStyle extends BaseComponentStyle
                     pipPositions.add(new Point(dx + dw, dy - dw));
                     pipPositions.add(new Point(dx, dy + dh));
                     pipPositions.add(new Point(dx, dy - dw));
-                    break;
                 }
             }
             for (Point pipPosition : pipPositions) {

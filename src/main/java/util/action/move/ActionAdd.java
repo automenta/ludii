@@ -228,30 +228,30 @@ public final class ActionAdd extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[Add:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
         if (this.level != -1) {
-            sb.append(",level=" + this.level);
+            sb.append(",level=").append(this.level);
         }
-        sb.append(",what=" + this.what);
+        sb.append(",what=").append(this.what);
         if (this.count > 1) {
-            sb.append(",count=" + this.count);
+            sb.append(",count=").append(this.count);
         }
         if (this.state != -1) {
-            sb.append(",state=" + this.state);
+            sb.append(",state=").append(this.state);
         }
         if (this.rotation != -1) {
-            sb.append(",rotation=" + this.rotation);
+            sb.append(",rotation=").append(this.rotation);
         }
         if (this.onStack) {
-            sb.append(",stack=" + this.onStack);
+            sb.append(",stack=").append(this.onStack);
         }
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         if (this.invisible != null) {
             sb.append(",invisible=");
@@ -321,13 +321,13 @@ public final class ActionAdd extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
         if (this.level != -1) {
-            sb.append("/" + this.level);
+            sb.append("/").append(this.level);
         }
         if (this.onStack) {
             sb.append("^");
@@ -338,20 +338,20 @@ public final class ActionAdd extends BaseAction
         if (this.what > 0 && this.what < context.components().length) {
             sb.append(context.components()[this.what].name());
             if (this.count > 1) {
-                sb.append("x" + this.count);
+                sb.append("x").append(this.count);
             }
         }
         if (this.state != -1) {
-            sb.append("=" + this.state);
+            sb.append("=").append(this.state);
         }
         if (this.rotation != -1) {
-            sb.append(" r" + this.rotation);
+            sb.append(" r").append(this.rotation);
         }
         if (this.invisible != null) {
             sb.append(" invisible:");
             for (int i = 0; i < this.invisible.length; ++i) {
                 if (this.invisible[i]) {
-                    sb.append("P" + (i + 1));
+                    sb.append("P").append(i + 1);
                 }
             }
         }
@@ -359,7 +359,7 @@ public final class ActionAdd extends BaseAction
             sb.append(" masked:");
             for (int i = 0; i < this.masked.length; ++i) {
                 if (this.masked[i]) {
-                    sb.append("P" + (i + 1));
+                    sb.append("P").append(i + 1);
                 }
             }
         }
@@ -373,7 +373,7 @@ public final class ActionAdd extends BaseAction
         if (this.what > 0 && this.what < context.components().length) {
             sb.append(context.components()[this.what].name());
             if (this.count > 1) {
-                sb.append("x" + this.count);
+                sb.append("x").append(this.count);
             }
         }
         String newTo = String.valueOf(this.to);
@@ -385,19 +385,19 @@ public final class ActionAdd extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(" to " + this.type + " " + newTo);
+            sb.append(" to ").append(this.type).append(" ").append(newTo);
         }
         else {
-            sb.append(" to " + newTo);
+            sb.append(" to ").append(newTo);
         }
         if (this.level != -1) {
-            sb.append("/" + this.level);
+            sb.append("/").append(this.level);
         }
         if (this.state != -1) {
-            sb.append(" state=" + this.state);
+            sb.append(" state=").append(this.state);
         }
         if (this.rotation != -1) {
-            sb.append(" rotation=" + this.rotation);
+            sb.append(" rotation=").append(this.rotation);
         }
         if (this.onStack) {
             sb.append(" on stack");
@@ -406,7 +406,7 @@ public final class ActionAdd extends BaseAction
             sb.append(",invisible={");
             for (int i = 0; i < this.invisible.length; ++i) {
                 if (this.invisible[i]) {
-                    sb.append("P" + (i + 1));
+                    sb.append("P").append(i + 1);
                 }
             }
             sb.append('}');
@@ -415,7 +415,7 @@ public final class ActionAdd extends BaseAction
             sb.append(",masked={");
             for (int i = 0; i < this.masked.length; ++i) {
                 if (this.masked[i]) {
-                    sb.append("P" + (i + 1));
+                    sb.append("P").append(i + 1);
                 }
             }
             sb.append('}');

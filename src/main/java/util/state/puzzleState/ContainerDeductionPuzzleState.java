@@ -4,10 +4,10 @@
 
 package util.state.puzzleState;
 
+import collections.ChunkSet;
 import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import collections.ChunkSet;
 import math.BitTwiddling;
 import util.state.State;
 import util.state.containerState.ContainerState;
@@ -144,22 +144,10 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
     @Override
     public void resetVariable(final SiteType type, final int var, final int numValues) {
         switch (type) {
-            case Vertex -> {
-                this.verts.setNBits(var, numValues, true);
-                break;
-            }
-            case Edge -> {
-                this.edges.setNBits(var, numValues, true);
-                break;
-            }
-            case Cell -> {
-                this.cells.setNBits(var, numValues, true);
-                break;
-            }
-            default -> {
-                this.verts.setNBits(var, numValues, true);
-                break;
-            }
+            case Vertex -> this.verts.setNBits(var, numValues, true);
+            case Edge -> this.edges.setNBits(var, numValues, true);
+            case Cell -> this.cells.setNBits(var, numValues, true);
+            default -> this.verts.setNBits(var, numValues, true);
         }
     }
     
@@ -174,7 +162,6 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
                         bs.set(n, true);
                     }
                 }
-                break;
             }
             case Edge -> {
                 final int values = this.edges.getChunk(var);
@@ -183,16 +170,6 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
                         bs.set(n, true);
                     }
                 }
-                break;
-            }
-            case Cell -> {
-                final int values = this.cells.getChunk(var);
-                for (int n = 0; n < this.nbValuesCell; ++n) {
-                    if ((values & 1 << n) != 0x0) {
-                        bs.set(n, true);
-                    }
-                }
-                break;
             }
             default -> {
                 final int values = this.cells.getChunk(var);
@@ -201,7 +178,6 @@ public class ContainerDeductionPuzzleState extends BaseContainerStateDeductionPu
                         bs.set(n, true);
                     }
                 }
-                break;
             }
         }
         return bs;

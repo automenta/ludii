@@ -43,19 +43,16 @@ public final class CountOff extends BaseIntFunction
                 if (sites[0] < context.topology().cells().size()) {
                     return context.topology().cells().get(sites[0]).off().size();
                 }
-                break;
             }
             case Edge -> {
                 if (sites[0] < context.topology().edges().size()) {
                     return 0;
                 }
-                break;
             }
             case Vertex -> {
                 if (sites[0] < context.topology().vertices().size()) {
                     return 0;
                 }
-                break;
             }
         }
         return -1;

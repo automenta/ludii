@@ -5,8 +5,8 @@
 package metadata.ai.heuristics;
 
 import annotations.Opt;
-import game.Game;
 import collections.FVector;
+import game.Game;
 import metadata.ai.AIItem;
 import metadata.ai.heuristics.terms.HeuristicTerm;
 import util.Context;
@@ -126,7 +126,7 @@ public class Heuristics implements AIItem
         final StringBuilder sb = new StringBuilder();
         sb.append("(heuristics {\n");
         for (final HeuristicTerm term : this.heuristicTerms) {
-            sb.append("    " + term.toString() + "\n");
+            sb.append("    ").append(term.toString()).append("\n");
         }
         sb.append("})\n");
         return sb.toString();
@@ -138,7 +138,7 @@ public class Heuristics implements AIItem
         for (final HeuristicTerm term : this.heuristicTerms) {
             final String termStr = term.toStringThresholded(thresholdWeight);
             if (termStr != null) {
-                sb.append("    " + termStr + "\n");
+                sb.append("    ").append(termStr).append("\n");
             }
         }
         sb.append("})\n");

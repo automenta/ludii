@@ -38,9 +38,7 @@ public class Show implements GraphicsItem
                     case AsHoles -> {
                         return new ShowSitesAsHoles(value);
                     }
-                    default -> throw new IllegalArgumentException("Show(): A ShowSiteDataType is not implemented.");
                 }
-
             }
             case Sites: {
                 switch (showDataType) {
@@ -50,13 +48,11 @@ public class Show implements GraphicsItem
                     case AsHoles -> {
                         return new ShowSitesAsHoles(value);
                     }
-                    default -> throw new IllegalArgumentException("Show(): A ShowSiteDataType is not implemented.");
                 }
             }
-            default: {
-                throw new IllegalArgumentException("Show(): A ShowSiteType is not implemented.");
-            }
         }
+
+        throw new IllegalArgumentException("Show(): A ShowSiteDataType is not implemented.");
     }
     
     public static GraphicsItem construct(final ShowSymbolType showType, final String imageName, @Opt final String region, @Opt final RoleType roleType, @Opt final SiteType graphElementType, @Opt @Or final Integer[] sites, @Opt @Or final Integer site, @Opt final RegionFunction regionFunction, @Opt final BoardGraphicsType boardGraphicsType, @Opt @Name final Colour fillColour, @Opt @Name final Colour edgeColour, @Opt @Name final Float scale, @Opt @Name final Integer rotation) {

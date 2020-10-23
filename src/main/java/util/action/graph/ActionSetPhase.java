@@ -47,15 +47,15 @@ public final class ActionSetPhase extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetPhase:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
-        sb.append(",phase=" + this.phase);
+        sb.append(",phase=").append(this.phase);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -98,12 +98,12 @@ public final class ActionSetPhase extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
-        sb.append("=%" + this.phase);
+        sb.append("=%").append(this.phase);
         return sb.toString();
     }
     
@@ -120,12 +120,12 @@ public final class ActionSetPhase extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
-        sb.append(" = " + this.phase + ")");
+        sb.append(" = ").append(this.phase).append(")");
         return sb.toString();
     }
     

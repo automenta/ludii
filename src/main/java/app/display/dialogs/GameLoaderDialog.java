@@ -326,9 +326,8 @@ public class GameLoaderDialog
                 return super.getChildAt(index);
             }
             int visibleIdx = -1;
-            Iterator<TreeNode> iterator = this.children.iterator();
-            while (iterator.hasNext()) {
-                final GameLoaderNode node = (GameLoaderNode) iterator.next();
+            for (TreeNode child : this.children) {
+                final GameLoaderNode node = (GameLoaderNode) child;
                 if (node.isVisible) {
                     ++visibleIdx;
                 }
@@ -345,9 +344,8 @@ public class GameLoaderDialog
             }
             int count = 0;
             try {
-                Iterator<TreeNode> iterator = this.children.iterator();
-                while (iterator.hasNext()) {
-                    final GameLoaderNode node = (GameLoaderNode) iterator.next();
+                for (TreeNode child : this.children) {
+                    final GameLoaderNode node = (GameLoaderNode) child;
                     if (node.isVisible) {
                         ++count;
                     }
@@ -372,9 +370,8 @@ public class GameLoaderDialog
             }
             else {
                 this.isVisible = false;
-                Iterator<TreeNode> iterator = this.children.iterator();
-                while (iterator.hasNext()) {
-                    final GameLoaderNode child = (GameLoaderNode) iterator.next();
+                for (TreeNode treeNode : this.children) {
+                    final GameLoaderNode child = (GameLoaderNode) treeNode;
                     child.updateVisibility(filterText);
                     if (child.isVisible) {
                         this.isVisible = true;

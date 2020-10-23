@@ -25,9 +25,7 @@ public final class TrackSite extends BaseIntFunction
             case EndSite -> {
                 return new TrackSiteEndTrack(player, role, name);
             }
-            default -> {
-                throw new IllegalArgumentException("TrackSite(): A TrackSiteType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("TrackSite(): A TrackSiteType is not implemented.");
         }
     }
     
@@ -36,9 +34,7 @@ public final class TrackSite extends BaseIntFunction
             case Move -> {
                 return new TrackSiteMove(from, role, player, name, steps);
             }
-            default -> {
-                throw new IllegalArgumentException("TrackSite(): A TrackSiteMoveType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("TrackSite(): A TrackSiteMoveType is not implemented.");
         }
     }
     

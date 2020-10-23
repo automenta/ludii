@@ -4,11 +4,10 @@
 
 package language.parser;
 
-import main.FileHandling;
 import grammar.Report;
+import main.FileHandling;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -63,7 +62,7 @@ public class KnownDefines
         }
     }
     
-    void recurseKnownDefines(final String path, final Report report) throws Exception {
+    void recurseKnownDefines(final String path, final Report report) {
         final File root = new File(path);
         final File[] list = root.listFiles();
         if (list == null) {
@@ -93,7 +92,7 @@ public class KnownDefines
         try (final BufferedReader rdr = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
             String line;
             while ((line = rdr.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line).append("\n");
             }
         }
         catch (IOException e) {

@@ -4,15 +4,15 @@
 
 package features;
 
+import collections.ChunkSet;
+import collections.FVector;
+import collections.FastArrayList;
 import features.features.Feature;
 import features.instances.*;
 import game.Game;
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TFloatArrayList;
 import gnu.trove.list.array.TIntArrayList;
-import collections.ChunkSet;
-import collections.FVector;
-import collections.FastArrayList;
 import util.Context;
 import util.FeatureSetInterface;
 import util.Move;
@@ -478,98 +478,44 @@ public class FeatureSet extends FeatureSetInterface
                 final FeatureInstance instance = fastFeatureInstanceNode.featureInstance;
                 if (instance.mustEmpty() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell -> {
-                            footprintEmptyCells.or(instance.mustEmpty());
-                            break;
-                        }
-                        case Vertex -> {
-                            footprintEmptyVertices.or(instance.mustEmpty());
-                            break;
-                        }
-                        case Edge -> {
-                            footprintEmptyEdges.or(instance.mustEmpty());
-                            break;
-                        }
+                        case Cell -> footprintEmptyCells.or(instance.mustEmpty());
+                        case Vertex -> footprintEmptyVertices.or(instance.mustEmpty());
+                        case Edge -> footprintEmptyEdges.or(instance.mustEmpty());
                     }
                 }
                 if (instance.mustNotEmpty() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell -> {
-                            footprintEmptyCells.or(instance.mustNotEmpty());
-                            break;
-                        }
-                        case Vertex -> {
-                            footprintEmptyVertices.or(instance.mustNotEmpty());
-                            break;
-                        }
-                        case Edge -> {
-                            footprintEmptyEdges.or(instance.mustNotEmpty());
-                            break;
-                        }
+                        case Cell -> footprintEmptyCells.or(instance.mustNotEmpty());
+                        case Vertex -> footprintEmptyVertices.or(instance.mustNotEmpty());
+                        case Edge -> footprintEmptyEdges.or(instance.mustNotEmpty());
                     }
                 }
                 if (instance.mustWhoMask() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell -> {
-                            footprintWhoCells.or(instance.mustWhoMask());
-                            break;
-                        }
-                        case Vertex -> {
-                            footprintWhoVertices.or(instance.mustWhoMask());
-                            break;
-                        }
-                        case Edge -> {
-                            footprintWhoEdges.or(instance.mustWhoMask());
-                            break;
-                        }
+                        case Cell -> footprintWhoCells.or(instance.mustWhoMask());
+                        case Vertex -> footprintWhoVertices.or(instance.mustWhoMask());
+                        case Edge -> footprintWhoEdges.or(instance.mustWhoMask());
                     }
                 }
                 if (instance.mustNotWhoMask() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell -> {
-                            footprintWhoCells.or(instance.mustNotWhoMask());
-                            break;
-                        }
-                        case Vertex -> {
-                            footprintWhoVertices.or(instance.mustNotWhoMask());
-                            break;
-                        }
-                        case Edge -> {
-                            footprintWhoEdges.or(instance.mustNotWhoMask());
-                            break;
-                        }
+                        case Cell -> footprintWhoCells.or(instance.mustNotWhoMask());
+                        case Vertex -> footprintWhoVertices.or(instance.mustNotWhoMask());
+                        case Edge -> footprintWhoEdges.or(instance.mustNotWhoMask());
                     }
                 }
                 if (instance.mustWhatMask() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell -> {
-                            footprintWhatCells.or(instance.mustWhatMask());
-                            break;
-                        }
-                        case Vertex -> {
-                            footprintWhatVertices.or(instance.mustWhatMask());
-                            break;
-                        }
-                        case Edge -> {
-                            footprintWhatEdges.or(instance.mustWhatMask());
-                            break;
-                        }
+                        case Cell -> footprintWhatCells.or(instance.mustWhatMask());
+                        case Vertex -> footprintWhatVertices.or(instance.mustWhatMask());
+                        case Edge -> footprintWhatEdges.or(instance.mustWhatMask());
                     }
                 }
                 if (instance.mustNotWhatMask() != null) {
                     switch (instance.graphElementType()) {
-                        case Cell -> {
-                            footprintWhatCells.or(instance.mustNotWhatMask());
-                            break;
-                        }
-                        case Vertex -> {
-                            footprintWhatVertices.or(instance.mustNotWhatMask());
-                            break;
-                        }
-                        case Edge -> {
-                            footprintWhatEdges.or(instance.mustNotWhatMask());
-                            break;
-                        }
+                        case Cell -> footprintWhatCells.or(instance.mustNotWhatMask());
+                        case Vertex -> footprintWhatVertices.or(instance.mustNotWhatMask());
+                        case Edge -> footprintWhatEdges.or(instance.mustNotWhatMask());
                     }
                 }
                 instanceNodes.add(fastFeatureInstanceNode.children);

@@ -4,8 +4,8 @@
 
 package features.instances;
 
-import game.types.board.SiteType;
 import collections.ChunkSet;
+import game.types.board.SiteType;
 import util.state.State;
 import util.state.containerState.ContainerState;
 

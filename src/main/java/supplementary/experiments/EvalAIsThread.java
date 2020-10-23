@@ -4,9 +4,9 @@
 
 package supplementary.experiments;
 
+import collections.ListUtils;
 import game.Game;
 import gnu.trove.list.array.TIntArrayList;
-import collections.ListUtils;
 import manager.Manager;
 import manager.ai.AIDetails;
 import manager.referee.Referee;

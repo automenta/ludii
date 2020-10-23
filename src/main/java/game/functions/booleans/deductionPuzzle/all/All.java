@@ -34,9 +34,7 @@ public class All extends BaseBooleanFunction
             case Different -> {
                 return new AllDifferent(elementType, region, except, excepts);
             }
-            default -> {
-                throw new IllegalArgumentException("All(): A AllPuzzleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("All(): A AllPuzzleType is not implemented.");
         }
     }
     

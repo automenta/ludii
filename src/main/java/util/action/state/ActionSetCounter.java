@@ -35,9 +35,9 @@ public final class ActionSetCounter extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetCounter:");
-        sb.append("counter=" + this.counter);
+        sb.append("counter=").append(this.counter);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

@@ -130,12 +130,10 @@ public class ProofNumberSearch extends AI
                 case FALSE -> {
                     node.setProofNumber(Integer.MAX_VALUE);
                     node.setDisproofNumber(0);
-                    break;
                 }
                 case TRUE -> {
                     node.setProofNumber(0);
                     node.setDisproofNumber(Integer.MAX_VALUE);
-                    break;
                 }
                 case UNKNOWN -> {
                     if (node.nodeType() == PNSNode.PNSNodeTypes.AND_NODE) {
@@ -145,7 +143,6 @@ public class ProofNumberSearch extends AI
                     }
                     node.setProofNumber(1);
                     node.setDisproofNumber(Math.max(1, node.children.length));
-                    break;
                 }
             }
         }

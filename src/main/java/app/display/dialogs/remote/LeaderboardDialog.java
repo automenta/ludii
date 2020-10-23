@@ -42,13 +42,7 @@ public class LeaderboardDialog extends JDialog
             @Override
             public Class<?> getColumnClass(final int colNum) {
                 switch (colNum) {
-                    case 0 -> {
-                        return Integer.class;
-                    }
-                    case 1 -> {
-                        return String.class;
-                    }
-                    case 2 -> {
+                    case 0, 2 -> {
                         return Integer.class;
                     }
                     case 3 -> {

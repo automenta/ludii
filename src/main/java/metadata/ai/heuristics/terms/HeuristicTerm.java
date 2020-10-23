@@ -4,9 +4,9 @@
 
 package metadata.ai.heuristics.terms;
 
+import collections.FVector;
 import game.Game;
 import game.equipment.component.Component;
-import collections.FVector;
 import metadata.ai.AIItem;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import util.Context;

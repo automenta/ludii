@@ -8,12 +8,12 @@ import game.functions.booleans.BooleanConstant;
 import game.functions.dim.DimConstant;
 import game.functions.floats.FloatConstant;
 import game.functions.ints.IntConstant;
-import language.compiler.exceptions.TerminalNotFoundException;
-import language.grammar.Grammar;
-import main.StringRoutines;
 import grammar.Instance;
 import grammar.Report;
 import grammar.Symbol;
+import language.compiler.exceptions.TerminalNotFoundException;
+import language.grammar.Grammar;
+import main.StringRoutines;
 
 import java.util.ArrayList;
 import java.util.List;

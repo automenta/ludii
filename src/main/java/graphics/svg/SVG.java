@@ -103,9 +103,9 @@ public class SVG
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.elements.size() + " elements:\n");
+        sb.append(this.elements.size()).append(" elements:\n");
         for (final Element element : this.elements) {
-            sb.append(element + "\n");
+            sb.append(element).append("\n");
         }
         return sb.toString();
     }

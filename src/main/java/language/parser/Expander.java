@@ -5,10 +5,10 @@
 package language.parser;
 
 import exception.UnusedOptionException;
-import main.FileHandling;
-import main.StringRoutines;
 import grammar.Description;
 import grammar.Report;
+import main.FileHandling;
+import main.StringRoutines;
 import options.*;
 
 import java.io.File;

@@ -5,7 +5,10 @@
 package supplementary.bgg;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Recommender
 {
@@ -44,7 +47,7 @@ public class Recommender
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Couldn't choose game among candidates:\n");
                 for (final BggGame gm2 : candidates) {
-                    sb.append(gm2.name() + " (" + gm2.date() + ")\n");
+                    sb.append(gm2.name()).append(" (").append(gm2.date()).append(")\n");
                 }
                 System.out.println(sb.toString());
                 JOptionPane.showMessageDialog(null, sb.toString(), "Failed to Find Game", -1, null);
@@ -192,7 +195,6 @@ public class Recommender
             return "Couldn't find user '" + userName + "'.";
         }
         messageString = messageString + user.name() + " has " + user.ratings().size() + " ratings.\n";
-        final List<User> others = new ArrayList<>();
         final Map<String, User> othersMap = new HashMap<>();
         for (final Rating rating : user.ratings()) {
             final BggGame game = rating.game();
@@ -200,7 +202,7 @@ public class Recommender
                 othersMap.put(otherRating.user().name(), otherRating.user());
             }
         }
-        others.addAll(othersMap.values());
+        final List<User> others = new ArrayList<>(othersMap.values());
         messageString = messageString + others.size() + " users have scored at least one game that " + userName + " has scored.\n";
         for (final User other : others) {
             double tally = 0.0;

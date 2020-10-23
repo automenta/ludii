@@ -39,8 +39,8 @@ public class OptimiserFactory
         if (optimiserFile.exists()) {
             try (final BufferedReader reader = new BufferedReader(new FileReader(optimiserFile))) {
                 final List<String> linesList = new ArrayList<>();
-                final String line = reader.readLine();
-                while (line != null) {
+                String line;
+                while ((line = reader.readLine()) != null) {
                     linesList.add(line);
                 }
                 lines = linesList.toArray(lines);

@@ -46,7 +46,7 @@ public final class CountGroups extends BaseIntFunction
         this.dirnChoice = ((directions != null) ? directions.directionsFunctions() : new Directions(AbsoluteDirection.Adjacent, null));
         this.minFn = ((min == null) ? new IntConstant(0) : min);
         this.condition = If;
-        this.allPieces = ((If == null && of == null && role == null) || (role != null && (role == RoleType.All || role == RoleType.Shared)));
+        this.allPieces = ((If == null && of == null && role == null) || ((role == RoleType.All || role == RoleType.Shared)));
     }
     
     @Override

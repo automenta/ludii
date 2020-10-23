@@ -12,14 +12,14 @@ import game.equipment.container.board.Track;
 import game.types.play.RepetitionType;
 import main.FileHandling;
 import main.StringRoutines;
-import options.GameOptions;
-import options.Option;
-import options.Ruleset;
 import manager.Manager;
 import manager.network.SettingsNetwork;
 import manager.utils.ContextSnapshot;
 import manager.utils.PuzzleSelectionType;
 import manager.utils.SettingsManager;
+import options.GameOptions;
+import options.Option;
+import options.Ruleset;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -76,46 +76,16 @@ public class MainMenu extends JMenuBar
             for (int i = 0; i < MainMenu.recentGames.length && MainMenu.recentGames[i] != null; ++i) {
                 menuItem = new JMenuItem(MainMenu.recentGames[i]);
                 switch (i) {
-                    case 0 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(49, 512));
-                        break;
-                    }
-                    case 1 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(50, 512));
-                        break;
-                    }
-                    case 2 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(51, 512));
-                        break;
-                    }
-                    case 3 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(52, 512));
-                        break;
-                    }
-                    case 4 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(53, 512));
-                        break;
-                    }
-                    case 5 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(54, 512));
-                        break;
-                    }
-                    case 6 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(55, 512));
-                        break;
-                    }
-                    case 7 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(56, 512));
-                        break;
-                    }
-                    case 8 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(57, 512));
-                        break;
-                    }
-                    case 9 -> {
-                        menuItem.setAccelerator(KeyStroke.getKeyStroke(48, 512));
-                        break;
-                    }
+                    case 0 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(49, 512));
+                    case 1 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(50, 512));
+                    case 2 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(51, 512));
+                    case 3 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(52, 512));
+                    case 4 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(53, 512));
+                    case 5 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(54, 512));
+                    case 6 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(55, 512));
+                    case 7 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(56, 512));
+                    case 8 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(57, 512));
+                    case 9 -> menuItem.setAccelerator(KeyStroke.getKeyStroke(48, 512));
                 }
                 menuItem.addActionListener(al);
                 this.submenu.add(menuItem);

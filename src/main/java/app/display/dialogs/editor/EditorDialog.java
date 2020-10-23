@@ -8,12 +8,12 @@ import app.DesktopApp;
 import app.display.dialogs.util.DialogUtil;
 import app.game.GameSetupDesktop;
 import app.utils.SettingsDesktop;
+import grammar.Description;
+import grammar.Report;
 import graphics.ImageProcessing;
 import language.parser.Parser;
 import language.parser.SelectionType;
 import language.parser.TokenRange;
-import grammar.Description;
-import grammar.Report;
 import manager.Manager;
 import manager.utils.ContextSnapshot;
 import manager.utils.SettingsManager;
@@ -172,7 +172,6 @@ public class EditorDialog extends JDialog
                             }
                             EditorDialog.this.storeUndoText();
                             EditorDialog.this.deleteLine();
-                            break;
                         }
                         case REDO -> {
                             if (EditorDialog.this.trace) {
@@ -180,7 +179,6 @@ public class EditorDialog extends JDialog
                             }
                             EditorDialog.this.storeUndoText();
                             EditorDialog.this.redo();
-                            break;
                         }
                         case UNDO -> {
                             if (EditorDialog.this.trace) {
@@ -188,40 +186,31 @@ public class EditorDialog extends JDialog
                             }
                             EditorDialog.this.storeUndoText();
                             EditorDialog.this.undo();
-                            break;
                         }
                         case NO_ACTION -> {
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed ignored " + KeyEvent.getKeyText(e.getKeyChar()));
-                                break;
                             }
-                            break;
                         }
                         case COPY_SELECTION -> {
                             EditorDialog.this.copySelection();
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed copy selection " + EditorDialog.this.pasteBuffer);
-                                break;
                             }
-                            break;
                         }
                         case REMOVE_SELECTION -> {
                             EditorDialog.this.storeUndoText();
                             EditorDialog.this.removeSelection();
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed remove selection " + EditorDialog.this.pasteBuffer);
-                                break;
                             }
-                            break;
                         }
                         case PASTE_BUFFER -> {
                             EditorDialog.this.storeUndoText();
                             EditorDialog.this.pasteBuffer();
                             if (EditorDialog.this.trace) {
                                 System.out.println(">>EVENT: textArea/keypressed paste " + EditorDialog.this.pasteBuffer);
-                                break;
                             }
-                            break;
                         }
                         case AUTOSUGGEST -> {
                             if (EditorDialog.this.trace) {
@@ -229,7 +218,6 @@ public class EditorDialog extends JDialog
                             }
                             EditorDialog.this.storeUndoText();
                             EditorDialog.this.showAutosuggest(TextPaneUtils.cursorCoords(EditorDialog.this.textArea), true);
-                            break;
                         }
                     }
                     undoRecordTimer.start();
@@ -459,37 +447,28 @@ public class EditorDialog extends JDialog
                     case OPEN_CURLY -> {
                         appendToPane(this.textArea, token, EditorLookAndFeel.bracketColourByDepthAndType(ttype, curlyCount), ttype.isBold());
                         ++curlyCount;
-                        break;
                     }
                     case OPEN_ROUND, OPEN_SQUARE -> {
                         appendToPane(this.textArea, token, EditorLookAndFeel.bracketColourByDepthAndType(ttype, bracketCount), ttype.isBold());
                         ++bracketCount;
-                        break;
                     }
                     case CLOSE_CURLY -> {
                         --curlyCount;
                         appendToPane(this.textArea, token, EditorLookAndFeel.bracketColourByDepthAndType(ttype, curlyCount), ttype.isBold());
-                        break;
                     }
                     case CLOSE_ROUND, CLOSE_SQUARE -> {
                         --bracketCount;
                         appendToPane(this.textArea, token, EditorLookAndFeel.bracketColourByDepthAndType(ttype, bracketCount), ttype.isBold());
-                        break;
                     }
                     case OPEN_ANGLE -> {
                         inAngle = true;
                         appendToPane(this.textArea, token, ttype.fgColour(), ttype.isBold());
-                        break;
                     }
                     case CLOSE_ANGLE -> {
                         appendToPane(this.textArea, token, ttype.fgColour(), ttype.isBold());
                         inAngle = false;
-                        break;
                     }
-                    case WHITESPACE, INT, FLOAT, OTHER, STRING, LABEL, CLASS, ENUM, RULE -> {
-                        appendToPane(this.textArea, token, ttype.fgColour(), ttype.isBold());
-                        break;
-                    }
+                    case WHITESPACE, INT, FLOAT, OTHER, STRING, LABEL, CLASS, ENUM, RULE -> appendToPane(this.textArea, token, ttype.fgColour(), ttype.isBold());
                 }
                 lastTokenType = ttype;
             }

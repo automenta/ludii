@@ -12,9 +12,6 @@ public class RotationsOnly implements SymmetryValidator
             case REFLECTIONS -> {
                 return false;
             }
-            case ROTATIONS -> {
-                return true;
-            }
             case SUBSTITUTIONS -> {
                 return symmetryIndex == 0;
             }

@@ -4,6 +4,7 @@
 
 package util;
 
+import collections.ArrayUtils;
 import game.Game;
 import game.equipment.Equipment;
 import game.equipment.component.Component;
@@ -22,7 +23,6 @@ import game.types.board.RegionTypeDynamic;
 import game.types.play.RoleType;
 import game.util.equipment.Region;
 import gnu.trove.list.array.TIntArrayList;
-import collections.ArrayUtils;
 import math.BitTwiddling;
 import metadata.Metadata;
 import org.apache.commons.rng.core.source64.SplitMix64;

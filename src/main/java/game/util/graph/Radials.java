@@ -170,10 +170,10 @@ public class Radials
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Radials from " + this.siteType + " " + this.siteId + ":\n");
+        sb.append("Radials from ").append(this.siteType).append(" ").append(this.siteId).append(":\n");
         for (final AbsoluteDirection dirn : AbsoluteDirection.values()) {
             for (final Radial radial : this.inDirection[dirn.ordinal()]) {
-                sb.append("- " + dirn + ": " + radial.toString());
+                sb.append("- ").append(dirn).append(": ").append(radial.toString());
                 boolean isDistinct = false;
                 for (final Radial dist : this.distinctInDirection[dirn.ordinal()]) {
                     if (dist.matches(radial)) {

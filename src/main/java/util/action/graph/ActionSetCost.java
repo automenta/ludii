@@ -48,15 +48,15 @@ public final class ActionSetCost extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetCost:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
-        sb.append(",cost=" + this.cost);
+        sb.append(",cost=").append(this.cost);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -99,12 +99,12 @@ public final class ActionSetCost extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
-        sb.append("=$" + this.cost);
+        sb.append("=$").append(this.cost);
         return sb.toString();
     }
     
@@ -121,12 +121,12 @@ public final class ActionSetCost extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
-        sb.append(" = " + this.cost + ")");
+        sb.append(" = ").append(this.cost).append(")");
         return sb.toString();
     }
     

@@ -104,9 +104,9 @@ public class Ruleset {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[\"" + this.heading + "\" {");
+        sb.append("[\"").append(this.heading).append("\" {");
         for (String option : this.optionSettings) {
-            sb.append(" \"" + option + "\"");
+            sb.append(" \"").append(option).append("\"");
         }
         sb.append(" }]");
         return sb.toString();

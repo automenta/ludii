@@ -4,10 +4,10 @@
 
 package language.compiler;
 
+import grammar.Report;
 import language.compiler.exceptions.CompilerException;
 import language.compiler.exceptions.UnknownArrayErrorException;
 import language.grammar.Grammar;
-import grammar.Report;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

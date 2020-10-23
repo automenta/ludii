@@ -131,40 +131,29 @@ public class SuggestionDialog extends JDialog implements KeyListener, ListSelect
         }
         switch (keyChar) {
             case '\u0003', '\t', '\f', '\u0010', '\u0011', '\u0012', '\u0013', '\u0014', '!', '\"', '#', '$' -> {
-                break;
             }
             case '\n' -> {
                 final int pos = this.list.getSelectedIndex();
                 this.insertListEntryAndClose(pos);
-                break;
             }
-            case '\u001b' -> {
-                this.setVisible(false);
-                break;
-            }
+            case '\u001b' -> this.setVisible(false);
             case '\b' -> {
                 if (this.isPartial) {
                     this.parent.applyBackspace();
                     this.updateList();
-                    break;
                 }
-                break;
             }
             case '\u007f' -> {
                 if (this.isPartial) {
                     this.parent.applyDelete();
                     this.updateList();
-                    break;
                 }
-                break;
             }
             default -> {
                 if (this.isPartial) {
                     this.parent.insertCharacter(e.getKeyChar());
                     this.updateList();
-                    break;
                 }
-                break;
             }
         }
     }
@@ -179,12 +168,10 @@ public class SuggestionDialog extends JDialog implements KeyListener, ListSelect
             case 37 -> {
                 this.parent.cursorLeft();
                 this.updateList();
-                break;
             }
             case 39 -> {
                 this.parent.cursorRight();
                 this.updateList();
-                break;
             }
         }
     }

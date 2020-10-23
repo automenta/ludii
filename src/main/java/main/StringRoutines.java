@@ -128,9 +128,7 @@ public final class StringRoutines
                 case '\\' -> {
                     if (c < str.length() - 1 && str.charAt(c + 1) == '\"') {
                         ++c;
-                        break;
                     }
-                    break;
                 }
                 case '\"' -> {
                     return c;

@@ -39,13 +39,13 @@ public class Ai implements MetadataItem
         final StringBuilder sb = new StringBuilder();
         sb.append("    (ai\n");
         if (this.bestAgent != null) {
-            sb.append("        " + this.bestAgent.toString() + "\n");
+            sb.append("        ").append(this.bestAgent.toString()).append("\n");
         }
         if (this.heuristics != null) {
-            sb.append("        " + this.heuristics.toString() + "\n");
+            sb.append("        ").append(this.heuristics.toString()).append("\n");
         }
         if (this.features != null) {
-            sb.append("        " + this.features.toString() + "\n");
+            sb.append("        ").append(this.features.toString()).append("\n");
         }
         sb.append("    )\n");
         return sb.toString();

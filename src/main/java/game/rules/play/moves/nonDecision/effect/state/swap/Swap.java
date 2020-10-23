@@ -27,9 +27,7 @@ public final class Swap extends Effect
             case Pieces -> {
                 return new SwapPieces(locA, locB, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Swap(): A SwapSitesType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Swap(): A SwapSitesType is not implemented.");
         }
     }
     
@@ -58,9 +56,7 @@ public final class Swap extends Effect
             case Players -> {
                 return new SwapPlayers(player1, role1, player2, role2, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Swap(): A SwapSitesType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Swap(): A SwapSitesType is not implemented.");
         }
     }
     

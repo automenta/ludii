@@ -4,12 +4,12 @@
 
 package util.state.containerStackingState;
 
+import collections.ChunkSet;
+import collections.ListStack;
 import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
 import gnu.trove.list.array.TIntArrayList;
-import collections.ChunkSet;
-import collections.ListStack;
 import util.state.State;
 import util.zhash.ZobristHashGenerator;
 

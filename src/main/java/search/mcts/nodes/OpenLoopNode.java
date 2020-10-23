@@ -4,9 +4,9 @@
 
 package search.mcts.nodes;
 
-import game.Game;
 import collections.FVector;
 import collections.FastArrayList;
+import game.Game;
 import search.mcts.MCTS;
 import util.Context;
 import util.Move;

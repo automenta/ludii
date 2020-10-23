@@ -771,18 +771,9 @@ public abstract class MeasureGraph
             for (final ItemScore item2 : buckets.get(bid).items()) {
                 final RCL rcl = elements.get(item2.id()).situation().rcl();
                 switch (rclType) {
-                    case Row -> {
-                        rcl.setRow(bid);
-                        continue;
-                    }
-                    case Column -> {
-                        rcl.setColumn(bid);
-                        continue;
-                    }
-                    case Layer -> {
-                        rcl.setLayer(bid);
-                        continue;
-                    }
+                    case Row -> rcl.setRow(bid);
+                    case Column -> rcl.setColumn(bid);
+                    case Layer -> rcl.setLayer(bid);
                 }
             }
         }

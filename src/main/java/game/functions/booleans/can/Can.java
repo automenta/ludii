@@ -19,9 +19,7 @@ public class Can extends BaseBooleanFunction
             case Move -> {
                 return new CanMove(moves);
             }
-            default -> {
-                throw new IllegalArgumentException("Can(): A CanType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Can(): A CanType is not implemented.");
         }
     }
     

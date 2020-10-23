@@ -11,7 +11,10 @@ import main.StringRoutines;
 import main.UnixPrintWriter;
 import util.GameLoader;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.util.regex.Pattern;
 

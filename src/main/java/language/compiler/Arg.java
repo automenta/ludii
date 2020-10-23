@@ -4,10 +4,10 @@
 
 package language.compiler;
 
-import language.grammar.Grammar;
 import grammar.Instance;
 import grammar.Report;
 import grammar.Token;
+import language.grammar.Grammar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,14 +50,12 @@ public abstract class Arg
                 for (final Token sub : token.arguments()) {
                     ((ArgClass) arg).add(createFromToken(grammar, sub));
                 }
-                break;
             }
             case Array -> {
                 arg = new ArgArray(token.name(), token.parameterLabel());
                 for (final Token sub : token.arguments()) {
                     ((ArgArray) arg).add(createFromToken(grammar, sub));
                 }
-                break;
             }
             default -> {
                 return null;

@@ -5,11 +5,11 @@
 package game.util.equipment;
 
 import annotations.Hide;
+import collections.ChunkSet;
 import game.equipment.container.board.Board;
 import game.types.board.SiteType;
 import game.util.directions.AbsoluteDirection;
 import game.util.graph.Step;
-import collections.ChunkSet;
 import topology.Edge;
 import topology.SiteFinder;
 import topology.Topology;

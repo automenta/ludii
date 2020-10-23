@@ -72,15 +72,15 @@ public final class ActionSetRotation extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetRotation:");
         if (this.type != null || (context != null && this.type != context.board().defaultSite())) {
-            sb.append("type=" + this.type);
-            sb.append(",to=" + this.to);
+            sb.append("type=").append(this.type);
+            sb.append(",to=").append(this.to);
         }
         else {
-            sb.append("to=" + this.to);
+            sb.append("to=").append(this.to);
         }
-        sb.append(",rotation=" + this.rotation);
+        sb.append(",rotation=").append(this.rotation);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -103,12 +103,12 @@ public final class ActionSetRotation extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
-        sb.append(" r" + this.rotation);
+        sb.append(" r").append(this.rotation);
         return sb.toString();
     }
     
@@ -125,12 +125,12 @@ public final class ActionSetRotation extends BaseAction
             }
         }
         if (this.type != null && this.type != context.board().defaultSite()) {
-            sb.append(this.type + " " + newTo);
+            sb.append(this.type).append(" ").append(newTo);
         }
         else {
             sb.append(newTo);
         }
-        sb.append(" = " + this.rotation);
+        sb.append(" = ").append(this.rotation);
         sb.append(')');
         return sb.toString();
     }

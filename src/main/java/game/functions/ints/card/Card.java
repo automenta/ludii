@@ -25,9 +25,7 @@ public final class Card extends BaseIntFunction
             case TrumpSuit -> {
                 return new CardTrumpSuit();
             }
-            default -> {
-                throw new IllegalArgumentException("Card(): A CardSimpleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Card(): A CardSimpleType is not implemented.");
         }
     }
     
@@ -45,9 +43,7 @@ public final class Card extends BaseIntFunction
             case TrumpValue -> {
                 return new CardTrumpValue(at, level);
             }
-            default -> {
-                throw new IllegalArgumentException("Card(): A CardSiteType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Card(): A CardSiteType is not implemented.");
         }
     }
     

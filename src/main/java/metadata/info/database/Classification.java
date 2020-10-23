@@ -17,7 +17,7 @@ public class Classification implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (classification \"" + this.classification + "\")\n");
+        sb.append("    (classification \"").append(this.classification).append("\")\n");
         return sb.toString();
     }
     

@@ -6,6 +6,8 @@ package metadata.ai.heuristics.terms;
 
 import annotations.Name;
 import annotations.Opt;
+import collections.FVector;
+import collections.ListUtils;
 import game.Game;
 import game.equipment.component.Component;
 import game.functions.booleans.is.line.IsLine;
@@ -17,8 +19,6 @@ import game.util.graph.GraphElement;
 import game.util.graph.Radial;
 import gnu.trove.list.array.TFloatArrayList;
 import main.ReflectionUtils;
-import collections.FVector;
-import collections.ListUtils;
 import metadata.ai.heuristics.transformations.HeuristicTransformation;
 import topology.Topology;
 import topology.TopologyElement;
@@ -309,13 +309,13 @@ public class LineCompletionHeuristic extends HeuristicTerm
         final StringBuilder sb = new StringBuilder();
         sb.append("(lineCompletionHeuristic");
         if (this.transformation != null) {
-            sb.append(" transformation:" + this.transformation.toString());
+            sb.append(" transformation:").append(this.transformation.toString());
         }
         if (this.weight != 1.0f) {
-            sb.append(" weight:" + this.weight);
+            sb.append(" weight:").append(this.weight);
         }
         if (!this.autoComputeTargetLength) {
-            sb.append(" targetLength:" + this.targetLength);
+            sb.append(" targetLength:").append(this.targetLength);
         }
         sb.append(")");
         return sb.toString();
@@ -331,13 +331,13 @@ public class LineCompletionHeuristic extends HeuristicTerm
             final StringBuilder sb = new StringBuilder();
             sb.append("(lineCompletionHeuristic");
             if (this.transformation != null) {
-                sb.append(" transformation:" + this.transformation.toString());
+                sb.append(" transformation:").append(this.transformation.toString());
             }
             if (this.weight != 1.0f) {
-                sb.append(" weight:" + this.weight);
+                sb.append(" weight:").append(this.weight);
             }
             if (!this.autoComputeTargetLength) {
-                sb.append(" targetLength:" + this.targetLength);
+                sb.append(" targetLength:").append(this.targetLength);
             }
             sb.append(")");
             return sb.toString();

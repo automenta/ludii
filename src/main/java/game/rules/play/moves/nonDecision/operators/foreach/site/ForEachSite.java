@@ -7,6 +7,7 @@ package game.rules.play.moves.nonDecision.operators.foreach.site;
 import annotations.Hide;
 import annotations.Name;
 import annotations.Opt;
+import collections.FastArrayList;
 import game.Game;
 import game.functions.region.RegionFunction;
 import game.rules.play.moves.BaseMoves;
@@ -14,7 +15,6 @@ import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.effect.Effect;
 import game.rules.play.moves.nonDecision.effect.Then;
 import game.util.equipment.Region;
-import collections.FastArrayList;
 import util.Context;
 import util.Move;
 

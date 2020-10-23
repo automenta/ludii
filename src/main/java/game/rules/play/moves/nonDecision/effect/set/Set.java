@@ -55,9 +55,7 @@ public final class Set extends Effect
             case TrumpSuit -> {
                 return new SetTrumpSuit(suit, suits, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetSuitType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetSuitType is not implemented.");
         }
     }
     
@@ -76,9 +74,7 @@ public final class Set extends Effect
             case NextPlayer -> {
                 return new SetNextPlayer(who, nextPlayers, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetPlayerType is not implemented.");
         }
     }
     
@@ -97,9 +93,7 @@ public final class Set extends Effect
             case Direction -> {
                 return new SetDirection(to, directions, direction, previous, next, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetDirectionType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetDirectionType is not implemented.");
         }
     }
     
@@ -121,9 +115,7 @@ public final class Set extends Effect
             case Score -> {
                 return new SetScore(player, role, value, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetType is not implemented.");
         }
     }
     
@@ -132,9 +124,7 @@ public final class Set extends Effect
             case Pending -> {
                 return new SetPending(value, region, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetPendingType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetPendingType is not implemented.");
         }
     }
     
@@ -149,9 +139,7 @@ public final class Set extends Effect
             case Pot -> {
                 return new SetPot(newValue, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetIntegerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetIntegerType is not implemented.");
         }
     }
     
@@ -163,9 +151,7 @@ public final class Set extends Effect
             case State -> {
                 return new SetState(type, at, value, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetSiteType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetSiteType is not implemented.");
         }
     }
     
@@ -200,9 +186,7 @@ public final class Set extends Effect
             case Invisible -> {
                 return new SetInvisible(type, site, region, who, role, stack, then);
             }
-            default -> {
-                throw new IllegalArgumentException("Set(): A SetRegionPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Set(): A SetRegionPlayerType is not implemented.");
         }
     }
     

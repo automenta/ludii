@@ -25,9 +25,7 @@ public final class Value extends BaseIntFunction
             case Pending -> {
                 return new ValuePending();
             }
-            default -> {
-                throw new IllegalArgumentException("Value(): A ValueSimpleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Value(): A ValueSimpleType is not implemented.");
         }
     }
     
@@ -46,9 +44,7 @@ public final class Value extends BaseIntFunction
             case Player -> {
                 return new ValuePlayer(indexPlayer, role);
             }
-            default -> {
-                throw new IllegalArgumentException("Value(): A ValuePlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Value(): A ValuePlayerType is not implemented.");
         }
     }
     
@@ -57,9 +53,7 @@ public final class Value extends BaseIntFunction
             case Piece -> {
                 return new ValuePiece(of);
             }
-            default -> {
-                throw new IllegalArgumentException("Value(): A ValueComponentType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Value(): A ValueComponentType is not implemented.");
         }
     }
     

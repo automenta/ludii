@@ -17,7 +17,7 @@ public class Source implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (source \"" + this.source + "\")\n");
+        sb.append("    (source \"").append(this.source).append("\")\n");
         return sb.toString();
     }
     

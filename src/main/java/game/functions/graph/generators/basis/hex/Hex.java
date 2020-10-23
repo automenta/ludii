@@ -54,9 +54,7 @@ public class Hex extends Basis
             case Rectangle -> {
                 return new RectangleOnHex(dimA, (dimB != null) ? dimB : dimA);
             }
-            default -> {
-                throw new IllegalArgumentException("Shape " + st + " not supported for hex tiling.");
-            }
+            default -> throw new IllegalArgumentException("Shape " + st + " not supported for hex tiling.");
         }
     }
     

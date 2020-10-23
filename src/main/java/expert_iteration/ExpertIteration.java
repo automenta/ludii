@@ -4,6 +4,8 @@
 
 package expert_iteration;
 
+import collections.FVector;
+import collections.FastArrayList;
 import features.FeatureSet;
 import features.FeatureUtils;
 import features.elements.FeatureElement;
@@ -19,12 +21,10 @@ import gnu.trove.list.array.TFloatArrayList;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TObjectDoubleHashMap;
 import gnu.trove.map.hash.TObjectIntHashMap;
+import grammar.Report;
 import language.compiler.Compiler;
 import main.CommandLineArgParse;
 import main.FileHandling;
-import collections.FVector;
-import collections.FastArrayList;
-import grammar.Report;
 import metadata.ai.features.Features;
 import metadata.ai.heuristics.Heuristics;
 import metadata.ai.misc.BestAgent;
@@ -190,12 +190,10 @@ public class ExpertIteration
                                     case "Biased MCTS" -> {
                                         final Features features = (Features) Compiler.compileObject(FileHandling.loadTextContentsFromFile(ExpertIteration.this.bestAgentsDataDir + "/BestFeatures.txt"), "metadata.ai.features.Features", report);
                                         ai = MCTS.createBiasedMCTS(features, true);
-                                        break;
                                     }
                                     case "Biased MCTS (Uniform Playouts)" -> {
                                         final Features features = (Features) Compiler.compileObject(FileHandling.loadTextContentsFromFile(ExpertIteration.this.bestAgentsDataDir + "/BestFeatures.txt"), "metadata.ai.features.Features", report);
                                         ai = MCTS.createBiasedMCTS(features, false);
-                                        break;
                                     }
                                     default -> {
                                         if (!bestAgent.agent().equals("Random")) {

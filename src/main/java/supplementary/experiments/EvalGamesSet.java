@@ -4,9 +4,9 @@
 
 package supplementary.experiments;
 
+import collections.ListUtils;
 import game.Game;
 import gnu.trove.list.array.TIntArrayList;
-import collections.ListUtils;
 import util.AI;
 import util.Context;
 import util.GameLoader;
@@ -16,7 +16,9 @@ import utils.AIUtils;
 import utils.experiments.InterruptableExperiment;
 import utils.experiments.ResultsSummary;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;

@@ -35,17 +35,17 @@ public class ListUtils {
 
     public static <E> List<List<E>> generateTuples(List<List<E>> optionsLists) {
         ArrayList allTuples = new ArrayList();
-        if (optionsLists.size() > 0) {
+        if (!optionsLists.isEmpty()) {
             List<E> firstEntryOptions = optionsLists.get(0);
             ArrayList<List<E>> remainingOptionsLists = new ArrayList<>();
             for (int i = 1; i < optionsLists.size(); ++i) {
                 remainingOptionsLists.add(optionsLists.get(i));
             }
             List<List<E>> nMinOneTuples = ListUtils.generateTuples(remainingOptionsLists);
-            for (int i = 0; i < firstEntryOptions.size(); ++i) {
+            for (E firstEntryOption : firstEntryOptions) {
                 for (List<E> nMinOneTuple : nMinOneTuples) {
                     ArrayList<E> newTuple = new ArrayList<>(nMinOneTuple);
-                    newTuple.add(0, firstEntryOptions.get(i));
+                    newTuple.add(0, firstEntryOption);
                     allTuples.add(newTuple);
                 }
             }

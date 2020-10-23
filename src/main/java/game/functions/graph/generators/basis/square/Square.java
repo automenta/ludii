@@ -48,9 +48,7 @@ public class Square extends Basis
             case Diamond -> {
                 return new DiamondOnSquare(dim, diagonals);
             }
-            default -> {
-                throw new IllegalArgumentException("Shape " + st + " not supported for square tiling.");
-            }
+            default -> throw new IllegalArgumentException("Shape " + st + " not supported for square tiling.");
         }
     }
     

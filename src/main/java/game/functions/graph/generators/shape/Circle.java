@@ -19,7 +19,6 @@ import math.Vector;
 import util.Context;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Circle extends Basis

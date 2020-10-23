@@ -187,17 +187,12 @@ public final class SitesOccupied extends BaseRegionFunction
                 case Vertex -> {
                     flags |= 0x1000000L;
                     flags |= 0x800000L;
-                    break;
                 }
                 case Edge -> {
                     flags |= 0x4000000L;
                     flags |= 0x800000L;
-                    break;
                 }
-                case Cell -> {
-                    flags |= 0x2000000L;
-                    break;
-                }
+                case Cell -> flags |= 0x2000000L;
             }
         }
         flags |= this.who.gameFlags(game);

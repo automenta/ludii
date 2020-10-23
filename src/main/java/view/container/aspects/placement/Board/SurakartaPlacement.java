@@ -29,18 +29,9 @@ public class SurakartaPlacement extends BoardPlacement
         }
         final double fullDim = maxDim + extra * 2;
         switch (this.topology().graph().basis()) {
-            case Square -> {
-                this.containerScale = 1.1 * maxDim / fullDim;
-                break;
-            }
-            case Triangular -> {
-                this.containerScale = 0.9 * maxDim / fullDim;
-                break;
-            }
-            default -> {
-                System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
-                break;
-            }
+            case Square -> this.containerScale = 1.1 * maxDim / fullDim;
+            case Triangular -> this.containerScale = 0.9 * maxDim / fullDim;
+            default -> System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
         }
         this.setUnscaledPlacement(placement);
         this.placement = new Rectangle((int)(placement.getX() + placement.getWidth() * (1.0 - this.containerScale) / 2.0), (int)(placement.getY() + placement.getHeight() * (1.0 - this.containerScale) / 2.0), (int)(placement.getWidth() * this.containerScale), (int)(placement.getHeight() * this.containerScale));

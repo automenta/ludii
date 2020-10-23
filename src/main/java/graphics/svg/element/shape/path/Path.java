@@ -155,9 +155,9 @@ public class Path extends Shape
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.label() + ": fill=" + this.style.fill() + ", stroke=" + this.style.stroke() + ", strokeWidth=" + this.style.strokeWidth());
+        sb.append(this.label()).append(": fill=").append(this.style.fill()).append(", stroke=").append(this.style.stroke()).append(", strokeWidth=").append(this.style.strokeWidth());
         for (final PathOp op : this.ops) {
-            sb.append("\n   " + op + (op.absolute() ? " *" : ""));
+            sb.append("\n   ").append(op).append(op.absolute() ? " *" : "");
         }
         return sb.toString();
     }

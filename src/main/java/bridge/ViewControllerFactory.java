@@ -32,9 +32,6 @@ public class ViewControllerFactory
             return new BoardStyle(container);
         }
         switch (type) {
-            case Board -> {
-                return new BoardStyle(container);
-            }
             case Hand -> {
                 return new HandStyle(container);
             }
@@ -154,9 +151,6 @@ public class ViewControllerFactory
             return new PieceStyle(component);
         }
         switch (type) {
-            case Piece -> {
-                return new PieceStyle(component);
-            }
             case Card -> {
                 return new CardStyle(component);
             }
@@ -192,9 +186,6 @@ public class ViewControllerFactory
             return new BasicController(container);
         }
         switch (type) {
-            case BasicController -> {
-                return new BasicController(container);
-            }
             case PyramidalController -> {
                 return new PyramidalController(container);
             }

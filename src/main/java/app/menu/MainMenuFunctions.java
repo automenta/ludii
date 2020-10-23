@@ -29,17 +29,14 @@ import game.types.play.RepetitionType;
 import game.types.play.ResultType;
 import game.types.play.RoleType;
 import game.types.state.GameType;
+import grammar.Description;
+import grammar.Report;
 import graphics.svg.SVGLoader;
 import language.grammar.Grammar;
 import language.parser.Parser;
 import main.Constants;
 import main.FileHandling;
 import main.StringRoutines;
-import grammar.Description;
-import grammar.Report;
-import options.GameOptions;
-import options.Option;
-import options.Ruleset;
 import manager.Manager;
 import manager.ai.AIDetails;
 import manager.ai.AIUtil;
@@ -50,6 +47,9 @@ import manager.utils.ContextSnapshot;
 import manager.utils.PuzzleSelectionType;
 import manager.utils.SettingsManager;
 import metadata.ai.heuristics.Heuristics;
+import options.GameOptions;
+import options.Option;
+import options.Ruleset;
 import search.pns.ProofNumberSearch;
 import supplementary.EvalUtil;
 import supplementary.experiments.EvalAIsThread;
@@ -282,7 +282,7 @@ public class MainMenuFunctions extends JMenuBar
             }
             for (int i = 0; i < flagsValues.length; ++i) {
                 if ((game.gameFlags() & flagsValues[i]) != 0x0L) {
-                    properties.append(flags[i] + "\n");
+                    properties.append(flags[i]).append("\n");
                 }
             }
             Manager.app.addTextToAnalysisPanel(properties.toString());

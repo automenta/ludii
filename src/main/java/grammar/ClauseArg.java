@@ -66,21 +66,9 @@ public class ClauseArg {
             return "NULL";
         }
         switch (this.symbol.type()) {
-            case Primitive -> {
-                str = this.symbol.keyword();
-                break;
-            }
-            case Constant -> {
-                str = this.symbol.keyword();
-                break;
-            }
-            case Predefined, Class -> {
-                str = "<" + this.symbol.grammarLabel() + ">";
-                break;
-            }
-            default -> {
-                str = str + "[UNKNOWN]";
-            }
+            case Primitive, Constant -> str = this.symbol.keyword();
+            case Predefined, Class -> str = "<" + this.symbol.grammarLabel() + ">";
+            default -> str = str + "[UNKNOWN]";
         }
         for (int n = 0; n < this.nesting; ++n) {
             str = "{" + str + "}";

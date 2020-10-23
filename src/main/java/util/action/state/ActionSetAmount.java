@@ -62,10 +62,10 @@ public final class ActionSetAmount extends BaseAction
     public String toTrialFormat(final Context context) {
         final StringBuilder sb = new StringBuilder();
         sb.append("[SetAmount:");
-        sb.append("player=" + this.player);
-        sb.append(",amount=" + this.amount);
+        sb.append("player=").append(this.player);
+        sb.append(",amount=").append(this.amount);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();

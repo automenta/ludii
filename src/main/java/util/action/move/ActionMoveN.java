@@ -114,19 +114,19 @@ public final class ActionMoveN extends BaseAction
         final StringBuilder sb = new StringBuilder();
         sb.append("[Move:");
         if (this.typeFrom != null || (context != null && this.typeFrom != context.board().defaultSite())) {
-            sb.append("typeFrom=" + this.typeFrom);
-            sb.append(",from=" + this.from);
+            sb.append("typeFrom=").append(this.typeFrom);
+            sb.append(",from=").append(this.from);
         }
         else {
-            sb.append("from=" + this.from);
+            sb.append("from=").append(this.from);
         }
         if (this.typeTo != null || (context != null && this.typeTo != context.board().defaultSite())) {
-            sb.append(",typeTo=" + this.typeTo);
+            sb.append(",typeTo=").append(this.typeTo);
         }
-        sb.append(",to=" + this.to);
-        sb.append(",count=" + this.count);
+        sb.append(",to=").append(this.to);
+        sb.append(",count=").append(this.count);
         if (this.decision) {
-            sb.append(",decision=" + this.decision);
+            sb.append(",decision=").append(this.decision);
         }
         sb.append(']');
         return sb.toString();
@@ -174,7 +174,7 @@ public final class ActionMoveN extends BaseAction
             }
         }
         if (this.typeFrom != null && this.typeFrom != context.board().defaultSite()) {
-            sb.append(this.typeFrom + " " + newFrom);
+            sb.append(this.typeFrom).append(" ").append(newFrom);
         }
         else {
             sb.append(newFrom);
@@ -188,13 +188,13 @@ public final class ActionMoveN extends BaseAction
             }
         }
         if (this.typeTo != null && this.typeTo != context.board().defaultSite()) {
-            sb.append("-" + this.typeTo + " " + newTo);
+            sb.append("-").append(this.typeTo).append(" ").append(newTo);
         }
         else {
-            sb.append("-" + newTo);
+            sb.append("-").append(newTo);
         }
         if (this.count > 1) {
-            sb.append("x" + this.count);
+            sb.append("x").append(this.count);
         }
         return sb.toString();
     }
@@ -212,7 +212,7 @@ public final class ActionMoveN extends BaseAction
             }
         }
         if (this.typeFrom != null && this.typeTo != null && (this.typeFrom != context.board().defaultSite() || this.typeFrom != this.typeTo)) {
-            sb.append(this.typeFrom + " " + newFrom);
+            sb.append(this.typeFrom).append(" ").append(newFrom);
         }
         else {
             sb.append(newFrom);
@@ -226,13 +226,13 @@ public final class ActionMoveN extends BaseAction
             }
         }
         if (this.typeFrom != null && this.typeTo != null && (this.typeTo != context.board().defaultSite() || this.typeFrom != this.typeTo)) {
-            sb.append(" - " + this.typeTo + " " + newTo);
+            sb.append(" - ").append(this.typeTo).append(" ").append(newTo);
         }
         else {
-            sb.append("-" + newTo);
+            sb.append("-").append(newTo);
         }
         if (this.count > 1) {
-            sb.append("x" + this.count);
+            sb.append("x").append(this.count);
         }
         sb.append(')');
         return sb.toString();

@@ -35,7 +35,7 @@ public class BallSVG
                     }
                 }
             }
-            svg.append(line + "\n");
+            svg.append(line).append("\n");
         }
         return svg.toString();
     }

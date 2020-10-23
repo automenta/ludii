@@ -17,7 +17,7 @@ public class Version implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (version \"" + this.version + "\")\n");
+        sb.append("    (version \"").append(this.version).append("\")\n");
         return sb.toString();
     }
     

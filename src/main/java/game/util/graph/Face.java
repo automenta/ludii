@@ -251,12 +251,12 @@ public class Face extends GraphElement
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Face[" + this.id + "]:");
+        sb.append("Face[").append(this.id).append("]:");
         for (final Vertex vertex : this.vertices) {
-            sb.append(" " + vertex.id());
+            sb.append(" ").append(vertex.id());
         }
-        sb.append(" " + properties);
-        sb.append(" \"" + situation.label() + "\"");
+        sb.append(" ").append(properties);
+        sb.append(" \"").append(situation.label()).append("\"");
         return sb.toString();
     }
 }

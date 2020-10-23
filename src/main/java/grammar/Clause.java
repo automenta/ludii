@@ -150,17 +150,9 @@ public class Clause {
             str = str + ")";
         } else {
             switch (this.symbol.type()) {
-                case Primitive, Predefined, Constant -> {
-                    str = this.symbol.keyword();
-                    break;
-                }
-                case Class -> {
-                    str = "<" + safeKeyword + ">";
-                    break;
-                }
-                default -> {
-                    str = str + "[UNKNOWN]";
-                }
+                case Primitive, Predefined, Constant -> str = this.symbol.keyword();
+                case Class -> str = "<" + safeKeyword + ">";
+                default -> str = str + "[UNKNOWN]";
             }
         }
         for (int n = 0; n < this.symbol.nesting(); ++n) {

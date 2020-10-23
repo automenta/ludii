@@ -261,9 +261,9 @@ public class ParseItem {
         String TAB = "    ";
         StringBuilder sb = new StringBuilder();
         String label = (this.doesParse ? "+" : "-") + " ";
-        sb.append(label + indent);
+        sb.append(label).append(indent);
         if (this.token.parameterLabel() != null) {
-            sb.append(this.token.parameterLabel() + ":");
+            sb.append(this.token.parameterLabel()).append(":");
         }
         if (this.token.open() != '\u0000') {
             sb.append(this.token.open());
@@ -277,7 +277,7 @@ public class ParseItem {
                 sb.append(arg.dump(indent + "    "));
             }
             if (this.token.close() != '\u0000') {
-                sb.append(label + indent + this.token.close());
+                sb.append(label).append(indent).append(this.token.close());
             }
         } else if (this.token.close() != '\u0000') {
             sb.append(this.token.close());
@@ -296,15 +296,15 @@ public class ParseItem {
             if (this.instances == null || this.instances.size() < 1) {
                 return "** compare(): No instances for terminal " + this.token.name() + ".\n";
             }
-            sb.append(" => " + this.instances.get(0).symbol().cls().getSimpleName() + "\n");
+            sb.append(" => ").append(this.instances.get(0).symbol().cls().getSimpleName()).append("\n");
         } else {
             sb.append("\n");
             for (Instance instance : this.instances) {
                 if (instance == null || instance.clauses() == null) continue;
                 for (int c = 0; c < instance.clauses().size(); ++c) {
                     Clause clause = instance.clauses().get(c);
-                    sb.append((c + 1) + ". " + clause.symbol().grammarLabel() + ": " + clause.toString());
-                    sb.append(" => " + instance.symbol().cls().getSimpleName());
+                    sb.append(c + 1).append(". ").append(clause.symbol().grammarLabel()).append(": ").append(clause.toString());
+                    sb.append(" => ").append(instance.symbol().cls().getSimpleName());
                     sb.append("\n");
                 }
             }
@@ -318,7 +318,7 @@ public class ParseItem {
     public String tokenClause() {
         StringBuilder sb = new StringBuilder();
         if (this.token.parameterLabel() != null) {
-            sb.append(this.token.parameterLabel() + ":");
+            sb.append(this.token.parameterLabel()).append(":");
         }
         if (this.token.open() != '\u0000') {
             sb.append(this.token.open());

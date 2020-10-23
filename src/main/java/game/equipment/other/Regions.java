@@ -87,7 +87,6 @@ public class Regions extends Item
                     final TopologyElement corner = graph.corners(defaultType).get(c);
                     regions[c][0] = corner.index();
                 }
-                break;
             }
             case Sides -> {
                 regions = new Integer[graph.sides(defaultType).size()][];
@@ -100,7 +99,6 @@ public class Regions extends Item
                     }
                     ++indexSide;
                 }
-                break;
             }
             case SidesNoCorners -> {
                 final TIntArrayList corners = new TIntArrayList();
@@ -125,14 +123,12 @@ public class Regions extends Item
                     }
                     ++indexSideNoCorners;
                 }
-                break;
             }
             case AllSites -> {
                 regions = new Integer[1][graph.getGraphElements(defaultType).size()];
                 for (int k = 0; k < graph.getGraphElements(defaultType).size(); ++k) {
                     regions[0][k] = k;
                 }
-                break;
             }
             case Columns -> {
                 regions = new Integer[graph.columns(defaultType).size()][];
@@ -143,7 +139,6 @@ public class Regions extends Item
                         regions[k][l] = col.get(l).index();
                     }
                 }
-                break;
             }
             case Rows -> {
                 regions = new Integer[graph.rows(defaultType).size()][];
@@ -154,7 +149,6 @@ public class Regions extends Item
                         regions[k][l] = row.get(l).index();
                     }
                 }
-                break;
             }
             case Diagonals -> {
                 regions = new Integer[graph.diagonals(defaultType).size()][];
@@ -165,7 +159,6 @@ public class Regions extends Item
                         regions[k][l] = diag.get(l).index();
                     }
                 }
-                break;
             }
             case Layers -> {
                 regions = new Integer[graph.layers(defaultType).size()][];
@@ -176,7 +169,6 @@ public class Regions extends Item
                         regions[k][l] = diag.get(l).index();
                     }
                 }
-                break;
             }
             case HintRegions -> {
                 if (this.hintRegionName == null) {
@@ -191,7 +183,6 @@ public class Regions extends Item
                 if (context.game().equipment().edgesWithHints().length != 0) {
                     return context.game().equipment().edgesWithHints();
                 }
-                break;
             }
             case AllDirections -> {
                 regions = new Integer[graph.getGraphElements(defaultType).size()][];
@@ -212,7 +203,6 @@ public class Regions extends Item
                         regions[element.index()][index] = locs.getQuick(index);
                     }
                 }
-                break;
             }
             case SubGrids -> {
                 final int sizeSubGrids = (int) Math.sqrt(Math.sqrt(graph.cells().size()));
@@ -232,7 +222,6 @@ public class Regions extends Item
                         ++indexRegion;
                     }
                 }
-                break;
             }
             case Regions, Vertices, Touching -> {
                 final ArrayList<ArrayList<TopologyElement>> touchingRegions = new ArrayList<>();
@@ -250,7 +239,6 @@ public class Regions extends Item
                         regions[m][j2] = touchingRegions.get(m).get(j2).index();
                     }
                 }
-                break;
             }
         }
         return regions;

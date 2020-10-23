@@ -35,7 +35,7 @@ public final class IntArrayConstant extends BaseIntArrayFunction
             if (i > 0) {
                 sb.append(",");
             }
-            sb.append(String.valueOf(this.ints[i]));
+            sb.append(this.ints[i]);
         }
         sb.append("]");
         return sb.toString();

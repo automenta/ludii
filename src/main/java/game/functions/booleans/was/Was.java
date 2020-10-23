@@ -18,9 +18,7 @@ public class Was extends BaseBooleanFunction
             case Pass -> {
                 return new WasPass();
             }
-            default -> {
-                throw new IllegalArgumentException("Was(): A wasType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Was(): A wasType is not implemented.");
         }
     }
     

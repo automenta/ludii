@@ -4,18 +4,17 @@
 
 package supplementary.experiments.speed;
 
+import collections.FVector;
 import features.FeatureSet;
 import game.Game;
 import main.CommandLineArgParse;
 import main.FileHandling;
-import collections.FVector;
 import policies.softmax.SoftmaxFromMetadata;
 import util.Context;
 import util.GameLoader;
 import util.Trial;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;

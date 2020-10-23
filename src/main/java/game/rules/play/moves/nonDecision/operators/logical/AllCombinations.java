@@ -5,12 +5,12 @@
 package game.rules.play.moves.nonDecision.operators.logical;
 
 import annotations.Opt;
+import collections.FastArrayList;
 import game.Game;
 import game.rules.play.moves.BaseMoves;
 import game.rules.play.moves.Moves;
 import game.rules.play.moves.nonDecision.effect.Then;
 import game.rules.play.moves.nonDecision.operator.Operator;
-import collections.FastArrayList;
 import util.Context;
 import util.Move;
 

@@ -40,10 +40,10 @@ public class FeatureSet implements AIItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (featureSet " + this.role + " {\n");
+        sb.append("    (featureSet ").append(this.role).append(" {\n");
         for (int i = 0; i < this.featureStrings.length; ++i) {
             sb.append("        (pair ");
-            sb.append(StringRoutines.quote(this.featureStrings[i].trim()) + " ");
+            sb.append(StringRoutines.quote(this.featureStrings[i].trim())).append(" ");
             sb.append(this.featureWeights[i]);
             sb.append(")\n");
         }
@@ -53,11 +53,11 @@ public class FeatureSet implements AIItem
     
     public String toStringThresholded(final float threshold) {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (featureSet " + this.role + " {\n");
+        sb.append("    (featureSet ").append(this.role).append(" {\n");
         for (int i = 0; i < this.featureStrings.length; ++i) {
             if (Math.abs(this.featureWeights[i]) >= threshold) {
                 sb.append("        (pair ");
-                sb.append(StringRoutines.quote(this.featureStrings[i].trim()) + " ");
+                sb.append(StringRoutines.quote(this.featureStrings[i].trim())).append(" ");
                 sb.append(this.featureWeights[i]);
                 sb.append(")\n");
             }

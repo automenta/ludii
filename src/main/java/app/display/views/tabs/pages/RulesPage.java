@@ -7,10 +7,10 @@ package app.display.views.tabs.pages;
 import app.display.views.tabs.TabPage;
 import app.display.views.tabs.TabView;
 import game.Game;
-import options.Option;
 import manager.utils.ContextSnapshot;
 import manager.utils.SettingsManager;
 import metadata.Metadata;
+import options.Option;
 import util.Context;
 
 import java.awt.*;

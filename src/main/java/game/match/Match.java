@@ -6,6 +6,7 @@ package game.match;
 
 import annotations.Hide;
 import annotations.Opt;
+import collections.FVector;
 import game.Game;
 import game.equipment.Equipment;
 import game.equipment.container.board.Board;
@@ -14,7 +15,6 @@ import game.players.Players;
 import game.rules.end.End;
 import game.rules.play.moves.BaseMoves;
 import game.rules.play.moves.Moves;
-import collections.FVector;
 import grammar.Description;
 import util.*;
 import util.action.others.ActionNextInstance;

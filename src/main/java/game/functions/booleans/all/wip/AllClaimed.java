@@ -53,25 +53,14 @@ public final class AllClaimed extends BaseBooleanFunction
                         return true;
                     }
                 }
-                break;
             }
-            case Vertex -> {
+            case Vertex, Cell -> {
                 for (int site = sites.bitSet().nextSetBit(0); site >= 0; site = sites.bitSet().nextSetBit(site + 1)) {
                     final Edge edge2 = graph.edges().get(site);
                     if (state.who(edge2.vA().index(), this.indexType) == whoSiteId && state.who(edge2.vB().index(), this.indexType) == whoSiteId) {
                         return true;
                     }
                 }
-                break;
-            }
-            case Cell -> {
-                for (int site = sites.bitSet().nextSetBit(0); site >= 0; site = sites.bitSet().nextSetBit(site + 1)) {
-                    final Edge edge2 = graph.edges().get(site);
-                    if (state.who(edge2.vA().index(), this.indexType) == whoSiteId && state.who(edge2.vB().index(), this.indexType) == whoSiteId) {
-                        return true;
-                    }
-                }
-                break;
             }
         }
         return false;

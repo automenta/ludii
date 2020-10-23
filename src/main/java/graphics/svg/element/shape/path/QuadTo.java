@@ -129,7 +129,7 @@ public class QuadTo extends PathOp
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.label + ": x1=" + this.x1 + ", y1=" + this.y1 + ", x=" + this.x + ", y=" + this.y);
+        sb.append(this.label).append(": x1=").append(this.x1).append(", y1=").append(this.y1).append(", x=").append(this.x).append(", y=").append(this.y);
         return sb.toString();
     }
     

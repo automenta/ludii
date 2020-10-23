@@ -4,11 +4,11 @@
 
 package search.mcts.nodes;
 
+import collections.FVector;
+import collections.FastArrayList;
 import expert_iteration.ExItExperience;
 import game.Game;
 import gnu.trove.list.array.TIntArrayList;
-import collections.FVector;
-import collections.FastArrayList;
 import policies.softmax.SoftmaxPolicy;
 import search.mcts.MCTS;
 import util.Context;
@@ -115,9 +115,6 @@ public abstract class BaseNode
     
     public double valueEstimateUnvisitedChildren(final int player, final State state) {
         switch (this.mcts.qInit()) {
-            case DRAW -> {
-                return 0.0;
-            }
             case INF -> {
                 return 10000.0;
             }

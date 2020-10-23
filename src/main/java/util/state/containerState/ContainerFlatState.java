@@ -4,15 +4,17 @@
 
 package util.state.containerState;
 
+import collections.ChunkSet;
 import game.Game;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import collections.ChunkSet;
 import topology.Cell;
 import util.state.State;
 import util.zhash.HashedBitSet;
 import util.zhash.HashedChunkSet;
 import util.zhash.ZobristHashGenerator;
+
+import java.util.Arrays;
 
 public class ContainerFlatState extends BaseContainerState
 {
@@ -328,7 +330,7 @@ public class ContainerFlatState extends BaseContainerState
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = 31 * result + ((this.hidden == null) ? 0 : this.hidden.hashCode());
+        result = 31 * result + ((this.hidden == null) ? 0 : Arrays.hashCode(this.hidden));
         result = 31 * result + ((this.who == null) ? 0 : this.who.hashCode());
         result = 31 * result + ((this.playable == null) ? 0 : this.playable.hashCode());
         result = 31 * result + ((this.count == null) ? 0 : this.count.hashCode());
@@ -361,34 +363,34 @@ public class ContainerFlatState extends BaseContainerState
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("ContainerState type = " + this.getClass() + "\n");
+        sb.append("ContainerState type = ").append(this.getClass()).append("\n");
         if (this.emptyChunkSetCell() != null) {
-            sb.append("Empty = " + this.emptyChunkSetCell().toChunkString() + "\n");
+            sb.append("Empty = ").append(this.emptyChunkSetCell().toChunkString()).append("\n");
         }
         if (this.who != null) {
-            sb.append("Who = " + this.cloneWhoCell().toChunkString() + "\n");
+            sb.append("Who = ").append(this.cloneWhoCell().toChunkString()).append("\n");
         }
         if (this.what != null) {
-            sb.append("What" + this.cloneWhatCell().toChunkString() + "\n");
+            sb.append("What").append(this.cloneWhatCell().toChunkString()).append("\n");
         }
         if (this.state != null) {
-            sb.append("State = " + this.state.internalStateCopy().toChunkString() + "\n");
+            sb.append("State = ").append(this.state.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.rotation != null) {
-            sb.append("Rotation = " + this.rotation.internalStateCopy().toChunkString() + "\n");
+            sb.append("Rotation = ").append(this.rotation.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.value != null) {
-            sb.append("value = " + this.value.internalStateCopy().toChunkString() + "\n");
+            sb.append("value = ").append(this.value.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.count != null) {
-            sb.append("Count = " + this.count.internalStateCopy().toChunkString() + "\n");
+            sb.append("Count = ").append(this.count.internalStateCopy().toChunkString()).append("\n");
         }
         if (this.playable != null) {
-            sb.append("Playable = " + this.playable.internalStateCopy().toString() + "\n");
+            sb.append("Playable = ").append(this.playable.internalStateCopy().toString()).append("\n");
         }
         if (this.hidden != null) {
             for (int i = 1; i < this.hidden.length; ++i) {
-                sb.append("Hidden for  player " + i + " = " + this.hidden[i].internalStateCopy().toChunkString() + "\n");
+                sb.append("Hidden for  player ").append(i).append(" = ").append(this.hidden[i].internalStateCopy().toChunkString()).append("\n");
             }
         }
         return sb.toString();

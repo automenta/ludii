@@ -38,18 +38,9 @@ public class SurakartaDesign extends BoardDesign
     
     protected void drawBoard(final Graphics2D g2d) {
         switch (this.topology().graph().basis()) {
-            case Square -> {
-                this.drawBoardSquare(g2d);
-                break;
-            }
-            case Triangular -> {
-                this.drawBoardTriangular(g2d);
-                break;
-            }
-            default -> {
-                System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
-                break;
-            }
+            case Square -> this.drawBoardSquare(g2d);
+            case Triangular -> this.drawBoardTriangular(g2d);
+            default -> System.out.println("** Board type " + this.topology().graph().basis() + " not supported for Surkarta.");
         }
     }
     

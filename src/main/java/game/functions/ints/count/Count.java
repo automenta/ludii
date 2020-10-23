@@ -70,9 +70,7 @@ public final class Count extends BaseIntFunction
             case Vertices -> {
                 return new CountVertices();
             }
-            default -> {
-                throw new IllegalArgumentException("Count(): A CountSimpleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Count(): A CountSimpleType is not implemented.");
         }
     }
     
@@ -112,9 +110,7 @@ public final class Count extends BaseIntFunction
             case Sites -> {
                 return new CountSites(in, at, name);
             }
-            default -> {
-                throw new IllegalArgumentException("Count(): A CountSiteType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Count(): A CountSiteType is not implemented.");
         }
     }
     
@@ -136,9 +132,7 @@ public final class Count extends BaseIntFunction
             case Pips -> {
                 return new CountPips(role, of);
             }
-            default -> {
-                throw new IllegalArgumentException("Count(): A CountComponentType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Count(): A CountComponentType is not implemented.");
         }
     }
     
@@ -160,9 +154,7 @@ public final class Count extends BaseIntFunction
             case Groups -> {
                 return new CountGroups(type, directions, role, of, If, min);
             }
-            default -> {
-                throw new IllegalArgumentException("Count(): A CountGroupsType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Count(): A CountGroupsType is not implemented.");
         }
     }
     
@@ -171,9 +163,7 @@ public final class Count extends BaseIntFunction
             case Liberties -> {
                 return new CountLiberties(type, at, directions, If);
             }
-            default -> {
-                throw new IllegalArgumentException("Count(): A CountLibertiesType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Count(): A CountLibertiesType is not implemented.");
         }
     }
     
@@ -182,9 +172,7 @@ public final class Count extends BaseIntFunction
             case Steps -> {
                 return new CountSteps(type, relation, stepMove, site1, site2);
             }
-            default -> {
-                throw new IllegalArgumentException("Count(): A CountStepsType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Count(): A CountStepsType is not implemented.");
         }
     }
     
@@ -193,9 +181,7 @@ public final class Count extends BaseIntFunction
             case StepsOnTrack -> {
                 return new CountStepsOnTrack(role, player, name, site1, site2);
             }
-            default -> {
-                throw new IllegalArgumentException("Count(): A CountStepsOnTrackType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Count(): A CountStepsOnTrackType is not implemented.");
         }
     }
     

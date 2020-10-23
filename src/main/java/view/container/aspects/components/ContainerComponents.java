@@ -5,10 +5,10 @@
 package view.container.aspects.components;
 
 import bridge.Bridge;
+import collections.FastArrayList;
 import game.equipment.component.Component;
 import game.equipment.container.Container;
 import game.types.board.SiteType;
-import collections.FastArrayList;
 import metadata.graphics.util.PieceStackType;
 import topology.Cell;
 import topology.TopologyElement;

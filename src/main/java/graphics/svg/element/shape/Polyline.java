@@ -83,10 +83,10 @@ public class Polyline extends Shape
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(this.label() + ": fill=" + this.style.fill() + ", stroke=" + this.style.stroke() + ", strokeWidth=" + this.style.strokeWidth());
+        sb.append(this.label()).append(": fill=").append(this.style.fill()).append(", stroke=").append(this.style.stroke()).append(", strokeWidth=").append(this.style.strokeWidth());
         sb.append(" :");
         for (final Point2D.Double pt : this.points) {
-            sb.append(" (" + pt.x + "," + pt.y + ")");
+            sb.append(" (").append(pt.x).append(",").append(pt.y).append(")");
         }
         return sb.toString();
     }

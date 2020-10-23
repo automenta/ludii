@@ -4,9 +4,9 @@
 
 package search.flat;
 
-import game.Game;
 import collections.FVector;
 import collections.FastArrayList;
+import game.Game;
 import util.AI;
 import util.Context;
 import util.Move;

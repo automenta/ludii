@@ -66,9 +66,7 @@ public final class Sites extends BaseRegionFunction
             case Between -> {
                 return new SitesBetween(directions, type, from, fromIncluded, to, toIncluded, cond);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesBetweenType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesBetweenType is not implemented.");
         }
     }
     
@@ -77,9 +75,7 @@ public final class Sites extends BaseRegionFunction
             case LargePiece -> {
                 return new SitesLargePiece(type, at);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesLargePiece is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesLargePiece is not implemented.");
         }
     }
     
@@ -88,9 +84,7 @@ public final class Sites extends BaseRegionFunction
             case Random -> {
                 return new SitesRandom(region, num);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesRandomType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesRandomType is not implemented.");
         }
     }
     
@@ -109,9 +103,7 @@ public final class Sites extends BaseRegionFunction
             case Crossing -> {
                 return new SitesCrossing(at, who, role);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesCrossingType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesCrossingType is not implemented.");
         }
     }
     
@@ -120,9 +112,7 @@ public final class Sites extends BaseRegionFunction
             case Group -> {
                 return new SitesGroup(type, at, directions, If);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesGroupType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesGroupType is not implemented.");
         }
     }
     
@@ -146,9 +136,7 @@ public final class Sites extends BaseRegionFunction
             case Slosh -> {
                 return new SitesSlosh();
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesEdgeType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesEdgeType is not implemented.");
         }
     }
     
@@ -217,9 +205,7 @@ public final class Sites extends BaseRegionFunction
             case Perimeter -> {
                 return new SitesPerimeter(elementType);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesSimpleType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesSimpleType is not implemented.");
         }
     }
     
@@ -235,9 +221,7 @@ public final class Sites extends BaseRegionFunction
             case To -> {
                 return new SitesTo(moves);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesMoveType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesMoveType is not implemented.");
         }
     }
     
@@ -272,9 +256,7 @@ public final class Sites extends BaseRegionFunction
             case Empty -> {
                 return SitesEmpty.construct(elementType, index);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesIndexType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesIndexType is not implemented.");
         }
     }
     
@@ -296,9 +278,7 @@ public final class Sites extends BaseRegionFunction
             case Side -> {
                 return new SitesSide(elementType, player, role, direction);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
         }
     }
     
@@ -307,9 +287,7 @@ public final class Sites extends BaseRegionFunction
             case Distance -> {
                 return new SitesDistance(elementType, relation, from, distance);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesDistanceType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesDistanceType is not implemented.");
         }
     }
     
@@ -372,9 +350,7 @@ public final class Sites extends BaseRegionFunction
             case Visible -> {
                 return new SitesVisible(pid, role, elementType);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
         }
     }
     
@@ -383,9 +359,7 @@ public final class Sites extends BaseRegionFunction
             case Start -> {
                 return new SitesStart(pid);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesPlayerType is not implemented.");
         }
     }
     
@@ -427,9 +401,7 @@ public final class Sites extends BaseRegionFunction
             case Occupied -> {
                 return new SitesOccupied(by, By, container, Container, component, Component, components, top, type);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesOccupiedType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesOccupiedType is not implemented.");
         }
     }
     
@@ -448,9 +420,7 @@ public final class Sites extends BaseRegionFunction
             case Incident -> {
                 return new SitesIncident(resultType, of, at, owner, roleOwner);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesIncidentType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesIncidentType is not implemented.");
         }
     }
     
@@ -469,9 +439,7 @@ public final class Sites extends BaseRegionFunction
             case Around -> {
                 return new SitesAround(typeLoc, where, regionWhere, type, distance, directions, If, includeSelf);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesAroundType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesAroundType is not implemented.");
         }
     }
     
@@ -490,9 +458,7 @@ public final class Sites extends BaseRegionFunction
             case Direction -> {
                 return new SitesDirection(from, From, directions, included, stop, stopIncluded, distance, type);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesDirectionType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesDirectionType is not implemented.");
         }
     }
     
@@ -501,9 +467,7 @@ public final class Sites extends BaseRegionFunction
             case LineOfSight -> {
                 return new SitesLineOfSight(typeLoS, typeLoc, at, directions);
             }
-            default -> {
-                throw new IllegalArgumentException("Sites(): A SitesAroundType is not implemented.");
-            }
+            default -> throw new IllegalArgumentException("Sites(): A SitesAroundType is not implemented.");
         }
     }
     

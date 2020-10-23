@@ -40,9 +40,7 @@ public class Brick extends Basis
             case Spiral -> {
                 return new SpiralOnBrick(dimA);
             }
-            default -> {
-                throw new IllegalArgumentException("Shape " + st + " not supported for Brick tiling.");
-            }
+            default -> throw new IllegalArgumentException("Shape " + st + " not supported for Brick tiling.");
         }
     }
     

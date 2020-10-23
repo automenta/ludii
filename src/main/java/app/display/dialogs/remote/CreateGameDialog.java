@@ -13,7 +13,6 @@ import app.loading.GameLoading;
 import app.menu.MainMenu;
 import game.Game;
 import main.FileHandling;
-import options.Option;
 import manager.Manager;
 import manager.ai.AIDetails;
 import manager.ai.AIMenuName;
@@ -21,6 +20,7 @@ import manager.network.DatabaseFunctions;
 import manager.network.SettingsNetwork;
 import manager.utils.ContextSnapshot;
 import manager.utils.SettingsManager;
+import options.Option;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

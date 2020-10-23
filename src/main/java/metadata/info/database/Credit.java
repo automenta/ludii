@@ -17,7 +17,7 @@ public class Credit implements InfoItem
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("    (credit \"" + this.credit + "\")\n");
+        sb.append("    (credit \"").append(this.credit).append("\")\n");
         return sb.toString();
     }
     
