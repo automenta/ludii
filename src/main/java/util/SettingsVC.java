@@ -1,0 +1,224 @@
+// 
+// Decompiled by Procyon v0.5.36
+// 
+
+package util;
+
+import util.locations.FullLocation;
+import util.locations.Location;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public final class SettingsVC
+{
+    public static boolean showBoardShape;
+    public static boolean showCellIndices;
+    public static boolean showEdgeIndices;
+    public static boolean showVertexIndices;
+    public static boolean showCellCoordinates;
+    public static boolean showEdgeCoordinates;
+    public static boolean showVertexCoordinates;
+    public static boolean showIndices;
+    public static boolean showCoordinates;
+    public static boolean showPossibleMoves;
+    public static ArrayList<String> trackNames;
+    public static ArrayList<Boolean> trackShown;
+    public static Location selectedLocation;
+    public static Location animatedLocation;
+    public static String pieceStyleExtension;
+    public static Font displayFont;
+    public static boolean sandboxMode;
+    public static boolean abstractPriority;
+    public static boolean drawCornerCells;
+    public static boolean drawCornerConcaveCells;
+    public static boolean drawCornerConvexCells;
+    public static boolean drawMajorCells;
+    public static boolean drawMinorCells;
+    public static boolean drawOuterCells;
+    public static boolean drawPerimeterCells;
+    public static boolean drawInnerCells;
+    public static boolean drawTopCells;
+    public static boolean drawBottomCells;
+    public static boolean drawLeftCells;
+    public static boolean drawRightCells;
+    public static boolean drawCenterCells;
+    public static boolean drawPhasesCells;
+    public static Map<String, Boolean> drawSideCells;
+    public static boolean drawNeighboursCells;
+    public static boolean drawRadialsCells;
+    public static boolean drawDistanceCells;
+    public static boolean drawCornerVertices;
+    public static boolean drawCornerConcaveVertices;
+    public static boolean drawCornerConvexVertices;
+    public static boolean drawMajorVertices;
+    public static boolean drawMinorVertices;
+    public static boolean drawOuterVertices;
+    public static boolean drawPerimeterVertices;
+    public static boolean drawInnerVertices;
+    public static boolean drawTopVertices;
+    public static boolean drawBottomVertices;
+    public static boolean drawLeftVertices;
+    public static boolean drawRightVertices;
+    public static boolean drawCenterVertices;
+    public static boolean drawPhasesVertices;
+    public static Map<String, Boolean> drawSideVertices;
+    public static boolean drawNeighboursVertices;
+    public static boolean drawRadialsVertices;
+    public static boolean drawDistanceVertices;
+    public static boolean drawCentreEdges;
+    public static boolean drawCornerEdges;
+    public static boolean drawCornerConcaveEdges;
+    public static boolean drawCornerConvexEdges;
+    public static boolean drawMajorEdges;
+    public static boolean drawMinorEdges;
+    public static boolean drawOuterEdges;
+    public static boolean drawPerimeterEdges;
+    public static boolean drawInnerEdges;
+    public static boolean drawTopEdges;
+    public static boolean drawBottomEdges;
+    public static boolean drawLeftEdges;
+    public static boolean drawRightEdges;
+    public static boolean drawDistanceEdges;
+    public static boolean drawPhasesEdges;
+    public static Map<String, Boolean> drawSideEdges;
+    public static boolean drawAxialEdges;
+    public static boolean drawHorizontalEdges;
+    public static boolean drawVerticalEdges;
+    public static boolean drawAngledEdges;
+    public static boolean drawSlashEdges;
+    public static boolean drawSloshEdges;
+    public static boolean drawFacesOfVertices;
+    public static boolean drawEdgesOfVertices;
+    public static boolean drawVerticesOfFaces;
+    public static boolean drawEdgesOfFaces;
+    public static boolean drawVerticesOfEdges;
+    public static boolean drawFacesOfEdges;
+    public static Location lastClickedSite;
+    public static ArrayList<Boolean> drawColumnsCells;
+    public static ArrayList<Boolean> drawRowsCells;
+    public static ArrayList<Boolean> drawColumnsVertices;
+    public static ArrayList<Boolean> drawRowsVertices;
+    public static boolean SelectingConsequenceMove;
+    public static ArrayList<Location> possibleToLocations;
+    public static boolean pieceBeingDragged;
+    public static boolean thisFrameIsAnimated;
+    public static boolean showCandidateValues;
+    public static String lastErrorMessage;
+    public static boolean noAnimation;
+    public static boolean coordWithOutline;
+    public static String errorReport;
+    public static HashMap<String, String> pieceFamilies;
+    
+    public static String getPieceFamily(final String gameName) {
+        if (SettingsVC.pieceFamilies.containsKey(gameName)) {
+            return SettingsVC.pieceFamilies.get(gameName);
+        }
+        return "";
+    }
+    
+    public static void setPieceFamily(final String gameName, final String pieceFamily) {
+        SettingsVC.pieceFamilies.put(gameName, pieceFamily);
+    }
+    
+    static {
+        SettingsVC.showBoardShape = false;
+        SettingsVC.showCellIndices = false;
+        SettingsVC.showEdgeIndices = false;
+        SettingsVC.showVertexIndices = false;
+        SettingsVC.showCellCoordinates = false;
+        SettingsVC.showEdgeCoordinates = false;
+        SettingsVC.showVertexCoordinates = false;
+        SettingsVC.showIndices = false;
+        SettingsVC.showCoordinates = false;
+        SettingsVC.showPossibleMoves = false;
+        SettingsVC.trackNames = new ArrayList<>();
+        SettingsVC.trackShown = new ArrayList<>();
+        SettingsVC.selectedLocation = new FullLocation(-1);
+        SettingsVC.animatedLocation = new FullLocation(-1);
+        SettingsVC.pieceStyleExtension = "";
+        SettingsVC.sandboxMode = false;
+        SettingsVC.abstractPriority = true;
+        SettingsVC.drawCornerCells = false;
+        SettingsVC.drawCornerConcaveCells = false;
+        SettingsVC.drawCornerConvexCells = false;
+        SettingsVC.drawMajorCells = false;
+        SettingsVC.drawMinorCells = false;
+        SettingsVC.drawOuterCells = false;
+        SettingsVC.drawPerimeterCells = false;
+        SettingsVC.drawInnerCells = false;
+        SettingsVC.drawTopCells = false;
+        SettingsVC.drawBottomCells = false;
+        SettingsVC.drawLeftCells = false;
+        SettingsVC.drawRightCells = false;
+        SettingsVC.drawCenterCells = false;
+        SettingsVC.drawPhasesCells = false;
+        SettingsVC.drawSideCells = new HashMap<>();
+        SettingsVC.drawNeighboursCells = false;
+        SettingsVC.drawRadialsCells = false;
+        SettingsVC.drawDistanceCells = false;
+        SettingsVC.drawCornerVertices = false;
+        SettingsVC.drawCornerConcaveVertices = false;
+        SettingsVC.drawCornerConvexVertices = false;
+        SettingsVC.drawMajorVertices = false;
+        SettingsVC.drawMinorVertices = false;
+        SettingsVC.drawOuterVertices = false;
+        SettingsVC.drawPerimeterVertices = false;
+        SettingsVC.drawInnerVertices = false;
+        SettingsVC.drawTopVertices = false;
+        SettingsVC.drawBottomVertices = false;
+        SettingsVC.drawLeftVertices = false;
+        SettingsVC.drawRightVertices = false;
+        SettingsVC.drawCenterVertices = false;
+        SettingsVC.drawPhasesVertices = false;
+        SettingsVC.drawSideVertices = new HashMap<>();
+        SettingsVC.drawNeighboursVertices = false;
+        SettingsVC.drawRadialsVertices = false;
+        SettingsVC.drawDistanceVertices = false;
+        SettingsVC.drawCentreEdges = false;
+        SettingsVC.drawCornerEdges = false;
+        SettingsVC.drawCornerConcaveEdges = false;
+        SettingsVC.drawCornerConvexEdges = false;
+        SettingsVC.drawMajorEdges = false;
+        SettingsVC.drawMinorEdges = false;
+        SettingsVC.drawOuterEdges = false;
+        SettingsVC.drawPerimeterEdges = false;
+        SettingsVC.drawInnerEdges = false;
+        SettingsVC.drawTopEdges = false;
+        SettingsVC.drawBottomEdges = false;
+        SettingsVC.drawLeftEdges = false;
+        SettingsVC.drawRightEdges = false;
+        SettingsVC.drawDistanceEdges = false;
+        SettingsVC.drawPhasesEdges = false;
+        SettingsVC.drawSideEdges = new HashMap<>();
+        SettingsVC.drawAxialEdges = false;
+        SettingsVC.drawHorizontalEdges = false;
+        SettingsVC.drawVerticalEdges = false;
+        SettingsVC.drawAngledEdges = false;
+        SettingsVC.drawSlashEdges = false;
+        SettingsVC.drawSloshEdges = false;
+        SettingsVC.drawFacesOfVertices = false;
+        SettingsVC.drawEdgesOfVertices = false;
+        SettingsVC.drawVerticesOfFaces = false;
+        SettingsVC.drawEdgesOfFaces = false;
+        SettingsVC.drawVerticesOfEdges = false;
+        SettingsVC.drawFacesOfEdges = false;
+        SettingsVC.lastClickedSite = null;
+        SettingsVC.drawColumnsCells = new ArrayList<>();
+        SettingsVC.drawRowsCells = new ArrayList<>();
+        SettingsVC.drawColumnsVertices = new ArrayList<>();
+        SettingsVC.drawRowsVertices = new ArrayList<>();
+        SettingsVC.SelectingConsequenceMove = false;
+        SettingsVC.possibleToLocations = new ArrayList<>();
+        SettingsVC.pieceBeingDragged = false;
+        SettingsVC.thisFrameIsAnimated = false;
+        SettingsVC.showCandidateValues = false;
+        SettingsVC.lastErrorMessage = "";
+        SettingsVC.noAnimation = false;
+        SettingsVC.coordWithOutline = false;
+        SettingsVC.errorReport = "";
+        SettingsVC.pieceFamilies = new HashMap<>();
+    }
+}
