@@ -1,0 +1,60 @@
+(game "Odd"  
+    (players 2) 
+    (equipment { 
+        (board (rotate 90 (hex 5))) 
+        (piece "Ball" Each)
+        (hand Shared size:2)
+        }
+    )  
+    (rules 
+        (start {
+            (place "Ball1" (handSite Shared)) 
+            (place "Ball2" (handSite Shared 1))
+        })
+        (play 
+            (move 
+                (from (sites Hand Shared)) 
+                (to (sites Empty))
+                copy:true
+            )
+        )
+        (end 
+            (if (is Full) 
+                (if 
+                    (is Odd 
+                        (+ 
+                            (count Groups P1 min:5) 
+                            (count Groups P2 min:5)
+                        )
+                    ) 
+                    (result P1 Win)
+                )
+                (result P2 Win)
+            ) 
+        )
+    )
+)
+
+//------------------------------------------------------------------------------
+
+(metadata 
+    
+    (info
+        {
+        (description "Odd was invented in 2007 by Nick Bentley. It is played on a hexagonal board.")
+        (aliases {"Dustin"})
+        (rules "Players take turns placing one stone of either color on the board, until it is full. Player One wins if there is an odd number of groups with at least five pieces on the board, Player Two wins otherwise.")
+        (source "<a href=\"https://boardgamegeek.com/boardgame/28527/odd\" target=\"_blank\" class=\"style1\" style=\"color: #0000EE\" />BGG</a>")
+        (version "1.0.8")
+        (classification "board/space/group")
+        (author "Nick Bentley")
+        (credit "Eric Piette")
+        (date "2007")
+        }
+    )
+    
+    (ai 
+        "Odd_ai"
+    )
+    
+)

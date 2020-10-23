@@ -1,0 +1,150 @@
+(define "FromIsOnTheRegionToFill" (is In #1 (sites (player (mapEntry (mover)))) ))
+
+(define "ToIsOnTheRegionToFill" (is In #1 (sites (player (mapEntry (mover)))) ))
+
+(define "EmptyAndNotVisited"     							  
+    (and 
+        (is Empty (to)) 
+        (not (is Visited (to))) 
+    ) 
+)
+
+(define "Hop" 
+    (move
+        Hop 
+        (from #1)
+        (between if:(not (is Empty (between))))
+        (to 
+            if:(and
+                "EmptyAndNotVisited"
+                (or
+                    (not ("FromIsOnTheRegionToFill" #1))
+                    ("ToIsOnTheRegionToFill" (to)) 
+                )
+            )
+        )
+        #2		
+    )
+) 
+
+(define "HopSequence" ("Hop" #1 (then (if (can Move ("Hop" (last To))) (moveAgain) ))))
+
+(define "RegionFilled" (= (sites (player (mapEntry (mover)))) (sites Occupied by:Mover)))
+
+//------------------------------------------------------------------------------
+
+(game "Halma"  
+    (players <Version:numPlayers>)  
+    (equipment { 
+        (board (square 16)) 
+        (piece "Counter" Each)
+        <Version:home>
+        }
+    )  
+    (rules 
+        (start { 
+            <Version:start>
+        })
+        
+        phases:{
+        (phase "Movement"  (play 
+                (forEach Piece (or 
+                        ("HopSequence" (from)) 
+                        (move
+                            Step
+                            (to 
+                                if:(and
+                                    (is Empty (to))
+                                    (or
+                                        (not ("FromIsOnTheRegionToFill" (from)))
+                                        ("ToIsOnTheRegionToFill" (to))
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ) 
+            (nextPhase (is Mover (next)) "MultiJump")
+        ) 
+        (phase "MultiJump" (play 
+                (or 
+                    ("HopSequence" (last To)) 
+                    (move Pass)
+                )
+            ) 
+            (nextPhase (not (is Mover (next))) "Movement")
+        ) 
+        }
+        
+        (end (if "RegionFilled" (result Mover Win) )) 
+    )
+)
+
+//------------------------------------------------------------------------------
+
+(option "Players" <Version> args:{ <numPlayers> <home> <start> }
+    {
+    (item "2" 
+        <2>
+        <  
+        (regions "Home" P1 (difference (expand origin:(coord "P1") steps:5 Orthogonal) (sites {"K1" "P6"})))
+        (regions "Home" P2 (difference (expand origin:(coord "A16") steps:5 Orthogonal) (sites {"A11" "F16"})))
+        (map {(pair P1 P2) (pair P2 P1)})
+        >
+        <
+        (place "Counter1" (sites P1))
+        (place "Counter2" (sites P2))
+        >
+        "The version of the game played with 2 players."
+    )*   
+    (item "4"    
+        <4>
+        <  
+        (regions "Home" P1 (difference (expand origin:(coord "A1") steps:4 Orthogonal) (sites {"E1" "A5"})))
+        (regions "Home" P2 (difference (expand origin:(coord "P1") steps:4 Orthogonal) (sites {"L1" "P5"})))
+        (regions "Home" P3 (difference (expand origin:(coord "A16") steps:4 Orthogonal) (sites {"A12" "E16"})))
+        (regions "Home" P4 (difference (expand origin:(coord "P16") steps:4 Orthogonal) (sites {"P12" "L16"})))
+        (map {(pair P1 P4) (pair P2 P3) (pair P3 P2) (pair P4 P1)})
+        >
+        <
+        (place "Counter1" (sites P1))
+        (place "Counter2" (sites P2))
+        (place "Counter3" (sites P3))
+        (place "Counter4" (sites P4))
+        >
+        "The version of the game played with 4 players."
+    ) 
+})
+
+//------------------------------------------------------------------------------
+
+(metadata 
+    
+    (info
+        {
+        (description "Halma was invented in 1883 by George Howard Monks in Boston, and inspired other games such as Chinese Checkers.")
+        (rules "Played on a 16x16 checkered board. Can be played with two or four players. It is played with nineteen pieces for a two-player game, thirteen for a four-player game. The pieces begin play in opposing corners of the board, called the \"camp.\" Pieces can move in any direction to an adjacent square. Players can also jump any adjacent piece, including the player's own. Jumping does not capture. Multiple jumps in one turn by the same piece are allowed. The goal is to move all of one's pieces into the opposing player's camp. Once a piece has moved into the camp, it cannot leave.")
+        (source "<a href=\"https://en.wikipedia.org/wiki/Halma\" target=\"_blank\" class=\"style1\" style=\"color: #0000EE\" />Wikipedia</a>")
+        (version "1.0.8")
+        (classification "board/race/fill")
+        (credit "Eric Piette")
+        }
+    )
+    
+    (graphics {
+        (region Colour "Home" Edge InnerEdges (colour Black))
+        (board Checkered)
+        (board Colour InnerEdges (colour 0 0 0 0))
+        (board Colour OuterEdges (colour 150 75 0))
+        (board Colour Phase0 (colour 200 150 75))
+        (board Colour Phase1 (colour 250 221 144))
+        (board StyleThickness InnerEdges 2.0)
+        (board StyleThickness OuterEdges 2.0)
+    })
+    
+    (ai 
+        "Halma_ai"
+    )
+    
+)

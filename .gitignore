@@ -2,3 +2,6 @@
 database.zip
 target/
 .idea
+ludii_preferences.json
+ludii.trl
+ludii-grammar-*.txt

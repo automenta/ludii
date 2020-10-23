@@ -1,0 +1,41 @@
+(game "Squava"  
+    (players 2) 
+    (mode) 
+    (equipment { 
+        (board (square 5)) 
+        (piece "Ball" Each) 
+        }
+    )  
+    (rules 
+        (meta (swap) )
+        (play (move Add (to (sites Empty))))
+        (end {
+            (if (is Line 4) (result Mover Win))
+            (if (is Line 3) (result Mover Loss)) 
+        })  
+    )
+)
+
+//------------------------------------------------------------------------------
+
+(metadata 
+    
+    (info
+        {
+        (description "Squava is a Yavalath variant on a 5x5 board.")
+        (rules "Players alternate turns placing one of their pieces on the board. The first person to make a line of four, but without first making a line of three, wins.")
+        (source "<a href=\"https://boardgamegeek.com/boardgame/112745/squava\" target=\"_blank\" class=\"style1\" style=\"color: #0000EE\" />BGG</a>")
+        (version "1.0.8")
+        (classification "board/space/line")
+        (author "Néstor Romeral Andrés")
+        (publisher "nestorgames")
+        (credit "Eric Piette")
+        (date "2011")
+        }
+    )
+    
+    (ai 
+        "Squava_ai"
+    )
+    
+)

@@ -1,0 +1,54 @@
+(game "Shisima"
+    (players 2)  
+    (equipment 
+        { 
+        (board (circle {8} ) use:Vertex)
+        (piece "Ball" Each "StepToEmpty")
+        }
+    )  
+    (rules 
+        (start 
+            { 
+            (place "Ball1" {8 1 2})
+            (place "Ball2" {4 5 6})
+            }
+        )
+        
+        (play (forEach Piece))
+        (end 
+            (if 
+                (and 
+                    (= (what at:(centrePoint)) (mover)) 
+                    (is Line 3)
+                ) 
+                (result Mover Win)
+            )
+        )  
+    )
+)
+
+//------------------------------------------------------------------------------
+
+(metadata 
+    
+    (info
+        {
+        (description "Shisima is played by the Tiriki people in Kenya on an octagonal board. The board represents a source of water (\"shisima\") in the center, and the pieces are imbalavali, \"water insects.\" It is a game of alignment.")
+        (rules "Each player has three pieces. Pieces are initially placed three-in a row on side nearest the player. Pieces can move to an adjacent space connected to it by a line. The goal is to create three in a row through the central space.")
+        (source "Crane 1982: 11.")
+        (version "1.0.8")
+        (classification "board/space/line")
+        (credit "Eric Piette")
+        (origin  "This game was played in Kenya, around 1982CE.")
+        }
+    )
+    
+    (graphics {
+        (no Curves)
+    })
+    
+    (ai 
+        "Shisima_ai"
+    )
+    
+)

@@ -1,0 +1,117 @@
+(define "Columns" <Num:holes>)
+(define "PiecesCaptured" (count at:(mapEntry #1)))
+(define "WasInStore" (is Pending))
+(define "LastCounterInTheStore" (set Pending))
+(define "SowingEndInMyStore" (= (to) (mapEntry Mover)))
+(define "PlayFromLastHole" (sites {(var)}))
+(define "StoreLastHoleSowed" (set Var (to)))
+(define "OppositePit" (if (is Mover P1) (+ (to) "Columns") (- (to) "Columns") ) )
+
+//------------------------------------------------------------------------------
+
+(game "Sungka" 
+    (players 2)  
+    (equipment { 
+        (mancalaBoard 2 "Columns"
+            (track "Track" "1,E,ENE,WNW,W,WSW" loop:true)
+        )
+        (regions P1 (sites Bottom))                     // P1 home
+        (regions P2 (sites Top))                        // P2 home
+        (map {(pair P1 FirstSite) (pair P2 LastSite)})  // kalahs (storage pits)
+        (piece "Seed" Shared)
+    })  
+    
+    (rules 
+        (start (set Count "Columns" to:(union (sites P1) (sites P2))))		  
+        (play 
+            (move
+                Select 
+                (from 
+                    (if 
+                        (and 
+                            (is Mover Prev) 
+                            (not ("WasInStore"))
+                        ) 
+                        "PlayFromLastHole" 
+                        (sites Mover)
+                    )
+                    if:(< 0 (count at:(from)))
+                )
+                (then 
+                    (sow 
+                        apply:(if ("SowingEndInMyStore")
+                            (and
+                                (moveAgain)
+                                ("LastCounterInTheStore")
+                            )
+                            (if (and {(is In (to) (sites Mover)) (= (count at:(to)) 1) (< 0 (count at:"OppositePit"))})
+                                (fromTo 
+                                    (from "OppositePit") 
+                                    (to (mapEntry (mover))) 
+                                    count:(count at:"OppositePit")
+                                )
+                                (if (> (count at:(to)) 1)
+                                    (and
+                                        (moveAgain)
+                                        ("StoreLastHoleSowed")
+                                    )
+                                )
+                            )
+                        )
+                        skipIf:(= (to) (mapEntry Next))
+                    )
+                )
+            )
+        )
+        (end
+            (if (no Moves Mover)
+                (byScore {
+                    (score P1 ("PiecesCaptured" P1)) 
+                    (score P2 ("PiecesCaptured" P2))
+                })
+            )
+        )
+    )
+)
+
+//------------------------------------------------------------------------------
+
+(option "Board Size" <Num> args:{ <holes> }
+    {
+    (item "3"  <3> "The board has 3 holes by row.")
+    (item "4"  <4> "The board has 4 holes by row.")
+    (item "5"  <5> "The board has 5 holes by row.")
+    (item "6"  <6> "The board has 6 holes by row.")*
+    (item "7"  <7> "The board has 7 holes by row.")
+    (item "8"  <8> "The board has 8 holes by row.")
+    (item "9"  <9> "The board has 9 holes by row.")
+    (item "10"  <10> "The board has 10 holes by row.")
+    (item "11"  <11> "The board has 11 holes by row.")
+    (item "12"  <12> "The board has 12 holes by row.")
+    (item "13"  <13> "The board has 13 holes by row.")
+    (item "14"  <14> "The board has 14 holes by row.")
+    (item "15"  <15> "The board has 15 holes by row.")
+    (item "16"  <16> "The board has 16 holes by row.")
+})
+
+//------------------------------------------------------------------------------
+
+(metadata 
+    (info
+        {
+        (description "Sungka is a two-row mancala-style board game from the Philippines. It is similar to many other games throughout Southeast Asia, which have similar playing mechanisms and similar names.")
+        (rules "Game starts with each hole containing the same number of counters as there are holes in a row. Players take counters from one hole and sow them in a counter-clockwise direction starting in the next hole from which the counters were taken. Players include their own store when sowing but ignore their opponent's store. If last counter falls into an empty hole, move ends. If it is on the player's side, the counters in the opponent's hole opposite are taken and added to the player's store. If the last counter falls into the player's store, the player may sow counters from another hole on their side. If the last counter drops into an occupied hole on either side of the board, the counters are picked up and sowing continues until the last counter drops into an empty hole. When there are no more counters left to play, the player with the most counters in their store wins.")
+        (source "de Voogt 2010 ")
+        (version "1.0.8")
+        (classification "board/sow/two rows")
+        (credit "Eric Piette")
+        }
+    )
+    
+    (graphics {
+        (board Style Mancala)
+    })
+    (ai
+        "Sungka_ai"
+    )
+)

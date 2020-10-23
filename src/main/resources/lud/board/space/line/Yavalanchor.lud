@@ -1,0 +1,78 @@
+(game "Yavalanchor"  
+    (players 2) 
+    (equipment { 
+        (board (rotate 90 (hex 5))) 
+        (piece "Ball" Each)
+        (piece "Ball" Shared)
+        (hand Shared)
+    })  
+    
+    (rules 
+        (meta (swap))
+        (start (place "Ball" (handSite Shared)))
+        (play 
+            (or
+                (move 
+                    Add 
+                    (to 
+                        (sites Around 
+                            (sites Occupied by:Shared component:"Ball") 
+                            if:(is Empty (to))
+                        )
+                    )
+                ) 
+                (move 
+                    (from (handSite Shared)) 
+                    (to (sites Empty)) 
+                    copy:true
+                )
+            )
+        )
+        (end {
+            (if (and 
+                    (or 
+                        (= (what at:(last To)) (id "Ball1")) 
+                        (= (what at:(last To)) (id "Ball")) 
+                    )
+                    (is Line 5 whats:{(id "Ball1") (id "Ball")})
+                ) 
+                (result P1 Win)
+            )  
+            (if (and 
+                    (or 
+                        (= (what at:(last To)) (id "Ball2")) 
+                        (= (what at:(last To)) (id "Ball")) 
+                    )
+                    (is Line 5 whats:{(id "Ball2") (id "Ball")})
+                ) 
+                (result P2 Win)
+            ) 
+        })
+    )
+)
+
+(metadata
+    
+    (info
+        {
+        (description "Yavanalanchor is a Yavalath derivative invented by Néstor Romeral Andrés in 2012.")
+        (rules "Two players play, with white and black pieces, with neutral red pieces as well. Players take turns placing either a red counters on an empty space or a counter of their color on a space adjacent to a red one. Play continues until one player creates five in a row with only their color and red. The player that does so first wins.")
+        (source "<a href=\"https://boardgamegeek.com/boardgame/126653/yavalanchor\" target=\"_blank\" class=\"style1\" style=\"color: #0000EE\" />BGG</a>")
+        (version "1.0.8")
+        (classification "board/space/line")
+        (author "Néstor Romeral Andrés")
+        (publisher "<a href=\"https://www.nestorgames.com\" target=\"_blank\" class=\"style1\" style=\"color: #0000EE\" />nestorgames</a>")
+        (credit "Eric Piette")
+        (date "2012")
+        }
+    )
+    
+    (graphics {
+        (player Colour All (colour Red))
+    })
+    
+    (ai 
+        "Yavalanchor_ai"
+    )
+    
+)

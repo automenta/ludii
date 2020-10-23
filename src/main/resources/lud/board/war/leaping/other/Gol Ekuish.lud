@@ -1,0 +1,45 @@
+(game "Gol Ekuish"  
+    (players 2)  
+    (equipment { 
+        (board (circle {6 6 6 6 6 6 6} ) use:Vertex)
+        (piece "Counter" Each 
+            (or 
+                ("HopRotationalCapture")
+                ("StepRotationalToEmpty")
+            )
+        )
+    })  
+    
+    (rules 
+        (start {
+            (place "Counter1" (sites {3..5 9..11 15..17 21..23 27..29 33..35 39..41})  )
+            (place "Counter2" (sites {1 2 6 7 8 12 13 14 18 19 20 24 25 26 30 31 32 36 37 38 42}) )
+        })
+        
+        (play (forEach Piece))
+        (end ("NoMoves" Loss)) 
+    )
+)
+
+//------------------------------------------------------------------------------
+
+(metadata 
+    
+    (info
+        {
+        (description "Gol Ekuish is a game from India with leaping captures like many others in South Asia and beyond. The board consists of seven concentric circles divided by three diameters.")
+        (aliases {"Gol-skuish"})
+        (rules "Each player begins with 21 pieces, arranges on the 21 intersections of three consecutive radii. Players alternate turns moving to an empty adjacent spot. Captures are made by hopping over an opponent's piece. The player who captures all of the other player's pieces wins.")
+        (source "Gupta 1924: 167.")
+        (version "1.0.8")
+        (classification "board/war/leaping")
+        (credit "Eric Piette")
+        (origin  "This game was played in India, around 1924CE.")
+        }
+    )
+    
+    (ai 
+        "Gol Ekuish_ai"
+    )
+    
+)
